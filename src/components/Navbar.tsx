@@ -1,6 +1,7 @@
 'use client'
 
-import { signIn, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import Image from 'next/image'
 
 export function Navbar () {
 
@@ -9,7 +10,23 @@ export function Navbar () {
   return (
     <nav>
       <p>Navbar</p>
-      <button onClick={() => signIn()}>SignIn</button>
+      { session?.user 
+      ? (
+        <>
+        <div>
+          <p>{session?.user.name}</p>
+          <p>{session?.user.email}</p>
+          <Image src={session?.user.image || ''} width={50} height={50} alt="profile image" />
+        </div>
+
+        <button onClick={() => signOut({
+          callbackUrl: '/'
+        })}>Logout</button>
+        </>
+      )
+      :(
+        <button onClick={() => signIn()}>SignIn</button>
+      )}
     </nav>
   )
 }
