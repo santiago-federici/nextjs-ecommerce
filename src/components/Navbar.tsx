@@ -1,11 +1,15 @@
 'use client'
 
 import { useEffect, useId, useState } from 'react'
+
 import { signIn, signOut, useSession } from 'next-auth/react'
+
 import Image from 'next/image'
+
 
 import { About, Cart, CloseMenu, Contact, Home, Menu, Products, UserCircle } from './Icons'
 import { NavItem } from './NavItem'
+import { Button } from './Buttons/Button'
 
 import '@styles/Navbar.css'
 
@@ -37,7 +41,7 @@ export function Navbar () {
     <nav className='flex py-4 justify-between wrapper'>
       <h1>Ecom</h1>
 
-      <div className='flex gap-8 items-center'>
+      <div className='flex gap-4 md:gap-8 items-center'>
         {
           !isMenuOpen &&
           <span className='md:hidden' onClick={() => setIsMenuOpen(prev => !prev)}>
@@ -45,7 +49,7 @@ export function Navbar () {
           </span>
         }
 
-        <ul className={`${isMenuOpen ? 'opacity-100' : 'opacity-0'} md:opacity-100 grid md:flex gap-4 py-4 px-6 md:px-0 md:py-0 bg-[--clr-surface] z-50 md:z-auto md:bg-transparent absolute md:relative top-16 md:top-0 w-[101%] left-[-1px] md:w-auto`}>
+        <ul className={`${isMenuOpen ? 'block' : 'hidden'} grid md:flex gap-4 py-4 px-6 md:px-0 md:py-0 bg-[--clr-surface] z-50 md:z-auto md:bg-transparent absolute md:relative top-16 md:top-0 w-[101%] left-[-1px] md:w-auto`}>
           <NavItem icon={<Home />} label={'Home'} />
           <NavItem icon={<Products />} label={'Products'} />
           <NavItem icon={<About />} label={'About'} />
@@ -53,7 +57,7 @@ export function Navbar () {
 
           { !session?.user
             ? (
-              <button onClick={() => signIn()} className='primary-btn md:hidden'>Sign in</button>
+              <span onClick={() => signIn()}><Button as='primary' text='Sign in' extraClassName='md:hidden w-full' /></span>
             )
             : <></>
           }
@@ -82,7 +86,9 @@ export function Navbar () {
             </>
             )
             :(
-              <button onClick={() => signIn()} className='hidden md:block primary-btn'>Sign in</button>
+              <>
+              <span onClick={() => signIn()}><Button as='primary' text='Sign in' extraClassName='hidden md:block' /></span>
+              </>
             )
           }
 

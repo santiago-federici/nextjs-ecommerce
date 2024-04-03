@@ -14,8 +14,6 @@
 
   --btn-padding: .25rem 1.25rem;
 
-  --border-radius: 5px;
-
   --ff-base: 'Cantarell', sans-serif;
   --ff-accent: 'Fjalla One', sans-serif;
 
@@ -115,23 +113,6 @@ h3 {
 button,
 input {
   font-size: var(--fs-300);
-}
-
-.ghost-btn {
-  background: transparent;
-  border: 1px solid var(--clr-secondary);
-  padding: var(--btn-padding);
-  border-radius: var(--border-radius);
-  color: white;
-  font-weight: 700;
-}
-
-.primary-btn {
-  background: hsl(0, 0%, 0%);
-  padding: var(--btn-padding);
-  border-radius: var(--border-radius);
-  color: white;
-  font-weight: 500;
 }
 
 /* button {

@@ -1,5 +1,7 @@
 // import Image from "next/image";
 
+import { Button } from "@components/Buttons/Button";
+
 export default function Home() {
   return (
     <main className="wrapper grid">
@@ -12,7 +14,7 @@ export default function Home() {
         /> */}
         <h1 className="text-white text-center md:text-left text-pretty">Mejora tu estilo con nuestro productos</h1>
 
-        <button className="ghost-btn">Ver productos</button>
+        <Button as='ghost' text='Ver productos' />
       </section>
     </main>
   );
