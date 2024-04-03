@@ -3,31 +3,183 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --clr-heading: hsl(204, 100%, 1%);
+  --clr-text: hsl(204, 20%, 15%);
+
+  --clr-surface: hsl(0, 0%, 90%); 
+
+  --clr-primary: hsl(27, 100%, 56%);
+  --clr-secondary: white;
+  --clr-accent: hsl(357, 94%, 52%);
+
+  --btn-padding: .25rem 1.25rem;
+
+  --border-radius: 5px;
+
+  --ff-base: 'Cantarell', sans-serif;
+  --ff-accent: 'Fjalla One', sans-serif;
+
+  /* Step -2: 12.50px → 10.00px */
+  --fs-100: clamp(0.63rem, calc(0.84rem + -0.27vw), 0.78rem);
+
+  /* Step -1: 15.00px → 14.14px */
+  --fs-200: clamp(0.88rem, calc(0.96rem + -0.09vw), 0.94rem);
+
+  /* Step 0: 18.00px → 20.00px */
+  --fs-300: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
+
+  /* Step 1: 21.60px → 28.28px */
+  --fs-400: clamp(1.35rem, calc(1.20rem + 0.73vw), 1.77rem);
+
+  /* Step 2: 25.92px → 39.99px */
+  --fs-500: clamp(1.62rem, calc(1.31rem + 1.53vw), 2.50rem);
+
+  /* Step 3: 31.10px → 56.54px */
+  --fs-600: clamp(1.94rem, calc(1.39rem + 2.77vw), 3.53rem);
+
+  /* Step 4: 37.32px → 79.95px */
+  --fs-700: clamp(2.33rem, calc(1.41rem + 4.63vw), 5.00rem);
+
+  /* Step 5: 44.79px → 113.05px */
+  --fs-800: clamp(2.80rem, calc(1.32rem + 7.42vw), 7.07rem);
 }
 
-@media (prefers-color-scheme: dark) {
+
+/* @media(prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --clr-heading: hsl(0, 0%, 100%);
+    --clr-text: hsl(204, 20%, 85%);
+    --clr-surface: hsl(226, 27%, 18%);
+    --clr-primary: hsl(27, 100%, 56%);
+    --clr-secondary: hsl(186, 69%, 67%);
+    --clr-accent: hsl(315, 89%, 52%);
   }
+} */
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--ff-base);
 }
+
+/* html {
+  color-scheme: light dark;
+} */
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--clr-surface);
+  color: var(--clr-text);
+  line-height: 1.6;
+  font-size: var(--fs-300);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/*  Tipically it's the main */
+.wrapper {
+  width: min(100% - 3rem, 130ch);
+  margin-inline: auto;
+  position: relative;
+  place-items: center;
+}
+
+/*  This one also goes for the main */
+.flow > * + * {
+  margin-top: 1em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ff-accent);
+  color: var(--clr-heading);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-600);
+  font-weight: 900;
+}
+
+h2 {
+  font-size: var(--fs-500);
+}
+
+h3 {
+  font-size: var(--fs-400);
+}
+
+button,
+input {
+  font-size: var(--fs-300);
+}
+
+.ghost-btn {
+  background: transparent;
+  border: 1px solid var(--clr-secondary);
+  padding: var(--btn-padding);
+  border-radius: var(--border-radius);
+  color: white;
+  font-weight: 700;
+}
+
+.primary-btn {
+  background: hsl(0, 0%, 0%);
+  padding: var(--btn-padding);
+  border-radius: var(--border-radius);
+  color: white;
+  font-weight: 500;
+}
+
+/* button {
+  background: transparent;
+  color: var(--clr-heading);
+  border: 2px solid var(--clr-primary);
+  padding: 0.4rem 1rem;
+  border-radius: 0.5rem;
+  transition: .3s;
+} */
+
+/* button:hover {
+  color: var(--clr-text);
+  cursor: pointer;
+  border: 2px solid var(--clr-accent);
+} */
+
+/* input {
+  padding: .25rem .7rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--clr-primary);
+  transition: .3s;
+  color: var(--clr-text)
+} */
+
+/* input:focus,
+input:hover {
+  outline: none;
+  border-bottom: 2px solid var(--clr-accent);
+} */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+a {
+  color: var(--clr-primary);
+  transition: .3s;
+}
+
+a:hover,
+a:focus {
+  color: var(--clr-accent);
+}
+
+::marker {
+  color: var(--clr-primary);
 }
