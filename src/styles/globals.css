@@ -102,8 +102,6 @@ h4 {
 h1 {
   font-family: var(--font-bangers);
   letter-spacing: 2px;
-  font-size: var(--fs-600);
-  font-weight: 900;
 }
 
 button,

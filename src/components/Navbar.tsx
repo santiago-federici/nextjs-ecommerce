@@ -39,7 +39,7 @@ export function Navbar () {
 
   return (
     <nav className='flex py-4 justify-between wrapper'>
-      <h1>Ecom</h1>
+      <h1 className='text-5xl md:text-6xl'>Ecom</h1>
 
       <div className='flex gap-4 md:gap-8 items-center'>
         {
