@@ -22,7 +22,7 @@ export function Navbar () {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   
   // close menu when screen is greater than 768px
-  const [screenWitdh, setScreenWitdh] = useState(window.innerWidth)
+  const [screenWitdh, setScreenWitdh] = useState(0)
   const mdTailwindWidth = 768 // <--- width of the tailwind md:
   useEffect(() => {
     const handleResize = () => {
