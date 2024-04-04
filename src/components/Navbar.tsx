@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 import { About, Cart, CloseMenu, Contact, Home, Menu, Products, UserCircle } from './Icons'
 import { NavItem } from './NavItem'
-import { Button } from './Buttons/Button'
+import { Button } from './Button'
 
 import '@styles/Navbar.css'
 

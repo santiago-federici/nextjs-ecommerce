@@ -1,4 +1,4 @@
-import { Button } from "@components/Buttons/Button";
+import { Button } from "@components/Button";
 import Image from "next/image";
 
 export function HeroSection () {
