@@ -16,7 +16,7 @@ export function HeroSection () {
       </div>
 
       <section className="wrapper mt-14 md:mt-40 grid justify-items-center md:justify-items-start w-full">
-        <h1 className="text-white font-bold text-5xl md:text-6xl text-balance text-center lg:text-left lg:w-[500px]">
+        <h1 className="text-white font-bold text-balance text-center lg:text-left lg:w-[500px]">
           Mejora tu estilo con nuestros productos
         </h1>
         <Button as="ghost" text="Ver productos" extraClassName="mt-10" />

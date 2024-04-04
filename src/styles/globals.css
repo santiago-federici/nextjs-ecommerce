@@ -106,7 +106,6 @@ body {
   font-size: var(--fs-300);
 }
 
-/*  Tipically it's the main */
 .wrapper {
   width: min(100% - 3rem, 130ch);
   margin-inline: auto;
@@ -114,7 +113,6 @@ body {
   place-items: center;
 }
 
-/*  This one also goes for the main */
 .flow > * + * {
   margin-top: 1em;
 }
@@ -137,6 +135,15 @@ h4 {
 h1 {
   font-family: var(--font-bangers);
   letter-spacing: 2px;
+  font-size: var(--fs-600);
+}
+
+h2 {
+  font-size: var(--fs-500);
+}
+
+h3 {
+  font-size: var(--fs-400);
 }
 
 button,
@@ -144,50 +151,9 @@ input {
   font-size: var(--fs-300);
 }
 
-/* button {
-  background: transparent;
-  color: var(--clr-heading);
-  border: 2px solid var(--clr-primary);
-  padding: 0.4rem 1rem;
-  border-radius: 0.5rem;
-  transition: .3s;
-} */
-
-/* button:hover {
-  color: var(--clr-text);
-  cursor: pointer;
-  border: 2px solid var(--clr-accent);
-} */
-
-/* input {
-  padding: .25rem .7rem;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid var(--clr-primary);
-  transition: .3s;
-  color: var(--clr-text)
-} */
-
-/* input:focus,
-input:hover {
-  outline: none;
-  border-bottom: 2px solid var(--clr-accent);
-} */
-
 img {
   max-width: 100%;
   display: block;
-}
-
-
-a {
-  color: var(--clr-primary);
-  transition: .3s;
-}
-
-a:hover,
-a:focus {
-  color: var(--clr-accent);
 }
 
 ::marker {
