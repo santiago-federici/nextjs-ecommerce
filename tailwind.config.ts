@@ -16,7 +16,7 @@ const config: Config = {
       textColor: {
         heading: 'var(--clr-heading)',
         text: 'var(--clr-text)',
-        'text-inverted': 'var(--clr-inverted)'
+        inverted: 'var(--clr-inverted)'
       },
       backgroundColor: {
         surface: 'var(--clr-surface)'
