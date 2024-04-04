@@ -12,7 +12,7 @@
     
     --clr-heading: #000;
     --clr-text: #1f282e;
-    --clr-inverted: #d1dae0;
+    --clr-inverted: #ffffff;
 
     --btn-padding: .25rem 1.25rem;
   }
@@ -21,31 +21,31 @@
     :root {
       --clr-surface: #22273a;
   
-      --clr-primary: #000000;
-      --clr-secondary: #ffffff;
+      --clr-primary: #ffffff;
+      --clr-secondary: #000000;
       --clr-accent: #f8121d;
       
       --clr-heading: #ffffff;
       --clr-text: #d1dae0;
-      --clr-inverted: #1f282e;
+      --clr-inverted: #000000;
     } 
   }
 
-  :root[data-theme = 'dark'] {
+  :root:has(#theme [value="dark"]:checked) {
     color-scheme: dark;
     
     --clr-surface: #22273a;
   
-    --clr-primary: #000000;
-    --clr-secondary: #ffffff;
+    --clr-primary: #ffffff;
+    --clr-secondary: #000000;
     --clr-accent: #f8121d;
     
     --clr-heading: #ffffff;
     --clr-text: #d1dae0;
-    --clr-inverted: #1f282e;
+    --clr-inverted: #000000;
   }
 
-  :root[data-theme = 'light'] {
+  :root:has(#theme [value="light"]:checked) {
     color-scheme: light;
 
     --clr-surface: #e6e6e6;
@@ -56,7 +56,7 @@
     
     --clr-heading: #000;
     --clr-text: #1f282e;
-    --clr-inverted: #d1dae0;
+    --clr-inverted: #ffffff;
   }
 }
 

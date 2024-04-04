@@ -41,6 +41,11 @@ export function Navbar () {
     <nav className='flex py-4 justify-between wrapper'>
       <h1 className='text-5xl md:text-6xl'>Ecom</h1>
 
+      <select data-theme-picker name="themepicker" id="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select> 
+
       <div className='flex gap-4 md:gap-8 items-center'>
         {
           !isMenuOpen &&
