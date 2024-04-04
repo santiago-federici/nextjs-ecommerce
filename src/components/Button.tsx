@@ -1,11 +1,12 @@
 export function Button ({ as, text, extraClassName }: { as: string, text: string, extraClassName?: string }) {
 
-  const defeaultButtonStyle = 'p-btn-padding rounded text-white font-bold'
+  const defeaultButtonStyle = 'p-btn-padding rounded font-bold'
   
-  const primaryButtonStyle = 'bg-primary font-medium text-inverted'
-  const ghostButtonStyle = 'bg-transparent border-secondary font-bold border border-[2px] text-inverted'
+  const primaryButtonStyle = 'text-inverted bg-primary font-medium'
+  const ghostButtonStyle = 'text-inverted bg-transparent border-secondary border border-[2px]'
+  const buttonStyle = as === 'primary' ? primaryButtonStyle : ghostButtonStyle
   
   return (
-    <button className={`${defeaultButtonStyle} ${as === 'primary' ? primaryButtonStyle : ghostButtonStyle} ${extraClassName}`}>{text}</button>
+    <button className={`${defeaultButtonStyle} ${buttonStyle} ${extraClassName}`}>{text}</button>
   )
 }
