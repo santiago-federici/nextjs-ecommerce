@@ -6,7 +6,7 @@
   :root {
     --clr-surface: #e6e6e6;
 
-    --clr-primary: #ff841f;
+    --clr-primary: #000000;
     --clr-secondary: #ffffff;
     --clr-accent: #f8121d;
     
@@ -21,7 +21,7 @@
     :root {
       --clr-surface: #22273a;
   
-      --clr-primary: #ff841f;
+      --clr-primary: #000000;
       --clr-secondary: #ffffff;
       --clr-accent: #f8121d;
       
@@ -36,7 +36,7 @@
     
     --clr-surface: #22273a;
   
-    --clr-primary: #ff841f;
+    --clr-primary: #000000;
     --clr-secondary: #ffffff;
     --clr-accent: #f8121d;
     
@@ -50,7 +50,7 @@
 
     --clr-surface: #e6e6e6;
 
-    --clr-primary: #ff841f;
+    --clr-primary: #000000;
     --clr-secondary: #ffffff;
     --clr-accent: #f8121d;
     
