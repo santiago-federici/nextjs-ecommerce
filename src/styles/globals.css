@@ -161,6 +161,6 @@ a:focus {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 100dvh;
+  height: 95dvh;
   z-index: -1;
 }
