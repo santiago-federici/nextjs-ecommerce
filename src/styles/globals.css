@@ -88,15 +88,20 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-bangers);
-  letter-spacing: 2px;
-  /* font-family: var(--font-paytoneone); */
   color: var(--clr-heading);
   line-height: 1.1;
   text-wrap: balance;
 }
 
+h2,
+h3,
+h4 {
+  font-family: var(--font-paytoneone);
+}
+
 h1 {
+  font-family: var(--font-bangers);
+  letter-spacing: 2px;
   font-size: var(--fs-600);
   font-weight: 900;
 }
