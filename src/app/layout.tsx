@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Onest } from "next/font/google";
+import { Bangers } from "next/font/google";
+import { Paytone_One } from "next/font/google";
 
 import { Navbar } from '@components/Navbar'
 import { Provider } from "@components/Provider";
 
 import "@styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const onest = Onest({ 
+  subsets: ["latin"] ,
+  variable: "--font-onest",
+});
+
+const bangers = Bangers({ 
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bangers",
+ });
+
+const paytoneOne = Paytone_One({ 
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-paytoneone",
+ });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${onest.variable} ${bangers.variable} ${paytoneOne.variable}`}>
         <Provider>
           <Navbar />
           {children}
