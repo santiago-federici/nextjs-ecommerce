@@ -1,0 +1,3 @@
+.carousel-mask {
+  mask-image: linear-gradient(to right, black 90%, transparent);
+}
