@@ -1,3 +1,10 @@
+.navbar-wrapper {
+  width: min(100% - 3rem, 130ch);
+  margin-inline: auto;
+  position: relative;
+  place-items: center;
+}
+
 .profile-dropdown {
   position: absolute;
   top: 4rem;

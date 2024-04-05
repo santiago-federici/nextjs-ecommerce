@@ -107,7 +107,7 @@ body {
 }
 
 .wrapper {
-  width: min(100% - 3rem, 130ch);
+  width: min(100% - 3rem, 110ch);
   margin-inline: auto;
   position: relative;
   place-items: center;
@@ -158,12 +158,4 @@ img {
 
 ::marker {
   color: var(--clr-primary);
-}
-
-.hero {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 95dvh;
-  z-index: -1;
 }

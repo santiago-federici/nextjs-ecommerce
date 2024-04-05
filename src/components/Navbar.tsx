@@ -38,7 +38,7 @@ export function Navbar () {
   }, [screenWitdh])
 
   return (
-    <nav className='flex py-4 justify-between wrapper'>
+    <nav className='flex py-4 justify-between navbar-wrapper'>
       <h1 className='text-5xl md:text-6xl'>Ecom</h1>
 
       <div className='flex gap-4 items-center'>
