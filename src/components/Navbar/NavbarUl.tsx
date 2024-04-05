@@ -1,4 +1,4 @@
-import { NavItem } from "../NavItem";
+import { NavItem } from "./NavItem";
 import { About, Contact, Home, Products } from '../Icons'
 import { Button } from "../Button";
 import { signIn } from 'next-auth/react'
