@@ -31,7 +31,7 @@
     } 
   }
 
-  :root:has(#theme [value="dark"]:checked) {
+  :root:has(#toggle:checked) {
     color-scheme: dark;
     
     --clr-surface: #22273a;
@@ -45,7 +45,7 @@
     --clr-inverted: #000000;
   }
 
-  :root:has(#theme [value="light"]:checked) {
+  :root:has(#toggle:not(:checked)) {
     color-scheme: light;
 
     --clr-surface: #e6e6e6;
