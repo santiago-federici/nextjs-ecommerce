@@ -3,7 +3,7 @@ import { Onest } from "next/font/google";
 import { Bangers } from "next/font/google";
 import { Paytone_One } from "next/font/google";
 
-import { Navbar } from '@components/Navbar'
+import { Navbar } from '@components/Navbar/Navbar'
 import { Provider } from "@components/Provider";
 
 import "@styles/globals.css";
