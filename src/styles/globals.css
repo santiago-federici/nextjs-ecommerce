@@ -8,7 +8,7 @@
 
     --clr-primary: #000000;
     --clr-secondary: #ffffff;
-    --clr-accent: #f8121d;
+    --clr-accent: #2888F5;
     
     --clr-heading: #000;
     --clr-text: #1f282e;
@@ -19,11 +19,11 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --clr-surface: #22273a;
+      --clr-surface: #222222;
   
       --clr-primary: #ffffff;
       --clr-secondary: #000000;
-      --clr-accent: #f8121d;
+      --clr-accent: #2888F5;
       
       --clr-heading: #ffffff;
       --clr-text: #d1dae0;
@@ -34,11 +34,11 @@
   :root:has(#toggle:checked) {
     color-scheme: dark;
     
-    --clr-surface: #22273a;
+    --clr-surface: #222222;
   
     --clr-primary: #ffffff;
     --clr-secondary: #000000;
-    --clr-accent: #f8121d;
+    --clr-accent: #2888F5;
     
     --clr-heading: #ffffff;
     --clr-text: #d1dae0;
@@ -52,7 +52,7 @@
 
     --clr-primary: #000000;
     --clr-secondary: #ffffff;
-    --clr-accent: #f8121d;
+    --clr-accent: #2888F5;
     
     --clr-heading: #000;
     --clr-text: #1f282e;
