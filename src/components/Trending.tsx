@@ -3,7 +3,7 @@ import { Card } from "./Card";
 
 export function Trending () {
   return(
-    <article className="wrapper grid gap-20 place-content-center mb-60 ">
+    <article className="grid gap-20 place-items-center mt-32 md:mt-44 ">
       <h2 className="text-3xl md:text-4xl underline underline-offset-4 uppercase">Trending</h2>
 
 
