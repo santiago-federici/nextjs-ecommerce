@@ -1,4 +1,5 @@
 import { HeroSection } from "@components/HeroSection";
+import { Offers } from "@components/Offers";
 import { Trending } from "@components/Trending";
 
 export default function Home() {
@@ -7,6 +8,8 @@ export default function Home() {
       <HeroSection />
 
       <Trending />
+
+      <Offers />
     </main>
   );
 }
