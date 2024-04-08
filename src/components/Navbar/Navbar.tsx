@@ -39,42 +39,48 @@ export function Navbar () {
   }, [screenWitdh])
 
   return (
-  <>
-    <nav className='flex py-4 justify-between navbar-wrapper border'>
-      <h1 className='text-5xl md:text-6xl'>Ecom</h1>
+    <>
+      <nav className='flex py-4 justify-between navbar-wrapper border'>
+        <h1 className='text-5xl md:text-6xl'>Ecom</h1>
 
-      <ThemeSwtich />
+        <ThemeSwtich />
 
-      <div className='flex gap-4 md:gap-8 items-center'>
-        {
-          !isMenuOpen &&
-          <span className='lg:hidden' onClick={() => setIsMenuOpen(prev => !prev)}>
-            <Menu />
-          </span>
-        }
+        <div className='flex gap-4 md:gap-8 items-center'>
+          {
+            !isMenuOpen && 
+              <>
+                <span className='lg:hidden' onClick={() => setIsMenuOpen(prev => !prev)}>
+                  <Menu />
+                </span>
+                <NavbarUl isMenuOpen={isMenuOpen} session={session} />
+              </>
+          }
 
 
-        {
-          isMenuOpen
-          ? <span className='lg:hidden justify-self-end' onClick={() => setIsMenuOpen(prev => !prev)}>
-              <CloseMenu />
-            </span>
-          : (
-            <>
-              { 
-                session?.user 
-                ? <UserSettings profileId={profileId} session={session} />
-                : <span onClick={() => signIn()}><Button as='primary' text='Sign in' extraClassName='hidden lg:inline' /></span>
-              }
+          {
+            isMenuOpen
+            ? <span className='lg:hidden justify-self-end' onClick={() => setIsMenuOpen(prev => !prev)}>
+                <CloseMenu />
+              </span>
+            : (
+              <>
+                { 
+                  session?.user 
+                  ? <UserSettings profileId={profileId} session={session} />
+                  : <span onClick={() => signIn()}><Button as='primary' text='Sign in' extraClassName='hidden lg:inline' /></span>
+                }
 
-              <Cart />
-            </>
-          )
-        }
-      </div>
+                <Cart />
+              </>
+            )
+          }
+        </div>
 
-    </nav>
-            <NavbarUl isMenuOpen={isMenuOpen} session={session} />
+      </nav>
+      {
+        isMenuOpen &&
+        <NavbarUl isMenuOpen={isMenuOpen} session={session} />
+      }
     </>
   )
 }
