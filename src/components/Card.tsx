@@ -13,7 +13,7 @@ export function Card ({ prodName, price }: { prodName: string, price: string }) 
       />
 
       <div className="px-2 grid gap-2">
-        <p className="text-md md:text-xl">{prodName}</p>
+        <p className="text-md md:text-xl text-heading">{prodName}</p>
         <p className="font-medium text-xl md:text-2xl">${price} <span className="text-green-500 text-xs align-text-top">15% OFF</span> </p>
       </div>
     </article>
