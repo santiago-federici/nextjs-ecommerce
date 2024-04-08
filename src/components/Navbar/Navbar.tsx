@@ -40,7 +40,7 @@ export function Navbar () {
 
   return (
     <>
-      <nav className='flex py-4 justify-between navbar-wrapper border'>
+      <nav className='flex py-4 justify-between navbar-wrapper'>
         <h1 className='text-5xl md:text-6xl'>Ecom</h1>
 
         <ThemeSwtich />
