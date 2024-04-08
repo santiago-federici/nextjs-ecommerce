@@ -1,13 +1,11 @@
-import { Breadcrumbs } from "@components/Breadcrumbs";
-import { HeroSection } from "@components/HeroSection";
-import { Offers } from "@components/Offers";
-import { Trending } from "@components/Trending";
+import { HeroSection } from "@components/HomePage/HeroSection";
+import { Offers } from "@components/HomePage/Offers";
+import { Trending } from "@components/HomePage/Trending";
 
 export default function Home() {
   return (
     <main className="wrapper">
-      <Breadcrumbs />
-      
+
       <HeroSection />
 
       <Trending />
