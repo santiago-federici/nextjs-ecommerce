@@ -8,7 +8,7 @@
 
     --clr-primary: #000000;
     --clr-secondary: #ffffff;
-    --clr-accent: #2888F5;
+    --clr-accent: #5ba7ff;
     
     --clr-heading: #000;
     --clr-text: #1f282e;
@@ -52,7 +52,7 @@
 
     --clr-primary: #000000;
     --clr-secondary: #ffffff;
-    --clr-accent: #2888F5;
+    --clr-accent: #5ba7ff;
     
     --clr-heading: #000;
     --clr-text: #1f282e;
@@ -175,6 +175,6 @@ img {
   display: block;
 }
 
-::marker {
+/* ::marker {
   color: var(--clr-primary);
-}
+} */
