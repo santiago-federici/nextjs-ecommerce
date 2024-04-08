@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --clr-surface: #e6e6e6;
+    --clr-surface-elevated: #cec7c7;
 
     --clr-primary: #000000;
     --clr-secondary: #ffffff;
@@ -21,11 +22,12 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --clr-surface: #222222;
+      --clr-surface: #1A1B1B;
+      --clr-surface-elevated: #2d2d2c;
   
       --clr-primary: #ffffff;
       --clr-secondary: #000000;
-      --clr-accent: #2888F5;
+      --clr-accent: #E42EC0;
       
       --clr-heading: #ffffff;
       --clr-text: #d1dae0;
@@ -38,11 +40,12 @@
   :root:has(#toggle:checked) {
     color-scheme: dark;
     
-    --clr-surface: #222222;
+    --clr-surface: #1A1B1B;
+    --clr-surface-elevated: #2d2d2c;
   
     --clr-primary: #ffffff;
     --clr-secondary: #000000;
-    --clr-accent: #2888F5;
+    --clr-accent: #E42EC0;
     
     --clr-heading: #ffffff;
     --clr-text: #d1dae0;
@@ -55,6 +58,7 @@
     color-scheme: light;
 
     --clr-surface: #e6e6e6;
+    --clr-surface-elevated: #cec7c7;
 
     --clr-primary: #000000;
     --clr-secondary: #ffffff;

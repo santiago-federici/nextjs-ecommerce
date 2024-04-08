@@ -20,6 +20,7 @@ const config: Config = {
       },
       backgroundColor: {
         surface: 'var(--clr-surface)',
+        'surface-elevated': 'var(--clr-surface-elevated)',
         footersurface: 'var(--clr-footer-surface)'
       },
       colors: {

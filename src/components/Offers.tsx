@@ -8,7 +8,7 @@ import '@styles/Offers.css'
 export function Offers () {
   return (
     <HomeSection extraClassName="py-8">
-      <div className="bg-accent absolute w-[100svw] h-full top-0 z-1 rounded-corners"></div>
+      <div className="bg-surface-elevated absolute w-[95svw] h-full top-0 z-1 rounded-corners rounded-xl"></div>
 
       <SectionTitle title="Ofertas" />
 
