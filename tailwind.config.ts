@@ -19,7 +19,8 @@ const config: Config = {
         inverted: 'var(--clr-inverted)'
       },
       backgroundColor: {
-        surface: 'var(--clr-surface)'
+        surface: 'var(--clr-surface)',
+        footersurface: 'var(--clr-footer-surface)'
       },
       colors: {
         primary: 'var(--clr-primary)',
