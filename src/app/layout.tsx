@@ -7,6 +7,7 @@ import { Navbar } from '@components/Navbar/Navbar'
 import { Provider } from "@components/Provider";
 
 import "@styles/globals.css";
+import { Footer } from "@components/Footer";
 
 const onest = Onest({ 
   subsets: ["latin"] ,
@@ -41,6 +42,7 @@ export default function RootLayout({
         <Provider>
           <Navbar />
           {children}
+          <Footer />
         </Provider>
       </body>
     </html>
