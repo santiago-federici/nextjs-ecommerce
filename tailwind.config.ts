@@ -15,7 +15,7 @@ const config: Config = {
       },
       textColor: {
         heading: 'var(--clr-heading)',
-        text: 'var(--clr-text)',
+        base: 'var(--clr-base)',
         inverted: 'var(--clr-inverted)'
       },
       backgroundColor: {
