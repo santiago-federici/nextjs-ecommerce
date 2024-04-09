@@ -1,0 +1,29 @@
+.menu {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .menu {
+    display: flex;
+  }
+}
+
+.menu-icon ~ input:checked ~ .menu {
+  display: grid;
+}
+
+.profile-menu {
+  display: none;
+}
+
+.profile-menu-icon ~ input:checked ~ .profile-menu {
+  display: grid;
+}
+
+.cart {
+  display: none;
+}
+
+.cart-icon ~ input:checked ~ .cart {
+  display: grid;
+}

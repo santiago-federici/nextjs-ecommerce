@@ -3,7 +3,7 @@ import { Onest } from "next/font/google";
 import { Bangers } from "next/font/google";
 import { Paytone_One } from "next/font/google";
 
-import { Navbar } from '@components/Navbar/Navbar'
+import { Header } from '@components/Header/Header'
 import { Provider } from "@components/Provider";
 
 import "@styles/globals.css";
@@ -40,7 +40,7 @@ export default function RootLayout({
     <html lang="en" className="bg-surface">
       <body className={`${onest.variable} ${bangers.variable} ${paytoneOne.variable} wrapper`}>
         <Provider>
-          <Navbar />
+          <Header />
           {children}
           <Footer />
         </Provider>
