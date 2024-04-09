@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-surface">
-      <body className={`${onest.variable} ${bangers.variable} ${paytoneOne.variable}`}>
+      <body className={`${onest.variable} ${bangers.variable} ${paytoneOne.variable} wrapper`}>
         <Provider>
           <Navbar />
           {children}
