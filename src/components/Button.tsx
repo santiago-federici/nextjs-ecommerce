@@ -1,9 +1,9 @@
 export function Button ({ as, text, extraClassName }: { as: string, text: string, extraClassName?: string }) {
 
-  const defeaultButtonStyle = 'px-4 py-1 max-sm:text-sm md:p-btn-padding rounded font-bold transition duration-200 z-10'
+  const defeaultButtonStyle = 'text-inverted font-medium uppercase text-sm md:text-md p-btn-padding rounded-sm transition duration-200'
   
-  const primaryButtonStyle = 'text-inverted bg-primary font-medium hover:opacity-80'
-  const ghostButtonStyle = 'text-inverted bg-transparent border-secondary border border-[2px] hover:bg-primary hover:border-primary hover:text-inverted'
+  const primaryButtonStyle = 'bg-secondary border border-secondary hover:opacity-70'
+  const ghostButtonStyle = 'bg-transparent border border-primary hover:bg-primary hover:text-secondary'
   const buttonStyle = as === 'primary' ? primaryButtonStyle : ghostButtonStyle
   
   return (
