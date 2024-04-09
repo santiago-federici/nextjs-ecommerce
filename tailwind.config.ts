@@ -31,7 +31,6 @@ const config: Config = {
         'btn-padding': 'var(--btn-padding)'
       }
     },
-  },
-  plugins: [require("daisyui")],
+  }
 };
 export default config;
