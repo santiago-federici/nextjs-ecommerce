@@ -1,18 +1,14 @@
 'use client'
 
 import { useEffect, useId, useState } from 'react'
-
 import { signIn, useSession } from 'next-auth/react'
 
-
-import { Cart, CloseMenu, Menu } from '../Icons'
-
 import { Button } from '../Button'
-
-import '@styles/Navbar.css'
-import { ThemeSwtich } from './ThemeSwitch'
 import { NavbarUl } from './NavbarUl'
 import { UserSettings } from '@components/UserSettings'
+import { Cart, CloseMenu, Menu } from '../Icons'
+
+import '@styles/Navbar.css'
 
 export function Navbar () {
 
@@ -42,8 +38,6 @@ export function Navbar () {
     <>
       <nav className='flex py-4 justify-between navbar-wrapper'>
         <h1 className='text-5xl md:text-6xl'>Ecom</h1>
-
-        <ThemeSwtich />
 
         <div className='flex gap-4 md:gap-8 items-center'>
           {
