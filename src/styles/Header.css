@@ -1,3 +1,5 @@
+/* Menu modal */
+
 .menu {
   display: none;
 }
@@ -12,13 +14,7 @@
   display: grid;
 }
 
-.profile-menu {
-  display: none;
-}
-
-.profile-menu-icon ~ input:checked ~ .profile-menu {
-  display: grid;
-}
+/* Cart modal */
 
 .cart {
   display: none;

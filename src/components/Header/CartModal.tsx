@@ -9,7 +9,7 @@ export function CartModal ({ cartId }: { cartId: string }) {
 
       <input type="checkbox" hidden id={cartId} />
 
-      <aside className='cart absolute top-16'>
+      <aside className='cart absolute top-16 w-fit p-4 text-nowrap shadow-lg'>
         <ul>
           <li>Product One</li>
           <li>Product Two</li>

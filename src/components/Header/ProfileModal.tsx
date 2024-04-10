@@ -2,36 +2,83 @@ import { Button } from "@components/Button";
 import { UserCircle } from "@components/Icons";
 import { signIn, signOut } from "next-auth/react";
 
-export function ProfileModal ({ profileId, session }: { profileId: string, session: any }) {
+import { useState } from "react";
+import { motion, Variants } from "framer-motion";
+
+const itemVariants: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 24 }
+  },
+  closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
+};
+
+export function ProfileModal ({ session }: { session: any }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  
   return (
-    <>
-      <label htmlFor={profileId} className='profile-menu-icon hidden lg:flex cursor-pointer hover:text-accent'>
+    <motion.nav
+      initial={false}
+      animate={isOpen ? "open" : "closed"}
+      className="relative hidden lg:flex cursor-pointer hover:text-accent"
+    >
+      <motion.button
+        whileTap={{ scale: 0.9 }}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <UserCircle />
-      </label>
-
-      <input type="checkbox" hidden id={profileId} />
-
-      <ul className='profile-menu absolute top-16 w-fit gap-4 p-2 shadow-2xl text-nowrap'>
+      </motion.button>
+      <motion.ul
+        variants={{
+          open: {
+            clipPath: "inset(0% 0% 0% 0% round 4px)",
+            transition: {
+              type: "spring",
+              bounce: 0,
+              duration: 0.7,
+              delayChildren: 0.3,
+              staggerChildren: 0.05
+            }
+          },
+          closed: {
+            clipPath: "inset(10% 50% 90% 50% round 10px)",
+            transition: {
+              type: "spring",
+              bounce: 0,
+              duration: 0.3
+            }
+          }
+        }}
+        style={{ 
+          pointerEvents: isOpen ? "auto" : "none", 
+          top: "calc(100% + 10px)", // Adjust this value to adjust the distance between nav and ul
+          left: "50%",
+          transform: "translateX(-50%)" 
+        }}
+        className="absolute grid w-[200px] gap-4 py-4 px-6 text-nowrap bg-slate-50"
+      >
         {
           session?.user 
           ? 
           <>
-            <li>User settings</li>
-            <li>My orders</li>
-            <li>My account</li>
-            <li onClick={() => signOut()}>Logout</li>
+            <motion.li variants={itemVariants}>User settings</motion.li>
+            <motion.li variants={itemVariants}>My orders</motion.li>
+            <motion.li variants={itemVariants}>My account</motion.li>
+            <motion.li onClick={() => signOut()}variants={itemVariants}>Logout</motion.li>
           </>
           :
           <>
-            <li onClick={() => signIn()}>
+            <motion.li onClick={() => signIn()} variants={itemVariants}>
               <Button as='primary' text='Login' extraClassName='w-full' />
-            </li>
-            <li onClick={() => signIn()}>
+            </motion.li>
+            <motion.li onClick={() => signIn()} variants={itemVariants}>
               <Button as='primary' text='Register' extraClassName='w-full' />
-            </li>
+            </motion.li>
           </>
         }
-      </ul>
-    </>
+      </motion.ul>
+    </motion.nav>
   )
 }
