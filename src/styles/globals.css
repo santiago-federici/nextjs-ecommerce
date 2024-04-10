@@ -201,3 +201,7 @@ img {
 .nice-hover:hover {
   color: black;
 }
+
+.modal-shadow {
+  box-shadow: 5px 0 30px 0 rgba(0 0 0 / 1);
+}

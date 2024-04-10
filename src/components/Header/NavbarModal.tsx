@@ -98,7 +98,7 @@ export function Navbar ({ session }: { session: any }) {
             initial="inital"
             animate="open"
             exit="exit"
-            className="grid py-4 px-6 bg-surface w-full h-full absolute top-0 left-0 z-10 origin-left"
+            className="grid py-4 px-6 bg-surface w-full md:w-[70svw] h-full absolute top-0 left-0 z-10 origin-left modal-shadow"
           >
             <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
               {
