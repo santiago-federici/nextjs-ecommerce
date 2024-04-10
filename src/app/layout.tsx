@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Onest } from "next/font/google";
 import { Bangers } from "next/font/google";
 import { Paytone_One } from "next/font/google";
+import { Work_Sans } from "next/font/google";
+import { Oswald } from "next/font/google";
 
 import { Header } from '@components/Header/Header'
 import { Provider } from "@components/Provider";
@@ -14,16 +16,10 @@ const onest = Onest({
   variable: "--font-onest",
 });
 
-const bangers = Bangers({ 
+const workSans = Work_Sans({ 
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-bangers",
- });
-
-const paytoneOne = Paytone_One({ 
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-paytoneone",
+  weight: ["700", "900"],
+  variable: "--font-worksans",
  });
 
 export const metadata: Metadata = {
@@ -38,7 +34,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-surface">
-      <body className={`${onest.variable} ${bangers.variable} ${paytoneOne.variable} wrapper`}>
+      <body className={`${onest.variable} ${workSans.variable} wrapper`}>
+        <div className="hero-bg"></div>
         <Provider>
           <Header />
           {children}

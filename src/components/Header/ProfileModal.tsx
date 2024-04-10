@@ -22,11 +22,12 @@ export function ProfileModal ({ session }: { session: any }) {
     <motion.nav
       initial={false}
       animate={isOpen ? "open" : "closed"}
-      className="relative hidden lg:flex cursor-pointer hover:text-accent"
+      className="relative hidden lg:flex"
     >
       <motion.button
-        whileTap={{ scale: 0.9 }}
+        whileTap={{ scale: 0.8 }}
         onClick={() => setIsOpen(!isOpen)}
+        className="text-white cursor-pointer hover:text-accent transition duration-200"
       >
         <UserCircle />
       </motion.button>
@@ -57,7 +58,7 @@ export function ProfileModal ({ session }: { session: any }) {
           left: "50%",
           transform: "translateX(-50%)" 
         }}
-        className="absolute grid w-[200px] gap-4 py-4 px-6 text-nowrap bg-slate-50"
+        className="absolute grid w-[200px] gap-4 py-4 px-6 text-nowrap bg-surface"
       >
         {
           session?.user 

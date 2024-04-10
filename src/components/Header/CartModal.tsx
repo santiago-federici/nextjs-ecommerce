@@ -3,7 +3,7 @@ import { Cart } from "@components/Icons";
 export function CartModal ({ cartId }: { cartId: string }) {
   return(
     <>
-      <label htmlFor={cartId} className='cart-icon cursor-pointer hover:text-accent'>
+      <label htmlFor={cartId} className='text-white cart-icon cursor-pointer hover:text-accent transitoin duration-200'>
         <Cart />
       </label>
 
