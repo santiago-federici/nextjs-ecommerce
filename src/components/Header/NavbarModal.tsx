@@ -89,6 +89,24 @@ export function Navbar ({ session }: { session: any }) {
       >
         {isOpen ? <CloseMenu /> : <Menu />}
       </span>
+
+      <ul className='hidden lg:flex gap-4 text-white items-center order-2'>
+              {
+                navLinks.map((link, index) => {
+                  return (
+                      <li 
+                        key={index}
+                        className='font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase'
+                      >
+                        <span className='lg:hidden'>
+                          {link.icon}
+                        </span>
+                        {link.title}
+                      </li>
+                    )
+                })
+              }
+            </ul>
     
       <AnimatePresence mode="wait">
         {
