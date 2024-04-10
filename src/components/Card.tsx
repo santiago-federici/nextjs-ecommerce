@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-export function Card ({ prodName, price }: { prodName: string, price: string }) {
+export function Card ({ prodName, price, image }: { prodName: string, price: number, image: string }) {
   return (
     <article className="grid gap-8 place-content-center">
       <Image
-        src="/sunglass-1.png"
+        src={image}
         alt="sunglasses"
         width={230}
         height={114}
