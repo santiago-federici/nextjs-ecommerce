@@ -1,9 +1,8 @@
 'use client'
 
-import { useId } from 'react'
 import { useSession } from 'next-auth/react'
 
-import { Navbar } from './Navbar'
+import { Navbar } from './NavbarModal'
 import { ProfileModal } from './ProfileModal'
 import { CartModal } from './CartModal'
 
@@ -12,8 +11,6 @@ import '@styles/Header.css'
 export function Header () {
 
   const { data: session } = useSession()
-
-  const cartId = useId()
 
   
   return (
@@ -27,7 +24,7 @@ export function Header () {
         <ProfileModal session={session} />
 
 
-        <CartModal cartId={cartId} />
+        <CartModal />
 
       </span>
 
