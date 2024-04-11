@@ -1,6 +1,12 @@
 import Image from "next/image"
 import { HomeSection } from "./HomeSection"
 
+const winterCollectionInfo = {
+  title: 'CHECK OUT OUR WINTER COLLECTION',
+  subtitle: 'Winter Collections — New Modern Design',
+  description: 'We’ve gathered the latest models for you to consider adding to your winter lineup, check and see which ones can complete your wardrobe this season.'
+}
+
 const winterCollectionProds = [
   {
     image: '/NikeSB.webp',
@@ -23,9 +29,9 @@ export function BlackSection () {
   return(
     <HomeSection bgColor="secondary" extraClassname="justify-between">
       <div className="flow lg:max-w-sm xl:max-w-xl">
-        <h3 className="text-white">CHECK OUT OUR WINTER COLLECTION</h3>
-        <p className="text-gray-300">Winter Collections — New Modern Design</p>
-        <p className="text-gray-300">We’ve gathered the latest models for you to consider adding to your winter lineup, check and see which ones can complete your wardrobe this season.</p>
+        <h3 className="text-white">{winterCollectionInfo.title}</h3>
+        <p className="text-gray-300">{winterCollectionInfo.subtitle}</p>
+        <p className="text-gray-300">{winterCollectionInfo.description}</p>
       </div>
 
       <ul className="grid lg:flex gap-4 w-full">
