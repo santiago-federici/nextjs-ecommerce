@@ -27,7 +27,7 @@ const winterCollectionProds = [
 
 export function BlackSection () {
   return(
-    <HomeSection bgColor="secondary" extraClassname="justify-between">
+    <HomeSection bgColor="secondary" extraClassname="lg:flex justify-between gap-10">
       <div className="flow lg:max-w-sm xl:max-w-xl">
         <h3 className="text-white">{winterCollectionInfo.title}</h3>
         <p className="text-gray-300">{winterCollectionInfo.subtitle}</p>

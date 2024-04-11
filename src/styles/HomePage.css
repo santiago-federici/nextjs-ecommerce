@@ -21,6 +21,7 @@
 .offers-custom-underline {
   transform: skew(-15deg);
   cursor: pointer;
+  transition: 200ms ease all;
 }
 
 .offers-custom-underline::after {
@@ -31,5 +32,15 @@
   position: absolute;
   bottom: -3px;
   left: 0;
-  transition: 300ms all ease;
+  transition: 200ms all ease;
+}
+
+@media (width > 1024px) {
+  .offers-custom-underline::after {
+    height: 6px;
+  }
+}
+
+.offers-custom-underline:hover::after {
+  background: var(--clr-accent);
 }

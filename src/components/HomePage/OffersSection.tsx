@@ -41,21 +41,23 @@ const offerProds = [
 export function OffersSection () {
 
   return(
-    <HomeSection bgColor="primary">
-      <h3 className="text-4xl uppercase offers-custom-underline">{sectionInfo.title}</h3>
+    <HomeSection bgColor="surface" extraClassname="gap-10 lg:gap-24">
+      <h3 className="text-4xl lg:text-5xl uppercase offers-custom-underline hover:text-accent">{sectionInfo.title}</h3>
 
-      {
-        offerProds.map((prod, index) => (
-          <Card 
-            key={index}
-            prodName={prod.prodName} 
-            price={prod.price} 
-            prevPrice={prod.prevPrice}
-            image={prod.image} 
-            isOffer={prod.isOffer}
-          />
-        ))
-      }
+      <div>
+        {
+          offerProds.map((prod, index) => (
+            <Card 
+              key={index}
+              prodName={prod.prodName} 
+              price={prod.price} 
+              prevPrice={prod.prevPrice}
+              image={prod.image} 
+              isOffer={prod.isOffer}
+            />
+          ))
+        }
+      </div>
 
       <Button as="primary" text={sectionInfo.btnText} />
     </HomeSection>
