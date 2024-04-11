@@ -34,8 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-surface">
-      <body className={`${onest.variable} ${workSans.variable} wrapper`}>
-        <div className="hero-bg"></div>
+      <body className={`${onest.variable} ${workSans.variable}`}>
         <Provider>
           <Header />
           {children}
