@@ -1,0 +1,18 @@
+.custom-underline {
+  transform: skew(-15deg);
+}
+
+.custom-underline::after {
+  content: '';
+  background: black;
+  width: 0%;
+  height: 3px;
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  transition: 300ms all ease;
+}
+
+.custom-underline:hover::after {
+  width: 102%;
+}
