@@ -18,21 +18,21 @@ export function Menu () {
   )
 }
 
-export function CloseMenu () {
+export function Close () {
   return (
     <svg 
       width="30"  
-      height="30"  
-      viewBox="0 0 24 24"  
+      height="30" 
+      viewBox="0 0 24 24"
       fill="none"  
       stroke="currentColor"  
       stroke-width="2"  
       stroke-linecap="round"  
-      stroke-linejoin="round"
+      stroke-linejoin="round" 
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
-      <path d="M9 9l6 6m0 -6l-6 6" />
+      <path d="M18 6l-12 12" />
+      <path d="M6 6l12 12" />
     </svg>
   )
 }
