@@ -4,7 +4,7 @@
 
 .custom-underline::after {
   content: '';
-  background: black;
+  background: #fff;
   width: 0%;
   height: 3px;
   position: absolute;
