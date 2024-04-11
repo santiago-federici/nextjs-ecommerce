@@ -38,8 +38,8 @@ export function Header () {
   const [cartIsOpen, setCartIsOpen] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = navIsOpen || cartIsOpen ? 'hidden' : 'auto'
-  }, [navIsOpen, cartIsOpen])
+    document.body.style.overflow = navIsOpen ? 'hidden' : 'auto'
+  }, [navIsOpen])
   
   return (
     <>

@@ -82,7 +82,7 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
           initial="inital"
           animate="open"
           exit="exit"
-          className="grid py-4 px-6 bg-surface w-[80%] lg:w-[400px] h-full absolute top-0 right-0 origin-right modal-shadow z-20"
+          className="grid py-4 px-6 bg-surface w-[80%] lg:w-[400px] h-full fixed top-0 right-0 origin-right overflow-y-auto modal-shadow z-20"
         >
           <motion.span 
             onClick={() => setIsOpen(false)}

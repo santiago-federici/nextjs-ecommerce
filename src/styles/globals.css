@@ -99,9 +99,10 @@
   font-family: var(--font-onest);
 }
 
-/* html {
-  color-scheme: light dark;
-} */
+html {
+  /* color-scheme: light dark; */
+  scrollbar-gutter: stable;
+}
 
 body {
   background: var(--clr-surface);
