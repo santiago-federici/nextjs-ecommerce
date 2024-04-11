@@ -21,7 +21,7 @@ const winterCollectionProds = [
 export function BlackSection () {
   return(
     <section className="bg-secondary w-full h-fit">
-      <div className='wrapper grid lg:flex gap-16 lg:gap-6 justify-between py-24 lg:py-32'>
+      <div className='wrapper grid lg:flex gap-10 lg:gap-6 justify-between py-24 lg:py-32'>
         <div className="flow lg:max-w-sm xl:max-w-xl">
           <h3 className="text-white">CHECK OUT OUR WINTER COLLECTION</h3>
           <p className="text-gray-300">Winter Collections — New Modern Design</p>
