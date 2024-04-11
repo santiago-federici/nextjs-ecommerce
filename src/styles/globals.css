@@ -182,7 +182,7 @@ img {
   color: var(--clr-primary);
 } */
 
-.nice-hover::before {
+.ghost-btn-hover::before {
   content: '';
   position: absolute;
   top: 0;
@@ -191,13 +191,14 @@ img {
   height: 100%;
   background: white;
   transition: all 300ms ease;
+  z-index: -1;
 }
 
-.nice-hover:hover::before {
+.ghost-btn-hover:hover::before {
   width: 100%;
 }
 
-.nice-hover:hover {
+.ghost-btn-hover:hover {
   color: black;
 }
 
