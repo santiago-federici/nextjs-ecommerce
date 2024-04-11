@@ -1,28 +1,9 @@
-import { About, CloseMenu, Contact, Home, Menu, Products } from "@components/Icons"
+import { About, Close, Contact, Home, Products } from "@components/Icons"
 import { Button } from "@components/Button"
 
 import { useEffect, useState } from "react"
 import { signIn } from "next-auth/react"
-import { AnimatePresence, delay, motion, Variants } from "framer-motion"
-
-const navLinks = [
-  {
-    title: 'Home',
-    icon: <Home />
-  },
-  {
-    title: 'Products',
-    icon: <Products />
-  },
-  {
-    title: 'About',
-    icon: <About />
-  },
-  {
-    title: 'Contact',
-    icon: <Contact />
-  }
-]
+import { AnimatePresence, motion } from "framer-motion"
 
 const navVariants = {
   inital: {
@@ -66,9 +47,7 @@ const liVariants = {
   })
 }
 
-export function Navbar ({ session }: { session: any }) {
-  const [isOpen, setIsOpen] = useState(false);
-  
+export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any, isOpen: boolean, setIsOpen: any, navLinks: any }) {
   const [screenWitdh, setScreenWitdh] = useState(0)
   const mdTailwindWidth = 1024 // <--- width of the tailwind lg: class
   useEffect(() => {
@@ -80,86 +59,68 @@ export function Navbar ({ session }: { session: any }) {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [screenWitdh])
-  return(
-    <>
-      <span 
-        className={`lg:hidden cursor-pointer hover:text-accent transition duration-200 order-1 z-20 ${isOpen ? 'text-black' : 'text-white'}`}
-        onClick={() => setIsOpen(prev => !prev)}
-      >
-        {isOpen ? <CloseMenu /> : <Menu />}
-      </span>
+  }, [screenWitdh, setIsOpen])
 
-      <ul className='hidden lg:flex gap-4 text-white items-center order-2'>
-              {
-                navLinks.map((link, index) => {
-                  return (
-                      <li 
-                        key={index}
-                        className='font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase'
-                      >
-                        <span className='lg:hidden'>
-                          {link.icon}
-                        </span>
-                        {link.title}
-                      </li>
-                    )
-                })
-              }
-            </ul>
-    
-      <AnimatePresence mode="wait">
-        {
-          isOpen &&
-          <motion.nav 
-            variants={navVariants}
-            initial="inital"
-            animate="open"
-            exit="exit"
-            className="grid py-4 px-6 bg-surface w-full md:w-[70svw] h-full absolute top-0 left-0 z-10 origin-left modal-shadow"
+  return(
+    <AnimatePresence mode="wait">
+      {
+        isOpen &&
+        <motion.nav 
+          variants={navVariants}
+          initial="inital"
+          animate="open"
+          exit="exit"
+          className="grid py-4 px-6 bg-surface w-full md:w-[70svw] h-full absolute top-0 left-0 z-20 origin-left modal-shadow"
+        >
+          <motion.span 
+            onClick={() => setIsOpen(false)}
+            className="cursor-pointer hover:text-accent justify-self-end w-fit h-fit"
+            custom={1}
+            variants={liVariants}
           >
-            <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
-              {
-                navLinks.map((link, index) => {
-                  return (
-                    <motion.div
-                      custom={index}
-                      variants={liVariants}
-                      initial="inital"
-                      animate="open"
-                      exit="exit"
-                      key={index}
-                    >
-                      <li className='font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase'>
-                        <span className='lg:hidden'>
-                          {link.icon}
-                        </span>
-                        {link.title}
-                      </li>
-                    </motion.div>
-                    )
-                })
-              }
-              { 
-                !session?.user
-                ? (
-                  <motion.span
-                    custom={navLinks.length + 1}
+            <Close />
+          </motion.span>
+          <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
+            {
+              navLinks.map((link: any, index: number) => {
+                return (
+                  <motion.div
+                    custom={index}
                     variants={liVariants}
                     initial="inital"
                     animate="open"
                     exit="exit"
-                    onClick={() => signIn()}>
-                      <Button as='primary' text='Login' extraClassName='lg:hidden w-full' />
-                  </motion.span>
-                )
-                : <></>
-              }
-            </ul> 
-          </motion.nav>
-        }
-      </AnimatePresence>
-    </>
+                    key={index}
+                  >
+                    <li className='font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase'>
+                      <span className='lg:hidden'>
+                        {link.icon}
+                      </span>
+                      {link.title}
+                    </li>
+                  </motion.div>
+                  )
+              })
+            }
+            { 
+              !session?.user
+              ? (
+                <motion.span
+                  custom={navLinks.length + 1}
+                  variants={liVariants}
+                  initial="inital"
+                  animate="open"
+                  exit="exit"
+                  onClick={() => signIn()}>
+                    <Button as='primary' text='Login' extraClassName='lg:hidden w-full' />
+                </motion.span>
+              )
+              : <></>
+            }
+          </ul> 
+        </motion.nav>
+      }
+    </AnimatePresence>
   )
 }
 

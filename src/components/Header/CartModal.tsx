@@ -1,9 +1,5 @@
-import { About, Cart, CloseMenu, Contact, Home, Menu, Products } from "@components/Icons"
-import { Button } from "@components/Button"
-
-import { useEffect, useState } from "react"
-import { signIn } from "next-auth/react"
-import { AnimatePresence, delay, motion, Variants } from "framer-motion"
+import { Close } from "@components/Icons"
+import { AnimatePresence, motion } from "framer-motion"
 import { Card } from "@components/Card"
 
 const cartProds = [
@@ -75,55 +71,53 @@ const liVariants = {
   })
 }
 
-export function CartModal () {
-  const [isOpen, setIsOpen] = useState(false);
-  
+export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: any }) {
+
   return(
-    <>
-      <span 
-        onClick={() => setIsOpen(prev => !prev)}
-        className={`${isOpen ? 'text-black' : 'text-white'} cursor-pointer hover:text-accent transition duration-200 z-20`}
-      >
-        {isOpen ? <CloseMenu /> : <Cart />}
-      </span>
-    
-      <AnimatePresence mode="wait">
-        {
-          isOpen &&
-          <motion.nav 
-            variants={navVariants}
-            initial="inital"
-            animate="open"
-            exit="exit"
-            className="grid py-4 px-6 bg-surface w-[80svw] lg:w-[400px] h-full absolute top-0 right-0 z-10 origin-right modal-shadow"
+    <AnimatePresence mode="wait">
+      {
+        isOpen &&
+        <motion.nav 
+          variants={navVariants}
+          initial="inital"
+          animate="open"
+          exit="exit"
+          className="grid py-4 px-6 bg-surface w-[80%] lg:w-[400px] h-full absolute top-0 right-0 origin-right modal-shadow z-20"
+        >
+          <motion.span 
+            onClick={() => setIsOpen(false)}
+            className="cursor-pointer hover:text-accent justify-self-end w-fit h-fit"
+            custom={1}
+            variants={liVariants}
           >
-            <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
-              {
-                cartProds.map((prod, index) => {
-                  return (
-                      <motion.div 
-                        key={index}
-                        custom={index}
-                        variants={liVariants}
-                        initial="inital"
-                        animate="open"
-                        exit="exit"
-                      >
-                        <li>
-                          <Card 
-                            prodName={prod.name} 
-                            price={prod.price} 
-                            image={prod.image}
-                          />
-                        </li>
-                      </motion.div>
-                    )
-                })
-              }
-            </ul> 
-          </motion.nav>
-        }
-      </AnimatePresence>
-    </>
+            <Close />
+          </motion.span>
+          <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
+            {
+              cartProds.map((prod, index) => {
+                return (
+                    <motion.div 
+                      key={index}
+                      custom={index}
+                      variants={liVariants}
+                      initial="inital"
+                      animate="open"
+                      exit="exit"
+                    >
+                      <li>
+                        <Card 
+                          prodName={prod.name} 
+                          price={prod.price} 
+                          image={prod.image}
+                        />
+                      </li>
+                    </motion.div>
+                  )
+              })
+            }
+          </ul> 
+        </motion.nav>
+      }
+    </AnimatePresence>
   )
 }
