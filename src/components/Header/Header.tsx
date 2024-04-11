@@ -8,7 +8,7 @@ import { CartModal } from './CartModal'
 
 import '@styles/Header.css'
 import { About, Cart, Contact, Home, Menu, Products } from '@components/Icons'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 
 const navLinks = [
@@ -37,10 +37,6 @@ export function Header () {
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
 
-  useEffect(() => {
-    document.body.style.overflow = navIsOpen ? 'hidden' : 'auto'
-  }, [navIsOpen])
-  
   return (
     <>
       <Navbar session={session} isOpen={navIsOpen} setIsOpen={setNavIsOpen} navLinks={navLinks} />

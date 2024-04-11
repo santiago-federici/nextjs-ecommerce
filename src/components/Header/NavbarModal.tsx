@@ -1,4 +1,4 @@
-import { About, Close, Contact, Home, Products } from "@components/Icons"
+import { Close } from "@components/Icons"
 import { Button } from "@components/Button"
 
 import { useEffect, useState } from "react"
@@ -70,7 +70,7 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
           initial="inital"
           animate="open"
           exit="exit"
-          className="grid py-4 px-6 bg-surface w-full md:w-[70svw] h-full absolute top-0 left-0 z-20 origin-left modal-shadow"
+          className="grid py-4 px-6 bg-surface w-full md:w-[70svw] h-full fixed top-0 left-0 z-20 origin-left modal-shadow"
         >
           <motion.span 
             onClick={() => setIsOpen(false)}
@@ -123,6 +123,3 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
     </AnimatePresence>
   )
 }
-
-
-{/* <ul className={`${isOpen ? 'text-black' : 'text-white'} grid lg:flex gap-4 py-4 px-6 lg:py-0 lg:px-0 bg-surface lg:bg-transparent top-16 lg:top-0 w-full absolute lg:relative items-center`}> */}
