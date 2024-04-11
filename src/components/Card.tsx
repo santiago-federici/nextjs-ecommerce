@@ -1,20 +1,31 @@
 import Image from "next/image";
 
-export function Card ({ prodName, price, image }: { prodName: string, price: number, image: string }) {
+export function Card ({ prodName, price, prevPrice, image, isOffer }: { prodName: string, price: number, prevPrice: number, image: string, isOffer: number }) {
   return (
-    <article className="grid gap-8 place-content-center">
+    <article className="grid gap-6 relative overflow-hidden">
+      {
+        isOffer &&
+        <span className="absolute top-[20px] right-[-50px] w-[200px] bg-green-500 text-white text-center text-sm font-semibold py-1 px-2 rotate-[30deg]">
+          {isOffer}% OFF
+        </span>
+      }
+      
       <Image
         src={image}
-        alt="sunglasses"
-        width={230}
-        height={114}
-        quality={100}
-        className="justify-self-center w-[150px] md:w-[230px]"
+        alt="shirt"
+        width={500}
+        height={500}
+        className="w-full h-auto"
       />
 
-      <div className="px-2 grid gap-2">
-        <p className="text-md md:text-xl text-heading">{prodName}</p>
-        <p className="font-medium text-xl md:text-2xl">${price} <span className="text-green-500 text-xs align-text-top">15% OFF</span> </p>
+      <div className="grid gap-2 px-2">
+        <p className="text-heading text-md md:text-xl">{prodName}</p>
+        <p className="text-2xl md:text-3xl font-semibold">
+          <span className="text-gray-500 text-lg line-through mr-4">
+            ${prevPrice}
+          </span>
+          ${price}
+        </p>
       </div>
     </article>
   )
