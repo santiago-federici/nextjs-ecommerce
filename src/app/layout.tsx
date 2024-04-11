@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Onest } from "next/font/google";
-import { Bangers } from "next/font/google";
-import { Paytone_One } from "next/font/google";
 import { Work_Sans } from "next/font/google";
-import { Oswald } from "next/font/google";
 
 import { Header } from '@components/Header/Header'
 import { Provider } from "@components/Provider";
