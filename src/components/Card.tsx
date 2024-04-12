@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-export function Card ({ prodName, price, prevPrice, image, isOffer, extraClassname }: { prodName: string, price: number, prevPrice: number, image: string, isOffer: number, extraClassname: string }) {
+export function Card ({ prodName, price, prevPrice, image, isOffer, extraClassname, currSlide }: { prodName: string, price: number, prevPrice: number, image: string, isOffer: number, extraClassname: string, currSlide?: number }) {
   return (
-    <article className={`grid gap-6 relative overflow-hidden ${extraClassname}`}>
+    <article className={`grid gap-6 relative overflow-hidden ${extraClassname}`} style={{ transform: `translateX(${currSlide && currSlide * -100}%)`}}>
       {
         isOffer &&
         <span className="absolute top-[20px] right-[-50px] w-[200px] bg-green-500 text-white text-center text-sm font-semibold py-1 px-2 rotate-[30deg]">

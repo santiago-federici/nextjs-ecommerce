@@ -1,6 +1,9 @@
+'use client'
+
 import { Card } from "@components/Card";
 import { HomeSection } from "./HomeSection";
 import { Button } from "@components/Button";
+import { useState } from "react";
 
 const sectionInfo ={
   title: 'Offers',
@@ -38,25 +41,45 @@ const offerProds = [
   }
 ]
 
+
 export function OffersSection () {
 
+  const [currSlide, setCurrSlide] = useState(0)
+
+  const handleNextSlide = () => {
+    setCurrSlide(curr => (curr === offerProds.length - 1 ? 0 : curr + 1))
+  }
+
+  const handlePrevSlide = () => {
+    setCurrSlide(curr => (curr ===  0 ? offerProds.length - 1 : curr - 1))
+  }
+  
   return(
-    <HomeSection bgColor="surface" extraClassname="gap-10 lg:gap-24">
+    <HomeSection bgColor="surface" extraClassname="gap-10 lg:gap-24 overflow-hidden mb-40">
       <h3 className="text-4xl lg:text-5xl uppercase offers-custom-underline hover:text-accent">{sectionInfo.title}</h3>
 
-      <div>
+      <article className="flex gap-6 overflow-hidden w-full sticky">
         {
           offerProds.map((prod, index) => (
-            <Card 
-              key={index}
-              prodName={prod.prodName} 
-              price={prod.price} 
-              prevPrice={prod.prevPrice}
-              image={prod.image} 
-              isOffer={prod.isOffer}
-            />
+            <div key={index}>
+              <Card 
+                prodName={prod.prodName} 
+                price={prod.price} 
+                prevPrice={prod.prevPrice}
+                image={prod.image} 
+                isOffer={prod.isOffer}
+                extraClassname='w-[400px] transition duration-500'
+                currSlide={currSlide}
+                />
+            </div>
           ))
         }
+      </article>
+
+
+      <div className="flex gap-8">
+        <span onClick={handlePrevSlide}>prev</span>
+        <span onClick={handleNextSlide}>next</span>
       </div>
 
       <Button as="primary" text={sectionInfo.btnText} />
