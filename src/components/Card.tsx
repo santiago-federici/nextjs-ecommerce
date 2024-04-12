@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export function Card ({ prodName, price, prevPrice, image, isOffer, extraClassname, currSlide }: { prodName: string, price: number, prevPrice: number, image: string, isOffer: number, extraClassname: string, currSlide?: number }) {
+export function Card ({ prodName, price, prevPrice, image, isOffer, extraClassname, currSlide }: { prodName: string, price: number, prevPrice?: number, image: string, isOffer?: number, extraClassname?: string, currSlide?: number }) {
   return (
     <article className={`grid gap-6 relative overflow-hidden ${extraClassname}`} style={{ transform: `translateX(${currSlide && currSlide * -100}%)`}}>
       {
@@ -21,9 +21,12 @@ export function Card ({ prodName, price, prevPrice, image, isOffer, extraClassna
       <div className="grid gap-2 px-2 text-nowrap">
         <p className="text-heading text-lg">{prodName}</p>
         <p className="text-2xl md:text-3xl font-semibold">
-          <span className="text-gray-500 text-lg line-through mr-4">
-            ${prevPrice}
-          </span>
+          {
+            isOffer &&
+            <span className="text-gray-500 text-lg line-through mr-4">
+              ${prevPrice}
+            </span>
+          }
           ${price}
         </p>
       </div>
