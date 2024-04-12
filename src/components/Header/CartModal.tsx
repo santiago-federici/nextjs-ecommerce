@@ -4,28 +4,28 @@ import { Card } from "@components/Card"
 
 const cartProds = [
   {
-    name: 'Home',
+    prodName: 'Nike Dri-Fit Strike',
+    price: 53.499,
     image: '/Nike-DriFit-Strike.webp',
-    quantity: 1,
-    price: 0
+    quantity: 1
   },
   {
-    name: 'Home',
-    image: '/Nike-DriFit-Strike.webp',
-    quantity: 1,
-    price: 0
+    prodName: 'Nike Trail Solar Chase',
+    price: 45.499,
+    image: '/Nike-Dri-FIT-LeBron.webp',
+    quantity: 1
   },
   {
-    name: 'Home',
-    image: '/Nike-DriFit-Strike.webp',
-    quantity: 1,
-    price: 0
+    prodName: 'Nike Dri-Fit UV Hyverse',
+    price: 70.009,
+    image: '/NikeDri-FIT-UV-Hyverse.webp',
+    quantity: 1
   },
   {
-    name: 'Home',
-    image: '/Nike-DriFit-Strike.webp',
-    quantity: 1,
-    price: 0
+    prodName: 'Nike Dri-Fit',
+    price: 125.999,
+    image: '/NikeDri-FIT.webp',
+    quantity: 1
   }
 ]
 
@@ -96,22 +96,21 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
             {
               cartProds.map((prod, index) => {
                 return (
-                    <motion.div 
-                      key={index}
-                      custom={index}
-                      variants={liVariants}
-                      initial="inital"
-                      animate="open"
-                      exit="exit"
-                    >
-                      <li>
-                        <Card 
-                          prodName={prod.name} 
-                          price={prod.price} 
-                          image={prod.image}
-                        />
-                      </li>
-                    </motion.div>
+                    <li key={index}>
+                      <motion.div 
+                        custom={index}
+                        variants={liVariants}
+                        initial="inital"
+                        animate="open"
+                        exit="exit"
+                      >
+                          <Card 
+                            prodName={prod.prodName} 
+                            price={prod.price} 
+                            image={prod.image}
+                          />
+                      </motion.div>
+                    </li>
                   )
               })
             }
