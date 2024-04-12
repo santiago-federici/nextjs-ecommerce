@@ -1,4 +1,4 @@
-import { Button } from "@components/Button";
+import { Button } from "@components/CustomButtons";
 import { UserCircle } from "@components/Icons";
 import { signIn, signOut } from "next-auth/react";
 

@@ -1,5 +1,5 @@
 import { Close } from "@components/Icons"
-import { Button } from "@components/Button"
+import { Button } from "@components/CustomButtons"
 
 import { useEffect, useState } from "react"
 import { signIn } from "next-auth/react"
