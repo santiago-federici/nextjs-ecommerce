@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/CustomButtons'
 
 import '@/styles/HeroSection.css'
 

@@ -1,6 +1,6 @@
 import { HomeSection } from "./HomeSection";
-import { Button } from "@components/Button";
-import { Carousel } from "@components/Carousel";
+import { Button } from "@components/CustomButtons";
+import { CarouselContainer } from "@components/CarouselContainer";
 
 const sectionInfo ={
   title: 'Offers',
@@ -41,10 +41,10 @@ const offerProds = [
 
 export function OffersSection () {
   return(
-    <HomeSection bgColor="surface" extraClassname="gap-10 lg:gap-24 overflow-hidden mb-40">
+    <HomeSection bgColor="surface" extraClassname="gap-12 lg:gap-16">
       <h3 className="text-4xl lg:text-5xl uppercase offers-custom-underline hover:text-accent">{sectionInfo.title}</h3>
 
-      <Carousel prods={offerProds} />
+      <CarouselContainer prods={offerProds} />
       
       <Button as="primary" text={sectionInfo.btnText} />
     </HomeSection>
