@@ -86,7 +86,7 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
         >
           <motion.span 
             onClick={() => setIsOpen(false)}
-            className="cursor-pointer hover:text-accent justify-self-end w-fit h-fit"
+            className="cursor-pointer hover:opacity-70 justify-self-end w-fit h-fit"
             custom={1}
             variants={liVariants}
           >
