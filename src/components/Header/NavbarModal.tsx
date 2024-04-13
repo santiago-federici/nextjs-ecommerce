@@ -80,7 +80,7 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
           >
             <Close />
           </motion.span>
-          <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
+          <ul className='text-black grid gap-2 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
             {
               navLinks.map((link: any, index: number) => {
                 return (
@@ -92,7 +92,7 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
                     exit="exit"
                     key={index}
                   >
-                    <li className='font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase'>
+                    <li className='font-medium text-lg flex gap-2 cursor-pointer hover:bg-zinc-300 w-full pl-2 py-2 rounded-md transition duration-200 uppercase'>
                       <span className='lg:hidden'>
                         {link.icon}
                       </span>

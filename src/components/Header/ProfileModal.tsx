@@ -27,7 +27,7 @@ export function ProfileModal ({ session }: { session: any }) {
       <motion.button
         whileTap={{ scale: 0.8 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="text-white cursor-pointer hover:text-accent transition duration-200"
+        className="cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200"
       >
         <UserCircle />
       </motion.button>

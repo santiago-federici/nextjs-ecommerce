@@ -44,7 +44,7 @@ export function Header () {
 
       <header className='wrapper absolute flex justify-between items-center py-4 left-1/2 -translate-x-1/2'>
         <span 
-          className='text-white hover:text-accent lg:hidden cursor-pointer transition duration-200 order-1'
+          className='lg:hidden cursor-pointer order-1 hover:scale-105 hover:opacity-70 transition duration-200'
           onClick={() => setNavIsOpen(true)}
         >
           <Menu />
@@ -73,7 +73,7 @@ export function Header () {
 
           <span 
             onClick={() => setCartIsOpen(true)}
-            className='text-white hover:text-accent cursor-pointer transition duration-200'
+            className='cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200'
           >
             <Cart />
           </span>
