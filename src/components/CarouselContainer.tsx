@@ -20,7 +20,7 @@ export function CarouselContainer ({ prods }: { prods: any[] }) {
         <CarouselContent className="w-full gap-4">
           {
             prods.map((prod, index) => (
-              <CarouselItem key={index} className="w-full basis-full lg:basis-1/3">
+              <CarouselItem key={index} className="w-full basis-full md:basis-1/2 lg:basis-1/3">
                 <Card
                   prodName={prod.prodName}
                   price={prod.price}
@@ -32,8 +32,8 @@ export function CarouselContainer ({ prods }: { prods: any[] }) {
             ))
           }
         </CarouselContent>
-        <CarouselPrevious className="ml-14" />
-        <CarouselNext className="mr-14" />
+        <CarouselPrevious className="ml-14 md:top-[45%]" />
+        <CarouselNext className="mr-14 md:top-[45%]" />
       </Carousel>
   )
 }
