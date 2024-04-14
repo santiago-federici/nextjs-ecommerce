@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
@@ -9,6 +10,7 @@ import { ProfileModal } from './ProfileModal'
 import { CartModal } from './CartModal'
 
 import { About, Cart, Contact, Home, Menu, Products } from '@components/Icons'
+
 
 
 const navLinks = [
@@ -34,6 +36,8 @@ export function Header () {
 
   const { data: session } = useSession()
 
+  const pathname = usePathname()
+
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
 
@@ -44,15 +48,15 @@ export function Header () {
 
       <header className='wrapper absolute flex justify-between items-center py-4 left-1/2 -translate-x-1/2'>
         <span 
-          className='lg:hidden cursor-pointer order-1 hover:scale-105 hover:opacity-70 transition duration-200'
+          className={`${pathname === '/' ? 'text-white' : 'text-black'} lg:hidden cursor-pointer order-1 hover:scale-105 hover:opacity-70 transition duration-200`}
           onClick={() => setNavIsOpen(true)}
         >
           <Menu />
         </span>
 
-        <h1 className='text-white hover:text-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1'>Ecom</h1>
+        <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1`}>Ecom</h1>
 
-        <ul className='hidden lg:flex gap-4 text-white items-center order-2'>
+        <ul className={`${pathname === '/' ? 'text-white' : 'text-black'} hidden lg:flex gap-4 items-center order-2`}>
           {
             navLinks.map((link, index) => {
               return (
@@ -75,7 +79,7 @@ export function Header () {
 
           <span 
             onClick={() => setCartIsOpen(true)}
-            className='cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200'
+            className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200`}
           >
             <Cart />
           </span>

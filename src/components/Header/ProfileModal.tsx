@@ -4,6 +4,7 @@ import { signIn, signOut } from "next-auth/react";
 
 import { useState } from "react";
 import { motion, Variants } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const itemVariants: Variants = {
   open: {
@@ -17,6 +18,8 @@ const itemVariants: Variants = {
 export function ProfileModal ({ session }: { session: any }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const pathname = usePathname()
+
   
   return (
     <motion.nav
@@ -27,7 +30,7 @@ export function ProfileModal ({ session }: { session: any }) {
       <motion.button
         whileTap={{ scale: 0.8 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200"
+        className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200`}
       >
         <UserCircle />
       </motion.button>
