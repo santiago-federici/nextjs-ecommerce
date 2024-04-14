@@ -23,7 +23,7 @@ const config: Config = {
       },
       textColor: {
         heading: 'var(--clr-heading)',
-        base: 'var(--clr-base)',
+        text: 'var(--clr-text)',
         inverted: 'var(--clr-inverted)'
       },
       backgroundColor: {

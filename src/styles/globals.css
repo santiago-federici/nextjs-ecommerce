@@ -12,7 +12,7 @@
     --clr-accent: #e42ec0;
     
     --clr-heading: #000;
-    --clr-base: #1f282e;
+    --clr-text: #1f282e;
     --clr-inverted: #ffffff;
 
     --btn-padding: .6rem 1.3rem;
@@ -106,7 +106,7 @@ html {
 
 body {
   background: var(--clr-surface);
-  color: var(--clr-base);
+  color: var(--clr-text);
   line-height: 1.6;
   font-size: var(--fs-300);
 }
