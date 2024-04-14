@@ -2,8 +2,6 @@
 
 import { Button } from '@components/CustomButtons'
 
-import '@/styles/HeroSection.css'
-
 const heroSectionInfo = {
   title: 'Dress to Impress. Enter Our Fashion Wonderland',
   btnText: 'Shop now'

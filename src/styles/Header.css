@@ -1,9 +1,0 @@
-/* Cart modal */
-
-.cart {
-  display: none;
-}
-
-.cart-icon ~ input:checked ~ .cart {
-  display: grid;
-}

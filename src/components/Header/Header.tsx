@@ -1,14 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 import { Navbar } from './NavbarModal'
 import { ProfileModal } from './ProfileModal'
 import { CartModal } from './CartModal'
 
-import '@styles/Header.css'
 import { About, Cart, Contact, Home, Menu, Products } from '@components/Icons'
-import { useState } from 'react'
 
 
 const navLinks = [
@@ -60,7 +60,9 @@ export function Header () {
                     key={index}
                     className='font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase'
                   >
-                    {link.title}
+                    <Link href={`/${link.title === 'Home' ? '' : link.title.toLowerCase()}`}>
+                      {link.title}
+                    </Link>
                   </li>
                 )
             })

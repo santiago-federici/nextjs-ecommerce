@@ -4,7 +4,7 @@ import { OffersSection } from "@components/HomePage/OffersSection";
 
 import '@styles/HomePage.css'
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main>
 
