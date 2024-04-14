@@ -1,4 +1,4 @@
-export function Button ({ as, text, extraClassName }: { as: string, text: string, extraClassName?: string }) {
+export function Button ({ as, icon, text, extraClassName }: { as: string, icon?: JSX.Element ,text: string, extraClassName?: string }) {
 
   const defeaultButtonStyle = 'text-inverted font-medium uppercase text-sm md:text-md p-btn-padding rounded-sm transition duration-200'
   
@@ -7,6 +7,6 @@ export function Button ({ as, text, extraClassName }: { as: string, text: string
   const buttonStyle = as === 'primary' ? primaryButtonStyle : ghostButtonStyle
   
   return (
-    <button className={`${defeaultButtonStyle} ${buttonStyle} ${extraClassName}`}>{text}</button>
+    <button className={`${defeaultButtonStyle} ${buttonStyle} ${extraClassName}`}>{icon}{text}</button>
   )
 }
