@@ -1,7 +1,9 @@
 import Image from "next/image"
+import Link from "next/link"
 
 import { SortDropdown } from "@components/ProductsPage/SortDropdown"
 import { FiltersAside } from "@components/ProductsPage/FiltersAside"
+import { ArrowRight } from "@components/Icons"
 
 export default function ProductsPage () {
 
@@ -9,7 +11,11 @@ export default function ProductsPage () {
     <div className='wrapper pt-[120px] pb-[200px]'>
 
       {/* TODO: create breadcrumbs component with all the logic */}
-      <p className="text-gray-500 text-sm mb-10">Homepage / Products</p>
+      <div className="text-gray-500 text-sm mb-10 flex gap-1">
+        <Link href={'/'}>Homepage</Link>
+        <ArrowRight />      
+        <p>Products</p>
+      </div>
 
       <section className="grid lg:flex justify-between w-full">
         <div className="flex flex-col justify-between">
@@ -25,8 +31,6 @@ export default function ProductsPage () {
         
         <FiltersAside />
       </section>
-      
-
     </div>
   )
 } 
