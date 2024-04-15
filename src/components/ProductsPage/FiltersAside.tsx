@@ -4,7 +4,7 @@ import { Button } from "@components/CustomButtons"
 import { ArrowDown, ArrowUp, Close, Filter } from "@components/Icons"
 import { motion, Variants } from 'framer-motion'
 import { AnimatePresence } from "framer-motion"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const navVariants: Variants = {
   inital: {
@@ -168,6 +168,19 @@ const filters = [
 export function FiltersAside () {
   const [isOpen, setIsOpen] = useState(false)
   const [activeFilter, setActiveFilter] = useState <number | null>(null)
+
+  const [screenWitdh, setScreenWitdh] = useState(0)
+  const mdTailwindWidth = 1024 // <--- width of the tailwind lg: class
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWitdh(window.innerWidth)
+      screenWitdh >= mdTailwindWidth ? setIsOpen(false) : null
+    }
+    window.addEventListener('resize', handleResize) 
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [screenWitdh, setIsOpen])
   
   return(
     <>
