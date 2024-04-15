@@ -1,6 +1,7 @@
 import Image from "next/image"
 
-import { Filters } from "@components/ProductsPage/Filters"
+import { SortDropdown } from "@components/ProductsPage/SortDropdown"
+import { FiltersAside } from "@components/ProductsPage/FiltersAside"
 
 export default function ProductsPage () {
 
@@ -19,7 +20,11 @@ export default function ProductsPage () {
         <Image src={'/prodsHeader.png'} width={900} height={150} alt={'prodsHeader'} className="w-full lg:w-2/3" />
       </section>
 
-      <Filters />
+      <section className="mt-16 flex lg:hidden justify-between relative">
+        <SortDropdown />
+        
+        <FiltersAside />
+      </section>
       
 
     </div>
