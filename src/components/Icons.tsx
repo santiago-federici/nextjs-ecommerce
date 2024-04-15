@@ -222,3 +222,39 @@ export function Sort () {
     </svg>
   )
 }
+
+export function ArrowDown () {
+  return (
+    <svg  
+      width="20"  
+      height="20"  
+      viewBox="0 0 24 24"  
+      fill="none"  
+      stroke="currentColor"  
+      stroke-width="2"  
+      stroke-linecap="round"  
+      stroke-linejoin="round"  
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M6 9l6 6l6 -6" />
+    </svg>
+  )
+}
+
+export function ArrowUp () {
+  return (
+    <svg  
+      width="20"  
+      height="20"  
+      viewBox="0 0 24 24"  
+      fill="none"  
+      stroke="currentColor"  
+      stroke-width="2"  
+      stroke-linecap="round"  
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M6 15l6 -6l6 6" />
+    </svg>
+  )
+}
