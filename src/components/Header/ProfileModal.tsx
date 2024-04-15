@@ -6,6 +6,27 @@ import { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 
+const ulVariants = {
+  open: {
+    clipPath: "inset(0% 0% 0% 0% round 4px)",
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.7,
+      delayChildren: 0.3,
+      staggerChildren: 0.05
+    }
+  },
+  closed: {
+    clipPath: "inset(10% 50% 90% 50% round 10px)",
+    transition: {
+      type: "spring",
+      bounce: 0,
+      duration: 0.3
+    }
+  }
+}
+
 const itemVariants: Variants = {
   open: {
     opacity: 1,
@@ -35,33 +56,14 @@ export function ProfileModal ({ session }: { session: any }) {
         <UserCircle />
       </motion.button>
       <motion.ul
-        variants={{
-          open: {
-            clipPath: "inset(0% 0% 0% 0% round 4px)",
-            transition: {
-              type: "spring",
-              bounce: 0,
-              duration: 0.7,
-              delayChildren: 0.3,
-              staggerChildren: 0.05
-            }
-          },
-          closed: {
-            clipPath: "inset(10% 50% 90% 50% round 10px)",
-            transition: {
-              type: "spring",
-              bounce: 0,
-              duration: 0.3
-            }
-          }
-        }}
+        variants={ulVariants}
         style={{ 
           pointerEvents: isOpen ? "auto" : "none", 
-          top: "calc(100% + 10px)", // Adjust this value to adjust the distance between nav and ul
+          top: "calc(100% + 10px)",
           left: "50%",
           transform: "translateX(-50%)" 
         }}
-        className="absolute grid w-[200px] gap-4 py-4 px-6 text-nowrap bg-surface"
+        className={`absolute grid w-[200px] gap-4 py-4 px-6 text-nowrap ${pathname === '/' ? 'bg-surface' : 'bg-zinc-300'}`}
       >
         {
           session?.user 
