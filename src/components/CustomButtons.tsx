@@ -4,7 +4,7 @@ export function Button ({ as, icon, text, extraClassName }: { as: string, icon?:
   
   const primaryButtonStyle = 'bg-secondary border border-secondary hover:opacity-70'
   const ghostButtonStyle = 'bg-transparent border border-primary relative z-10 ghost-btn-hover'
-  const buttonStyle = as === 'primary' ? primaryButtonStyle : ghostButtonStyle
+  const buttonStyle = as === 'primary' ? primaryButtonStyle : as === 'ghost' ? ghostButtonStyle : ''
   
   return (
     <button className={`${defeaultButtonStyle} ${buttonStyle} ${extraClassName}`}>{icon}{text}</button>
