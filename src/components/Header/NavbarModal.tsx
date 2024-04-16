@@ -4,6 +4,8 @@ import { Button } from "@components/CustomButtons"
 import { useEffect, useState } from "react"
 import { signIn } from "next-auth/react"
 import { AnimatePresence, motion } from "framer-motion"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const navVariants = {
   inital: {
@@ -61,6 +63,12 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
     }
   }, [screenWitdh, setIsOpen])
 
+  const pathname = usePathname()
+  
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname, setIsOpen])
+
   return(
     <AnimatePresence mode="wait">
       {
@@ -92,11 +100,16 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
                     exit="exit"
                     key={index}
                   >
-                    <li className='font-medium text-lg flex gap-2 cursor-pointer hover:bg-zinc-300 w-full pl-2 py-2 rounded-md transition duration-200 uppercase'>
-                      <span className='lg:hidden'>
-                        {link.icon}
-                      </span>
-                      {link.title}
+                    <li>
+                      <Link 
+                        href={`/${link.title === 'Home' ? '' : link.title.toLowerCase()}`}
+                        className='font-medium text-lg flex gap-2 cursor-pointer hover:bg-zinc-300 w-full pl-2 py-2 rounded-md transition duration-200 uppercase'
+                      >
+                        <span className='lg:hidden'>
+                          {link.icon}
+                        </span>
+                        {link.title}
+                      </Link>
                     </li>
                   </motion.div>
                   )

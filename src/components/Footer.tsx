@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstagramLogo, XLogo, YoutubeLogo } from "./Icons";
 
 const navLinks = [
@@ -31,7 +32,14 @@ export function Footer () {
         <ul className="flex gap-4">
           {
             navLinks.map((link, index) => (
-              <li key={index} className="hover:text-accent cursor-pointer transition duration-200">{link.title}</li>
+              <li key={index}>
+                <Link
+                  href={`/${link.title === 'Home' ? '' : link.title.toLowerCase()}`}
+                  className="hover:text-accent cursor-pointer transition duration-200"
+                >
+                  {link.title}
+                </Link>
+              </li>
             ))
           }
         </ul>
