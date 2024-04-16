@@ -223,10 +223,17 @@ export function FiltersAside () {
                 })
               }
 
-              <div className="flex justify-between gap-2 mt-6">
+              <motion.div 
+                custom={filters.length + 1}
+                variants={liVariants}
+                initial="inital"
+                animate="open"
+                exit="exit"
+                className="flex justify-between gap-2 mt-6"
+              >
                 <Button as="custom" text="Clear" extraClassName="w-full bg-red-600 border-red-600 hover:opacity-70" />
                 <Button as="primary" text="Apply" extraClassName="w-full" />
-              </div>
+              </motion.div>
             </ul> 
           </motion.nav>
         }
