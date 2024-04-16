@@ -1,35 +1,33 @@
 import Image from "next/image";
 
-export function Card ({ prodName, price, prevPrice, image, isOffer, extraClassname }: { prodName: string, price: number, prevPrice?: number, image: string, isOffer?: number, extraClassname?: string }) {
+export function Card({ prodName, price, prevPrice, image, isOffer }: { prodName: string, price: number, prevPrice?: number, image: string, isOffer?: number }) {
   return (
-    <article className={`grid gap-4 relative overflow-hidden w-full h-auto ${extraClassname}`}>
-      {
-        isOffer &&
-        <span className="absolute top-[20px] right-[-50px] w-[200px] bg-green-500 text-white text-center text-sm font-semibold py-1 px-2 rotate-[30deg]">
-          {isOffer}% OFF
-        </span>
-      }
+    <article className="grid bg-white rounded-sm shadow-md overflow-hidden">
+      <div className="relative h-60">
+        <Image
+          src={image}
+          alt={prodName}
+          layout="fill"
+          objectFit="cover"
+        />
 
-      <Image
-        src={image}
-        alt="shirt"
-        width={400}
-        height={400}
-        className="w-full"
-      />
+        {
+          isOffer && 
+          <span className="bg-green-500 text-white text-sm font-semibold py-1 px-2 rounded-md absolute top-2 right-2">{isOffer}
+            % OFF
+          </span>
+        }
+      </div>
 
-      <div className="grid gap-2 px-2 text-nowrap">
-        <p className="text-heading text-lg">{prodName}</p>
-        <p className="text-2xl md:text-3xl font-semibold">
+      <div className="p-4">
+        <h3 className="text-lg">{prodName}</h3>
+        <div className="grid items-center">
           {
-            isOffer &&
-            <span className="text-gray-500 text-lg line-through mr-4">
-              ${prevPrice}
-            </span>
+            prevPrice && <p className="text-sm text-gray-500 line-through mt-1">${prevPrice}</p>
           }
-          ${price}
-        </p>
+          <p className="text-gray-900 text-2xl">${price}</p>
+        </div>
       </div>
     </article>
-  )
+  );
 }
