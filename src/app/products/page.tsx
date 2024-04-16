@@ -157,28 +157,28 @@ export default function ProductsPage () {
 
       <section className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-4 mt-16">
         <aside className="hidden lg:flex lg:flex-col gap-4">
-              {
-                filters.map((filter, index) => (
-                  <article key={index} className="p-4 bg-zinc-300 h-fit rounded-sm shadow-lg">
-                    <h3>{filter.name}</h3>
-                    <ul className="">
-                      {
-                        filter.options.map((option, index) => (
-                          <li key={index} className="ml-2">
-                            <label htmlFor="filter" className="flex gap-2">
-                              <input type="checkbox" id="filter" />
-                              <p>{option.name}</p>
-                            </label>
-                          </li>
-                        ))
-                      }
-                    </ul>
-                  </article> 
-                ))
-              }
-          </aside>
+          {
+            filters.map((filter, index) => (
+              <article key={index} className="p-4 bg-zinc-300 h-fit rounded-sm shadow-lg">
+                <h3>{filter.name}</h3>
+                <ul className="">
+                  {
+                    filter.options.map((option, index) => (
+                      <li key={index} className="ml-2">
+                        <label htmlFor="filter" className="flex gap-2">
+                          <input type="checkbox" id="filter" />
+                          <p>{option.name}</p>
+                        </label>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </article> 
+            ))
+          }
+        </aside>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid custom-grid gap-4">
           {prods.map((prod, index) => (
             <Card
               key={index}

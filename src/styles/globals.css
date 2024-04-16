@@ -112,29 +112,22 @@ body {
 }
 
 .wrapper {
-  width: min(100% - 3rem, 100ch);
+  width: min(100% - 5rem, 100ch);
   margin-inline: auto;
   place-items: center;
 }
 
-@media screen and (width < 1500px) {
-  .wrapper {
-    width: min(100% - 15rem, 100ch);
-  }
-}
-
-@media screen and (width < 1024) {
-  .wrapper {
-    width: min(100% - 5rem, 100ch);
-  }
-}
-
-@media screen and (width < 768px) {
+@media screen and (width > 1024) {
   .wrapper {
     width: min(100% - 3rem, 100ch);
   }
 }
 
+@media screen and (width < 1500px) {
+  .wrapper {
+    width: min(100% - 5rem, 100ch);
+  }
+}
 
 .flow > * + * {
   margin-top: 1em;
