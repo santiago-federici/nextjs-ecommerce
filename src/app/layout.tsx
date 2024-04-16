@@ -7,6 +7,7 @@ import { Provider } from "@components/Provider";
 
 import "@styles/globals.css";
 import { Footer } from "@components/Footer";
+import { CartProvider } from "@contexts/CartContext";
 
 const onest = Onest({ 
   subsets: ["latin"] ,
@@ -32,11 +33,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-surface">
       <body className={`${onest.variable} ${workSans.variable}`}>
-        <Provider>
-          <Header />
-          {children}
-          <Footer />
-        </Provider>
+        <CartProvider>
+          <Provider>
+            <Header />
+            {children}
+            <Footer />
+          </Provider>
+        </CartProvider>
       </body>
     </html>
   );
