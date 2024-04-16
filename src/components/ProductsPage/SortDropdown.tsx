@@ -100,7 +100,7 @@ export function SortDropdown () {
       <motion.button
         whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="font-medium uppercase text-sm md:text-md p-btn-padding rounded-sm transition duration-200 flex gap-2 items-center border-secondary text-secondary border border-black bg-zinc-300 hover:bg-zinc-400 h-fit"
+        className="font-medium uppercase text-sm md:text-md p-btn-padding rounded-sm transition duration-200 flex gap-2 items-center border-secondary text-secondary border border-black hover:bg-zinc-300 h-fit"
       >
         <Sort /> Sort
       </motion.button>

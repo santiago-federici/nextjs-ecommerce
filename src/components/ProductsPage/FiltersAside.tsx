@@ -185,7 +185,7 @@ export function FiltersAside () {
   return(
     <>
       <span onClick={() => setIsOpen(true)}>
-        <Button as="custom" text="Filters" icon={<Filter />} extraClassName="flex gap-2 border-secondary text-secondary border border-black bg-zinc-300 hover:bg-zinc-400 h-fit" />
+        <Button as="custom" text="Filters" icon={<Filter />} extraClassName="flex gap-2 border-secondary text-secondary border border-black hover:bg-zinc-300 h-fit" />
       </span>
       
       <AnimatePresence mode="wait">
