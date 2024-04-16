@@ -10,6 +10,7 @@ import { ProfileModal } from './ProfileModal'
 import { CartModal } from './CartModal'
 
 import { About, Cart, Contact, Home, Menu, Products } from '@components/Icons'
+import { useCart } from '@hooks/useCart'
 
 
 
@@ -40,6 +41,8 @@ export function Header () {
 
   const [navIsOpen, setNavIsOpen] = useState(false);
   const [cartIsOpen, setCartIsOpen] = useState(false);
+
+  const { cartQuantity } = useCart()
 
   return (
     <>
@@ -79,9 +82,10 @@ export function Header () {
 
           <span 
             onClick={() => setCartIsOpen(true)}
-            className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200`}
+            className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200 relative`}
           >
             <Cart />
+            <span className='absolute -bottom-2 -right-1 bg-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm'>{cartQuantity}</span>
           </span>
 
         </span>
