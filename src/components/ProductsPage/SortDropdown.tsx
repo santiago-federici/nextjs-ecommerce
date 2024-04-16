@@ -107,7 +107,7 @@ export function SortDropdown () {
       <motion.ul
         variants={ulVariants}
         style={{ pointerEvents: isOpen ? "auto" : "none" }}
-        className="absolute bg-zinc-300 w-fit mt-2 text-nowrap grid gap-2 z-20"
+        className="absolute bg-zinc-300 w-fit mt-2 text-nowrap grid gap-2 z-50"
       >
         {
           sortOptions.map((option, index) => (
