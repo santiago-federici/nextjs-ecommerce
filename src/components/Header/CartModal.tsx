@@ -1,33 +1,7 @@
 import { Close } from "@components/Icons"
 import { AnimatePresence, motion } from "framer-motion"
 import { Card } from "@components/Card"
-
-const cartProds = [
-  {
-    prodName: 'Nike Dri-Fit Strike',
-    price: 53.499,
-    image: '/Nike-DriFit-Strike.webp',
-    quantity: 1
-  },
-  {
-    prodName: 'Nike Trail Solar Chase',
-    price: 45.499,
-    image: '/Nike-Dri-FIT-LeBron.webp',
-    quantity: 1
-  },
-  {
-    prodName: 'Nike Dri-Fit UV Hyverse',
-    price: 70.009,
-    image: '/NikeDri-FIT-UV-Hyverse.webp',
-    quantity: 1
-  },
-  {
-    prodName: 'Nike Dri-Fit',
-    price: 125.999,
-    image: '/NikeDri-FIT.webp',
-    quantity: 1
-  }
-]
+import { useCart } from "@hooks/useCart"
 
 const navVariants = {
   inital: {
@@ -73,6 +47,8 @@ const liVariants = {
 
 export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: any }) {
 
+  const { cart } = useCart()
+
   return(
     <AnimatePresence mode="wait">
       {
@@ -94,7 +70,7 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
           </motion.span>
           <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
             {
-              cartProds.map((prod, index) => {
+              cart.map((prod, index) => {
                 return (
                     <li key={index}>
                       <motion.div 
@@ -105,9 +81,7 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
                         exit="exit"
                       >
                           <Card 
-                            prodName={prod.prodName} 
-                            price={prod.price} 
-                            image={prod.image}
+                            id={prod.id}
                           />
                       </motion.div>
                     </li>
