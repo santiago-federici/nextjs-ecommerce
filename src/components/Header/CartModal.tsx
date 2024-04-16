@@ -82,6 +82,7 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
                       >
                           <Card 
                             id={prod.id}
+                            quantity={prod.quantity}
                           />
                       </motion.div>
                     </li>
