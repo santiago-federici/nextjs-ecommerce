@@ -8,80 +8,7 @@ import { Card } from "@components/Card"
 
 import '@styles/ProductsPage.css'
 
-const prods = [
-  {
-    prodName: 'Nike Dri-Fit Strike',
-    price: 53.499,
-    image: '/Nike-DriFit-Strike.webp',
-  },
-  {
-    prodName: 'Nike Trail Solar Chase',
-    price: 45.499,
-    prevPrice: 72.999,
-    image: '/Nike-Dri-FIT-LeBron.webp',
-    isOffer: 50
-  },
-  {
-    prodName: 'Nike Dri-Fit UV Hyverse',
-    price: 70.009,
-    image: '/NikeDri-FIT-UV-Hyverse.webp',
-  },
-  {
-    prodName: 'Nike Dri-Fit',
-    price: 125.999,
-    prevPrice: 178.599,
-    image: '/NikeDri-FIT.webp',
-    isOffer: 30
-  },
-  {
-    prodName: 'Nike Dri-Fit Strike',
-    price: 53.499,
-    image: '/Nike-DriFit-Strike.webp',
-  },
-  {
-    prodName: 'Nike Trail Solar Chase',
-    price: 45.499,
-    prevPrice: 72.999,
-    image: '/Nike-Dri-FIT-LeBron.webp',
-    isOffer: 50
-  },
-  {
-    prodName: 'Nike Dri-Fit UV Hyverse',
-    price: 70.009,
-    image: '/NikeDri-FIT-UV-Hyverse.webp',
-  },
-  {
-    prodName: 'Nike Dri-Fit',
-    price: 125.999,
-    prevPrice: 178.599,
-    image: '/NikeDri-FIT.webp',
-    isOffer: 30
-  },
-  {
-    prodName: 'Nike Dri-Fit Strike',
-    price: 53.499,
-    image: '/Nike-DriFit-Strike.webp',
-  },
-  {
-    prodName: 'Nike Trail Solar Chase',
-    price: 45.499,
-    prevPrice: 72.999,
-    image: '/Nike-Dri-FIT-LeBron.webp',
-    isOffer: 50
-  },
-  {
-    prodName: 'Nike Dri-Fit UV Hyverse',
-    price: 70.009,
-    image: '/NikeDri-FIT-UV-Hyverse.webp',
-  },
-  {
-    prodName: 'Nike Dri-Fit',
-    price: 125.999,
-    prevPrice: 178.599,
-    image: '/NikeDri-FIT.webp',
-    isOffer: 30
-  }
-]
+import prods from '@mocks/prods.json'
 
 const filters = [
   {
@@ -255,11 +182,7 @@ export default function ProductsPage () {
           {prods.map((prod, index) => (
             <Card
               key={index}
-              prodName={prod.prodName}
-              price={prod.price}
-              prevPrice={prod.prevPrice}
-              image={prod.image}
-              isOffer={prod.isOffer}
+              id={prod.id}
             />
           ))}
         </div>
