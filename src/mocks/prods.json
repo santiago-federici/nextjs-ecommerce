@@ -28,13 +28,13 @@
     "isOffer": 30
   },
   {
-    "id": 1,
+    "id": 5,
     "prodName": "Nike Dri-Fit Strike",
     "price": 53.499,
     "image": "/Nike-DriFit-Strike.webp"
   },
   {
-    "id": 2,
+    "id": 6,
     "prodName": "Nike Trail Solar Chase",
     "price": 45.499,
     "prevPrice": 72.999,
@@ -42,13 +42,13 @@
     "isOffer": 50
   },
   {
-    "id": 3,
+    "id": 7,
     "prodName": "Nike Dri-Fit UV Hyverse",
     "price": 70.009,
     "image": "/NikeDri-FIT-UV-Hyverse.webp"
   },
   {
-    "id": 4,
+    "id": 8,
     "prodName": "Nike Dri-Fit",
     "price": 125.999,
     "prevPrice": 178.599,
@@ -56,13 +56,13 @@
     "isOffer": 30
   },
   {
-    "id": 1,
+    "id": 9,
     "prodName": "Nike Dri-Fit Strike",
     "price": 53.499,
     "image": "/Nike-DriFit-Strike.webp"
   },
   {
-    "id": 2,
+    "id": 10,
     "prodName": "Nike Trail Solar Chase",
     "price": 45.499,
     "prevPrice": 72.999,
@@ -70,13 +70,13 @@
     "isOffer": 50
   },
   {
-    "id": 3,
+    "id": 11,
     "prodName": "Nike Dri-Fit UV Hyverse",
     "price": 70.009,
     "image": "/NikeDri-FIT-UV-Hyverse.webp"
   },
   {
-    "id": 4,
+    "id": 12,
     "prodName": "Nike Dri-Fit",
     "price": 125.999,
     "prevPrice": 178.599,
@@ -84,13 +84,13 @@
     "isOffer": 30
   },
   {
-    "id": 1,
+    "id": 13,
     "prodName": "Nike Dri-Fit Strike",
     "price": 53.499,
     "image": "/Nike-DriFit-Strike.webp"
   },
   {
-    "id": 2,
+    "id": 14,
     "prodName": "Nike Trail Solar Chase",
     "price": 45.499,
     "prevPrice": 72.999,
@@ -98,13 +98,13 @@
     "isOffer": 50
   },
   {
-    "id": 3,
+    "id": 15,
     "prodName": "Nike Dri-Fit UV Hyverse",
     "price": 70.009,
     "image": "/NikeDri-FIT-UV-Hyverse.webp"
   },
   {
-    "id": 4,
+    "id": 16,
     "prodName": "Nike Dri-Fit",
     "price": 125.999,
     "prevPrice": 178.599,

@@ -7,7 +7,7 @@ import { AddToCart } from "./Icons";
 import { Button } from "./CustomButtons";
 import { useCart } from "@hooks/useCart";
 
-export function Card({ id, quantity }: { id: number, quantity: number }) {
+export function Card({ id }: { id: number }) {
 
   const { increaseQuantity } = useCart()
   
@@ -15,7 +15,7 @@ export function Card({ id, quantity }: { id: number, quantity: number }) {
   
   return (
     prod &&
-    <article className="grid bg-white rounded-sm shadow-md overflow-hidden">
+    <article className="bg-white rounded-sm shadow-md overflow-hidden ">
       <div className="relative h-60 cursor-pointer group">
 
         <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 group-hover:opacity-60 transition duration-300"></span>
@@ -28,8 +28,7 @@ export function Card({ id, quantity }: { id: number, quantity: number }) {
         </span>
 
         <span>
-
-          <Button as="custom" text="See details" extraClassName="text-sm text-nowrap border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 hover:text-accent hover:border-accent transition duration-200" />
+          <Button as="custom" text="See details" extraClassName="text-sm text-nowrap border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 hover:text-accent hover:border-accent transition duration-200" />
         </span>
 
         <Image
@@ -47,17 +46,15 @@ export function Card({ id, quantity }: { id: number, quantity: number }) {
         }
       </div>
 
-      <div className="px-4 py-2 ">
-        <h3 className="text-lg">{prod.prodName}</h3>
+      <div className="p-4 grid h-fit place-content-start">
+        <h3 className="text-lg lg:text-xl">{prod.prodName}</h3>
         <div className="grid lg:flex items-center lg:gap-2 lg:mt-2">
           {
             prod.prevPrice && <p className="text-sm text-gray-500 line-through mt-1">${prod.prevPrice}</p>
           }
-          <p className="text-gray-900 text-2xl">${prod.price}</p>
+          <p className="text-gray-900 text-xl lg:text-2xl font-semibold">${prod.price}</p>
         </div>
       </div>
-
-      {quantity && quantity}
     </article>
   )
 }
