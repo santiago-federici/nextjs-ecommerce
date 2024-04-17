@@ -18,17 +18,19 @@ export function Card({ id }: { id: number }) {
     <article className="bg-white rounded-sm shadow-md overflow-hidden ">
       <div className="relative h-60 cursor-pointer group">
 
-        <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 group-hover:opacity-60 transition duration-300"></span>
+        <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>
         
         <span 
           onClick={() => increaseQuantity(id)}
-          className="absolute top-2 left-2 z-20 hover:text-accent opacity-0 group-hover:opacity-100 transition duration-200 text-white"
+          className="text-zinc-500 lg:group-hover:text-white absolute top-2 left-2 z-20 transition duration-200"
         >
-          <AddToCart />
+          <div className="hover:text-accent">
+            <AddToCart />
+          </div>
         </span>
 
         <span>
-          <Button as="custom" text="See details" extraClassName="text-sm text-nowrap border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 hover:text-accent hover:border-accent transition duration-200" />
+          <Button as="custom" text="See details" extraClassName="text-sm text-nowrap border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-0 lg:group-hover:opacity-100 hover:text-accent hover:border-accent transition duration-200" />
         </span>
 
         <Image
