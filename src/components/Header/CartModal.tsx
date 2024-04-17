@@ -1,7 +1,7 @@
-import { Close } from "@components/Icons"
+import { BigCart, Close } from "@components/Icons"
 import { AnimatePresence, motion } from "framer-motion"
-import { Card } from "@components/Card"
 import { useCart } from "@hooks/useCart"
+import { CartCard } from "@components/CartCard"
 
 const navVariants = {
   inital: {
@@ -58,7 +58,7 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
           initial="inital"
           animate="open"
           exit="exit"
-          className="grid py-4 px-6 bg-surface w-[80%] lg:w-[400px] h-full fixed top-0 right-0 origin-right overflow-y-auto modal-shadow z-20"
+          className="grid py-4 px-6 bg-surface w-[80svw] md:w-[400px] h-full fixed top-0 right-0 origin-right overflow-y-auto modal-shadow z-20"
         >
           <motion.span 
             onClick={() => setIsOpen(false)}
@@ -66,11 +66,20 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
             custom={1}
             variants={liVariants}
           >
-            <Close />
+            <div className="hover:rotate-180 transition duration-500">
+              <Close />
+            </div>
           </motion.span>
-          <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
-            {
-              cart.map((prod, index) => {
+          { cart.length < 1 
+            ?
+            <div className="flex flex-col items-center">
+              <h3 className="mb-10">Your cart is empty!</h3>
+              <BigCart />
+            </div>
+            :
+            <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
+              {
+                cart.map((prod, index) => {
                 return (
                     <li key={index}>
                       <motion.div 
@@ -80,16 +89,17 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
                         animate="open"
                         exit="exit"
                       >
-                          <Card 
+                          <CartCard 
                             id={prod.id}
                             quantity={prod.quantity}
                           />
                       </motion.div>
                     </li>
                   )
-              })
-            }
-          </ul> 
+                })
+              }
+            </ul> 
+          }
         </motion.nav>
       }
     </AnimatePresence>
