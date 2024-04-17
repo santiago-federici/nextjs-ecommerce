@@ -12,23 +12,29 @@ import { CartModal } from './CartModal'
 import { About, Cart, Contact, Home, Menu, Products } from '@components/Icons'
 import { useCart } from '@hooks/useCart'
 
+import clsx from 'clsx';
+
 
 
 const navLinks = [
   {
     title: 'Home',
+    href: '/',
     icon: <Home />
   },
   {
     title: 'Products',
+    href: '/products',
     icon: <Products />
   },
   {
     title: 'About',
+    href: '/about',
     icon: <About />
   },
   {
     title: 'Contact',
+    href: '/contact',
     icon: <Contact />
   }
 ]
@@ -65,9 +71,14 @@ export function Header () {
               return (
                   <li 
                     key={index}
-                    className='font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase'
+                    className={clsx(
+                      'font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase',
+                      {
+                        'text-accent' : pathname === link.href
+                      }
+                    )}
                   >
-                    <Link href={`/${link.title === 'Home' ? '' : link.title.toLowerCase()}`}>
+                    <Link href={link.href}>
                       {link.title}
                     </Link>
                   </li>

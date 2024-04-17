@@ -22,7 +22,7 @@ export function Card({ id }: { id: number }) {
         
         <span 
           onClick={() => increaseQuantity(id)}
-          className="text-zinc-500 lg:group-hover:text-white absolute top-2 left-2 z-20 transition duration-200"
+          className="text-zinc-500 lg:group-hover:text-white absolute top-2 left-2 z-10 transition duration-200"
         >
           <div className="hover:text-accent">
             <AddToCart />

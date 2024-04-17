@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react"
 import { AnimatePresence, motion } from "framer-motion"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import clsx from "clsx"
 
 const navVariants = {
   inital: {
@@ -102,17 +103,26 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
                     exit="exit"
                     key={index}
                   >
-                    <li>
+                    <motion.li
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="transition duration-200"
+                    >
                       <Link 
-                        href={`/${link.title === 'Home' ? '' : link.title.toLowerCase()}`}
-                        className='font-medium text-lg flex gap-2 cursor-pointer hover:bg-zinc-300 w-full pl-2 py-2 rounded-md transition duration-200 uppercase'
+                        href={link.href}
+                        className={clsx(
+                          'font-medium text-lg flex gap-2 cursor-pointer hover:bg-zinc-400 w-full pl-2 py-2 rounded-md transition duration-200 uppercase',
+                          {
+                            'bg-zinc-300': pathname === link.href 
+                          }
+                        )}
                       >
                         <span className='lg:hidden'>
                           {link.icon}
                         </span>
                         {link.title}
                       </Link>
-                    </li>
+                    </motion.li>
                   </motion.div>
                   )
               })

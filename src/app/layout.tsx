@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+
 import { Onest } from "next/font/google";
 import { Work_Sans } from "next/font/google";
 
-import { Header } from '@components/Header/Header'
+import { CartProvider } from "@contexts/CartContext";
 import { Provider } from "@components/Provider";
+import { Header } from '@components/Header/Header'
+import { Footer } from "@components/Footer";
 
 import "@styles/globals.css";
-import { Footer } from "@components/Footer";
-import { CartProvider } from "@contexts/CartContext";
 
 const onest = Onest({ 
   subsets: ["latin"] ,
