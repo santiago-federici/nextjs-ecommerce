@@ -119,7 +119,7 @@ body {
 
 @media screen and (width > 768px) {
   .wrapper {
-    width: min(100% - 4rem, 100ch);
+    width: min(100% - 6rem, 100ch);
   }
 }
 
@@ -128,12 +128,6 @@ body {
     width: min(100% - 6rem, 120ch);
   }
 }
-
-/* @media screen and (width < 1500px) {
-  .wrapper {
-    width: min(100% - 5rem, 100ch);
-  }
-} */
 
 .flow > * + * {
   margin-top: 1em;
