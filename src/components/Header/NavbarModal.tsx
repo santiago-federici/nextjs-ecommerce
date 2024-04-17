@@ -86,7 +86,9 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
             custom={1}
             variants={liVariants}
           >
-            <Close />
+            <div className="hover:-rotate-180 transition duration-500">
+              <Close />
+            </div>
           </motion.span>
           <ul className='text-black grid gap-2 py-4 px-6 bg-surface top-16 w-full absolute items-center'>
             {
