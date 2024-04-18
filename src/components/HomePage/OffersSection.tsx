@@ -1,13 +1,15 @@
 import { Card } from "@components/Card";
-import { HomeSection } from "./HomeSection";
 import { Button } from "@components/CustomButtons";
 import prods from '@mocks/prods.json'
 import { Wrapper } from "@components/Wrapper";
-// import { CarouselContainer } from "@components/CarouselContainer";
+import Link from "next/link";
 
 const sectionInfo ={
   title: 'Best offers',
-  btnText: 'See offers'
+  btn: {
+    text: 'See offers',
+    href: '/products'
+  }
 }
 
 export function OffersSection () {
@@ -21,8 +23,6 @@ export function OffersSection () {
     <Wrapper className="grid place-items-center gap-12 lg:gap-16">
       <h3 className="text-4xl lg:text-5xl uppercase offers-custom-underline hover:text-accent">{sectionInfo.title}</h3>
 
-      {/* <CarouselContainer /> */}
-
       <ul className="w-full grid lg:place-content-center offers-grid gap-4 lg:my-8">
         {
           limitedProds.map((prod, index) => (
@@ -35,7 +35,9 @@ export function OffersSection () {
         }
       </ul>
       
-      <Button as="primary" text={sectionInfo.btnText} />
+      <Link href={sectionInfo.btn.href}>
+        <Button as="primary" text={sectionInfo.btn.text} />
+      </Link>
     </Wrapper>
   )
 }
