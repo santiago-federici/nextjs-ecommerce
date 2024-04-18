@@ -1,5 +1,5 @@
 import { Card } from "@components/Card";
-import { Button } from "@components/CustomButtons";
+import { Button } from "@components/Button";
 import prods from '@mocks/prods.json'
 import { Wrapper } from "@components/Wrapper";
 import Link from "next/link";
@@ -36,7 +36,7 @@ export function OffersSection () {
       </ul>
       
       <Link href={sectionInfo.btn.href}>
-        <Button as="primary" text={sectionInfo.btn.text} />
+        <Button as="filled" text={sectionInfo.btn.text} />
       </Link>
     </Wrapper>
   )

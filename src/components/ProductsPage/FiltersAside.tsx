@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "@components/CustomButtons"
+import { Button } from "@components/Button"
 import { ArrowDown, ArrowUp, Close, Filter } from "@components/Icons"
 import { motion, Variants } from 'framer-motion'
 import { AnimatePresence } from "framer-motion"
@@ -185,7 +185,7 @@ export function FiltersAside () {
   return(
     <>
       <span onClick={() => setIsOpen(true)}>
-        <Button as="custom" text="Filters" icon={<Filter />} extraClassName="flex gap-2 border-secondary text-secondary border border-black hover:bg-zinc-300 h-fit" />
+        <Button text="Filters" icon={<Filter />} className="flex gap-2 hover:bg-zinc-300" />
       </span>
       
       <AnimatePresence mode="wait">
@@ -231,8 +231,8 @@ export function FiltersAside () {
                 exit="exit"
                 className="flex justify-between gap-2 mt-6"
               >
-                <Button as="custom" text="Clear" extraClassName="w-full bg-red-600 border-red-600 hover:opacity-70" />
-                <Button as="primary" text="Apply" extraClassName="w-full" />
+                <Button as='filled' text="Clear" className="w-full border-none bg-red-400 border-red-400 hover:opacity-70 text-red-900" />
+                <Button as="filled" text="Apply" className="w-full" />
               </motion.div>
             </ul> 
           </motion.nav>

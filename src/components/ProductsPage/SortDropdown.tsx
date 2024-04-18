@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { motion, Variants } from 'framer-motion'
 import { Sort } from '@components/Icons'
+import { Button } from '@components/Button'
 
 const ulVariants = {
   open: {
@@ -100,9 +101,8 @@ export function SortDropdown () {
       <motion.button
         whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="font-medium uppercase text-sm md:text-md p-btn-padding rounded-sm transition duration-200 flex gap-2 items-center border-secondary text-secondary border border-black hover:bg-zinc-300 h-fit"
       >
-        <Sort /> Sort
+        <Button text='Sort' icon={<Sort />} className='flex gap-2 hover:bg-zinc-300' />
       </motion.button>
       <motion.ul
         variants={ulVariants}

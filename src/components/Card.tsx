@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useCart } from "@hooks/useCart";
 
 import { AddToCart } from "./Icons";
-import { Button } from "./CustomButtons";
+import { Button } from "./Button";
 
 import prods from '@mocks/prods.json'
 
@@ -20,7 +20,7 @@ export function Card({ id }: { id: number }) {
   return (
     prod &&
     <article className="bg-white rounded-sm shadow-md overflow-hidden ">
-      <div className="relative h-60 cursor-pointer group">
+      <div className="relative h-60 cursor-pointer group grid place-items-center">
 
         <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>
         
@@ -34,7 +34,7 @@ export function Card({ id }: { id: number }) {
         </span>
 
         <Link href={`/products/${id}`}>
-          <Button as="custom" text="See details" extraClassName="text-sm text-nowrap border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-0 lg:group-hover:opacity-100 hover:text-accent hover:border-accent transition duration-200" />
+          <Button as='outline' text="See details" className="text-sm text-white border-white text-nowrap z-10 hidden lg:flex lg:opacity-0 lg:group-hover:opacity-100 hover:text-accent hover:border-accent" />
         </Link>
 
         <Image

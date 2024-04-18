@@ -35,9 +35,6 @@ const config: Config = {
         secondary: 'var(--clr-secondary)',
         accent: 'var(--clr-accent)'
       },
-      padding: {
-        'btn-padding': 'var(--btn-padding)'
-      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

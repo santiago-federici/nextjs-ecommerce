@@ -8,6 +8,26 @@
   height: 80svh;
 }
 
+.hero-btn-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: white;
+  transition: all 300ms ease;
+  z-index: -1;
+}
+
+.hero-btn-effect:hover::before {
+  width: 100%;
+}
+
+.hero-btn-effect:hover {
+  color: black;
+}
+
 .custom-underline {
   transform: skew(-15deg);
   cursor: pointer;

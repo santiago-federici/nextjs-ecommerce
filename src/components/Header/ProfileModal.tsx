@@ -1,4 +1,4 @@
-import { Button } from "@components/CustomButtons";
+import { Button } from "@components/Button";
 import { UserCircle } from "@components/Icons";
 import { signIn, signOut } from "next-auth/react";
 
@@ -77,10 +77,10 @@ export function ProfileModal ({ session }: { session: any }) {
           :
           <>
             <motion.li onClick={() => signIn()} variants={itemVariants}>
-              <Button as='primary' text='Login' extraClassName='w-full' />
+              <Button as='filled' text='Login' className='w-full' />
             </motion.li>
             <motion.li onClick={() => signIn()} variants={itemVariants}>
-              <Button as='primary' text='Register' extraClassName='w-full' />
+              <Button as='filled' text='Register' className='w-full' />
             </motion.li>
           </>
         }

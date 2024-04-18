@@ -1,5 +1,5 @@
 import { Close } from "@components/Icons"
-import { Button } from "@components/CustomButtons"
+import { Button } from "@components/Button"
 
 import { useEffect, useState } from "react"
 import { signIn } from "next-auth/react"
@@ -131,13 +131,13 @@ export function Navbar ({ session, isOpen, setIsOpen, navLinks }: { session: any
               !session?.user
               ? (
                 <motion.span
-                  custom={navLinks.length + 1}
+                  custom={navLinks.length + 0.5}
                   variants={liVariants}
                   initial="inital"
                   animate="open"
                   exit="exit"
                   onClick={() => signIn()}>
-                    <Button as='primary' text='Login' extraClassName='lg:hidden w-full' />
+                    <Button as='filled' text='Login' className='lg:hidden w-full' />
                 </motion.span>
               )
               : <></>
