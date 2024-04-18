@@ -6,14 +6,12 @@ import '@styles/HomePage.css'
 
 export default function HomePage() {
   return (
-    <main>
-
+    <section>
       <HeroSection />
 
       <BlackSection />
 
       <OffersSection />
-
-    </main>
+    </section>
   );
 }

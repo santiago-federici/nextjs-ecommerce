@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import { Wrapper } from "@components/Wrapper"
 import { SortDropdown } from "@components/ProductsPage/SortDropdown"
 import { FiltersAside } from "@components/ProductsPage/FiltersAside"
 import { ArrowRight } from "@components/Icons"
@@ -131,7 +132,7 @@ const filters = [
 export default function ProductsPage () {
 
   return(
-    <div className='wrapper pt-[120px] pb-[200px]'>
+    <Wrapper>
 
       {/* TODO: create breadcrumbs component with all the logic */}
       <div className="text-gray-500 text-sm mb-10 flex gap-1">
@@ -187,6 +188,6 @@ export default function ProductsPage () {
           ))}
         </div>
       </section>
-    </div>
+    </Wrapper>
   )
 } 

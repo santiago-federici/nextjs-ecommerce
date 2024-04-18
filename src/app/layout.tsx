@@ -37,7 +37,9 @@ export default function RootLayout({
         <CartProvider>
           <Provider>
             <Header />
-            {children}
+            <main className='realtive flex flex-col min-h-screen w-full'>
+              {children}
+            </main>
             <Footer />
           </Provider>
         </CartProvider>
