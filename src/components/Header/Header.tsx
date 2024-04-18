@@ -13,6 +13,7 @@ import { About, Cart, Contact, Home, Menu, Products } from '@components/Icons'
 import { useCart } from '@hooks/useCart'
 
 import clsx from 'clsx';
+import { Wrapper } from '@components/Wrapper'
 
 
 
@@ -51,15 +52,15 @@ export function Header () {
   const { cartQuantity } = useCart()
 
   return (
-    <>
+    <header className='w-full'>
       <Navbar session={session} isOpen={navIsOpen} setIsOpen={setNavIsOpen} navLinks={navLinks} />
       <CartModal isOpen={cartIsOpen} setIsOpen={setCartIsOpen} />
 
-      <header className='wrapper absolute flex justify-between items-center py-4 left-1/2 -translate-x-1/2'>
+      <Wrapper className='py-4 flex justify-between items-center'>
         <span 
           className={`${pathname === '/' ? 'text-white' : 'text-black'} lg:hidden cursor-pointer order-1 hover:scale-105 hover:opacity-70 transition duration-200`}
           onClick={() => setNavIsOpen(true)}
-        >
+          >
           <Menu />
         </span>
 
@@ -100,7 +101,7 @@ export function Header () {
           </span>
 
         </span>
-      </header>
-    </>
+      </Wrapper>
+    </header>
   )
 }

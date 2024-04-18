@@ -20,7 +20,7 @@ export function OffersSection () {
   const limitedProds = highestDiscounts.slice(0, 3);
   
   return(
-    <Wrapper className="grid place-items-center gap-12 lg:gap-16">
+    <Wrapper className="grid place-items-center gap-12 lg:gap-16 py-24 lg:py-32">
       <h3 className="text-4xl lg:text-5xl uppercase offers-custom-underline hover:text-accent">{sectionInfo.title}</h3>
 
       <ul className="w-full grid lg:place-content-center offers-grid gap-4 lg:my-8">
