@@ -1,11 +1,15 @@
 'use client'
 
+import Link from 'next/link'
 import Image from "next/image";
 
-import prods from '@mocks/prods.json'
+import { useCart } from "@hooks/useCart";
+
 import { AddToCart } from "./Icons";
 import { Button } from "./CustomButtons";
-import { useCart } from "@hooks/useCart";
+
+import prods from '@mocks/prods.json'
+
 
 export function Card({ id }: { id: number }) {
 
@@ -29,9 +33,9 @@ export function Card({ id }: { id: number }) {
           </div>
         </span>
 
-        <span>
+        <Link href={`/products/${id}`}>
           <Button as="custom" text="See details" extraClassName="text-sm text-nowrap border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-0 lg:group-hover:opacity-100 hover:text-accent hover:border-accent transition duration-200" />
-        </span>
+        </Link>
 
         <Image
           src={prod.image}
