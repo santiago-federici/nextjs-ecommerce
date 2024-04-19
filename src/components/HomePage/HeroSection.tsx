@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@components/Button'
+import { Button } from '@components/CustomButton'
 import { Wrapper } from '@components/Wrapper'
 import Link from 'next/link'
 

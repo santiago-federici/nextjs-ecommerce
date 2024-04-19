@@ -2,7 +2,7 @@ import { BigCart, Close } from "@components/Icons"
 import { AnimatePresence, motion } from "framer-motion"
 import { useCart } from "@hooks/useCart"
 import { CartCard } from "@components/CartCard"
-import { Button } from "@components/Button"
+import { Button } from "@components/CustomButton"
 
 const navVariants = {
   inital: {

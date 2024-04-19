@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useCart } from "@hooks/useCart";
 
 import { AddToCart } from "./Icons";
-import { Button } from "./Button";
+import { Button } from "./CustomButton";
 
 import prods from '@mocks/prods.json'
 

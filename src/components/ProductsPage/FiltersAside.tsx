@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "@components/Button"
+import { Button } from "@components/CustomButton"
 import { ArrowDown, ArrowUp, Close, Filter } from "@components/Icons"
 import clsx from "clsx"
 import { motion, Variants } from 'framer-motion'

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { motion, Variants } from 'framer-motion'
 import { Sort } from '@components/Icons'
-import { Button } from '@components/Button'
+import { Button } from '@components/CustomButton'
 
 const ulVariants = {
   open: {
