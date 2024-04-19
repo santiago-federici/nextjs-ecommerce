@@ -21,8 +21,8 @@ export function CartCard ({ id, quantity }: { id: number, quantity: number }) {
       />
 
       <section className='py-2 flex flex-col gap-2 w-full'>
-        <div>
-          <h3 className='text-lg'>{prod.prodName}</h3>
+        <div className='flex-1'>
+          <h3 className='text-base md:text-lg'>{prod.prodName}</h3>
           <p className='text-xl font-semibold'>{prod.price}</p>
         </div>
 

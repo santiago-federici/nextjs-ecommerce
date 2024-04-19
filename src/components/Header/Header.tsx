@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 import { Navbar } from './NavbarModal'
 import { ProfileModal } from './ProfileModal'
-import { CartModal } from './CartModal'
+import { CartSheet } from './CartSheet'
 
 import { About, Cart, Contact, Home, LogoSVG, Menu, Products } from '@components/Icons'
 import { useCart } from '@hooks/useCart'
@@ -59,7 +59,6 @@ export function Header () {
 
       
       <Navbar session={session} isOpen={navIsOpen} setIsOpen={setNavIsOpen} navLinks={navLinks} />
-      <CartModal isOpen={cartIsOpen} setIsOpen={setCartIsOpen} />
 
       <Wrapper className='py-4 flex justify-between items-center'>
         <span 
@@ -69,9 +68,11 @@ export function Header () {
           <Menu />
         </span>
 
-        <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-custom-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1`}>
-          {headerInfo.logo}
-        </h1>
+        <Link href={'/'} className='order-3 lg:order-1'>
+          <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-custom-accent text-5xl md:text-6xl cursor-pointer transition duration-200`}>
+            {headerInfo.logo}
+          </h1>
+        </Link>
 
         <ul className={`${pathname === '/' ? 'text-white' : 'text-black'} hidden lg:flex gap-4 items-center order-2`}>
           {
@@ -100,10 +101,9 @@ export function Header () {
           <ProfileModal session={session} />
 
           <span 
-            onClick={() => setCartIsOpen(true)}
-            className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200 relative`}
+            className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200 relative flex items-center justify-center`}
           >
-            <Cart />
+            <CartSheet />
             <span className='absolute -bottom-2 -right-1 bg-custom-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm'>{cartQuantity}</span>
           </span>
 

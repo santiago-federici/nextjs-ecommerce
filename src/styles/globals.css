@@ -121,11 +121,6 @@
   font-family: var(--font-onest);
 }
 
-html {
-  /* color-scheme: light dark; */
-  scrollbar-gutter: stable;
-}
-
 body {
   background: var(--clr-surface);
   color: var(--clr-text);
@@ -140,13 +135,13 @@ body {
 
 @media screen and (width > 768px) {
   .wrapper {
-    width: min(100% - 6rem, 100ch);
+    width: min(100% - 7rem, 100ch);
   }
 }
 
 @media screen and (width > 1024px) {
   .wrapper {
-    width: min(100% - 6rem, 120ch);
+    width: min(100% - 7rem, 110ch);
   }
 }
 
