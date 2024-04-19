@@ -64,7 +64,7 @@ export function CartSheet () {
           : (
             <section className="flex flex-col items-center mt-20 flex-1">
               <BigCart />
-              <p className="text-3xl font-bold my-4">Your cart is empty!</p>
+              <p className="text-2xl md:text-3xl font-bold my-4">Your cart is empty!</p>
               <SheetTrigger asChild>
                 <Link href={'/products'}>
                   <Button as="filled" text="Shop now" />
