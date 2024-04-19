@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import { Wrapper } from "@components/Wrapper"
 import { SortDropdown } from "@components/ProductsPage/SortDropdown"
-import { FiltersAside } from "@components/ProductsPage/FiltersAside"
+import { FiltersSheet } from "@components/ProductsPage/FiltersSheet"
 import { ArrowRight } from "@components/Icons"
 import { Card } from "@components/Card"
 
@@ -153,7 +153,7 @@ export default function ProductsPage () {
       <section className="mt-16 flex lg:hidden justify-between relative">
         <SortDropdown />
         
-        <FiltersAside />
+        <FiltersSheet filters={filters} />
       </section>
 
       <section className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-4 mt-16">

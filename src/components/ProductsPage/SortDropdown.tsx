@@ -102,7 +102,7 @@ export function SortDropdown () {
         whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <Button text='Sort' icon={<Sort />} className='flex gap-2 hover:bg-zinc-300' />
+        <Button text='Sort' icon={<Sort />} className='flex gap-2 text-[#000] bg-slate-300 border-slate-900' />
       </motion.span>
       <motion.ul
         variants={ulVariants}
