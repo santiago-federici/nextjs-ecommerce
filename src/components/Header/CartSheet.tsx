@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sheet"
 import { CartCard } from "@components/CartCard"
 import { Button } from "@components/CustomButton"
+import { CustomSeparator } from "@components/CustomSeparator"
 import { BigCart, Cart } from "@components/Icons"
 import { useCart } from "@hooks/useCart"
 import Link from "next/link"
@@ -48,7 +49,7 @@ export function CartSheet () {
               </ul>
 
               <section>
-                <div className="w-full h-px bg-zinc-200 mt-8 mb-4"></div>
+                <CustomSeparator />
 
                 <div className="flex">
                   <p className="flex-1">Shipping</p>
