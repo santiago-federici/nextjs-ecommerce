@@ -77,7 +77,7 @@
 }
 
 .offers-custom-underline:hover::after {
-  background: var(--clr-accent);
+  background: var(--clr-custom-accent);
 }
 
 .carousel-mask-image {

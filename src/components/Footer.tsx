@@ -35,7 +35,7 @@ export function Footer () {
               <li key={index}>
                 <Link
                   href={`/${link.title === 'Home' ? '' : link.title.toLowerCase()}`}
-                  className="hover:text-accent cursor-pointer transition duration-200"
+                  className="hover:text-custom-accent cursor-pointer transition duration-200"
                 >
                   {link.title}
                 </Link>
@@ -52,7 +52,7 @@ export function Footer () {
           }
         </ul>
 
-        <p className="text-sm text-center hover:text-accent cursor-pointer transition duration-200">Copyright © 2024 - All right reserved by ACME Industries Ltd</p>
+        <p className="text-sm text-center hover:text-custom-accent cursor-pointer transition duration-200">Copyright © 2024 - All right reserved by ACME Industries Ltd</p>
       </div>
     </footer>
   )

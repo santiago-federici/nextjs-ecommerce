@@ -69,7 +69,7 @@ export function Header () {
           <Menu />
         </span>
 
-        <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1`}>
+        <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-custom-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1`}>
           {headerInfo.logo}
         </h1>
 
@@ -80,9 +80,9 @@ export function Header () {
                   <li 
                     key={index}
                     className={clsx(
-                      'font-medium flex gap-2 hover:text-accent cursor-pointer transition duration-200 uppercase',
+                      'font-medium flex gap-2 hover:text-custom-accent cursor-pointer transition duration-200 uppercase',
                       {
-                        'text-accent' : pathname === link.href
+                        'text-custom-accent' : pathname === link.href
                       }
                     )}
                   >
@@ -104,7 +104,7 @@ export function Header () {
             className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200 relative`}
           >
             <Cart />
-            <span className='absolute -bottom-2 -right-1 bg-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm'>{cartQuantity}</span>
+            <span className='absolute -bottom-2 -right-1 bg-custom-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm'>{cartQuantity}</span>
           </span>
 
         </span>

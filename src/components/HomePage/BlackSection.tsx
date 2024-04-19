@@ -27,7 +27,7 @@ const winterCollectionProds = [
 
 export function BlackSection () {
   return(
-    <div className="bg-secondary">
+    <div className="bg-custom-secondary">
       <Wrapper className="lg:flex justify-between gap-10 lg:gap-20 py-24 lg:py-32">
 
         <div className="flow lg:max-w-sm xl:max-w-xl">

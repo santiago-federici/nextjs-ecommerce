@@ -28,16 +28,16 @@ export function CartCard ({ id, quantity }: { id: number, quantity: number }) {
 
         <div className='flex  items-center justify-between'>
           <div className='flex items-center gap-2'>
-            <span onClick={() => decreaseQuantity(id)} className='cursor-pointer hover:text-accent transition duration-200'>
+            <span onClick={() => decreaseQuantity(id)} className='cursor-pointer hover:text-custom-accent transition duration-200'>
               <Minus />
             </span>
             <p className='text-lg'>{quantity}</p>
-            <span onClick={() => increaseQuantity(id)} className='cursor-pointer hover:text-accent transition duration-200'>
+            <span onClick={() => increaseQuantity(id)} className='cursor-pointer hover:text-custom-accent transition duration-200'>
               <Plus />
             </span>
           </div>
 
-          <span onClick={() => removeProd(id)} className='cursor-pointer hover:text-accent transition duration-200'>
+          <span onClick={() => removeProd(id)} className='cursor-pointer hover:text-custom-accent transition duration-200'>
             <Trash />
           </span>
         </div>

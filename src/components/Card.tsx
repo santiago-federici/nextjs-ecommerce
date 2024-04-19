@@ -28,13 +28,13 @@ export function Card({ id }: { id: number }) {
           onClick={() => increaseQuantity(id)}
           className="text-zinc-500 lg:group-hover:text-white absolute top-2 left-2 z-10 transition duration-200"
         >
-          <div className="hover:text-accent">
+          <div className="hover:text-custom-accent">
             <AddToCart />
           </div>
         </span>
 
         <Link href={`/products/${id}`}>
-          <Button as='outline' text="See details" className="text-sm text-white border-white text-nowrap z-10 hidden lg:flex lg:opacity-0 lg:group-hover:opacity-100 hover:text-accent hover:border-accent" />
+          <Button as='outline' text="See details" className="text-sm text-white border-white text-nowrap z-10 hidden lg:flex lg:opacity-0 lg:group-hover:opacity-100 hover:text-custom-accent hover:border-custom-accent" />
         </Link>
 
         <Image
