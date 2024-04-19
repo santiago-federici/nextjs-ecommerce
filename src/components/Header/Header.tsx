@@ -15,7 +15,9 @@ import { useCart } from '@hooks/useCart'
 import clsx from 'clsx';
 import { Wrapper } from '@components/Wrapper'
 
-
+const headerInfo = {
+  logo: <LogoSVG />
+}
 
 const navLinks = [
   {
@@ -53,6 +55,9 @@ export function Header () {
 
   return (
     <header className='w-full'>
+      <div className={clsx('opacity-0 w-0 h-0 fixed top-1/2 right-1/2', { 'dark-effect' : cartIsOpen })}></div>
+
+      
       <Navbar session={session} isOpen={navIsOpen} setIsOpen={setNavIsOpen} navLinks={navLinks} />
       <CartModal isOpen={cartIsOpen} setIsOpen={setCartIsOpen} />
 
@@ -65,8 +70,7 @@ export function Header () {
         </span>
 
         <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1`}>
-          <LogoSVG />
-          {/* Ecom */}
+          {headerInfo.logo}
         </h1>
 
         <ul className={`${pathname === '/' ? 'text-white' : 'text-black'} hidden lg:flex gap-4 items-center order-2`}>

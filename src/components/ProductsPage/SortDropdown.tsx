@@ -98,12 +98,12 @@ export function SortDropdown () {
       animate={isOpen ? "open" : "closed"}
       className="relative"
     >
-      <motion.button
+      <motion.span
         whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}
       >
         <Button text='Sort' icon={<Sort />} className='flex gap-2 hover:bg-zinc-300' />
-      </motion.button>
+      </motion.span>
       <motion.ul
         variants={ulVariants}
         style={{ pointerEvents: isOpen ? "auto" : "none" }}

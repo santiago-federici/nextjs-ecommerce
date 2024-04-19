@@ -2,6 +2,7 @@ import { BigCart, Close } from "@components/Icons"
 import { AnimatePresence, motion } from "framer-motion"
 import { useCart } from "@hooks/useCart"
 import { CartCard } from "@components/CartCard"
+import { Button } from "@components/Button"
 
 const navVariants = {
   inital: {
@@ -72,9 +73,10 @@ export function CartModal ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
           </motion.span>
           { cart.length < 1 
             ?
-            <div className="flex flex-col items-center">
-              <h3 className="mb-10">Your cart is empty!</h3>
+            <div className="flex flex-col items-center gap-8">
               <BigCart />
+              <p className="text-3xl font-bold">Your cart is empty!</p>
+              <Button as="filled" text="Shop now" />
             </div>
             :
             <ul className='text-black grid gap-4 py-4 px-6 bg-surface top-16 w-full absolute items-center'>

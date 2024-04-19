@@ -2,6 +2,7 @@
 
 import { Button } from "@components/Button"
 import { ArrowDown, ArrowUp, Close, Filter } from "@components/Icons"
+import clsx from "clsx"
 import { motion, Variants } from 'framer-motion'
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
@@ -184,6 +185,8 @@ export function FiltersAside () {
   
   return(
     <>
+      <div className={clsx('opacity-0 w-0 h-0 fixed top-1/2 right-1/2', { 'dark-effect' : isOpen })}></div>
+    
       <span onClick={() => setIsOpen(true)}>
         <Button text="Filters" icon={<Filter />} className="flex gap-2 hover:bg-zinc-300" />
       </span>
@@ -231,7 +234,7 @@ export function FiltersAside () {
                 exit="exit"
                 className="flex justify-between gap-2 mt-6"
               >
-                <Button as='filled' text="Clear" className="w-full border-none bg-red-400 border-red-400 hover:opacity-70 text-red-900" />
+                <Button as='filled' text="Clear" className="w-full border-none bg-red-500 border-red-500 hover:opacity-70 text-red-100" />
                 <Button as="filled" text="Apply" className="w-full" />
               </motion.div>
             </ul> 
