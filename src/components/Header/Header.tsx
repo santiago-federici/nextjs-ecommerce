@@ -9,7 +9,7 @@ import { Navbar } from './NavbarModal'
 import { ProfileModal } from './ProfileModal'
 import { CartModal } from './CartModal'
 
-import { About, Cart, Contact, Home, Menu, Products } from '@components/Icons'
+import { About, Cart, Contact, Home, LogoSVG, Menu, Products } from '@components/Icons'
 import { useCart } from '@hooks/useCart'
 
 import clsx from 'clsx';
@@ -64,7 +64,10 @@ export function Header () {
           <Menu />
         </span>
 
-        <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1`}>Ecom</h1>
+        <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-accent text-5xl md:text-6xl cursor-pointer transition duration-200 order-3 lg:order-1`}>
+          <LogoSVG />
+          {/* Ecom */}
+        </h1>
 
         <ul className={`${pathname === '/' ? 'text-white' : 'text-black'} hidden lg:flex gap-4 items-center order-2`}>
           {
