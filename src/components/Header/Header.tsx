@@ -4,42 +4,18 @@ import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-import { NavbarSheet } from './NavbarSheet'
-import { ProfileModal } from './ProfileModal'
-import { CartSheet } from './CartSheet'
-
-import { About, Contact, Home, LogoSVG, Menu, Products } from '@components/Icons'
 import { useCart } from '@hooks/useCart'
 
-import clsx from 'clsx';
+import { CartSheet } from './CartSheet'
+import { NavbarComponent } from './NavbarComponent'
+import { ProfileModal } from './ProfileModal'
 import { Wrapper } from '@components/Wrapper'
+
+import { LogoSVG } from '@components/Icons'
 
 const headerInfo = {
   logo: <LogoSVG />
 }
-
-const navLinks = [
-  {
-    title: 'Home',
-    href: '/',
-    icon: <Home />
-  },
-  {
-    title: 'Products',
-    href: '/products',
-    icon: <Products />
-  },
-  {
-    title: 'About',
-    href: '/about',
-    icon: <About />
-  },
-  {
-    title: 'Contact',
-    href: '/contact',
-    icon: <Contact />
-  }
-]
 
 export function Header () {
 
@@ -53,41 +29,19 @@ export function Header () {
     <header className='w-full'>
 
       <Wrapper className='py-4 flex justify-between items-center'>
-        <span className={`${pathname === '/' ? 'text-white' : 'text-black'} lg:hidden cursor-pointer order-1 hover:scale-105 hover:opacity-70 transition duration-200`}>
-          <NavbarSheet navLinks={navLinks} session={session} />
-        </span>
+        <NavbarComponent session={session} />
 
-        <Link href={'/'} className='order-3 lg:order-1'>
+        <Link href={'/'} className='order-2 lg:order-1'>
           <h1 className={`${pathname === '/' ? 'text-white' : 'text-black'} hover:text-custom-accent text-5xl md:text-6xl cursor-pointer transition duration-200`}>
             {headerInfo.logo}
           </h1>
         </Link>
 
-        <ul className={`${pathname === '/' ? 'text-white' : 'text-black'} hidden lg:flex gap-4 items-center order-2`}>
-          {
-            navLinks.map((link, index) => {
-              return (
-                  <li 
-                    key={index}
-                    className={clsx(
-                      'font-medium flex gap-2 hover:text-custom-accent cursor-pointer transition duration-200 uppercase',
-                      {
-                        'text-custom-accent' : pathname === link.href
-                      }
-                    )}
-                  >
-                    <Link href={link.href}>
-                      {link.title}
-                    </Link>
-                  </li>
-                )
-            })
-          }
-        </ul>
-
-        <span className='flex gap-4 order-4'>
+        <span className='flex gap-4 order-3'>
           
-          <ProfileModal session={session} />
+          <div className='hidden lg:flex'>
+            <ProfileModal session={session} />
+          </div>
 
           <span 
             className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200 relative flex items-center justify-center`}
