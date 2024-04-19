@@ -1,15 +1,14 @@
 'use client'
 
-import { useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-import { Navbar } from './NavbarModal'
+import { NavbarSheet } from './NavbarSheet'
 import { ProfileModal } from './ProfileModal'
 import { CartSheet } from './CartSheet'
 
-import { About, Cart, Contact, Home, LogoSVG, Menu, Products } from '@components/Icons'
+import { About, Contact, Home, LogoSVG, Menu, Products } from '@components/Icons'
 import { useCart } from '@hooks/useCart'
 
 import clsx from 'clsx';
@@ -48,24 +47,14 @@ export function Header () {
 
   const pathname = usePathname()
 
-  const [navIsOpen, setNavIsOpen] = useState(false);
-  const [cartIsOpen, setCartIsOpen] = useState(false);
-
   const { cartQuantity } = useCart()
 
   return (
     <header className='w-full'>
-      <div className={clsx('opacity-0 w-0 h-0 fixed top-1/2 right-1/2', { 'dark-effect' : cartIsOpen })}></div>
-
-      
-      <Navbar session={session} isOpen={navIsOpen} setIsOpen={setNavIsOpen} navLinks={navLinks} />
 
       <Wrapper className='py-4 flex justify-between items-center'>
-        <span 
-          className={`${pathname === '/' ? 'text-white' : 'text-black'} lg:hidden cursor-pointer order-1 hover:scale-105 hover:opacity-70 transition duration-200`}
-          onClick={() => setNavIsOpen(true)}
-          >
-          <Menu />
+        <span className={`${pathname === '/' ? 'text-white' : 'text-black'} lg:hidden cursor-pointer order-1 hover:scale-105 hover:opacity-70 transition duration-200`}>
+          <NavbarSheet navLinks={navLinks} session={session} />
         </span>
 
         <Link href={'/'} className='order-3 lg:order-1'>
