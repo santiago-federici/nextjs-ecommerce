@@ -96,7 +96,7 @@ export function SortDropdown () {
     <motion.nav
       initial={false}
       animate={isOpen ? "open" : "closed"}
-      className="relative"
+      className="relative lg:hidden"
     >
       <motion.span
         whileTap={{ scale: 0.97 }}

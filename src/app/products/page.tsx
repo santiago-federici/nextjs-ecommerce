@@ -3,131 +3,13 @@ import Link from "next/link"
 
 import { Wrapper } from "@components/Wrapper"
 import { SortDropdown } from "@components/ProductsPage/SortDropdown"
-import { FiltersSheet } from "@components/ProductsPage/FiltersSheet"
+import { FiltersComponent } from "@components/ProductsPage/FiltersComponent"
 import { ArrowRight } from "@components/Icons"
 import { Card } from "@components/Card"
 
 import '@styles/ProductsPage.css'
 
 import prods from '@mocks/prods.json'
-
-const filters = [
-  {
-    id: 1,
-    name: "Categories",
-    options: [
-      {
-        name: "All",
-        value: "all"
-      },
-      {
-        name: "T-Shirts",
-        value: "tshirts"
-      },
-      {
-        name: "Hoodies",
-        value: "hoodies"
-      },
-      {
-        name: "Snickers",
-        value: "snickers"
-      },
-      {
-        name: "Joggers",
-        value: "joggers"
-      }
-    ]
-  },
-  {
-    id: 2,
-    name: "Brands",
-    options: [
-      {
-        name: "All",
-        value: "all"
-      },
-      {
-        name: "Adidas",
-        value: "adidas"
-      },
-      {
-        name: "Puma",
-        value: "puma"
-      },
-      {
-        name: "Reebok",
-        value: "reebok"
-      },
-      {
-        name: "Vans",
-        value: "vans"
-      }
-    ]
-  },
-  {
-    id: 3,
-    name: "Price",
-    options: [
-      {
-        name: "Under $10",
-        value: "10"
-      },
-      {
-        name: "$10 - $20",
-        value: "10-20"
-      },
-      {
-        name: "$20 - $30",
-        value: "20-30"
-      },
-      {
-        name: "$30 - $40",
-        value: "30-40"
-      },
-      {
-        name: "Over $40",
-        value: "40"
-      }
-    ]
-  },
-  {
-    id: 4,
-    name: "Rating",
-    options: [
-      {
-        name: "5 Stars",
-        value: "5"
-      },
-      {
-        name: "4 Stars",
-        value: "4"
-      },
-      {
-        name: "3 Stars",
-        value: "3"
-      },
-      {
-        name: "2 Stars",
-        value: "2"
-      },
-    ]
-  },
-  {
-    id: 5,
-    name: "Discount",
-    options: [
-      {
-        name: "Only discount",
-        value: "discount"
-      },
-      {
-        name: "No discount",
-        value: "nodiscount"
-      }
-    ]
-  }
-]
-
 
 export default function ProductsPage () {
 
@@ -150,34 +32,13 @@ export default function ProductsPage () {
         <Image src={'/prodsHeader.png'} width={900} height={150} alt={'prodsHeader'} className="w-full lg:w-2/3" />
       </section>
 
-      <section className="mt-16 flex lg:hidden justify-between relative">
-        <SortDropdown />
-        
-        <FiltersSheet filters={filters} />
-      </section>
 
       <section className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-4 mt-16">
-        <aside className="hidden lg:flex lg:flex-col gap-4">
-          {
-            filters.map((filter, index) => (
-              <article key={index} className="p-4 bg-zinc-300 h-fit rounded-sm shadow-lg">
-                <h3>{filter.name}</h3>
-                <ul className="">
-                  {
-                    filter.options.map((option, index) => (
-                      <li key={index} className="ml-2">
-                        <label htmlFor="filter" className="flex gap-2">
-                          <input type="checkbox" id="filter" />
-                          <p>{option.name}</p>
-                        </label>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </article> 
-            ))
-          }
-        </aside>
+        <section className="mb-10 lg:mb-0 max-lg:flex justify-between lg:justify-start relative">
+          <SortDropdown />
+          
+          <FiltersComponent />
+        </section>
 
         <div className="grid custom-grid gap-4">
           {prods.map((prod, index) => (
