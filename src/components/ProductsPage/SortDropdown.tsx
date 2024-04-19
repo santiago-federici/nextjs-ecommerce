@@ -1,50 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Sort } from "@components/Icons"
+import { useState } from "react"
 
-import { motion, Variants } from 'framer-motion'
-import { Sort } from '@components/Icons'
-import { Button } from '@components/CustomButton'
-
-const ulVariants = {
-  open: {
-    clipPath: "inset(0% 0% 0% 0% round 4px)",
-    transition: {
-      type: "spring",
-      bounce: 0,
-      duration: 0.7,
-      delayChildren: 0.3,
-      staggerChildren: 0.05
-    }
-  },
-  closed: {
-    clipPath: "inset(10% 50% 90% 50% round 10px)",
-    transition: {
-      type: "spring",
-      bounce: 0,
-      duration: 0.3
-    }
-  }
-}
-
-const itemVariants: Variants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: { 
-      type: "spring", 
-      stiffness: 300, 
-      damping: 24 
-    }
-  },
-  closed: { 
-    opacity: 0, 
-    y: 15, 
-    transition: { 
-      duration: 0.2 
-    } 
-  }
-}
 
 const sortOptions = [
   {
@@ -89,36 +56,33 @@ const sortOptions = [
   },
 ]
 
-export function SortDropdown () {
-  const [isOpen, setIsOpen] = useState(false)
-
+export function SortDropdown ({ className }: { className: string }) {
+  const [value, setValue] = useState('latest')
+  
   return (
-    <motion.nav
-      initial={false}
-      animate={isOpen ? "open" : "closed"}
-      className="relative lg:hidden"
-    >
-      <motion.span
-        whileTap={{ scale: 0.97 }}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <Button text='Sort' icon={<Sort />} className='flex gap-2 text-[#000] bg-slate-300 border-slate-900' />
-      </motion.span>
-      <motion.ul
-        variants={ulVariants}
-        style={{ pointerEvents: isOpen ? "auto" : "none" }}
-        className="absolute bg-zinc-300 w-fit mt-2 text-nowrap grid gap-2 z-50"
-      >
-        {
-          sortOptions.map((option, index) => (
-            <motion.li 
-              key={index} 
-              variants={itemVariants}
-              className="px-4 py-1 rounded-sm hover:bg-zinc-400 cursor-pointer transition duration-200"
-            >{option.name}</motion.li>
-          ))
-        }
-      </motion.ul>
-    </motion.nav>
+    <div className={className}>
+      <DropdownMenu>
+        <DropdownMenuTrigger  className="font-medium uppercase text-sm md:text-md px-4 py-2 rounded-md relative transition duration-200 flex gap-2 bg-zinc-300 border border-zinc-900 hover:opacity-70">
+          <Sort /> Sort
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className='ml-4 lg:ml-0'>
+          <DropdownMenuLabel>Sort By</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuRadioGroup value={value}>
+            {
+              sortOptions.map((option, index) => (
+                <DropdownMenuRadioItem 
+                  key={index}
+                  value={option.value}
+                  onClick={() => setValue(option.value)}
+                >
+                  {option.name}
+                </DropdownMenuRadioItem>  
+              ))
+            }
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   )
 }

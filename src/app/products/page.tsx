@@ -14,7 +14,7 @@ import prods from '@mocks/prods.json'
 export default function ProductsPage () {
 
   return(
-    <Wrapper>
+    <Wrapper className="flex flex-col">
 
       {/* TODO: create breadcrumbs component with all the logic */}
       <div className="text-gray-500 text-sm mb-10 flex gap-1">
@@ -32,10 +32,12 @@ export default function ProductsPage () {
         <Image src={'/prodsHeader.png'} width={900} height={150} alt={'prodsHeader'} className="w-full lg:w-2/3" />
       </section>
 
+      <SortDropdown className='hidden lg:flex self-end mt-8' />
 
-      <section className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-4 mt-16">
-        <section className="mb-10 lg:mb-0 max-lg:flex justify-between lg:justify-start relative">
-          <SortDropdown />
+
+      <section className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-4 mt-10">
+        <section className="mb-6 lg:mb-0 max-lg:flex justify-between lg:justify-start relative">
+          <SortDropdown className="lg:hidden" />
           
           <FiltersComponent />
         </section>

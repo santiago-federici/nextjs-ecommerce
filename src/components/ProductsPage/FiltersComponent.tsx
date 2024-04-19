@@ -132,7 +132,7 @@ export function FiltersComponent () {
     <>
       <aside className="hidden lg:flex gap-4 lg:flex-col bg-white p-4 rounded-md shadow-md">
         <p className='text-gray-600'>Filters</p>
-        <FiltersAcoordion />
+        <FiltersAccordion />
         <FiltersButtons />
       </aside>
 
@@ -147,7 +147,7 @@ export function FiltersComponent () {
               <SheetTitle className='self-start'>Filters</SheetTitle>
             </SheetHeader>
 
-            <FiltersAcoordion />
+            <FiltersAccordion />
             
             <SheetFooter className="mt-8 grid">
               <FiltersButtons />
@@ -169,7 +169,7 @@ import {
 
 import { Label } from "@/components/ui/label"
 
-function FiltersAcoordion () {
+function FiltersAccordion () {
   return(
     <section className="mt-8 lg:mt-0">
       <Accordion type="single" collapsible defaultValue="item-0">
