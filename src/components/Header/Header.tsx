@@ -4,12 +4,10 @@ import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
-import { useCart } from '@hooks/useCart'
-
+import { Wrapper } from '@components/Wrapper'
 import { CartSheet } from './CartSheet'
 import { NavbarComponent } from './NavbarComponent'
-import { ProfileModal } from './ProfileModal'
-import { Wrapper } from '@components/Wrapper'
+import { ProfileDropdown } from './ProfileModal'
 
 import { LogoSVG } from '@components/Icons'
 
@@ -23,7 +21,6 @@ export function Header () {
 
   const pathname = usePathname()
 
-  const { cartQuantity } = useCart()
 
   return (
     <header className='w-full'>
@@ -39,16 +36,9 @@ export function Header () {
 
         <span className='flex gap-4 order-3'>
           
-          <div className='hidden lg:flex'>
-            <ProfileModal session={session} />
-          </div>
+          <ProfileDropdown session={session} pathname={pathname} />
 
-          <span 
-            className={`${pathname === '/' ? 'text-white' : 'text-black'} cursor-pointer hover:scale-105 hover:opacity-70 transition duration-200 relative flex items-center justify-center`}
-          >
-            <CartSheet />
-            <span className='absolute -bottom-2 -right-1 bg-custom-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm'>{cartQuantity}</span>
-          </span>
+          <CartSheet pathname={pathname} />
 
         </span>
       </Wrapper>
