@@ -19,7 +19,7 @@ export function Card({ id }: { id: number }) {
   
   return (
     prod &&
-    <article className="bg-white rounded-sm shadow-md overflow-hidden ">
+    <article className="bg-white rounded-sm shadow-md overflow-hidden">
       <div className="relative h-60 cursor-pointer group grid place-items-center">
 
         <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>

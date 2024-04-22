@@ -79,14 +79,3 @@
 .offers-custom-underline:hover::after {
   background: var(--clr-custom-accent);
 }
-
-.carousel-mask-image {
-  mask-image:  linear-gradient(to left, transparent 0%, black 5%, black 95%, transparent 100%);
-}
-
-@media (width > 1024px) {
-  .offers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 250px));
-  }
-}
