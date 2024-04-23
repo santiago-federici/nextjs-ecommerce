@@ -29,7 +29,7 @@ export function Header() {
         <Link href={"/"} className="order-2 lg:order-1">
           <div
             className={
-              "flex items-center bg-white rounded-full w-fit h-fit p-1 cursor-pointer transition duration-200"
+              "bg-white rounded-full p-1 cursor-pointer transition duration-200"
             }
           >
             {headerInfo.logo}

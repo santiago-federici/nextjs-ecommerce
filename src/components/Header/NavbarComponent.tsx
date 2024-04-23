@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@components/CustomButton";
+import { Button, buttonVariants } from "@components/ui/button";
 
 import { About, Contact, Home, Menu, Products } from "@components/Icons";
 
@@ -107,26 +107,20 @@ export function NavbarComponent({ session }: { session: any }) {
             {!session?.user ? (
               <SheetFooter className="flex flex-col gap-2">
                 <SheetTrigger asChild className="w-full">
-                  <div
-                  // onClick={() => signIn()}
+                  <Link
+                    href="/signIn"
+                    className={buttonVariants({ variant: "default" })}
                   >
-                    <Button
-                      as="filled"
-                      text="Login"
-                      className="lg:hidden w-full"
-                    />
-                  </div>
+                    Login
+                  </Link>
                 </SheetTrigger>
                 <SheetTrigger asChild className="w-full">
-                  <div
-                  // onClick={() => signIn()}
+                  <Link
+                    href="/signUp"
+                    className={buttonVariants({ variant: "outline" })}
                   >
-                    <Button
-                      as="outline"
-                      text="Register"
-                      className="lg:hidden w-full"
-                    />
-                  </div>
+                    Signup
+                  </Link>
                 </SheetTrigger>
               </SheetFooter>
             ) : (
