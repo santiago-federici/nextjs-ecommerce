@@ -1,10 +1,16 @@
-export function LogoSVG() {
+export function LogoSVG({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       version="1.0"
-      width="70"
-      height="70"
+      width={width ? width : "70"}
+      height={height ? height : "70"}
       viewBox="0 0 1024.000000 1024.000000"
       preserveAspectRatio="xMidYMid meet"
     >
