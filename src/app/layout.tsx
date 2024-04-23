@@ -4,22 +4,22 @@ import { Onest } from "next/font/google";
 import { Work_Sans } from "next/font/google";
 
 import { CartProvider } from "@contexts/CartContext";
-import { Provider } from "@components/Provider";
-import { Header } from '@components/Header/Header'
+// import { Provider } from "@components/Provider";
+import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer";
 
 import "@styles/globals.css";
 
-const onest = Onest({ 
-  subsets: ["latin"] ,
+const onest = Onest({
+  subsets: ["latin"],
   variable: "--font-onest",
 });
 
-const workSans = Work_Sans({ 
+const workSans = Work_Sans({
   subsets: ["latin"],
   weight: ["700", "900"],
   variable: "--font-worksans",
- });
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,13 +35,13 @@ export default function RootLayout({
     <html lang="en" className="bg-surface">
       <body className={`${onest.variable} ${workSans.variable}`}>
         <CartProvider>
-          <Provider>
-            <Header />
-            <main className='realtive flex flex-col min-h-screen w-full'>
-              {children}
-            </main>
-            <Footer />
-          </Provider>
+          {/* <Provider> */}
+          <Header />
+          <main className="realtive flex flex-col min-h-screen w-full">
+            {children}
+          </main>
+          <Footer />
+          {/* </Provider> */}
         </CartProvider>
       </body>
     </html>
