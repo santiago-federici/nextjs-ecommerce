@@ -4,7 +4,6 @@ import { Onest } from "next/font/google";
 import { Work_Sans } from "next/font/google";
 
 import { CartProvider } from "@contexts/CartContext";
-import { Providers } from "@components/Providers";
 import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer";
 
@@ -35,13 +34,11 @@ export default function RootLayout({
     <html lang="en" className="bg-surface">
       <body className={`${onest.variable} ${workSans.variable}`}>
         <CartProvider>
-          <Providers>
-            <Header />
-            <main className="realtive flex flex-col min-h-screen w-full">
-              {children}
-            </main>
-            <Footer />
-          </Providers>
+          <Header />
+          <main className="realtive flex flex-col min-h-screen w-full">
+            {children}
+          </main>
+          <Footer />
         </CartProvider>
       </body>
     </html>
