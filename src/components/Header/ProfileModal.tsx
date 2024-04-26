@@ -1,4 +1,5 @@
 // import { signIn } from "next-auth/react"
+import Link from "next/link";
 
 import {
   DropdownMenu,
@@ -9,31 +10,36 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@components/CustomButton";
 import { UserCircle } from "@components/Icons";
 import { buttonVariants } from "@components/ui/button";
 
 const noUserOptions = [
   {
     name: "Login",
+    link: "/signUp",
   },
   {
     name: "Register",
+    link: "/signUp",
   },
 ];
 
 const userOptions = [
   {
     name: "Profile",
+    link: "/profile",
   },
   {
     name: "Orders",
+    link: "/orders",
   },
   {
     name: "Settings",
+    link: "/settings",
   },
   {
     name: "Help",
+    link: "/help",
   },
   {
     name: "Logout",
@@ -67,18 +73,27 @@ export function ProfileDropdown({
                     key={index}
                     // onClick={() => signIn()}
                   >
-                    <Button as="filled" text={option.name} className="w-full" />
+                    <Link
+                      href={option.link}
+                      className={`${buttonVariants({
+                        variant: "default",
+                      })} w-full`}
+                    >
+                      {option.name}
+                    </Link>
                   </DropdownMenuItem>
                 ))
               : userOptions.map((option: any, index: number) => (
                   <DropdownMenuItem key={index} className="cursor-pointer">
-                    <p
+                    <Link
+                      // TODO: add the logout logic
+                      href={option.link === "/logout" ? "/" : option.link}
                       className={`${
                         option.name === "Logout" ? "text-red-500" : ""
                       }`}
                     >
                       {option.name}
-                    </p>
+                    </Link>
                   </DropdownMenuItem>
                 ))}
           </DropdownMenuGroup>
