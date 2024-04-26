@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Wrapper } from "@components/Wrapper";
 import { CartSheet } from "./CartSheet";
 import { NavbarComponent } from "./NavbarComponent";
-import { ProfileDropdown } from "./ProfileModal";
+import { ProfileDropdown } from "./ProfileDropdown";
 
 import { LogoSVG } from "@components/Icons";
 
