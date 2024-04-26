@@ -6,8 +6,45 @@ import { Button, buttonVariants } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Toaster, toast } from "sonner";
 
 export default function SignUpPage() {
+  const [error, setError] = useState("");
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const email = formData.get("email");
+    const username = formData.get("username");
+    const password = formData.get("password");
+
+    try {
+      const res = await fetch("/api/signUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          username,
+          password,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.message) setError(data.message);
+      if (data.success) toast.success(data.success);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
+
   return (
     <Wrapper className="grid place-items-center mt-14">
       <div className="grid place-items-center w-full max-w-xl h-fit p-6 bg-white rounded-md shadow-lg">
@@ -15,7 +52,7 @@ export default function SignUpPage() {
 
         <LogoSVG width="150" height="150" />
 
-        <form className="my-8 w-full grid gap-4">
+        <form onSubmit={handleSubmit} className="my-8 w-full grid gap-4">
           <div>
             <Label htmlFor="email" className="ml-1">
               Email
@@ -23,14 +60,31 @@ export default function SignUpPage() {
             <Input
               id="email"
               type="email"
+              name="email"
               placeholder="youremail@example.com"
+            />
+          </div>
+          <div>
+            <Label htmlFor="username" className="ml-1">
+              Username
+            </Label>
+            <Input
+              id="username"
+              type="text"
+              name="username"
+              placeholder="Your username"
             />
           </div>
           <div>
             <Label htmlFor="password" className="ml-1">
               Password
             </Label>
-            <Input id="password" type="password" placeholder="password" />
+            <Input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="******"
+            />
           </div>
 
           <Button className="bg-blue-500 hover:bg-blue-400 mt-6">
@@ -42,12 +96,14 @@ export default function SignUpPage() {
           href="/signIn"
           className={buttonVariants({
             variant: "link",
-            className: "mt-6 text-blue-500 hover:text-blue-300",
+            className: "mt-4 text-blue-500 hover:text-blue-300",
           })}
         >
           Already have an account? Signin
         </Link>
       </div>
+
+      <Toaster richColors />
     </Wrapper>
   );
 }
