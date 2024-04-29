@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+// import { signIn } from "@auth";
 
 import { Toaster, toast } from "sonner";
 
@@ -9,7 +10,7 @@ import { Button, buttonVariants } from "@components/ui/button";
 import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { Wrapper } from "@components/Wrapper";
-import { LogoSVG } from "@components/Icons";
+import { GoogleIcon, LogoSVG } from "@components/Icons";
 
 const pageInfo = {
   title: "Create an account",
@@ -95,9 +96,26 @@ export default function RegisterPage() {
           </div>
 
           <Button className="bg-blue-500 hover:bg-blue-400 mt-6">
-            Sign Up
+            Sign In
           </Button>
         </form>
+
+        {/* Separator */}
+        <div className="w-[90%] flex gap-2 items-center mb-8">
+          <span className="bg-gray-300 h-px w-full"></span>
+          <p className="text-gray-400 text-sm">or</p>
+          <span className="bg-gray-300 h-px w-full"></span>
+        </div>
+
+        <Button
+          // onClick={async () => {
+          // await signIn("google");
+          // }}
+          className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full"
+        >
+          <GoogleIcon />
+          Sign in with Google
+        </Button>
 
         <Link
           href="/login"
