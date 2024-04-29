@@ -38,6 +38,17 @@ const navLinks = [
   },
 ];
 
+const btnsInfo = [
+  {
+    text: "Login",
+    href: "/login",
+  },
+  {
+    text: "Register",
+    href: "/register",
+  },
+];
+
 export function NavbarComponent({ session }: { session: any }) {
   const pathname = usePathname();
 
@@ -108,7 +119,7 @@ export function NavbarComponent({ session }: { session: any }) {
               <SheetFooter className="flex flex-col gap-2">
                 <SheetTrigger asChild className="w-full">
                   <Link
-                    href="/signIn"
+                    href="/login"
                     className={buttonVariants({ variant: "default" })}
                   >
                     Login
@@ -116,10 +127,10 @@ export function NavbarComponent({ session }: { session: any }) {
                 </SheetTrigger>
                 <SheetTrigger asChild className="w-full">
                   <Link
-                    href="/signUp"
+                    href="/register"
                     className={buttonVariants({ variant: "outline" })}
                   >
-                    Signup
+                    Register
                   </Link>
                 </SheetTrigger>
               </SheetFooter>

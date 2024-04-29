@@ -1,15 +1,22 @@
 "use client";
 
-import { LogoSVG } from "@components/Icons";
-import { Wrapper } from "@components/Wrapper";
-import { Button, buttonVariants } from "@components/ui/button";
-import { Input } from "@components/ui/input";
-import { Label } from "@components/ui/label";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
 import { Toaster, toast } from "sonner";
 
-export default function SignUpPage() {
+import { Button, buttonVariants } from "@components/ui/button";
+import { Label } from "@components/ui/label";
+import { Input } from "@components/ui/input";
+import { Wrapper } from "@components/Wrapper";
+import { LogoSVG } from "@components/Icons";
+
+const pageInfo = {
+  title: "Create an account",
+  linkToLogin: "Already have an account? Login here",
+};
+
+export default function RegisterPage() {
   const [error, setError] = useState("");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,7 +55,7 @@ export default function SignUpPage() {
   return (
     <Wrapper className="grid place-items-center mt-14">
       <div className="grid place-items-center w-full max-w-xl h-fit p-6 bg-white rounded-md shadow-lg">
-        <h1 className="font-bold text-3xl mb-4 uppercase">Create an account</h1>
+        <h1 className="font-bold text-3xl mb-4 uppercase">{pageInfo.title}</h1>
 
         <LogoSVG width="150" height="150" />
 
@@ -93,13 +100,13 @@ export default function SignUpPage() {
         </form>
 
         <Link
-          href="/signIn"
+          href="/login"
           className={buttonVariants({
             variant: "link",
             className: "mt-4 text-blue-500 hover:text-blue-300",
           })}
         >
-          Already have an account? Signin
+          {pageInfo.linkToLogin}
         </Link>
       </div>
 
