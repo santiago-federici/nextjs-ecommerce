@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-// import { useSession } from 'next-auth/react'
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 import { Wrapper } from "@components/Wrapper";
@@ -16,8 +16,7 @@ const headerInfo = {
 };
 
 export function Header() {
-  // const { data: session } = useSession()
-  const session = false;
+  const { data: session } = useSession();
 
   const pathname = usePathname();
 

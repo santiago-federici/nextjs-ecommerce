@@ -4,17 +4,11 @@ import bcrypt from "bcryptjs";
 import { connectDB } from "@utils/DBconnection";
 
 export async function POST(request: Request) {
-  const { email, username, password } = await request.json();
+  const { email, password } = await request.json();
 
   // TODO: Improve validations
   if (!email)
     return NextResponse.json({ message: "Email is required" }, { status: 400 });
-
-  if (!username)
-    return NextResponse.json(
-      { message: "Username is required" },
-      { status: 400 }
-    );
 
   if (!password)
     return NextResponse.json(
@@ -22,14 +16,6 @@ export async function POST(request: Request) {
       { status: 400 }
     );
 
-  if (username.length < 3 || username.length > 20) {
-    return NextResponse.json(
-      { message: "Username must be 3-20 characters" },
-      { status: 400 }
-    );
-  }
-
-  console.log("here: outside==", password);
   if (password.length < 6 || password.length > 20) {
     console.log("here: ==", password);
     console.log("here: ==", password.length);
@@ -54,7 +40,6 @@ export async function POST(request: Request) {
 
     const user = new User({
       email,
-      username,
       password: hashedPassword,
     });
 
@@ -64,7 +49,6 @@ export async function POST(request: Request) {
       {
         _id: savedUser._id,
         email: savedUser.email,
-        username: savedUser.username,
       },
       { status: 201 }
     );

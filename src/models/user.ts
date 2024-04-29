@@ -13,13 +13,13 @@ const UserSchema = new Schema({
     minLength: [6, "Password must be at least 6 characters"],
     select: false,
   },
-  username: {
-    type: String,
-    required: [true, "Username is required"],
-    minLength: [3, "Username must be at least 3 characters"],
-    maxLength: [20, "Username must be less than 20 characters"],
-    match: [/^[a-zA-Z0-9]+$/, "Invalid username"],
-  },
+  // username: {
+  //   type: String,
+  //   required: [true, "Username is required"],
+  //   minLength: [3, "Username must be at least 3 characters"],
+  //   maxLength: [20, "Username must be less than 20 characters"],
+  //   match: [/^[a-zA-Z0-9]+$/, "Invalid username"],
+  // },
 });
 
 const User = models.User || model("User", UserSchema);

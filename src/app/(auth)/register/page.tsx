@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-// import { signIn } from "@auth";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 import { Toaster, toast } from "sonner";
 
@@ -19,13 +20,15 @@ const pageInfo = {
 
 export default function RegisterPage() {
   const [error, setError] = useState("");
+
+  const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
     const email = formData.get("email");
-    const username = formData.get("username");
     const password = formData.get("password");
 
     try {
@@ -36,14 +39,20 @@ export default function RegisterPage() {
         },
         body: JSON.stringify({
           email,
-          username,
           password,
         }),
       });
       const data = await res.json();
-      console.log(data);
+
+      const authRes = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
       if (data.message) setError(data.message);
       if (data.success) toast.success(data.success);
+
+      if (authRes?.ok) return router.push("/products");
     } catch (err) {
       console.error(err);
     }
@@ -70,17 +79,6 @@ export default function RegisterPage() {
               type="email"
               name="email"
               placeholder="youremail@example.com"
-            />
-          </div>
-          <div>
-            <Label htmlFor="username" className="ml-1">
-              Username
-            </Label>
-            <Input
-              id="username"
-              type="text"
-              name="username"
-              placeholder="Your username"
             />
           </div>
           <div>
