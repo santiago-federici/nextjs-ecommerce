@@ -43,6 +43,7 @@ const userOptions = [
   },
   {
     name: "Logout",
+    link: "/logout",
   },
 ];
 
@@ -87,7 +88,7 @@ export function ProfileDropdown({
                   <DropdownMenuItem key={index} className="cursor-pointer">
                     <Link
                       // TODO: add the logout logic
-                      href={option.link === "/logout" ? "/" : option.link}
+                      href={option.link}
                       className={`${
                         option.name === "Logout" ? "text-red-500" : ""
                       }`}
