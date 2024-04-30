@@ -32,7 +32,7 @@ export default function RegisterPage() {
     const password = formData.get("password");
 
     try {
-      const res = await fetch("/api/signUp", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
