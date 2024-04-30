@@ -43,7 +43,7 @@ const userOptions = [
   },
   {
     name: "Logout",
-    link: "/logout",
+    link: "/api/auth/signout",
   },
 ];
 
