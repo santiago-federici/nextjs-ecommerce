@@ -1,4 +1,4 @@
-// import { signIn } from "next-auth/react"
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 import {
@@ -43,7 +43,7 @@ const userOptions = [
   },
   {
     name: "Logout",
-    link: "/api/auth/signout",
+    link: "/login",
   },
 ];
 
@@ -70,10 +70,7 @@ export function ProfileDropdown({
           <DropdownMenuGroup>
             {!session?.user
               ? noUserOptions.map((option: any, index: number) => (
-                  <DropdownMenuItem
-                    key={index}
-                    // onClick={() => signIn()}
-                  >
+                  <DropdownMenuItem key={index}>
                     <Link
                       href={option.link}
                       className={`${buttonVariants({
@@ -87,8 +84,10 @@ export function ProfileDropdown({
               : userOptions.map((option: any, index: number) => (
                   <DropdownMenuItem key={index} className="cursor-pointer">
                     <Link
-                      // TODO: add the logout logic
                       href={option.link}
+                      onClick={
+                        option.name === "Logout" ? () => signOut() : () => {}
+                      }
                       className={`${
                         option.name === "Logout" ? "text-red-500" : ""
                       }`}
