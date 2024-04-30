@@ -49,9 +49,11 @@ export default function RegisterPage() {
         password,
         redirect: false,
       });
-      if (data.message) setError(data.message);
-      if (data.success) toast.success(data.success);
 
+      if (data?.message) return setError(data?.message);
+      if (data?.err) return setError(data?.err.errors.email.properties.message);
+
+      if (authRes?.ok) toast.success("User created successfully");
       if (authRes?.ok) return router.push("/products");
     } catch (err) {
       console.error(err);
@@ -94,7 +96,7 @@ export default function RegisterPage() {
           </div>
 
           <Button className="bg-blue-500 hover:bg-blue-400 mt-6">
-            Sign In
+            Register
           </Button>
         </form>
 
@@ -105,12 +107,7 @@ export default function RegisterPage() {
           <span className="bg-gray-300 h-px w-full"></span>
         </div>
 
-        <Button
-          // onClick={async () => {
-          // await signIn("google");
-          // }}
-          className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full"
-        >
+        <Button className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full">
           <GoogleIcon />
           Sign in with Google
         </Button>
