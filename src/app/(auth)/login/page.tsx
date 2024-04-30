@@ -38,7 +38,10 @@ export default function LoginPage() {
     });
 
     if (authRes?.error) setError(authRes?.error && "Invalid credentials");
-    if (authRes?.ok) toast.success(authRes?.ok && "Logged in successfully");
+    if (authRes?.ok) {
+      toast.success(authRes?.ok && "Logged in successfully");
+      return router.push("/");
+    }
   };
 
   useEffect(() => {
@@ -86,7 +89,10 @@ export default function LoginPage() {
           <span className="bg-gray-300 h-px w-full"></span>
         </div>
 
-        <Button className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full">
+        <Button
+          onClick={() => signIn("google")}
+          className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full"
+        >
           <GoogleIcon />
           Login with Google
         </Button>

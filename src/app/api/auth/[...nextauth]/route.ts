@@ -2,7 +2,7 @@ import User from "@models/user";
 import { connectDB } from "@utils/DBconnection";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-// import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 
 const handler = NextAuth({
@@ -40,12 +40,30 @@ const handler = NextAuth({
         return user;
       },
     }),
+    GoogleProvider({
+      name: "Google",
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
 
-    // GoogleProvider({
-    //   name: "Google",
-    //   clientId: process.env.AUTH_GOOGLE_ID!,
-    //   clientSecret: process.env.AUTH_GOOGLE_SECRET!,
-    // }),
+      // 👇🏽👇🏽 https://next-auth.js.org/providers/google 👇🏽👇🏽
+
+      // Google only provides Refresh Token to an application the first time a user signs in.
+      // To force Google to re-issue a Refresh Token, the user needs to remove the application from their
+      // account and sign in again: https://myaccount.google.com/permissions
+      // Alternatively, you can also pass options in the params object of authorization which will force the
+      // Refresh Token to always be provided on sign in, however this will ask all users to confirm if
+      // they wish to grant your application access every time they sign in.
+      // If you need access to the RefreshToken or AccessToken for a Google account and you are not using a
+      // database to persist user accounts, this may be something you need to do.
+
+      // authorization: {
+      //   params: {
+      //     prompt: "consent",
+      //     access_type: "offline",
+      //     response_type: "code"
+      //   }
+      // }
+    }),
   ],
   callbacks: {
     jwt({ token, user }) {
@@ -59,6 +77,7 @@ const handler = NextAuth({
   },
   pages: {
     signIn: "/register",
+    // signOut: "/",
   },
 });
 
