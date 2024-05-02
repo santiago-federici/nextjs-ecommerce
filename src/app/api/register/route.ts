@@ -17,8 +17,6 @@ export async function POST(request: Request) {
     );
 
   if (password.length < 6 || password.length > 20) {
-    console.log("here: ==", password);
-    console.log("here: ==", password.length);
     return NextResponse.json(
       { message: "Password must be 6-20 characters" },
       { status: 400 }
