@@ -112,7 +112,7 @@ export default function RegisterPage() {
           className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full"
         >
           <GoogleIcon />
-          Sign in with Google
+          Register with Google
         </Button>
 
         <Link
