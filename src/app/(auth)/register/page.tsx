@@ -111,7 +111,7 @@ export default function RegisterPage() {
         </div>
 
         <Button
-          onClick={() => signIn('google')}
+          onClick={() => signIn("google")}
           className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full"
         >
           <GoogleIcon />
