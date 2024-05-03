@@ -9,9 +9,16 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: [true, "Password is required"],
+    // required: [true, "Password is required"],
     minLength: [6, "Password must be at least 6 characters"],
     select: false,
+  },
+  googleId: {
+    type: String,
+  },
+  provider: {
+    type: String,
+    default: "credentials",
   },
   // username: {
   //   type: String,

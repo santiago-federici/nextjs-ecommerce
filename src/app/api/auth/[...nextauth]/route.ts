@@ -24,20 +24,20 @@ const handler = NextAuth({
       async authorize(credentials, req) {
         await connectDB();
 
-        const user = await User.findOne({
+        const userFound = await User.findOne({
           email: credentials?.email,
         }).select("+password");
 
-        if (!user) throw new Error("Invalid credentials");
+        if (!userFound) throw new Error("Invalid credentials");
 
         const isValidPassword = await bcrypt.compare(
           credentials!.password,
-          user.password
+          userFound.password
         );
 
         if (!isValidPassword) throw new Error("Invalid credentials");
 
-        return user;
+        return userFound;
       },
     }),
     GoogleProvider({
@@ -74,11 +74,60 @@ const handler = NextAuth({
       session.user = token.user as any; // TODO: set the props instead of using any
       return session;
     },
+    async signIn({ user, account, credentials }) {
+      if (account?.provider === "credentials") {
+        await connectDB();
+
+        const userFound = await User.findOne({
+          email: user?.email,
+        }).select("+password");
+
+        if (!userFound) throw new Error("Invalid credentials");
+
+        const credentialsPassword = credentials?.password ?? "";
+
+        const isValidPassword = await bcrypt.compare(
+          credentialsPassword.toString(),
+          userFound.password
+        );
+
+        if (!isValidPassword) throw new Error("Invalid credentials");
+
+        return userFound;
+      }
+
+      if (account?.provider === "google") {
+        await connectDB();
+        const userFound = await User.findOne({ email: user?.email });
+
+        if (!userFound) {
+          const newUser = new User({
+            email: user?.email,
+            googleId: user?.id,
+            provider: account?.provider,
+          });
+
+          const savedUser = await newUser.save();
+
+          return savedUser;
+        }
+
+        return userFound;
+      }
+    },
   },
   pages: {
     signIn: "/register",
-    // signOut: "/",
+    // signOut: '/auth/signout',
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // (used for check email message)
+    // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
+  // events: {
+  //   async signIn({ user, isNewUser}: { user: User, isNewUser: isNewUser}): Promise<isNewUser> {
+  //     return isNewUser;
+  //   }
+  // }
 });
 
 export { handler as GET, handler as POST };

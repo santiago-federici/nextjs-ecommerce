@@ -36,12 +36,12 @@ export async function POST(request: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({
+    const newUser = new User({
       email,
       password: hashedPassword,
     });
 
-    const savedUser = await user.save();
+    const savedUser = await newUser.save();
 
     return NextResponse.json(
       {

@@ -44,17 +44,20 @@ export default function RegisterPage() {
       });
       const data = await res.json();
 
+      if (data?.message) return setError(data?.message);
+
+      if (data?.err) return setError(data?.err.errors.email.properties.message);
+
       const authRes = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
 
-      if (data?.message) return setError(data?.message);
-      if (data?.err) return setError(data?.err.errors.email.properties.message);
-
-      if (authRes?.ok) toast.success("User created successfully");
-      if (authRes?.ok) return router.push("/products");
+      if (authRes?.ok) {
+        toast.success("User created successfully");
+        return router.push("/products");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -108,7 +111,7 @@ export default function RegisterPage() {
         </div>
 
         <Button
-          onClick={() => signIn("google")}
+          onClick={() => signIn('google')}
           className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full"
         >
           <GoogleIcon />
