@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
     if (userFound) {
       return NextResponse.json(
-        { message: "Email already exists" },
+        { message: "Email already in use" },
         { status: 400 }
       );
     }

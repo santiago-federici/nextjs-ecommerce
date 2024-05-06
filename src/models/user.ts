@@ -3,7 +3,7 @@ import { Schema, model, models } from "mongoose";
 const UserSchema = new Schema({
   email: {
     type: String,
-    unique: [true, "Email already exists"],
+    unique: [true, "Email already in use"],
     required: [true, "Email is required"],
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Invalid Email"],
   },
