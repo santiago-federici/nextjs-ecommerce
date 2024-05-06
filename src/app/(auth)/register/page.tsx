@@ -12,6 +12,7 @@ import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { Wrapper } from "@components/Wrapper";
 import { GoogleIcon, LogoSVG } from "@components/Icons";
+import clsx from "clsx";
 
 const pageInfo = {
   title: "Create an account",
@@ -44,6 +45,7 @@ export default function RegisterPage() {
       });
       const data = await res.json();
 
+      console.log(data?.message);
       if (data?.message) return setError(data?.message);
 
       if (data?.err) return setError(data?.err.errors.email.properties.message);
@@ -84,7 +86,13 @@ export default function RegisterPage() {
               type="email"
               name="email"
               placeholder="youremail@example.com"
+              className={clsx({
+                "focus-visible:ring-red-500": error.includes("Email"),
+              })}
             />
+            {error && error.includes("Email") && (
+              <p className="text-sm mt-2 text-red-500">{error}</p>
+            )}
           </div>
           <div>
             <Label htmlFor="password" className="ml-1">
@@ -95,7 +103,13 @@ export default function RegisterPage() {
               type="password"
               name="password"
               placeholder="******"
+              className={clsx({
+                "focus-visible:ring-red-500": error.includes("Password"),
+              })}
             />
+            {error && error.includes("Password") && (
+              <p className="text-sm mt-2 text-red-500">{error}</p>
+            )}
           </div>
 
           <Button className="bg-blue-500 hover:bg-blue-400 mt-6">
