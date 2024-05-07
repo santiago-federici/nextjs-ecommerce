@@ -1,9 +1,10 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
-// import User from "@/models/user";
-// import { connectDB } from "@utils/DBconnection";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { db } from "@/db";
 
-export const { auth, handlers, signIn, signOut } = NextAuth({
+export const authConfig = {
+  adapter: DrizzleAdapter(db),
   providers: [
     Google({
       name: "Google",
@@ -31,34 +32,23 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
-      if (user) token.user = user;
-      return token;
-    },
-    session({ session, token }) {
-      session.user = token.user as any; // TODO: set the props instead of using any
+    async session({ session, user }) {
+      session.user.id = user.id;
       return session;
     },
-    // async signIn({ user, account }) {
-    //   if (account?.provider === "google") {
-    //     await connectDB();
-    //     const userFound = await User.findOne({ email: user?.email });
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const paths = ["/products"]; // <-- set the protected paths here
+      const isProtected = paths.some((path) =>
+        nextUrl.pathname.startsWith(path)
+      );
 
-    //     if (!userFound) {
-    //       const newUser = new User({
-    //         email: user?.email,
-    //         googleId: user?.id,
-    //         provider: account?.provider,
-    //       });
-
-    //       const savedUser = await newUser.save();
-
-    //       return savedUser;
-    //     }
-
-    //     return userFound;
-    //   }
-    // },
+      if (isProtected && !isLoggedIn) {
+        const redirectUrl = new URL("/register", nextUrl.origin);
+        redirectUrl.searchParams.append("callbackUrl", nextUrl.href);
+        return Response.redirect(redirectUrl);
+      }
+    },
   },
   pages: {
     signIn: "/register",
@@ -72,4 +62,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   //     return isNewUser;
   //   }
   // }
-});
+} satisfies NextAuthConfig;
+
+export const { auth, handlers, signIn, signOut } = NextAuth(authConfig);
