@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1715103804468,
+      "tag": "0000_good_joshua_kane",
+      "breakpoints": true
+    }
+  ]
+}
