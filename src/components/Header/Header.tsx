@@ -16,7 +16,8 @@ const headerInfo = {
 };
 
 export function Header() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const session = false;
 
   const pathname = usePathname();
 

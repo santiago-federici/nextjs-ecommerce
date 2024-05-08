@@ -7,8 +7,10 @@ import { CartProvider } from "@contexts/CartContext";
 import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer";
 
+// import { Provider } from "@components/Providers";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+
 import "@styles/globals.css";
-import { Provider } from "@components/Providers";
 
 const onest = Onest({
   subsets: ["latin"],
@@ -32,8 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-surface">
-      <Provider>
+    <UserProvider>
+      <html lang="en" className="bg-surface">
+        {/* <Provider> */}
         <body className={`${onest.variable} ${workSans.variable}`}>
           <CartProvider>
             <Header />
@@ -43,7 +46,8 @@ export default function RootLayout({
             <Footer />
           </CartProvider>
         </body>
-      </Provider>
-    </html>
+        {/* </Provider> */}
+      </html>
+    </UserProvider>
   );
 }

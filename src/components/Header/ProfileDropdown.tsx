@@ -16,11 +16,11 @@ import { buttonVariants } from "@components/ui/button";
 const noUserOptions = [
   {
     name: "Login",
-    link: "/login",
+    link: "/api/auth/login",
   },
   {
     name: "Register",
-    link: "/register",
+    link: "/api/auth/signup",
   },
 ];
 
