@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 
 import { Toaster, toast } from "sonner";
 
@@ -12,37 +10,18 @@ import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { Wrapper } from "@components/Wrapper";
 import { GoogleIcon, LogoSVG } from "@components/Icons";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import clsx from "clsx";
 
 const pageInfo = {
   title: "Login",
-  linkToLogin: "Don't have an account yet? Register here",
+  registerBtnInfo: "Don't have an account yet? Register here",
+  registerLink: "/register",
 };
 
 export default function LoginPage() {
   const [error, setError] = useState("");
-
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    const authRes = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-
-    if (authRes?.error) setError(authRes?.error && "Invalid credentials");
-    if (authRes?.ok) {
-      toast.success(authRes?.ok && "Logged in successfully");
-      return router.push("/");
-    }
-  };
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     error && toast.error(error);
@@ -55,7 +34,7 @@ export default function LoginPage() {
 
         <LogoSVG width="150" height="150" />
 
-        <form onSubmit={handleSubmit} className="my-8 w-full grid gap-4">
+        <form className="my-8 w-full grid gap-8">
           <div>
             <Label htmlFor="email" className="ml-1">
               Email
@@ -65,21 +44,29 @@ export default function LoginPage() {
               type="email"
               name="email"
               placeholder="youremail@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+              className={clsx({
+                "focus-visible:ring-red-500": error.includes("Email"),
+              })}
             />
-          </div>
-          <div>
-            <Label htmlFor="password" className="ml-1">
-              Password
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="******"
-            />
+            {error && error.includes("Email") && (
+              <p className="text-sm mt-2 text-red-500">{error}</p>
+            )}
           </div>
 
-          <Button className="bg-blue-500 hover:bg-blue-400 mt-6">Login</Button>
+          <LoginLink
+            authUrlParams={{
+              connection_id:
+                process.env.NEXT_PUBLIC_KINDE_CONNECTION_EMAIL_PASSWORDLESS ||
+                "",
+              login_hint: email,
+            }}
+            className={`bg-[#3b82f6] hover:bg-[#3b82f6] ${buttonVariants({
+              variant: "default",
+            })} w-full`}
+          >
+            Login
+          </LoginLink>
         </form>
 
         {/* Separator */}
@@ -89,22 +76,27 @@ export default function LoginPage() {
           <span className="bg-gray-300 h-px w-full"></span>
         </div>
 
-        <Button
-          onClick={() => signIn("google")}
-          className="bg-transparent hover:bg-gray-200 text-black border border-gray-200 gap-2 w-full"
+        <LoginLink
+          className={`${buttonVariants({
+            variant: "outline",
+          })} w-full gap-2`}
+          authUrlParams={{
+            connection_id:
+              process.env.NEXT_PUBLIC_KINDE_CONNECTION_GOOGLE || "",
+          }}
         >
           <GoogleIcon />
           Login with Google
-        </Button>
+        </LoginLink>
 
         <Link
-          href="/register"
+          href={pageInfo.registerLink}
           className={buttonVariants({
             variant: "link",
             className: "mt-4 text-blue-500 hover:text-blue-300",
           })}
         >
-          {pageInfo.linkToLogin}
+          {pageInfo.registerBtnInfo}
         </Link>
       </div>
 
