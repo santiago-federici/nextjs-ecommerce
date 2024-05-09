@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sheet,
   SheetContent,
@@ -12,9 +14,12 @@ import { Separator } from "@/components/ui/separator";
 import { BigCart, Cart } from "@components/Icons";
 import { useCart } from "@hooks/useCart";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export function CartSheet({ pathname }: { pathname: string }) {
+export function CartSheet() {
   const { cart, cartQuantity } = useCart();
+
+  const pathname = usePathname();
 
   return (
     <span

@@ -1,7 +1,3 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 import { Wrapper } from "@components/Wrapper";
@@ -10,21 +6,20 @@ import { NavbarComponent } from "./NavbarComponent";
 import { ProfileDropdown } from "./ProfileDropdown";
 
 import { LogoSVG } from "@components/Icons";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const headerInfo = {
   logo: <LogoSVG />,
 };
 
-export function Header() {
-  // const { data: session } = useSession();
-  const session = false;
-
-  const pathname = usePathname();
+export async function Header() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
   return (
     <header className="w-full">
       <Wrapper className="py-4 flex justify-between items-center">
-        <NavbarComponent session={session} />
+        <NavbarComponent />
 
         <Link href={"/"} className="order-2 lg:order-1">
           <div
@@ -37,9 +32,9 @@ export function Header() {
         </Link>
 
         <span className="flex gap-4 order-3">
-          <ProfileDropdown session={session} pathname={pathname} />
+          <ProfileDropdown user={user} />
 
-          <CartSheet pathname={pathname} />
+          <CartSheet />
         </span>
       </Wrapper>
     </header>

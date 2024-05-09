@@ -1,5 +1,4 @@
-import { signOut } from "next-auth/react";
-import Link from "next/link";
+"use client";
 
 import {
   DropdownMenu,
@@ -11,18 +10,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserCircle } from "@components/Icons";
-import { buttonVariants } from "@components/ui/button";
-
-const noUserOptions = [
-  {
-    name: "Login",
-    link: "/api/auth/login",
-  },
-  {
-    name: "Register",
-    link: "/api/auth/signup",
-  },
-];
+import {
+  LoginLink,
+  RegisterLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const userOptions = [
   {
@@ -41,19 +35,11 @@ const userOptions = [
     name: "Help",
     link: "/help",
   },
-  {
-    name: "Logout",
-    link: "/login",
-  },
 ];
 
-export function ProfileDropdown({
-  session,
-  pathname,
-}: {
-  session: any;
-  pathname: string;
-}) {
+export function ProfileDropdown({ user }: { user: any }) {
+  const pathname = usePathname();
+
   return (
     <div className="hidden lg:flex">
       <DropdownMenu>
@@ -68,34 +54,23 @@ export function ProfileDropdown({
           <DropdownMenuLabel>Account settings</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {!session?.user
-              ? noUserOptions.map((option: any, index: number) => (
-                  <DropdownMenuItem key={index}>
-                    <Link
-                      href={option.link}
-                      className={`${buttonVariants({
-                        variant: "default",
-                      })} w-full`}
-                    >
-                      {option.name}
-                    </Link>
-                  </DropdownMenuItem>
-                ))
-              : userOptions.map((option: any, index: number) => (
+            {!user ? (
+              <DropdownMenuItem>
+                <LoginLink>Login</LoginLink>
+                <RegisterLink>Register</RegisterLink>
+              </DropdownMenuItem>
+            ) : (
+              <>
+                {userOptions.map((option: any, index: number) => (
                   <DropdownMenuItem key={index} className="cursor-pointer">
-                    <Link
-                      href={option.link}
-                      onClick={
-                        option.name === "Logout" ? () => signOut() : () => {}
-                      }
-                      className={`${
-                        option.name === "Logout" ? "text-red-500" : ""
-                      }`}
-                    >
-                      {option.name}
-                    </Link>
+                    <Link href={option.link}>{option.name}</Link>
                   </DropdownMenuItem>
                 ))}
+                <DropdownMenuItem>
+                  <LogoutLink className="text-red-500">Logout</LogoutLink>
+                </DropdownMenuItem>
+              </>
+            )}
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

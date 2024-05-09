@@ -1,5 +1,3 @@
-import { usePathname } from "next/navigation";
-// import { signIn } from "next-auth/react"
 import Link from "next/link";
 import clsx from "clsx";
 
@@ -14,6 +12,10 @@ import {
 import { buttonVariants } from "@components/ui/button";
 
 import { About, Contact, Home, Menu, Products } from "@components/Icons";
+import {
+  LogoutLink,
+  getKindeServerSession,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 
 const navLinks = [
   {
@@ -49,8 +51,11 @@ const btnsInfo = [
   },
 ];
 
-export function NavbarComponent({ session }: { session: any }) {
-  const pathname = usePathname();
+export async function NavbarComponent() {
+  const pathname = "/";
+
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
   return (
     <>
@@ -115,28 +120,35 @@ export function NavbarComponent({ session }: { session: any }) {
                 );
               })}
             </ul>
-            {!session?.user ? (
-              <SheetFooter className="flex flex-col gap-2">
+            <SheetFooter className="flex sm:flex-col gap-y-4 items-end flex-1 mb-8">
+              {!user ? (
+                btnsInfo.map((link, index) => {
+                  return (
+                    <SheetTrigger key={index} asChild className="w-full">
+                      <Link
+                        href={link.href}
+                        className={`uppercase ${buttonVariants({
+                          variant:
+                            link.text === "Login" ? "outline" : "default",
+                        })}`}
+                      >
+                        {link.text}
+                      </Link>
+                    </SheetTrigger>
+                  );
+                })
+              ) : (
                 <SheetTrigger asChild className="w-full">
-                  <Link
-                    href="/login"
-                    className={buttonVariants({ variant: "default" })}
+                  <LogoutLink
+                    className={`${buttonVariants({
+                      variant: "outline",
+                    })} hover:bg-red-200 hover:text-red-950 hover:border-red-300`}
                   >
-                    Login
-                  </Link>
+                    Logout
+                  </LogoutLink>
                 </SheetTrigger>
-                <SheetTrigger asChild className="w-full">
-                  <Link
-                    href="/register"
-                    className={buttonVariants({ variant: "outline" })}
-                  >
-                    Register
-                  </Link>
-                </SheetTrigger>
-              </SheetFooter>
-            ) : (
-              <></>
-            )}
+              )}
+            </SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
