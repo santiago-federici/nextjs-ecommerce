@@ -9,9 +9,10 @@ import { Button, buttonVariants } from "@components/ui/button";
 import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { Wrapper } from "@components/Wrapper";
-import { GoogleIcon, LogoSVG } from "@components/Icons";
+import { Close, GoogleIcon, LogoSVG } from "@components/Icons";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import clsx from "clsx";
+import { isValidEmail } from "@lib/utils";
 
 const pageInfo = {
   title: "Login",
@@ -20,12 +21,19 @@ const pageInfo = {
 };
 
 export default function LoginPage() {
-  const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | boolean>();
+  const [email, setEmail] = useState();
 
-  useEffect(() => {
-    error && toast.error(error);
-  }, [error]);
+  async function handleChange(e: any) {
+    setEmail(e.target.value);
+    if (!isValidEmail(email)) {
+      setError("Invalid email");
+    }
+
+    if (isValidEmail(email)) {
+      setError(false);
+    }
+  }
 
   return (
     <Wrapper className="grid place-items-center mt-14">
@@ -39,34 +47,48 @@ export default function LoginPage() {
             <Label htmlFor="email" className="ml-1">
               Email
             </Label>
-            <Input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="youremail@example.com"
-              onChange={(e) => setEmail(e.target.value)}
-              className={clsx({
-                "focus-visible:ring-red-500": error.includes("Email"),
-              })}
-            />
-            {error && error.includes("Email") && (
-              <p className="text-sm mt-2 text-red-500">{error}</p>
-            )}
+            <div className="relative">
+              <Input
+                id="email"
+                type="text"
+                name="email"
+                placeholder="youremail@example.com"
+                onChange={(e) => handleChange(e)}
+                className={clsx({
+                  "ring-4 focus-visible:ring-red-500/50 ring-red-500/50": error,
+                })}
+              />
+              {error && (
+                <span className="absolute right-2 top-[10px] text-red-500">
+                  <Close width="20" height="20" />
+                </span>
+              )}
+            </div>
+            <p className="text-sm text-red-500 mt-2 ml-2">{error}</p>
           </div>
 
-          <LoginLink
-            authUrlParams={{
-              connection_id:
-                process.env.NEXT_PUBLIC_KINDE_CONNECTION_EMAIL_PASSWORDLESS ||
-                "",
-              login_hint: email,
-            }}
-            className={`bg-[#3b82f6] hover:bg-[#3b82f6] ${buttonVariants({
-              variant: "default",
-            })} w-full`}
-          >
-            Login
-          </LoginLink>
+          {isValidEmail(email) && !error ? (
+            <LoginLink
+              authUrlParams={{
+                connection_id:
+                  process.env.NEXT_PUBLIC_KINDE_CONNECTION_EMAIL_PASSWORDLESS ||
+                  "",
+                login_hint: email!,
+              }}
+              className={`bg-[#3c82f3] hover:bg-[#3c82f3]/90 ${buttonVariants({
+                variant: "default",
+              })} w-full`}
+            >
+              Login
+            </LoginLink>
+          ) : (
+            <Button
+              onClick={(e) => e.preventDefault()}
+              className="cursor-not-allowed bg-[#3c82f3] hover:bg-[#3c82f3]/90"
+            >
+              Login
+            </Button>
+          )}
         </form>
 
         {/* Separator */}

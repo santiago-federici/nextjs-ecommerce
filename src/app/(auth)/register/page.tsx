@@ -2,23 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
+import clsx from "clsx";
 
 import { Button, buttonVariants } from "@components/ui/button";
 import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { Wrapper } from "@components/Wrapper";
+import { isValidEmail } from "@lib/utils";
+
 import { Close, GoogleIcon, LogoSVG } from "@components/Icons";
-import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import clsx from "clsx";
 
 const pageInfo = {
   title: "Create an account",
   loginBtnInfo: "Already have an account? Login here",
   loginLink: "/login",
 };
-
-const isValidEmail = (email: any) =>
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 
 export default function RegisterPage() {
   const [error, setError] = useState<string | boolean>();
@@ -75,7 +75,7 @@ export default function RegisterPage() {
                   "",
                 login_hint: email!,
               }}
-              className={`bg-[#3b82f6] hover:bg-[#3b82f6] ${buttonVariants({
+              className={`bg-[#3c82f3] hover:bg-[#3c82f3]/90 ${buttonVariants({
                 variant: "default",
               })} w-full`}
             >
@@ -84,7 +84,7 @@ export default function RegisterPage() {
           ) : (
             <Button
               onClick={(e) => e.preventDefault()}
-              className="cursor-not-allowed"
+              className="cursor-not-allowed bg-[#3c82f3] hover:bg-[#3c82f3]/90"
             >
               Register
             </Button>
