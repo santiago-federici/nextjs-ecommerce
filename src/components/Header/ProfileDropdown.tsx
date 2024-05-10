@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserCircle } from "@components/Icons";
+import { buttonVariants } from "@components/ui/button";
 import {
   LoginLink,
   RegisterLink,
@@ -17,6 +18,17 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+const noUserOptions = [
+  {
+    name: "Login",
+    link: "/login",
+  },
+  {
+    name: "Register",
+    link: "/register",
+  },
+];
 
 const userOptions = [
   {
@@ -55,10 +67,18 @@ export function ProfileDropdown({ user }: { user: any }) {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             {!user ? (
-              <DropdownMenuItem>
-                <LoginLink>Login</LoginLink>
-                <RegisterLink>Register</RegisterLink>
-              </DropdownMenuItem>
+              noUserOptions.map((option: any, index: number) => (
+                <DropdownMenuItem key={index}>
+                  <Link
+                    href={option.link}
+                    className={`w-full ${buttonVariants({
+                      variant: "default",
+                    })}`}
+                  >
+                    {option.name}
+                  </Link>
+                </DropdownMenuItem>
+              ))
             ) : (
               <>
                 {userOptions.map((option: any, index: number) => (
