@@ -1,5 +1,9 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,13 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { UserCircle } from "@components/Icons";
 import { buttonVariants } from "@components/ui/button";
-import {
-  LoginLink,
-  RegisterLink,
-  LogoutLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const noUserOptions = [
   {

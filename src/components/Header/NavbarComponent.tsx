@@ -1,4 +1,9 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+
 import clsx from "clsx";
 
 import {
@@ -12,10 +17,6 @@ import {
 import { buttonVariants } from "@components/ui/button";
 
 import { About, Contact, Home, Menu, Products } from "@components/Icons";
-import {
-  LogoutLink,
-  getKindeServerSession,
-} from "@kinde-oss/kinde-auth-nextjs/server";
 
 const navLinks = [
   {
@@ -51,11 +52,8 @@ const btnsInfo = [
   },
 ];
 
-export async function NavbarComponent() {
-  const pathname = "/";
-
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+export function NavbarComponent({ user }: { user: any }) {
+  const pathname = usePathname();
 
   return (
     <>

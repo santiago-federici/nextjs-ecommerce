@@ -19,7 +19,7 @@ export async function Header() {
   return (
     <header className="w-full">
       <Wrapper className="py-4 flex justify-between items-center">
-        <NavbarComponent />
+        <NavbarComponent user={user} />
 
         <Link href={"/"} className="order-2 lg:order-1">
           <div
