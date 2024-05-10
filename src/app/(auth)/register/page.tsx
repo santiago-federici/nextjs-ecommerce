@@ -6,11 +6,12 @@ import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import clsx from "clsx";
 
+import { isValidEmail } from "@lib/utils";
+
 import { Button, buttonVariants } from "@components/ui/button";
 import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { Wrapper } from "@components/Wrapper";
-import { isValidEmail } from "@lib/utils";
 
 import { Close, GoogleIcon, LogoSVG } from "@components/Icons";
 

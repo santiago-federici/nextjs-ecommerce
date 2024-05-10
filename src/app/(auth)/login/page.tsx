@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
-import { Toaster, toast } from "sonner";
+import clsx from "clsx";
+
+import { isValidEmail } from "@lib/utils";
 
 import { Button, buttonVariants } from "@components/ui/button";
 import { Label } from "@components/ui/label";
 import { Input } from "@components/ui/input";
 import { Wrapper } from "@components/Wrapper";
+
 import { Close, GoogleIcon, LogoSVG } from "@components/Icons";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import clsx from "clsx";
-import { isValidEmail } from "@lib/utils";
 
 const pageInfo = {
   title: "Login",
@@ -121,8 +122,6 @@ export default function LoginPage() {
           {pageInfo.registerBtnInfo}
         </Link>
       </div>
-
-      <Toaster richColors />
     </Wrapper>
   );
 }
