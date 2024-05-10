@@ -106,11 +106,11 @@ export function Menu() {
   );
 }
 
-export function Close() {
+export function Close({ width, height }: { width?: string; height?: string }) {
   return (
     <svg
-      width="30"
-      height="30"
+      width={width ? width : "30"}
+      height={height ? height : "30"}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
