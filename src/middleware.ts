@@ -5,7 +5,7 @@ export default function middleware(req: Request) {
 }
 
 export const config = {
-  matcher: ["/products"],
+  matcher: ["/about"],
 };
 
 // export default withAuth(
