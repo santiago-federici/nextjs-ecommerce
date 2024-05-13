@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useCart } from "@hooks/useCart";
 
 import { AddToCart } from "./Icons";
-import { Button } from "./CustomButton";
+import { Button } from "@components/ui/button";
 
 import prods from "@mocks/prods.json";
 
@@ -30,12 +30,16 @@ export function Card({ id }: { id: number }) {
             </div>
           </span>
 
-          <Link href={`/products/${id}`}>
+          <Link
+            href={`/products/${id}`}
+            className="z-10 hidden lg:flex lg:opacity-0 lg:group-hover:opacity-100"
+          >
             <Button
-              as="outline"
-              text="See details"
-              className="text-sm text-white border-white text-nowrap z-10 hidden lg:flex lg:opacity-0 lg:group-hover:opacity-100 hover:text-custom-accent hover:border-custom-accent"
-            />
+              variant={"outline"}
+              className="text-sm text-white bg-transparent hover:bg-transparent hover:text-custom-accent hover:border-custom-accent"
+            >
+              See details
+            </Button>
           </Link>
 
           <Image
