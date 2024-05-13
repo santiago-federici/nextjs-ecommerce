@@ -9,4 +9,5 @@ export default {
   out: "./drizzle",
   verbose: true,
   strict: true,
+  dialect: "sqlite",
 } satisfies Config;
