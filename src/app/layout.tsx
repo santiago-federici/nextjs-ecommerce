@@ -16,7 +16,7 @@ const onest = Onest({
 
 const workSans = Work_Sans({
   subsets: ["latin"],
-  weight: ["700", "900"],
+  weight: ["500", "600", "700", "800", "900"],
   variable: "--font-worksans",
 });
 
