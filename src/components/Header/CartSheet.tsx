@@ -1,5 +1,10 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
+import { useCart } from "@hooks/useCart";
+
 import {
   Sheet,
   SheetContent,
@@ -8,13 +13,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { CartCard } from "@components/CartCard";
-import { Button } from "@components/CustomButton";
+import { Button } from "@components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { CartCard } from "@components/CartCard";
+
 import { BigCart, Cart } from "@components/Icons";
-import { useCart } from "@hooks/useCart";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export function CartSheet() {
   const { cart, cartQuantity } = useCart();
@@ -70,19 +73,21 @@ export function CartSheet() {
               </p>
               <SheetTrigger asChild>
                 <Link href={"/products"}>
-                  <Button as="filled" text="Shop now" />
+                  <Button className="uppercase">Shop now</Button>
                 </Link>
               </SheetTrigger>
             </section>
           )}
 
-          <SheetFooter>
-            <SheetTrigger asChild className="w-full">
-              <Link href={"/cart"}>
-                <Button as="filled" text="Checkout" className="w-full" />
-              </Link>
-            </SheetTrigger>
-          </SheetFooter>
+          {cart.length > 0 ? (
+            <SheetFooter>
+              <SheetTrigger asChild className="w-full">
+                <Link href={"/cart"}>
+                  <Button className="uppercase w-full">Checkout</Button>
+                </Link>
+              </SheetTrigger>
+            </SheetFooter>
+          ) : null}
         </SheetContent>
       </Sheet>
 
