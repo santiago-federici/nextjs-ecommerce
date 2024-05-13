@@ -10,6 +10,7 @@ import { Card } from "@components/Card";
 import "@styles/ProductsPage.css";
 
 import prods from "@mocks/prods.json";
+import { Toaster } from "sonner";
 
 export default function ProductsPage() {
   return (
@@ -51,6 +52,7 @@ export default function ProductsPage() {
           ))}
         </div>
       </section>
+      <Toaster richColors />
     </Wrapper>
   );
 }
