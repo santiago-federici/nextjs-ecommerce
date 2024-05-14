@@ -8,11 +8,12 @@ import { useCart } from "@hooks/useCart";
 import { Button } from "@components/ui/button";
 
 import { AddToCart } from "./Icons";
+import clsx from "clsx";
 
 export function Card({ prod }: { prod: any }) {
   const { increaseQuantity } = useCart();
 
-  const { id, name, price, imageUrl, offerPercentage } = prod;
+  const { id, name, price, imageUrl, offerPercentage, stock } = prod;
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -31,9 +32,12 @@ export function Card({ prod }: { prod: any }) {
             onClick={() => increaseQuantity(id)}
             className="text-zinc-500 lg:group-hover:text-white absolute top-2 left-2 z-10 transition duration-200"
           >
-            <div className="hover:text-custom-accent">
+            <button
+              className="hover:text-custom-accent disabled:cursor-not-allowed"
+              disabled={stock <= 0}
+            >
               <AddToCart />
-            </div>
+            </button>
           </span>
 
           <Link
@@ -48,11 +52,24 @@ export function Card({ prod }: { prod: any }) {
             </Button>
           </Link>
 
-          <Image src={imageUrl} alt={name} layout="fill" objectFit="cover" />
+          <Image
+            src={imageUrl}
+            alt={name}
+            layout="fill"
+            objectFit="cover"
+            className={clsx({
+              "blur-[2px]": stock <= 0,
+            })}
+          />
 
           {offerPercentage > 0 && (
             <span className="bg-green-500 text-white text-sm font-semibold py-2 px-2 rounded-bl-md absolute top-0 -right-1">
               {offerPercentage}% OFF
+            </span>
+          )}
+          {stock <= 0 && (
+            <span className="uppercase bg-red-100 border border-red-200 text-red-600 text-sm font-semibold py-2 px-2 rounded-md shadow-md absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/4">
+              Out of stock
             </span>
           )}
         </div>
