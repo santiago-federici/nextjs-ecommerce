@@ -37,7 +37,9 @@ export function CartSheet() {
 
         <SheetContent className="flex flex-col">
           <SheetHeader>
-            <SheetTitle className="self-start">Cart (0)</SheetTitle>
+            <SheetTitle className="self-start">
+              Cart ({cartQuantity})
+            </SheetTitle>
           </SheetHeader>
 
           {cart.length > 0 ? (
