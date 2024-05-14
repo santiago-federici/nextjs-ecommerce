@@ -12,9 +12,9 @@ export const orders = sqliteTable("orders", {
     .notNull(),
   totalAmount: real("total_amount").notNull(),
   createdAt: text("created_at")
-    .default(sql`CURRENT_TIMESTAMP`)
+    .default(sql`(current_timestamp)`)
     .notNull(),
   updatedAt: text("updated_at")
-    .default(sql`CURRENT_TIMESTAMP`)
+    .default(sql`(current_timestamp)`)
     .notNull(),
 });

@@ -10,9 +10,9 @@ export const products = sqliteTable("products", {
   stock: integer("stock", { mode: "number" }).notNull(),
   isOffer: integer("isOffer", { mode: "boolean" }).default(false).notNull(),
   createdAt: text("created_at")
-    .default(sql`CURRENT_TIMESTAMP`)
+    .default(sql`(current_timestamp)`)
     .notNull(),
   updatedAt: text("updated_at")
-    .default(sql`CURRENT_TIMESTAMP`)
+    .default(sql`(current_timestamp)`)
     .notNull(),
 });
