@@ -11,7 +11,10 @@ export const orders = sqliteTable("orders", {
     .default("pending")
     .notNull(),
   totalAmount: real("total_amount").notNull(),
-  createdAt: integer("created_at", { mode: "timestamp" })
-    .default(sql`(CURRENT_TIMESTAMP)`)
+  createdAt: text("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: text("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
 });
