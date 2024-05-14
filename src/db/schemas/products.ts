@@ -8,7 +8,9 @@ export const products = sqliteTable("products", {
   imageUrl: text("imageUrl").notNull(),
   description: text("description").notNull(),
   stock: integer("stock", { mode: "number" }).notNull(),
-  isOffer: integer("isOffer", { mode: "boolean" }).default(false).notNull(),
+  offerPercentage: integer("offerPercentage", { mode: "number" })
+    .default(0)
+    .notNull(),
   createdAt: text("created_at")
     .default(sql`(current_timestamp)`)
     .notNull(),

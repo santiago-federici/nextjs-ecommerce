@@ -5,20 +5,26 @@ import Image from "next/image";
 
 import { useCart } from "@hooks/useCart";
 
-import { AddToCart } from "./Icons";
 import { Button } from "@components/ui/button";
 
-import prods from "@mocks/prods.json";
+import { AddToCart } from "./Icons";
 
-export function Card({ id }: { id: number }) {
+export function Card({ prod }: { prod: any }) {
   const { increaseQuantity } = useCart();
 
-  const prod = prods.find((prod) => prod.id === id);
+  const { id, name, price, imageUrl, offerPercentage } = prod;
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(price);
+  };
 
   return (
     prod && (
       <article className="bg-white rounded-sm shadow-md overflow-hidden">
-        <div className="relative h-60 cursor-pointer group grid place-items-center">
+        <div className="relative h-72 cursor-pointer group grid place-items-center">
           <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>
 
           <span
@@ -42,31 +48,35 @@ export function Card({ id }: { id: number }) {
             </Button>
           </Link>
 
-          <Image
-            src={prod.image}
-            alt={prod.prodName}
-            layout="fill"
-            objectFit="cover"
-          />
+          <Image src={imageUrl} alt={name} layout="fill" objectFit="cover" />
 
-          {prod.isOffer && (
-            <span className="bg-green-500 text-white text-sm font-semibold py-1 px-2 rounded-md absolute top-2 right-2">
-              {prod.isOffer}% OFF
+          {offerPercentage > 0 && (
+            <span className="bg-green-500 text-white text-sm font-semibold py-2 px-2 rounded-bl-md absolute top-0 -right-1">
+              {offerPercentage}% OFF
             </span>
           )}
         </div>
 
-        <div className="p-4 grid h-fit place-content-start">
-          <h3 className="text-lg lg:text-xl font-medium">{prod.prodName}</h3>
-          <div className="grid lg:flex items-center lg:gap-2 lg:mt-2">
-            {prod.prevPrice && (
-              <p className="text-sm text-gray-500 line-through mt-1">
-                ${prod.prevPrice}
+        <div className="py-4 px-2 lg:px-3 grid h-fit place-content-start">
+          <h3 className="text-base lg:text-lg font-medium">{name}</h3>
+
+          {/* Div containing the price of the product. If offerPercentage is greater than 0, display the 
+          discounted price plus the previous price with a line-through. Otherwise, display the original price. */}
+          <div className="flex items-baseline gap-2 lg:mt-2">
+            {offerPercentage > 0 ? (
+              <>
+                <p className="text-sm text-gray-500 line-through mt-1">
+                  {formatPrice(price)}
+                </p>
+                <p className="text-gray-900 text-lg lg:text-xl font-semibold">
+                  {formatPrice(price - (price * offerPercentage) / 100)}
+                </p>
+              </>
+            ) : (
+              <p className="text-gray-900 text-lg lg:text-xl font-semibold">
+                {formatPrice(price)}
               </p>
             )}
-            <p className="text-gray-900 text-xl lg:text-2xl font-semibold">
-              ${prod.price}
-            </p>
           </div>
         </div>
       </article>

@@ -4,15 +4,20 @@ import Link from "next/link";
 import { Wrapper } from "@components/Wrapper";
 import { SortDropdown } from "@components/ProductsPage/SortDropdown";
 import { FiltersComponent } from "@components/ProductsPage/FiltersComponent";
-import { ArrowRight } from "@components/Icons";
 import { Card } from "@components/Card";
+
+import { ArrowRight } from "@components/Icons";
+
+import { Toaster } from "sonner";
+
+import { db } from "@db";
+import { products } from "@db/schemas/products";
 
 import "@styles/ProductsPage.css";
 
-import prods from "@mocks/prods.json";
-import { Toaster } from "sonner";
+export default async function ProductsPage() {
+  const prods = await db.select().from(products);
 
-export default function ProductsPage() {
   return (
     <Wrapper className="flex flex-col">
       {/* TODO: create breadcrumbs component with all the logic */}
@@ -25,7 +30,7 @@ export default function ProductsPage() {
       <section className="grid lg:flex justify-between w-full">
         <div className="flex flex-col justify-between">
           <h2 className="text-6xl">Shirts</h2>
-          <p className="text-text text-sm">20 results</p>
+          <p className="text-text text-sm">{prods.length} results</p>
         </div>
 
         <Image
@@ -37,22 +42,22 @@ export default function ProductsPage() {
         />
       </section>
 
-      <SortDropdown className="hidden lg:flex self-end mt-8" />
+      <SortDropdown className="hidden xl:flex self-end mt-8" />
 
-      <section className="grid grid-cols-1 lg:grid-cols-[1fr_4fr] gap-4 mt-10">
-        <section className="mb-6 lg:mb-0 max-lg:flex justify-between lg:justify-start relative">
-          <SortDropdown className="lg:hidden" />
+      <section className="grid grid-cols-1 xl:grid-cols-[1fr_4fr] gap-4 mt-10">
+        <section className="mb-6 max-xl:flex justify-between xl:justify-start relative">
+          <SortDropdown className="xl:hidden" />
 
           <FiltersComponent />
         </section>
 
         <div className="grid custom-grid gap-4 mb-16">
           {prods.map((prod, index) => (
-            <Card key={index} id={prod.id} />
+            <Card key={index} prod={prod} />
           ))}
         </div>
       </section>
-      <Toaster richColors />
+      <Toaster richColors closeButton />
     </Wrapper>
   );
 }
