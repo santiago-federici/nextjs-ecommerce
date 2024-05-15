@@ -13,13 +13,9 @@ export const formatPrice = (price: number) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(price);
-
-  // 👇🏽 Another way to do it (from the nextjs tutorial)
-  // return (amount / 100).toLocaleString('en-US', {
-  //   style: 'currency',
-  //   currency: 'USD',
-  // });
 };
 
 // 👇🏽 Pagination (from the nextjs tutorial)
