@@ -1,5 +1,11 @@
 .custom-grid {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+@media (width > 750px) {
+  .custom-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 
 @media (width > 975px) {
@@ -7,6 +13,7 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
+
 @media (width > 1280px) {
   .custom-grid {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

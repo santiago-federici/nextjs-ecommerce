@@ -27,7 +27,7 @@ export function Card({ prod }: { prod: ProdProps }) {
   return (
     prod && (
       <article className="bg-white rounded-sm shadow-md overflow-hidden">
-        <div className="relative h-72 cursor-pointer group grid place-items-center">
+        <div className="relative h-48 md:h-72 cursor-pointer group grid place-items-center overflow-hidden">
           <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>
 
           <span
@@ -59,6 +59,7 @@ export function Card({ prod }: { prod: ProdProps }) {
             alt={name}
             layout="fill"
             objectFit="cover"
+            priority
             className={clsx({
               "blur-[2px]": stock <= 0,
             })}
@@ -70,7 +71,7 @@ export function Card({ prod }: { prod: ProdProps }) {
             </span>
           )}
           {stock <= 0 && (
-            <span className="uppercase bg-red-100 border border-red-200 text-red-600 text-xs font-semibold py-2 px-2 rounded-md shadow-md absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/4">
+            <span className="uppercase text-nowrap bg-red-100 border border-red-200 text-red-600 text-xs font-semibold py-2 px-2 rounded-md shadow-md absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/4">
               Out of stock
             </span>
           )}
@@ -87,12 +88,12 @@ export function Card({ prod }: { prod: ProdProps }) {
                 <p className="text-sm text-gray-500 line-through mt-1">
                   {formatPrice(price)}
                 </p>
-                <p className="text-gray-900 text-lg lg:text-xl font-semibold">
+                <p className="text-gray-900 text-base lg:text-xl font-semibold">
                   {formatPrice(price - (price * offerPercentage) / 100)}
                 </p>
               </>
             ) : (
-              <p className="text-gray-900 text-lg lg:text-xl font-semibold">
+              <p className="text-gray-900 text-base lg:text-xl font-semibold">
                 {formatPrice(price)}
               </p>
             )}
