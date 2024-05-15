@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import { db } from "@db";
+import { products } from "@db/schemas/products";
+
 import { Wrapper } from "@components/Wrapper";
 import { Card } from "@components/Card";
 import { Button } from "@components/ui/button";
@@ -11,7 +14,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import prods from "@mocks/prods.json";
+import clsx from "clsx";
 
 const sectionInfo = {
   title: "Best offers",
@@ -21,11 +24,13 @@ const sectionInfo = {
   },
 };
 
-export function OffersSection() {
-  const discountedProds = prods.filter((prod) => prod.isOffer);
+export async function OffersSection() {
+  const prods = await db.select().from(products);
+
+  const discountedProds = prods.filter((prod) => prod.offerPercentage > 0);
 
   const highestDiscounts = discountedProds.sort(
-    (a, b) => (b.isOffer || 0) - (a.isOffer || 0)
+    (a, b) => (b.offerPercentage || 0) - (a.offerPercentage || 0)
   );
 
   return (
@@ -45,9 +50,15 @@ export function OffersSection() {
           {highestDiscounts.map((prod, index) => (
             <CarouselItem
               key={index}
-              className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4 last:custom-mask"
+              // this is taking care of the case when there are less than 4 products, so it doesn't look bad
+              className={clsx({
+                "md:basis-1/2 lg:basis-1/3 xl:basis-1/4":
+                  highestDiscounts.length > 3,
+                "md:basis-1/2 lg:basis-1/3": highestDiscounts.length < 4,
+                "md:basis-1/2": highestDiscounts.length < 3,
+              })}
             >
-              <Card id={prod.id} />
+              <Card prod={prod} />
             </CarouselItem>
           ))}
         </CarouselContent>
