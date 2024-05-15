@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 import { toast } from "sonner";
 
 type CartContext = {
-  increaseQuantity: (id: number) => void;
+  increaseQuantity: (id: number, stock: number) => void;
   decreaseQuantity: (id: number) => void;
   removeProd: (id: number) => void;
   clearCart: () => void;
@@ -23,23 +23,30 @@ export const CartContext = createContext({} as CartContext);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const increaseQuantity = (id: number) => {
+  const increaseQuantity = (id: number, stock: number) => {
     const indexOfProduct = cart.findIndex((item) => item.id === id);
 
     if (indexOfProduct >= 0) {
-      const newCart = structuredClone(cart);
-      newCart[indexOfProduct].quantity += 1;
-      return setCart(newCart);
+      if (cart[indexOfProduct].quantity < stock) {
+        const newCart = structuredClone(cart);
+        newCart[indexOfProduct].quantity += 1;
+        return setCart(newCart);
+      }
+      return toast.warning("Stock limit reached for this product");
     }
 
-    setCart((prevState) => [
-      ...prevState,
-      {
-        id,
-        quantity: 1,
-      },
-    ]);
-    toast.success("Added to cart");
+    if (stock > 0) {
+      setCart((prevState) => [
+        ...prevState,
+        {
+          id,
+          quantity: 1,
+        },
+      ]);
+      return toast.success("Added to cart");
+    }
+
+    return toast.error("This product is out of stock");
   };
 
   const decreaseQuantity = (id: number) => {
@@ -59,7 +66,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const removeProd = (id: number) => {
     const newCart = cart.filter((item) => item.id !== id);
     setCart(newCart);
-    toast.warning("Product removed from cart");
+    toast.error("Product removed from cart");
   };
 
   const clearCart = () => {
