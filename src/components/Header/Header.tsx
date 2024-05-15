@@ -8,6 +8,9 @@ import { ProfileDropdown } from "./ProfileDropdown";
 import { LogoSVG } from "@components/Icons";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
+import { db } from "@db";
+import { products } from "@db/schemas/products";
+
 const headerInfo = {
   logo: <LogoSVG />,
 };
@@ -15,6 +18,11 @@ const headerInfo = {
 export async function Header() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  // getting the prods from the database to use them in the cart. The import is here and not in the CartSheet or the CartCard component
+  // because those are client components, and getting the prods from the DB requires async/await functions, which are not
+  // available in client components (at least for now).
+  const prods = await db.select().from(products);
 
   return (
     <header className="w-full">
@@ -34,7 +42,7 @@ export async function Header() {
         <span className="flex gap-4 order-3">
           <ProfileDropdown user={user} />
 
-          <CartSheet />
+          <CartSheet prods={prods} />
         </span>
       </Wrapper>
     </header>

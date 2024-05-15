@@ -4,23 +4,25 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { useCart } from "@hooks/useCart";
+import { formatPrice } from "@lib/utils";
 
 import { Button } from "@components/ui/button";
 
 import { AddToCart } from "./Icons";
 import clsx from "clsx";
 
-export function Card({ prod }: { prod: any }) {
+interface ProdProps {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+  offerPercentage: number;
+  stock: number;
+}
+export function Card({ prod }: { prod: ProdProps }) {
   const { increaseQuantity } = useCart();
 
   const { id, name, price, imageUrl, offerPercentage, stock } = prod;
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(price);
-  };
 
   return (
     prod && (
@@ -29,7 +31,7 @@ export function Card({ prod }: { prod: any }) {
           <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>
 
           <span
-            onClick={() => increaseQuantity(id)}
+            onClick={() => increaseQuantity(id, stock)}
             className="text-zinc-500 lg:group-hover:text-white absolute top-2 left-2 z-10 transition duration-200"
           >
             <button
@@ -68,7 +70,7 @@ export function Card({ prod }: { prod: any }) {
             </span>
           )}
           {stock <= 0 && (
-            <span className="uppercase bg-red-100 border border-red-200 text-red-600 text-sm font-semibold py-2 px-2 rounded-md shadow-md absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/4">
+            <span className="uppercase bg-red-100 border border-red-200 text-red-600 text-xs font-semibold py-2 px-2 rounded-md shadow-md absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/4">
               Out of stock
             </span>
           )}

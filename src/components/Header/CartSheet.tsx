@@ -19,7 +19,7 @@ import { CartCard } from "@components/CartCard";
 
 import { BigCart, Cart } from "@components/Icons";
 
-export function CartSheet() {
+export function CartSheet({ prods }: { prods: any }) {
   const { cart, cartQuantity } = useCart();
 
   const pathname = usePathname();
@@ -45,10 +45,14 @@ export function CartSheet() {
           {cart.length > 0 ? (
             <section className="flex-grow flex-1">
               <ul className="grid gap-4 mt-14">
-                {cart.map((prod, index) => {
+                {cart.map((cartProd, index) => {
                   return (
                     <li key={index}>
-                      <CartCard id={prod.id} quantity={prod.quantity} />
+                      <CartCard
+                        prods={prods}
+                        cartProdId={cartProd.id}
+                        quantity={cartProd.quantity}
+                      />
                     </li>
                   );
                 })}
