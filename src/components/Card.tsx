@@ -19,6 +19,7 @@ interface ProdProps {
   offerPercentage: number;
   stock: number;
 }
+
 export function Card({ prod }: { prod: ProdProps }) {
   const { increaseQuantity } = useCart();
 
@@ -43,7 +44,7 @@ export function Card({ prod }: { prod: ProdProps }) {
           </span>
 
           <Link
-            href={`/products/${id}`}
+            href={"/products/details?id=" + id.toString()}
             className="z-10 hidden lg:flex lg:opacity-0 lg:group-hover:opacity-100"
           >
             <Button
@@ -57,12 +58,15 @@ export function Card({ prod }: { prod: ProdProps }) {
           <Image
             src={imageUrl}
             alt={name}
-            layout="fill"
-            objectFit="cover"
+            fill
+            sizes="w-full h-full"
             priority
-            className={clsx({
-              "blur-[2px]": stock <= 0,
-            })}
+            className={
+              (clsx({
+                "blur-[2px]": stock <= 0,
+              }),
+              "object-cover")
+            }
           />
 
           {offerPercentage > 0 && (
@@ -78,7 +82,9 @@ export function Card({ prod }: { prod: ProdProps }) {
         </div>
 
         <div className="py-4 px-2 lg:px-3 grid h-fit place-content-start">
-          <h3 className="text-base lg:text-lg font-medium">{name}</h3>
+          <h3 className="text-base lg:text-lg font-medium text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
+            {name}
+          </h3>
 
           {/* Div containing the price of the product. If offerPercentage is greater than 0, display the 
           discounted price plus the previous price with a line-through. Otherwise, display the original price. */}
