@@ -44,7 +44,7 @@ export async function OffersSection() {
           align: "start",
           loop: true,
         }}
-        className="max-w-xs md:max-w-lg lg:max-w-4xl xl:max-w-6xl"
+        className="max-w-xs md:max-w-lg lg:max-w-full lg:w-9/12"
       >
         <CarouselContent className="flex items-stretch">
           {highestDiscounts.map((prod, index) => (
@@ -52,10 +52,10 @@ export async function OffersSection() {
               key={index}
               // this is taking care of the case when there are less than 4 products, so it doesn't look bad
               className={clsx({
-                "md:basis-1/2 lg:basis-1/3 xl:basis-1/4":
-                  highestDiscounts.length > 3,
-                "md:basis-1/2 lg:basis-1/3": highestDiscounts.length < 4,
-                "md:basis-1/2": highestDiscounts.length < 3,
+                "": highestDiscounts.length === 1,
+                "md:basis-1/2": highestDiscounts.length === 2,
+                "md:basis-1/2 lg:basis-1/3": highestDiscounts.length === 3,
+                "md:basis-1/2 lg:basis-1/4": highestDiscounts.length > 3,
               })}
             >
               <Card prod={prod} />
