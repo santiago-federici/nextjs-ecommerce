@@ -75,14 +75,15 @@ export function Card({ prod }: { prod: ProdProps }) {
               {offerPercentage}% OFF
             </span>
           )}
-          {stock <= 0 && (
-            <span className="uppercase text-nowrap bg-red-100 border border-red-200 text-red-600 text-xs font-semibold py-2 px-2 rounded-md shadow-md absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/4">
-              Out of stock
-            </span>
-          )}
         </div>
 
         <div className="py-2 px-1 grid h-fit place-content-start">
+          {stock <= 0 && (
+            <p className="text-base text-orange-600 font-medium">
+              Out of stock
+            </p>
+          )}
+
           <h3 className="text-base lg:text-lg font-medium text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
             {name}
           </h3>
