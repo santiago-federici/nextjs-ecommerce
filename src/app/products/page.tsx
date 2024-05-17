@@ -14,6 +14,22 @@ import { db } from "@db";
 import { products } from "@db/schemas/products";
 
 import "@styles/ProductsPage.css";
+import clsx from "clsx";
+
+const skewedSection = [
+  {
+    text: "New costumer?",
+    bg: "bg-gray-300",
+  },
+  {
+    text: "10% OFF",
+    bg: "bg-gray-400",
+  },
+  {
+    text: "In your first order!",
+    bg: "bg-gray-500",
+  },
+];
 
 export default async function ProductsPage() {
   const prods = await db.select().from(products);
@@ -27,19 +43,52 @@ export default async function ProductsPage() {
         <p>Products</p>
       </div>
 
-      <section className="grid lg:flex justify-between w-full">
+      <section className="grid gap-8 lg:flex lg:justify-between w-full">
         <div className="flex flex-col justify-between">
-          <h2 className="text-6xl">Shirts</h2>
-          <p className="text-text text-sm">{prods.length} results</p>
+          <h2 className="text-6xl font-semibold">Shirts</h2>
+          <p className="text-gray-500 text-sm">{prods.length} results</p>
         </div>
 
-        <Image
-          src={"/prodsHeader.png"}
-          width={900}
-          height={150}
-          alt={"prodsHeader"}
-          className="w-full lg:w-2/3"
-        />
+        {/* <div className="lg:mr-4 skew-x-[-20deg] place-self-center flex w-full lg:w-[60%] h-16 md:h-24">
+          <div className="bg-gray-300 w-[33%] h-full grid place-items-center px-4">
+            <p className="text-gray-800 text-xs md:text-lg lg:text-xl xl:text-2xl font-bold uppercase text-center skew-x-[20deg]">
+              New costumer?
+            </p>
+          </div>
+          <div className="bg-gray-400 w-[33%] h-full grid place-items-center px-4">
+            <p className="text-gray-800 text-base md:text-xl lg:text-2xl xl:text-4xl font-bold uppercase text-center skew-x-[20deg]">
+              10% OFF
+            </p>
+          </div>
+          <div className="bg-gray-500 w-[33%] h-full grid place-items-center px-4">
+            <p className="text-gray-800 text-xs md:text-lg lg:text-xl xl:text-2xl font-bold uppercase text-center skew-x-[20deg]">
+              In your first order!
+            </p>
+          </div>
+        </div> */}
+
+        <div className="lg:mr-4 skew-x-[-20deg] place-self-center flex w-full lg:w-[60%] h-16 md:h-24">
+          {skewedSection.map((item, index) => (
+            <div
+              key={index}
+              className={`${item.bg} w-[33%] h-full grid place-items-center px-4`}
+            >
+              <p
+                className={clsx(
+                  "font-bold uppercase text-center skew-x-[20deg]",
+                  {
+                    "text-base md:text-xl lg:text-2xl xl:text-4xl": index === 1,
+                  },
+                  {
+                    "text-xs md:text-lg lg:text-xl xl:text-2xl": index != 1,
+                  }
+                )}
+              >
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <SortDropdown className="hidden xl:flex self-end mt-8" />
