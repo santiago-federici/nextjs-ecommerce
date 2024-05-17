@@ -49,24 +49,7 @@ export default async function ProductsPage() {
           <p className="text-gray-500 text-sm">{prods.length} results</p>
         </div>
 
-        {/* <div className="lg:mr-4 skew-x-[-20deg] place-self-center flex w-full lg:w-[60%] h-16 md:h-24">
-          <div className="bg-gray-300 w-[33%] h-full grid place-items-center px-4">
-            <p className="text-gray-800 text-xs md:text-lg lg:text-xl xl:text-2xl font-bold uppercase text-center skew-x-[20deg]">
-              New costumer?
-            </p>
-          </div>
-          <div className="bg-gray-400 w-[33%] h-full grid place-items-center px-4">
-            <p className="text-gray-800 text-base md:text-xl lg:text-2xl xl:text-4xl font-bold uppercase text-center skew-x-[20deg]">
-              10% OFF
-            </p>
-          </div>
-          <div className="bg-gray-500 w-[33%] h-full grid place-items-center px-4">
-            <p className="text-gray-800 text-xs md:text-lg lg:text-xl xl:text-2xl font-bold uppercase text-center skew-x-[20deg]">
-              In your first order!
-            </p>
-          </div>
-        </div> */}
-
+        {/* Custom banner */}
         <div className="lg:mr-4 skew-x-[-20deg] place-self-center flex w-full lg:w-[60%] h-16 md:h-24">
           {skewedSection.map((item, index) => (
             <div
