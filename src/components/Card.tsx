@@ -18,17 +18,18 @@ interface ProdProps {
   price: number;
   offerPercentage: number;
   stock: number;
+  createdAt: string;
 }
 
 export function Card({ prod }: { prod: ProdProps }) {
   const { increaseQuantity } = useCart();
 
-  const { id, name, price, imageUrl, offerPercentage, stock } = prod;
+  const { id, name, price, imageUrl, offerPercentage, stock, createdAt } = prod;
 
   return (
     prod && (
-      <article className="bg-white rounded-sm shadow-md overflow-hidden">
-        <div className="relative h-48 md:h-72 cursor-pointer group grid place-items-center overflow-hidden">
+      <article className="rounded-sm overflow-hidden">
+        <div className="relative h-48 md:h-72 lg:h-96 cursor-pointer group grid place-items-center overflow-hidden">
           <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>
 
           <span
@@ -81,25 +82,25 @@ export function Card({ prod }: { prod: ProdProps }) {
           )}
         </div>
 
-        <div className="py-4 px-2 lg:px-3 grid h-fit place-content-start">
+        <div className="py-2 px-1 grid h-fit place-content-start">
           <h3 className="text-base lg:text-lg font-medium text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
             {name}
           </h3>
 
           {/* Div containing the price of the product. If offerPercentage is greater than 0, display the 
           discounted price plus the previous price with a line-through. Otherwise, display the original price. */}
-          <div className="flex items-baseline gap-2 lg:mt-2">
+          <div className="flex items-baseline gap-2">
             {offerPercentage > 0 ? (
               <>
                 <p className="text-sm text-gray-500 line-through mt-1">
                   {formatPrice(price)}
                 </p>
-                <p className="text-gray-900 text-base lg:text-xl font-semibold">
+                <p className="text-gray-900 text-base font-semibold">
                   {formatPrice(price - (price * offerPercentage) / 100)}
                 </p>
               </>
             ) : (
-              <p className="text-gray-900 text-base lg:text-xl font-semibold">
+              <p className="text-gray-900 text-base font-semibold">
                 {formatPrice(price)}
               </p>
             )}
