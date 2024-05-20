@@ -37,7 +37,7 @@ export default async function DetailsPage({
   const { name, imageUrl, price, description, offerPercentage, stock } = prod!;
 
   return (
-    <Wrapper className="mt-6 grid lg:flex gap-6 overflow-hidden bg-[#ffffff] p-4 rounded-md">
+    <Wrapper className="mt-6 grid lg:flex gap-6 p-8 overflow-hidden bg-[#ffffff] rounded-md border border-gray-100 shadow">
       <h2 className="lg:hidden">{name}</h2>
 
       <section className="hidden lg:flex md:flex-col gap-4">
@@ -46,28 +46,28 @@ export default async function DetailsPage({
           alt={name}
           width={100}
           height={100}
-          className="object-cover border border-zinc-400 rounded-sm"
+          className="object-cover border border-gray-400 rounded-sm"
         />
         <Image
           src={imageUrl}
           alt={name}
           width={100}
           height={100}
-          className="object-cover border border-zinc-400 rounded-sm"
+          className="object-cover border border-gray-400 rounded-sm"
         />
         <Image
           src={imageUrl}
           alt={name}
           width={100}
           height={100}
-          className="object-cover border border-zinc-400 rounded-sm"
+          className="object-cover border border-gray-400 rounded-sm"
         />
         <Image
           src={imageUrl}
           alt={name}
           width={100}
           height={100}
-          className="object-cover border border-zinc-400 rounded-sm"
+          className="object-cover border border-gray-400 rounded-sm"
         />
       </section>
 
@@ -88,7 +88,7 @@ export default async function DetailsPage({
           <h2>${price}</h2>
         </section>
 
-        <section className="flex flex-col gap-6 w-full lg:border lg:border-zinc-400 lg:rounded-md p-2 lg:p-4">
+        <section className="flex flex-col gap-6 w-full lg:border lg:border-gray-200 lg:rounded-md p-2 lg:p-4">
           <div className="grid gap-1">
             <p>
               <span className="text-green-500 font-semibold">Envio gratis</span>{" "}
