@@ -10,6 +10,7 @@ import { Button } from "@components/ui/button";
 
 import { AddToCart } from "./Icons";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 
 interface ProdProps {
   id: number;
@@ -26,17 +27,17 @@ export function Card({ prod }: { prod: ProdProps }) {
 
   const { id, name, price, imageUrl, offerPercentage, stock, createdAt } = prod;
 
+  const router = useRouter();
+
   return (
     prod && (
       <article className="rounded-sm overflow-hidden">
         <div className="relative h-48 md:h-72 lg:h-96 cursor-pointer group grid place-items-center overflow-hidden">
-          <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 lg:group-hover:opacity-60 transition duration-300"></span>
+          <span className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 xl:group-hover:opacity-60 transition duration-300"></span>
 
-          <span
-            onClick={() => increaseQuantity(id, stock)}
-            className="text-zinc-500 lg:group-hover:text-white absolute top-2 left-2 z-10 transition duration-200"
-          >
+          <span className="text-zinc-500 xl:group-hover:text-white absolute top-2 left-2 z-10 transition duration-200">
             <button
+              onClick={() => increaseQuantity(id, stock)}
               className="hover:text-custom-accent disabled:cursor-not-allowed"
               disabled={stock <= 0}
             >
@@ -46,7 +47,7 @@ export function Card({ prod }: { prod: ProdProps }) {
 
           <Link
             href={"/products/details?id=" + id.toString()}
-            className="z-10 hidden lg:flex lg:opacity-0 lg:group-hover:opacity-100"
+            className="z-10 max-xl:w-full max-xl:h-full opacity-0 xl:group-hover:opacity-100"
           >
             <Button
               variant={"outline"}
