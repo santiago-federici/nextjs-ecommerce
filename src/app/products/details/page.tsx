@@ -1,9 +1,13 @@
+import Image from "next/image";
+
 import { Wrapper } from "@components/Wrapper";
-import { Button } from "@components/ui/button";
+import ProductDetailsButtons from "@components/DetailsPage/ProductDetailsButtons";
+
+import { formatPrice } from "@lib/utils";
+
 import { db } from "@db";
 import { products } from "@db/schemas/products";
 import { eq } from "drizzle-orm";
-import Image from "next/image";
 
 interface ProdProps {
   id: number;
@@ -37,8 +41,8 @@ export default async function DetailsPage({
   const { name, imageUrl, price, description, offerPercentage, stock } = prod!;
 
   return (
-    <Wrapper className="mt-6 grid lg:flex gap-6 p-8 overflow-hidden bg-[#ffffff] rounded-md border border-gray-100 shadow">
-      <h2 className="lg:hidden">{name}</h2>
+    <Wrapper className="mt-6 grid lg:flex gap-2 lg:gap-6 lg:p-8 overflow-hidden bg-[#ffffff] rounded-md lg:border lg:border-gray-100 lg:shadow">
+      <h2 className="lg:hidden font-semibold text-2xl mt-6 ml-2">{name}</h2>
 
       <section className="hidden lg:flex md:flex-col gap-4">
         <Image
@@ -81,48 +85,72 @@ export default async function DetailsPage({
         />
       </div>
 
-      <section className="w-full grid lg:flex gap-6 text-base">
-        <section className="w-full p-2">
-          <h2 className="hidden lg:block">{name}</h2>
-          <p>{description}</p>
-          <h2>${price}</h2>
-        </section>
+      <section className="w-full grid xl:flex gap-6 text-base">
+        <section className="w-full flex flex-col gap-4 p-2 ">
+          <h2 className="hidden xl:block text-3xl">{name}</h2>
 
-        <section className="flex flex-col gap-6 w-full lg:border lg:border-gray-200 lg:rounded-md p-2 lg:p-4">
-          <div className="grid gap-1">
-            <p>
-              <span className="text-green-500 font-semibold">Envio gratis</span>{" "}
-              a todo el pais
-            </p>
-            <p>Conoce los tiempos y las formas de envio.</p>
-            <p className="text-blue-400 cursor-pointer">
-              Calcular cuando llega
+          <div className="flex flex-col">
+            {offerPercentage > 0 && (
+              <p className="text-gray-600 font-light text-base lg:text-lg line-through">
+                {formatPrice(price)}
+              </p>
+            )}
+            <p className="font-light text-2xl lg:text-4xl">
+              {formatPrice(price - (price * offerPercentage) / 100)}{" "}
+              {offerPercentage > 0 && (
+                <span className="text-sm text-green-600">
+                  {offerPercentage}% OFF
+                </span>
+              )}
             </p>
           </div>
 
+          <p className="font-semibold mt-4">Choose size:</p>
+          <div className="flex gap-2 mb-4">
+            <span className="w-7 h-7 text-sm grid place-items-center rounded-md border border-black bg-black text-white font-semibold">
+              S
+            </span>
+            <span className="w-7 h-7 text-sm grid place-items-center rounded-md border border-gray-200">
+              M
+            </span>
+            <span className="w-7 h-7 text-sm grid place-items-center rounded-md border border-gray-200">
+              L
+            </span>
+          </div>
+          <p>{description}</p>
+        </section>
+
+        <section className="flex flex-col gap-6 w-full xl:border xl:border-gray-200 xl:rounded-md p-2 xl:p-4">
           <div className="grid gap-1">
-            <p className="font-semibold text-lg">Stock disponible</p>
+            <p className="text-green-500 font-semibold">Free shipping</p>
+          </div>
+
+          <div className="grid gap-1">
+            <p className="font-semibold text-lg">Available stock</p>
             <p>
-              Almacenado y enviado por{" "}
+              Stored and sent by{" "}
               <span className="uppercase text-green-500 italic font-bold">
                 Full
               </span>
             </p>
           </div>
 
-          <p>
-            Cantidad: <span className="font-semibold">1 unidad</span>{" "}
-            <span className="text-gray-400">(+20 disponibles)</span>
-          </p>
+          {stock > 0 ? (
+            <p>
+              Quantity: <span className="font-semibold">1</span>{" "}
+              <span className="text-gray-400">({stock} available)</span>
+            </p>
+          ) : (
+            <p className="text-base text-orange-600 font-medium">
+              Out of stock
+            </p>
+          )}
 
           <div className="grid gap-1">
-            <p className="mb-2 text-gray-400 text-sm">
-              Podes comprar solo 1 unidad
-            </p>
-            <Button className="mb-1">Buy now</Button>
-            <Button variant={"outline"} className="bg-[#fafafa]">
-              Add to cart
-            </Button>
+            {stock === 1 && (
+              <p className="mb-2 text-gray-400 text-sm">Last unit available</p>
+            )}
+            <ProductDetailsButtons id={Number(searchParams.id)} stock={stock} />
           </div>
         </section>
       </section>
