@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Sort } from "@components/Icons";
+import { Button } from "@components/ui/button";
+// import { Button } from "@components/ui/button";
 
 const sortOptions = [
   {
@@ -39,7 +41,7 @@ export function SortDropdown({ className }: { className: string }) {
   return (
     <div className={className}>
       <DropdownMenu>
-        <DropdownMenuTrigger className="font-medium uppercase text-sm md:text-md px-4 py-2 rounded-md relative transition duration-200 flex gap-2 bg-zinc-300 border border-zinc-900 hover:opacity-70">
+        <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-medium uppercase pl-3 pr-4 py-2 border border-gray-200 rounded-md hover:bg-gray-100 transition duration-200">
           <Sort /> Sort
         </DropdownMenuTrigger>
         <DropdownMenuContent className="ml-4 lg:ml-0">

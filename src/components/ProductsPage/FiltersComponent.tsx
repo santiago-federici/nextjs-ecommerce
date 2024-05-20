@@ -130,7 +130,7 @@ const filters = [
 export function FiltersComponent() {
   return (
     <>
-      <aside className="hidden xl:flex gap-4 lg:flex-col bg-white p-4 rounded-md shadow-md min-w-60">
+      <aside className="hidden xl:flex gap-4 lg:flex-col border border-gray-200 p-4 rounded-md shadow-md min-w-60">
         <p className="text-gray-600">Filters</p>
         <FiltersAccordion />
         <FiltersButtons />
@@ -138,7 +138,7 @@ export function FiltersComponent() {
 
       <div className="xl:hidden">
         <Sheet>
-          <SheetTrigger className="font-medium uppercase text-sm md:text-md px-4 py-2 rounded-md relative transition duration-200 flex gap-2 bg-zinc-300 border border-zinc-900 hover:opacity-70">
+          <SheetTrigger className="flex items-center gap-2 text-sm font-medium uppercase pl-3 pr-4 py-2 border border-gray-200 rounded-md hover:bg-gray-100 transition duration-200">
             <Filter /> Filters
           </SheetTrigger>
 
