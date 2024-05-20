@@ -45,6 +45,8 @@ export function Card({ prod }: { prod: ProdProps }) {
             </button>
           </span>
 
+          {/* max-xl:w-full and max-xl:h-full are used to make the link fill the entire image, so when small screen users 
+          click anywhere in the image, they are redirected to the details */}
           <Link
             href={"/products/details?id=" + id.toString()}
             className="z-10 max-xl:w-full max-xl:h-full opacity-0 xl:group-hover:opacity-100"
