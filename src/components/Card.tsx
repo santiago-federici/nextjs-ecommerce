@@ -1,16 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 
-import { useCart } from "@hooks/useCart";
 import { formatPrice } from "@lib/utils";
 
-import { Button } from "@components/ui/button";
-
-import { AddToCart } from "./Icons";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
 
 interface ProdProps {
   id: number;
@@ -23,11 +16,7 @@ interface ProdProps {
 }
 
 export function Card({ prod }: { prod: ProdProps }) {
-  const { increaseQuantity } = useCart();
-
   const { id, name, price, imageUrl, offerPercentage, stock, createdAt } = prod;
-
-  const router = useRouter();
 
   return (
     prod && (
