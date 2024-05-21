@@ -1,5 +1,5 @@
-import { sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sql } from "drizzle-orm";
 
 export const products = sqliteTable("products", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }), // <-- generate random string using crypto (https://www.youtube.com/watch?v=4ZhtoOFKFP8&t=645s, min: 14:10)

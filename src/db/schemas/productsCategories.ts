@@ -2,7 +2,7 @@ import { integer, primaryKey, sqliteTable } from "drizzle-orm/sqlite-core";
 import { products } from "./products";
 import { categories } from "./categories";
 
-const productCategories = sqliteTable(
+export const productCategories = sqliteTable(
   "product_categories",
   {
     productId: integer("product_id", { mode: "number" })
@@ -12,9 +12,7 @@ const productCategories = sqliteTable(
       .references(() => categories.id)
       .notNull(),
   },
-  (table) => {
-    return {
-      pk: primaryKey({ columns: [table.productId, table.categoryId] }),
-    };
-  }
+  (table) => ({
+    pk: primaryKey({ columns: [table.productId, table.categoryId] }),
+  })
 );
