@@ -1,25 +1,13 @@
+import { MercadoPagoConfig, Preference } from "mercadopago";
+
+import { redirect } from "next/navigation";
+
 import { Wrapper } from "@components/Wrapper";
 import { Button } from "@components/ui/button";
-import { db } from "@db";
-import { products } from "@db/schemas/products";
-import { formatPrice } from "@lib/utils";
-import { eq } from "drizzle-orm";
-import { MercadoPagoConfig, Preference } from "mercadopago";
-import Image from "next/image";
-import { redirect } from "next/navigation";
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN!,
 });
-
-interface ProdProps {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-  offerPercentage: number;
-  stock: number;
-}
 
 export default async function CheckoutPage() {
   async function pay() {
@@ -29,7 +17,7 @@ export default async function CheckoutPage() {
       body: {
         items: [
           {
-            id: "donacion",
+            id: "1",
             title: "testing prod",
             quantity: 1,
             unit_price: 1005,
