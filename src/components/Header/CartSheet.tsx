@@ -88,7 +88,7 @@ export function CartSheet({ prods }: { prods: any }) {
           {cart.length > 0 ? (
             <SheetFooter>
               <SheetTrigger asChild className="w-full">
-                <Link href={"/cart"}>
+                <Link href={"/checkout"}>
                   <Button className="uppercase w-full">Checkout</Button>
                 </Link>
               </SheetTrigger>
