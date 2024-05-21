@@ -2,12 +2,15 @@ import Image from "next/image";
 
 import { Wrapper } from "@components/Wrapper";
 import ProductDetailsButtons from "@components/DetailsPage/ProductDetailsButtons";
+import Categories from "./_components/categories";
+import ProdOptions from "./_components/ProdOptions";
 
 import { formatPrice } from "@lib/utils";
 
 import { db } from "@db";
-import { products } from "@db/schemas/products";
 import { eq } from "drizzle-orm";
+import { shirtSizes } from "@db/schemas/shirt-sizes";
+import { products } from "@db/schemas/products";
 
 interface ProdProps {
   id: number;
@@ -39,6 +42,12 @@ export default async function DetailsPage({
   }
 
   const { name, imageUrl, price, description, offerPercentage, stock } = prod!;
+
+  // Getting the category options (e.g. if category is Shirts, then options might be 's', 'm', 'l', etc)
+  const categoryOptions = await db
+    .select()
+    .from(shirtSizes)
+    .where(eq(shirtSizes.productId, Number(searchParams.id)));
 
   return (
     <Wrapper className="mt-6 grid lg:flex gap-2 lg:gap-6 lg:p-8 overflow-hidden bg-[#ffffff] rounded-md lg:border lg:border-gray-100 lg:shadow">
@@ -106,18 +115,12 @@ export default async function DetailsPage({
           </div>
 
           <p className="font-semibold mt-4">Choose size:</p>
-          <div className="flex gap-2 mb-4">
-            <span className="w-7 h-7 text-sm grid place-items-center rounded-md border border-black bg-black text-white font-semibold">
-              S
-            </span>
-            <span className="w-7 h-7 text-sm grid place-items-center rounded-md border border-gray-200">
-              M
-            </span>
-            <span className="w-7 h-7 text-sm grid place-items-center rounded-md border border-gray-200">
-              L
-            </span>
-          </div>
+
+          <ProdOptions categoryOptions={categoryOptions} />
+
           <p>{description}</p>
+
+          <Categories prodId={Number(searchParams.id)} />
         </section>
 
         <section className="flex flex-col gap-6 w-full xl:border xl:border-gray-200 xl:rounded-md p-2 xl:p-4">
