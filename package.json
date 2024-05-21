@@ -24,6 +24,7 @@
     "drizzle-orm": "^0.30.10",
     "embla-carousel-react": "^8.0.4",
     "lucide-react": "^0.378.0",
+    "mercadopago": "^2.0.9",
     "next": "^14.1.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
