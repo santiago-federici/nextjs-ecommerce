@@ -1,44 +1,16 @@
-import { MercadoPagoConfig, Preference } from "mercadopago";
-
-import { redirect } from "next/navigation";
-
 import { Wrapper } from "@components/Wrapper";
-import { Button } from "@components/ui/button";
-
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN!,
-});
+import CheckoutProds from "./_components/CheckoutProds";
+import CheckoutLogic from "./_components/CheckoutLogic";
+import { db } from "@db";
+import { products } from "@db/schemas/products";
 
 export default async function CheckoutPage() {
-  async function pay() {
-    "use server";
-
-    const preference = await new Preference(client).create({
-      body: {
-        items: [
-          {
-            id: "1",
-            title: "testing prod",
-            quantity: 1,
-            unit_price: 1005,
-          },
-        ],
-        back_urls: {
-          failure: "http://localhost:3000/payment/failure",
-          success: "http://localhost:3000/payment/success",
-          pending: "http://localhost:3000/payment/pending",
-        },
-      },
-    });
-
-    redirect(preference.sandbox_init_point!);
-  }
+  const prods = await db.select().from(products);
 
   return (
-    <Wrapper>
-      <form action={pay}>
-        <Button>Enviar</Button>
-      </form>
+    <Wrapper className="flex gap-8 border rounded-md p-4">
+      <CheckoutProds prods={prods} />
+      <CheckoutLogic />
     </Wrapper>
   );
 }
