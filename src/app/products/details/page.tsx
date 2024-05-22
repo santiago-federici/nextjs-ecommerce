@@ -11,6 +11,7 @@ import { db } from "@db";
 import { eq } from "drizzle-orm";
 import { shirtSizes } from "@db/schemas/shirt-sizes";
 import { products } from "@db/schemas/products";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface ProdProps {
   id: number;
@@ -26,6 +27,9 @@ export default async function DetailsPage({
 }: {
   searchParams: { id: string };
 }) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
   const prods = await db
     .select()
     .from(products)
@@ -151,7 +155,11 @@ export default async function DetailsPage({
             {stock === 1 && (
               <p className="mb-2 text-gray-400 text-sm">Last unit available</p>
             )}
-            <ProductDetailsButtons id={Number(searchParams.id)} stock={stock} />
+            <ProductDetailsButtons
+              prodId={Number(searchParams.id)}
+              userId={Number(user?.id)}
+              stock={stock}
+            />
           </div>
         </section>
       </section>
