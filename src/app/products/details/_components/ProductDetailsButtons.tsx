@@ -3,13 +3,14 @@
 import { Button } from "@components/ui/button";
 import { Toaster, toast } from "sonner";
 import Link from "next/link";
-import { Alert } from "@components/Icons";
 
 export default function ProductDetailsButtons({
-  id,
+  prodId,
+  userId,
   stock,
 }: {
-  id: number;
+  prodId: number;
+  userId: number;
   stock: number;
 }) {
   const handleAddToCart = async () => {
@@ -21,7 +22,7 @@ export default function ProductDetailsButtons({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ id, stock }),
+          body: JSON.stringify({ prodId, userId, stock }),
         }
       );
       const data = await res.json();
