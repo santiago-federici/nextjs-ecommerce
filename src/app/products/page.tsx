@@ -88,7 +88,7 @@ export default async function ProductsPage() {
           ))}
         </div>
       </section>
-      <Toaster richColors closeButton />
+      <Toaster richColors />
     </Wrapper>
   );
 }
