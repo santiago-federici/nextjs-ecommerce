@@ -1,10 +1,9 @@
 "use client";
 
 import { Button } from "@components/ui/button";
-import { Toaster, toast } from "sonner";
-import Link from "next/link";
+import { toast } from "sonner";
 
-export default function ProductDetailsButtons({
+export default function AddToCartButton({
   prodId,
   userId,
   stock,
@@ -42,22 +41,14 @@ export default function ProductDetailsButtons({
   };
 
   return (
-    <>
-      <Button disabled={stock < 1} className="w-full mb-1">
-        <Link href={"/checkout"}>Buy now</Link>
-      </Button>
-
-      <Button
-        type="submit"
-        disabled={stock < 1}
-        variant={"outline"}
-        className="bg-[#fafafa] w-full"
-        onClick={handleAddToCart}
-      >
-        Add to cart
-      </Button>
-
-      <Toaster richColors />
-    </>
+    <Button
+      type="submit"
+      disabled={stock < 1}
+      variant={"outline"}
+      className="bg-[#fafafa] w-full"
+      onClick={handleAddToCart}
+    >
+      Add to cart
+    </Button>
   );
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Wrapper } from "@components/Wrapper";
-import ProductDetailsButtons from "./_components/ProductDetailsButtons";
+import AddToCartButton from "./_components/AddToCartButton";
 import ProdOptions from "./_components/ProdOptions";
 import Categories from "./_components/Categories";
 import MiniImagesSection from "./_components/MiniImagesSection";
@@ -14,6 +14,9 @@ import { products } from "@db/schemas/products";
 import { shirtSizes } from "@db/schemas/shirt-sizes";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Toaster } from "sonner";
+import { Button } from "@components/ui/button";
+import Link from "next/link";
 
 interface ProdProps {
   id: number;
@@ -128,7 +131,11 @@ export default async function DetailsPage({
             {stock === 1 && (
               <p className="mb-2 text-gray-400 text-sm">Last unit available</p>
             )}
-            <ProductDetailsButtons
+
+            <Button disabled={stock < 1} className="w-full mb-1">
+              <Link href={"/checkout"}>Buy now</Link>
+            </Button>
+            <AddToCartButton
               prodId={Number(searchParams.id)}
               userId={Number(user?.id)}
               stock={stock}
@@ -136,6 +143,7 @@ export default async function DetailsPage({
           </div>
         </section>
       </section>
+      <Toaster richColors />
     </Wrapper>
   );
 }
