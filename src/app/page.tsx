@@ -1,6 +1,6 @@
-import { BlackSection } from "@components/HomePage/BlackSection";
-import { HeroSection } from "@components/HomePage/HeroSection";
-import { OffersSection } from "@components/HomePage/OffersSection";
+import { BlackSection } from "./_components/BlackSection";
+import { HeroSection } from "./_components/HeroSection";
+import { OffersSection } from "./_components/OffersSection";
 
 import "@styles/HomePage.css";
 
