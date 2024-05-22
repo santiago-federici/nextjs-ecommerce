@@ -1,18 +1,18 @@
-import { increaseQuantity } from "@app/products/details/_lib/utils";
+import { increaseQuantity } from "@lib/cartUtils";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   if (request.method === "POST") {
     try {
-      const { id, stock } = await request.json();
+      const { prodId, userId, stock } = await request.json();
 
-      if (!id || !stock) {
+      if (!prodId || !userId || !stock) {
         return NextResponse.json({
-          error: "Missing required fields (id, stock)",
+          error: "Missing required fields",
         });
       }
 
-      const response = await increaseQuantity(id, stock);
+      const response = await increaseQuantity(prodId, userId, stock);
 
       return NextResponse.json(response);
     } catch (err) {
