@@ -4,13 +4,15 @@ import { Wrapper } from "@components/Wrapper";
 import ProductDetailsButtons from "./_components/ProductDetailsButtons";
 import ProdOptions from "./_components/ProdOptions";
 import Categories from "./_components/Categories";
+import MiniImagesSection from "./_components/MiniImagesSection";
 
 import { formatPrice } from "@lib/utils";
 
 import { db } from "@db";
 import { eq } from "drizzle-orm";
-import { shirtSizes } from "@db/schemas/shirt-sizes";
 import { products } from "@db/schemas/products";
+import { shirtSizes } from "@db/schemas/shirt-sizes";
+
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface ProdProps {
@@ -57,36 +59,7 @@ export default async function DetailsPage({
     <Wrapper className="mt-6 grid lg:flex gap-2 lg:gap-6 lg:p-8 overflow-hidden bg-[#ffffff] rounded-md lg:border lg:border-gray-100 lg:shadow">
       <h2 className="lg:hidden font-semibold text-2xl mt-6 ml-2">{name}</h2>
 
-      <section className="hidden lg:flex md:flex-col gap-4">
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={100}
-          height={100}
-          className="object-cover border border-gray-400 rounded-sm"
-        />
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={100}
-          height={100}
-          className="object-cover border border-gray-400 rounded-sm"
-        />
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={100}
-          height={100}
-          className="object-cover border border-gray-400 rounded-sm"
-        />
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={100}
-          height={100}
-          className="object-cover border border-gray-400 rounded-sm"
-        />
-      </section>
+      <MiniImagesSection imageUrl={imageUrl} name={name} />
 
       <div className="w-full lg:max-w-[40%] bg-[#f0f0f0] grid place-items-center rounded-sm overflow-hidden">
         <Image
