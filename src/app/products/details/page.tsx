@@ -2,8 +2,8 @@ import Image from "next/image";
 
 import { Wrapper } from "@components/Wrapper";
 import ProductDetailsButtons from "@components/DetailsPage/ProductDetailsButtons";
-import Categories from "./_components/categories";
 import ProdOptions from "./_components/ProdOptions";
+import Categories from "./_components/Categories";
 
 import { formatPrice } from "@lib/utils";
 
@@ -113,8 +113,6 @@ export default async function DetailsPage({
               )}
             </p>
           </div>
-
-          <p className="font-semibold mt-4">Choose size:</p>
 
           <ProdOptions categoryOptions={categoryOptions} />
 

@@ -18,22 +18,26 @@ export default function ProdOptions({
   const [selectedOption, setSelectedOption] = useState<Number>();
 
   return (
-    <div className="flex gap-2 mb-4">
-      {categoryOptions.map((size) => (
-        <button
-          key={size.id}
-          onClick={() => setSelectedOption(size.id)}
-          className={clsx(
-            {
-              "border-black bg-black text-white font-semibold":
-                size.id === selectedOption,
-            },
-            "w-7 h-7 text-xs uppercase grid place-items-center rounded-md border border-gray-200"
-          )}
-        >
-          {size.option}
-        </button>
-      ))}
-    </div>
+    <>
+      <p className="font-semibold mt-4">Choose size:</p>
+
+      <div className="flex gap-2 mb-4">
+        {categoryOptions.map((size) => (
+          <button
+            key={size.id}
+            onClick={() => setSelectedOption(size.id)}
+            className={clsx(
+              {
+                "border-black bg-black text-white font-semibold":
+                  size.id === selectedOption,
+              },
+              "w-7 h-7 text-xs uppercase grid place-items-center rounded-md border border-gray-200"
+            )}
+          >
+            {size.option}
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
