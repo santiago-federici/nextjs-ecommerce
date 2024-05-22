@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Wrapper } from "@components/Wrapper";
-import ProductDetailsButtons from "@components/DetailsPage/ProductDetailsButtons";
+import ProductDetailsButtons from "./_components/ProductDetailsButtons";
 import ProdOptions from "./_components/ProdOptions";
 import Categories from "./_components/Categories";
 
