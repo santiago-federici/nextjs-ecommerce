@@ -21,6 +21,7 @@ export const carts = sqliteTable(
     updatedAt: text("updated_at")
       .default(sql`(current_timestamp)`)
       .notNull(),
+    // session_id: text("session_id").notNull(),
   },
   (table) => ({
     unq: unique().on(table.productId, table.userId),
