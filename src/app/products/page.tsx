@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { Wrapper } from "@components/Wrapper";
-import { SortDropdown } from "@components/ProductsPage/SortDropdown";
-import { FiltersComponent } from "@components/ProductsPage/FiltersComponent";
+import { SortDropdown } from "./_components/SortDropdown";
+import { FiltersComponent } from "./_components/FiltersComponent";
 import { Card } from "@components/Card";
 
 import { ArrowRight } from "@components/Icons";
