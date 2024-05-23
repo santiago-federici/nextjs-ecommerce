@@ -51,3 +51,14 @@ export const formatPrice = (price: number) => {
 //     totalPages,
 //   ];
 // };
+
+export function generateRandomString(bytes: number) {
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    const crypto = require("crypto");
+    return crypto.randomBytes(bytes).toString("hex");
+  }
+
+  const array = new Uint8Array(bytes);
+  crypto.getRandomValues(array);
+  return Array.from(array, (x) => ("00" + x.toString(16)).slice(-2)).join("");
+}
