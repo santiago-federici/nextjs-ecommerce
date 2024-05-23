@@ -4,8 +4,8 @@ import { and, eq } from "drizzle-orm";
 
 export async function increaseQuantity(
   prodId: number,
-  stock: number,
-  userId: number
+  userId: string,
+  stock: number
 ) {
   "use server";
 
@@ -21,8 +21,10 @@ export async function increaseQuantity(
         .update(carts)
         .set({ quantity: cart[0].quantity + 1 })
         .where(and(eq(carts.productId, prodId), eq(carts.userId, userId)));
+      return { update: "Product quantity updated" };
+    } else {
+      return { warning: "Stock limit reached" };
     }
-    return { warning: "Stock limit reached" };
   }
 
   if (stock > 0) {
@@ -34,7 +36,7 @@ export async function increaseQuantity(
   return { error: "This product is out of stock" };
 }
 
-export async function decreaseQuantity(prodId: number, userId: number) {
+export async function decreaseQuantity(prodId: number, userId: string) {
   "use server";
 
   const cart = await db
@@ -55,15 +57,15 @@ export async function decreaseQuantity(prodId: number, userId: number) {
   }
 }
 
-export async function removeProd(prodId: number, userId: number) {
+export async function removeProd(prodId: number, userId: string) {
   await db
     .delete(carts)
     .where(and(eq(carts.productId, prodId), eq(carts.userId, userId)));
   return { success: "Product removed from cart" };
 }
 
-export async function clearCart(id: number) {
-  const cart = await db.delete(carts).where(eq(carts.userId, id));
+export async function clearCart(userId: string) {
+  const cart = await db.delete(carts).where(eq(carts.userId, userId));
   console.log(cart);
   return { success: "Cart cleared" };
 }

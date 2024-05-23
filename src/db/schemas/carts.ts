@@ -8,7 +8,7 @@ export const carts = sqliteTable(
   "carts",
   {
     id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-    userId: integer("user_id", { mode: "number" })
+    userId: text("user_id")
       .references(() => users.id)
       .notNull(),
     productId: integer("product_id", { mode: "number" })

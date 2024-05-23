@@ -5,7 +5,7 @@ import { users } from "./users";
 
 export const orders = sqliteTable("orders", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  userId: integer("user_id", { mode: "number" })
+  userId: text("user_id")
     .references(() => users.id)
     .notNull(),
   status: text("status", {

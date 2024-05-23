@@ -9,7 +9,7 @@ export default function AddToCartButton({
   stock,
 }: {
   prodId: number;
-  userId: number;
+  userId?: string;
   stock: number;
 }) {
   const handleAddToCart = async () => {
@@ -27,7 +27,7 @@ export default function AddToCartButton({
       const data = await res.json();
 
       if (data.warning) {
-        toast.warning(data.warninig);
+        toast.warning(data.warning);
       }
       if (data.success) {
         toast.success(data.success);

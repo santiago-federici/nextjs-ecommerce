@@ -137,7 +137,7 @@ export default async function DetailsPage({
             </Button>
             <AddToCartButton
               prodId={Number(searchParams.id)}
-              userId={Number(user?.id)}
+              userId={user?.id}
               stock={stock}
             />
           </div>
