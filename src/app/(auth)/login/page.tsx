@@ -38,7 +38,7 @@ export default function LoginPage() {
 
   return (
     <Wrapper className="grid place-items-center mt-14">
-      <div className="grid place-items-center w-full max-w-xl h-fit p-6 bg-white rounded-md shadow-lg">
+      <div className="grid place-items-center w-full max-w-xl h-fit p-6 bg-white rounded-md shadow-lg border border-gray-200">
         <h1 className="font-bold text-3xl mb-4 uppercase">{pageInfo.title}</h1>
 
         <LogoSVG width="150" height="150" />
