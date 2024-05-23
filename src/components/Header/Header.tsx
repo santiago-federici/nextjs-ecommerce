@@ -9,7 +9,9 @@ import { LogoSVG } from "@components/Icons";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 import { db } from "@db";
+import { eq } from "drizzle-orm";
 import { products } from "@db/schemas/products";
+import { users } from "@db/schemas/users";
 
 const headerInfo = {
   logo: <LogoSVG />,
@@ -18,6 +20,17 @@ const headerInfo = {
 export async function Header() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  if (user && user !== null) {
+    const existingUser = await db
+      .select()
+      .from(users)
+      .where(eq(users.id, user.id));
+
+    if (existingUser.length <= 0) {
+      await db.insert(users).values({ id: user.id }).returning();
+    }
+  }
 
   // getting the prods from the database to use them in the cart. The import is here and not in the CartSheet or the CartCard component
   // because those are client components, and getting the prods from the DB requires async/await functions, which are not
