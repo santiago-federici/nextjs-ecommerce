@@ -31,7 +31,7 @@ export default function ProdOptions({
                 "border-black bg-black text-white font-semibold":
                   size.id === selectedOption,
               },
-              "w-7 h-7 text-xs uppercase grid place-items-center rounded-md border border-gray-200"
+              "w-7 h-7 text-xs uppercase grid place-items-center rounded-md border border-gray-200 transition duration-200"
             )}
           >
             {size.option}
