@@ -13,7 +13,7 @@ export default function AddToCartButton({
   userId?: string;
   stock: number;
 }) {
-  const { handleAddToCart } = useCart();
+  const { increaseQuantity } = useCart();
 
   return (
     <Button
@@ -21,7 +21,7 @@ export default function AddToCartButton({
       disabled={stock < 1}
       variant={"outline"}
       className="bg-[#fafafa] w-full"
-      onClick={() => handleAddToCart(prodId, userId as string, stock)}
+      onClick={() => increaseQuantity(prodId, userId as string, stock)}
     >
       Add to cart
     </Button>

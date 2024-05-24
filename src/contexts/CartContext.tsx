@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type CartContext = {
-  handleAddToCart: (prodId: number, userId: string, stock: number) => void;
+  increaseQuantity: (prodId: number, userId: string, stock: number) => void;
   decreaseQuantity: (id: number) => void;
   removeProd: (id: number) => void;
   clearCart: () => void;
@@ -40,7 +40,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     findUserCarts();
   }, []);
 
-  const increaseQuantity = (id: number, stock: number): any => {
+  const increaseQuantityLocal = (id: number, stock: number): any => {
     const indexOfProduct = cart.findIndex((item) => item.productId === id);
 
     if (indexOfProduct >= 0) {
@@ -91,12 +91,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const handleAddToCart = async (
+  const increaseQuantity = async (
     prodId: number,
     userId: string,
     stock: number
   ) => {
-    const localData = increaseQuantity(prodId, stock);
+    const localData = increaseQuantityLocal(prodId, stock);
     const dbData = await increaseQuantityDb(prodId, userId, stock);
 
     if (dbData.warning && localData.warning) {
@@ -139,7 +139,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return (
     <CartContext.Provider
       value={{
-        handleAddToCart,
+        increaseQuantity,
         removeProd,
         decreaseQuantity,
         clearCart,

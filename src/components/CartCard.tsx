@@ -24,7 +24,7 @@ export function CartCard({
   userId: string;
   quantity: number;
 }) {
-  const { handleAddToCart, decreaseQuantity, removeProd } = useCart();
+  const { increaseQuantity, decreaseQuantity, removeProd } = useCart();
 
   const prod = prods.find((prod: any) => prod.id === cartProdId);
 
@@ -61,7 +61,7 @@ export function CartCard({
               </span>
               <p className="text-lg">{quantity}</p>
               <span
-                onClick={() => handleAddToCart(prodId, userId, stock)}
+                onClick={() => increaseQuantity(prodId, userId, stock)}
                 className="cursor-pointer hover:text-custom-accent transition duration-200"
               >
                 <Plus />
