@@ -1,4 +1,4 @@
-import { decreaseQuantity } from "@lib/cartUtils";
+import { removeProd } from "@lib/cartUtils";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -12,10 +12,11 @@ export async function POST(request: Request) {
         });
       }
 
-      const response = await decreaseQuantity(prodId, userId);
+      const response = await removeProd(prodId, userId);
 
       return NextResponse.json(response);
     } catch (err) {
+      console.error("Error adding to cart:", err);
       return NextResponse.json({ error: "Failed to add to cart" });
     }
   } else {

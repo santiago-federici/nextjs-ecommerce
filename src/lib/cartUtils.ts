@@ -41,18 +41,22 @@ export async function decreaseQuantity(prodId: number, userId: string) {
     .select()
     .from(carts)
     .where(and(eq(carts.productId, prodId), eq(carts.userId, userId)));
+
   if (cart.length > 0) {
     if (cart[0].quantity > 1) {
       await db
         .update(carts)
         .set({ quantity: cart[0].quantity - 1 })
-        .where(eq(carts.productId, prodId));
+        .where(and(eq(carts.productId, prodId), eq(carts.userId, userId)));
+      return { update: "Product quantity updated" };
     }
 
     if (cart[0].quantity === 1) {
-      removeProd(prodId, userId);
+      return removeProd(prodId, userId);
     }
   }
+
+  return { error: "Product not found in the cart" };
 }
 
 export async function removeProd(prodId: number, userId: string) {
@@ -64,6 +68,6 @@ export async function removeProd(prodId: number, userId: string) {
 
 export async function clearCart(userId: string) {
   const cart = await db.delete(carts).where(eq(carts.userId, userId));
-  console.log(cart);
-  return { success: "Cart cleared" };
+  if (cart.rowsAffected > 0) return { success: "Cart cleared" };
+  return { error: "Failed to clear cart" };
 }

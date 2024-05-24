@@ -20,7 +20,7 @@ import { CartCard } from "@components/CartCard";
 import { BigCart, Cart } from "@components/Icons";
 
 export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
-  const { cart, cartQuantity } = useCart();
+  const { cart, cartQuantity, clearCart } = useCart();
 
   const pathname = usePathname();
 
@@ -35,7 +35,7 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
           <Cart />
         </SheetTrigger>
 
-        <SheetContent className="flex flex-col">
+        <SheetContent className="flex flex-col overflow-y-auto">
           <SheetHeader>
             <SheetTitle className="self-start">
               Cart ({cartQuantity})
@@ -43,8 +43,8 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
           </SheetHeader>
 
           {cart.length > 0 ? (
-            <section className="flex-grow flex-1">
-              <ul className="grid gap-4 mt-14">
+            <section className="flex flex-col flex-grow flex-1">
+              <ul className="flex flex-col gap-4 mt-14 flex-grow flex-1">
                 {cart.map((cartProd, index) => {
                   return (
                     <li key={index}>
@@ -59,14 +59,22 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
                 })}
               </ul>
 
-              <section>
-                <Separator className="my-8" />
+              <Button
+                variant={"secondary"}
+                className="mt-16 place-self-end"
+                onClick={() => clearCart(userId)}
+              >
+                Clear cart
+              </Button>
 
-                <div className="flex">
+              <section className="flex flex-col gap-2">
+                <Separator className="my-4" />
+
+                <div className="flex text-base">
                   <p className="flex-1">Shipping</p>
                   <p>$0</p>
                 </div>
-                <div className="flex">
+                <div className="flex text-base">
                   <p className="flex-1">Total</p>
                   <p>$0</p>
                 </div>
@@ -90,7 +98,7 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
             <SheetFooter>
               <SheetTrigger asChild className="w-full">
                 <Link href={"/checkout"}>
-                  <Button className="uppercase w-full">Checkout</Button>
+                  <Button className="uppercase w-full mt-4">Checkout</Button>
                 </Link>
               </SheetTrigger>
             </SheetFooter>
