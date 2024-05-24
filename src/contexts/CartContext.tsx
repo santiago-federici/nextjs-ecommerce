@@ -29,10 +29,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         const res = await fetch(
           "http://localhost:3000/api/cart/find-user-carts"
         );
-        const carts = await res.json();
-        if (carts.length > 0) {
-          setCart(carts);
+        const data = await res.json();
+        if (data.length > 0) {
+          setCart(data);
+          return;
         }
+        return console.log(data);
       } catch (err) {
         console.error(err);
       }
@@ -92,23 +94,23 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  interface IQDataProps {
+    success?: string;
+    warning?: string;
+    error?: string;
+  }
+
   const increaseQuantity = async (
     prodId: number,
     userId: string,
     stock: number
   ) => {
-    const localData = increaseQuantityLocal(prodId, stock);
-    const dbData = await increaseQuantityDb(prodId, userId, stock);
+    const localData: IQDataProps = increaseQuantityLocal(prodId, stock);
+    await increaseQuantityDb(prodId, userId, stock);
 
-    if (dbData.warning && localData.warning) {
-      toast.warning(localData.warning);
-    }
-    if (dbData.success && localData.success) {
-      toast.success(localData.success);
-    }
-    if (dbData.error && localData.error) {
-      toast.error(localData.error);
-    }
+    if (localData.warning) toast.warning(localData.warning);
+    if (localData.success) toast.success(localData.success);
+    if (localData.error) toast.error(localData.error);
   };
 
   const decreaseQuantityLocal = (prodId: number): any => {
@@ -150,11 +152,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const decreaseQuantity = async (prodId: number, userId: string) => {
     const localData = decreaseQuantityLocal(prodId);
-    const dbData = await decreaseQuantityDb(prodId, userId);
+    await decreaseQuantityDb(prodId, userId);
 
-    if (dbData.success && localData.success) {
-      return toast.success(localData.success);
-    }
+    if (localData.success) return toast.success(localData.success);
   };
 
   const removeProdLocal = (prodId: number): any => {
@@ -180,10 +180,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const removeProd = async (prodId: number, userId?: string) => {
     const localData = removeProdLocal(prodId);
-    const dbData = await removeProdDb(prodId, userId!);
-    if (dbData.success && localData.success) {
-      return toast.success(localData.success);
-    }
+    await removeProdDb(prodId, userId!);
+    if (localData.success) return toast.success(localData.success);
   };
 
   const clearCartLocal = () => {
@@ -208,8 +206,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
   const clearCart = async (userId: string) => {
     const localData = clearCartLocal();
-    const dbData = await clearCartDb(userId);
-    if (dbData.success && localData.success) toast.success(localData.success);
+    await clearCartDb(userId);
+    if (localData.success) toast.success(localData.success);
   };
 
   const cartQuantity = cart.length;
