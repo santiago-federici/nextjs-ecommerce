@@ -1,10 +1,8 @@
-import Image from "next/image";
-
 import { Wrapper } from "@components/Wrapper";
 import AddToCartButton from "./_components/AddToCartButton";
 import ProdOptions from "./_components/ProdOptions";
 import Categories from "./_components/Categories";
-import MiniImagesSection from "./_components/MiniImagesSection";
+import ProductImages from "./_components/ProductImages";
 
 import { formatPrice } from "@lib/utils";
 
@@ -62,17 +60,7 @@ export default async function DetailsPage({
     <Wrapper className="mt-6 grid lg:flex gap-2 lg:gap-6 lg:p-8 overflow-hidden bg-[#ffffff] rounded-md lg:border lg:border-gray-100 lg:shadow">
       <h2 className="lg:hidden font-semibold text-2xl mt-6 ml-2">{name}</h2>
 
-      <MiniImagesSection imageUrl={imageUrl} name={name} />
-
-      <div className="w-full lg:max-w-[40%] bg-[#f0f0f0] grid place-items-center rounded-sm overflow-hidden">
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={600}
-          height={600}
-          className="sm:max-lg:w-full md:max-h-[600px] object-contain"
-        />
-      </div>
+      <ProductImages imageUrl={imageUrl} name={name} />
 
       <section className="w-full grid xl:flex gap-6 text-base">
         <section className="w-full flex flex-col gap-4 p-2 ">
