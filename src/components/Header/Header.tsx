@@ -55,7 +55,7 @@ export async function Header() {
         <span className="flex gap-4 order-3">
           <ProfileDropdown user={user} />
 
-          <CartSheet prods={prods} />
+          <CartSheet prods={prods} userId={user?.id!} />
         </span>
       </Wrapper>
     </header>

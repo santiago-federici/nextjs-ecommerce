@@ -19,7 +19,7 @@ import { CartCard } from "@components/CartCard";
 
 import { BigCart, Cart } from "@components/Icons";
 
-export function CartSheet({ prods }: { prods: any }) {
+export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
   const { cart, cartQuantity } = useCart();
 
   const pathname = usePathname();
@@ -50,7 +50,8 @@ export function CartSheet({ prods }: { prods: any }) {
                     <li key={index}>
                       <CartCard
                         prods={prods}
-                        cartProdId={cartProd.id}
+                        cartProdId={cartProd.productId}
+                        userId={userId}
                         quantity={cartProd.quantity}
                       />
                     </li>

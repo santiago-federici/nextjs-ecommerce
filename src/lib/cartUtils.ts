@@ -14,7 +14,6 @@ export async function increaseQuantity(
     .from(carts)
     .where(and(eq(carts.productId, prodId), eq(carts.userId, userId)));
 
-  // This means the product is already in the cart
   if (cart.length > 0) {
     if (cart[0].quantity < stock) {
       await db
@@ -28,7 +27,6 @@ export async function increaseQuantity(
   }
 
   if (stock > 0) {
-    // TODO: get the actual userId
     await db.insert(carts).values({ userId, productId: prodId, quantity: 1 });
     return { success: "Added to cart" };
   }

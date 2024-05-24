@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 import { toast } from "sonner";
 
 type CartContext = {
-  increaseQuantity: (id: number, stock: number) => void;
+  handleAddToCart: (prodId: number, userId: string, stock: number) => void;
   decreaseQuantity: (id: number) => void;
   removeProd: (id: number) => void;
   clearCart: () => void;
@@ -14,7 +14,7 @@ type CartContext = {
 };
 
 type CartItem = {
-  id: number;
+  productId: number;
   quantity: number;
 };
 
@@ -23,8 +23,8 @@ export const CartContext = createContext({} as CartContext);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const increaseQuantity = (id: number, stock: number) => {
-    const indexOfProduct = cart.findIndex((item) => item.id === id);
+  const increaseQuantity = (id: number, stock: number): any => {
+    const indexOfProduct = cart.findIndex((item) => item.productId === id);
 
     if (indexOfProduct >= 0) {
       if (cart[indexOfProduct].quantity < stock) {
@@ -32,25 +32,69 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         newCart[indexOfProduct].quantity += 1;
         return setCart(newCart);
       }
-      return toast.warning("Stock limit reached for this product");
+
+      return { warning: "Stock limit reached" };
     }
 
     if (stock > 0) {
       setCart((prevState) => [
         ...prevState,
         {
-          id,
+          productId: id,
           quantity: 1,
         },
       ]);
-      return toast.success("Added to cart");
+      return { success: "Added to cart" };
     }
 
-    return toast.error("This product is out of stock");
+    return { error: "This product is out of stock" };
+  };
+
+  const increaseQuantityDb = async (
+    prodId: number,
+    userId: string,
+    stock: number
+  ) => {
+    try {
+      const res = await fetch(
+        "http://localhost:3000/api/cart/increase-quantity",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prodId, userId, stock }),
+        }
+      );
+      const data = await res.json();
+
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleAddToCart = async (
+    prodId: number,
+    userId: string,
+    stock: number
+  ) => {
+    const localData = increaseQuantity(prodId, stock);
+    const dbData = await increaseQuantityDb(prodId, userId, stock);
+
+    if (dbData.warning && localData.warning) {
+      toast.warning(localData.warning);
+    }
+    if (dbData.success && localData.success) {
+      toast.success(localData.success);
+    }
+    if (dbData.error && localData.error) {
+      toast.error(localData.error);
+    }
   };
 
   const decreaseQuantity = (id: number) => {
-    const indexOfProduct = cart.findIndex((item) => item.id === id);
+    const indexOfProduct = cart.findIndex((item) => item.productId === id);
     if (indexOfProduct >= 0) {
       const newCart = structuredClone(cart);
       if (newCart[indexOfProduct].quantity > 1) {
@@ -64,7 +108,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const removeProd = (id: number) => {
-    const newCart = cart.filter((item) => item.id !== id);
+    const newCart = cart.filter((item) => item.productId !== id);
     setCart(newCart);
     toast.error("Product removed from cart");
   };
@@ -78,7 +122,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   return (
     <CartContext.Provider
       value={{
-        increaseQuantity,
+        handleAddToCart,
         removeProd,
         decreaseQuantity,
         clearCart,

@@ -2,6 +2,7 @@
 
 import { Button } from "@components/ui/button";
 import { toast } from "sonner";
+import { useCart } from "@hooks/useCart";
 
 export default function AddToCartButton({
   prodId,
@@ -12,33 +13,7 @@ export default function AddToCartButton({
   userId?: string;
   stock: number;
 }) {
-  const handleAddToCart = async () => {
-    try {
-      const res = await fetch(
-        "http://localhost:3000/api/cart/increase-quantity",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ prodId, userId, stock }),
-        }
-      );
-      const data = await res.json();
-
-      if (data.warning) {
-        toast.warning(data.warning);
-      }
-      if (data.success) {
-        toast.success(data.success);
-      }
-      if (data.error) {
-        toast.error(data.error);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const { handleAddToCart } = useCart();
 
   return (
     <Button
@@ -46,7 +21,7 @@ export default function AddToCartButton({
       disabled={stock < 1}
       variant={"outline"}
       className="bg-[#fafafa] w-full"
-      onClick={handleAddToCart}
+      onClick={() => handleAddToCart(prodId, userId as string, stock)}
     >
       Add to cart
     </Button>

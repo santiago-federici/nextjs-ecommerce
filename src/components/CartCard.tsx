@@ -16,21 +16,21 @@ interface ProdProps {
 export function CartCard({
   prods,
   cartProdId,
+  userId,
   quantity,
 }: {
   prods: ProdProps[];
   cartProdId: number;
+  userId: string;
   quantity: number;
 }) {
-  const { increaseQuantity, decreaseQuantity, removeProd } = useCart();
+  const { handleAddToCart, decreaseQuantity, removeProd } = useCart();
 
   const prod = prods.find((prod: any) => prod.id === cartProdId);
 
-  // The ! operator is the non-null assertion operator in TypeScript.
-  // It tells the TypeScript compiler that you are certain that prod is not null or undefined at this point in the code.
-  // This is used to bypass TypeScript's strict null checks and avoid compile-time errors related to potential null or undefined values.
-  // If there's any problems at this point, I should create a function to handle null or undefined values. e.g. if (!prod) { ...do something }
-  const { name, imageUrl, price, offerPercentage, stock } = prod!;
+  if (!prod) return <div>Product not found</div>;
+
+  const { id: prodId, name, imageUrl, price, offerPercentage, stock } = prod;
 
   return (
     prod && (
@@ -54,14 +54,14 @@ export function CartCard({
           <div className="flex  items-center justify-between">
             <div className="flex items-center gap-2">
               <span
-                onClick={() => decreaseQuantity(cartProdId)}
+                onClick={() => decreaseQuantity(prodId)}
                 className="cursor-pointer hover:text-custom-accent transition duration-200"
               >
                 <Minus />
               </span>
               <p className="text-lg">{quantity}</p>
               <span
-                onClick={() => increaseQuantity(cartProdId, stock)}
+                onClick={() => handleAddToCart(prodId, userId, stock)}
                 className="cursor-pointer hover:text-custom-accent transition duration-200"
               >
                 <Plus />
@@ -69,7 +69,7 @@ export function CartCard({
             </div>
 
             <span
-              onClick={() => removeProd(cartProdId)}
+              onClick={() => removeProd(prodId)}
               className="cursor-pointer hover:text-custom-accent transition duration-200"
             >
               <Trash />
