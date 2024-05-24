@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 type CartContext = {
@@ -22,6 +22,23 @@ export const CartContext = createContext({} as CartContext);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    const findUserCarts = async () => {
+      try {
+        const res = await fetch(
+          "http://localhost:3000/api/cart/find-user-carts"
+        );
+        const carts = await res.json();
+        if (carts.length > 0) {
+          setCart(carts);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    findUserCarts();
+  }, []);
 
   const increaseQuantity = (id: number, stock: number): any => {
     const indexOfProduct = cart.findIndex((item) => item.productId === id);
