@@ -1,8 +1,17 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+import { Card } from "@components/Card";
+
 import { db } from "@db";
 import { eq } from "drizzle-orm";
 import { productCategories } from "@db/schemas/productsCategories";
 import { products } from "@db/schemas/products";
-import { Card } from "@components/Card";
 
 export default async function RelatedProductsSection({
   productCategory,
@@ -34,14 +43,25 @@ export default async function RelatedProductsSection({
   const finalRelatedProds = relatedProds.filter((prod) => prod.id !== prodId);
 
   return (
-    <section className="grid gap-4 w-full">
-      <h3 className="text-2xl">Related Products</h3>
-
-      <article className="flex gap-4">
+    <Carousel
+      opts={{
+        align: "start",
+      }}
+    >
+      <CarouselContent className="flex items-stretch">
         {finalRelatedProds.map((prod, index) => (
-          <Card key={index} prod={prod} />
+          <CarouselItem
+            key={index}
+            className="basis-[40%] md:basis-[30%] lg:basis-[29%] xl:basis-[25%]"
+          >
+            <Card prod={prod} />
+          </CarouselItem>
         ))}
-      </article>
-    </section>
+      </CarouselContent>
+      {/* <CarouselPrevious className="ml-12 -mt-8 lg:m-0" /> */}
+      <CarouselPrevious />
+      {/* <CarouselNext className="mr-12 -mt-8 lg:m-0" /> */}
+      <CarouselNext />
+    </Carousel>
   );
 }
