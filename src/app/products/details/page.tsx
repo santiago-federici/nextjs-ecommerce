@@ -81,7 +81,7 @@ export default async function DetailsPage({
     .where(eq(productCategories.productId, id));
 
   return (
-    <Wrapper className="lg:p-8 overflow-hidden bg-[#ffffff] rounded-md lg:border lg:border-gray-100 lg:shadow">
+    <Wrapper className="lg:py-8 px-16 overflow-hidden bg-[#ffffff] rounded-md lg:border lg:border-gray-100 lg:shadow">
       <div className="mt-6 grid lg:flex gap-2 lg:gap-6">
         <h2 className="lg:hidden font-semibold text-2xl mt-6 ml-2">{name}</h2>
 
@@ -169,6 +169,8 @@ export default async function DetailsPage({
           {description}. {description}. {description}
         </span>
       </section>
+
+      <Separator className="mt-12 mb-8" />
 
       <RelatedProductsSection productCategory={productCategory} prodId={id} />
 

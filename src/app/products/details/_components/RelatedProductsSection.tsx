@@ -34,7 +34,7 @@ export default async function RelatedProductsSection({
   const finalRelatedProds = relatedProds.filter((prod) => prod.id !== prodId);
 
   return (
-    <section className="grid gap-4 mt-4 w-full">
+    <section className="grid gap-4 w-full">
       <h3 className="text-2xl">Related Products</h3>
 
       <article className="flex gap-4">
