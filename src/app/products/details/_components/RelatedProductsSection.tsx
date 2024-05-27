@@ -13,6 +13,16 @@ import { eq } from "drizzle-orm";
 import { productCategories } from "@db/schemas/productsCategories";
 import { products } from "@db/schemas/products";
 
+interface ProdProps {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+  offerPercentage: number;
+  stock: number;
+  createdAt: string;
+}
+
 export default async function RelatedProductsSection({
   productCategory,
   prodId,
@@ -29,7 +39,7 @@ export default async function RelatedProductsSection({
     relatedProdsIds.push(relatedProdId);
   }
 
-  const relatedProds = [];
+  const relatedProds: ProdProps[] = [];
   for (const item of relatedProdsIds) {
     for (const prodId of item) {
       const relatedProd = await db
@@ -40,7 +50,18 @@ export default async function RelatedProductsSection({
     }
   }
 
-  const finalRelatedProds = relatedProds.filter((prod) => prod.id !== prodId);
+  const finalRelatedProds: ProdProps[] = relatedProds.filter(
+    (prod) => prod.id !== prodId
+  );
+
+  const uniqueProducts: ProdProps[] = Object.values(
+    finalRelatedProds.reduce((acc: any, product: ProdProps) => {
+      acc[product.id] = product;
+      return acc;
+    }, {})
+  );
+
+  console.log(uniqueProducts);
 
   return (
     <Carousel
@@ -49,7 +70,7 @@ export default async function RelatedProductsSection({
       }}
     >
       <CarouselContent className="flex items-stretch">
-        {finalRelatedProds.map((prod, index) => (
+        {uniqueProducts.map((prod: ProdProps, index) => (
           <CarouselItem
             key={index}
             className="basis-[40%] md:basis-[30%] lg:basis-[29%] xl:basis-[25%]"
@@ -58,9 +79,7 @@ export default async function RelatedProductsSection({
           </CarouselItem>
         ))}
       </CarouselContent>
-      {/* <CarouselPrevious className="ml-12 -mt-8 lg:m-0" /> */}
       <CarouselPrevious />
-      {/* <CarouselNext className="mr-12 -mt-8 lg:m-0" /> */}
       <CarouselNext />
     </Carousel>
   );
