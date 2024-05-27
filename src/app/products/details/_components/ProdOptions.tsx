@@ -4,16 +4,16 @@ import { useState } from "react";
 
 import clsx from "clsx";
 
-interface CategoryOptionsProps {
+interface ProductOptionsProps {
   id: number;
   option: string;
   productId: number;
 }
 
 export default function ProdOptions({
-  categoryOptions,
+  productOptions,
 }: {
-  categoryOptions: CategoryOptionsProps[];
+  productOptions: ProductOptionsProps[];
 }) {
   const [selectedOption, setSelectedOption] = useState<Number>();
 
@@ -22,7 +22,7 @@ export default function ProdOptions({
       <p className="font-semibold mt-4">Choose size:</p>
 
       <div className="flex gap-2 mb-4">
-        {categoryOptions.map((size) => (
+        {productOptions.map((size) => (
           <button
             key={size.id}
             onClick={() => setSelectedOption(size.id)}

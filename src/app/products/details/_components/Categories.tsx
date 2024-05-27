@@ -3,13 +3,11 @@ import { categories } from "@db/schemas/categories";
 import { productCategories } from "@db/schemas/productsCategories";
 import { eq } from "drizzle-orm";
 
-export default async function Categories({ prodId }: { prodId: number }) {
-  // Getting the category (or categories) related to the product. This is used to get the categories NAMES.
-  const productCategory = await db
-    .select({ categoryId: productCategories.categoryId })
-    .from(productCategories)
-    .where(eq(productCategories.productId, prodId));
-
+export default async function Categories({
+  productCategory,
+}: {
+  productCategory: any;
+}) {
   // Getting the NAME of the category (or categories) related to the product
   const categoryNames = [];
   for (const item of productCategory) {
