@@ -1,9 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { formatPrice } from "@lib/utils";
-
-import clsx from "clsx";
 
 interface ProdProps {
   id: number;
@@ -20,35 +17,15 @@ export function Card({ prod }: { prod: ProdProps }) {
 
   return (
     prod && (
-      <Link href={"/products/details?id=" + id.toString()}>
-        <article className="rounded-sm overflow-hidden cursor-pointer">
-          <div className="relative h-48 md:h-72 lg:h-96">
-            <Image
-              src={imageUrl}
-              alt={name}
-              fill
-              sizes="w-full h-full"
-              priority
-              className={
-                (clsx({
-                  "blur-[2px]": stock <= 0,
-                }),
-                "object-cover")
-              }
-            />
-          </div>
+      <article className="max-w-sm overflow-hidden cursor-pointer">
+        <Link href={"/products/details?id=" + id.toString()}>
+          <img className="rounded-sm" src={imageUrl} alt={name} />
 
           <div className="py-2 px-1 grid h-fit place-content-start">
             {stock <= 0 && (
               <p className="text-base text-orange-600 font-medium">
                 Out of stock
               </p>
-            )}
-
-            {stock > 0 && offerPercentage > 0 && (
-              <span className="text-sm text-green-600 font-medium">
-                {offerPercentage}% OFF
-              </span>
             )}
 
             <h3 className="text-base lg:text-lg font-medium text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
@@ -66,9 +43,14 @@ export function Card({ prod }: { prod: ProdProps }) {
                 {formatPrice(price - (price * offerPercentage) / 100)}
               </p>
             </div>
+            {stock > 0 && offerPercentage > 0 && (
+              <span className="text-sm text-green-600 font-semibold">
+                {offerPercentage}% OFF
+              </span>
+            )}
           </div>
-        </article>
-      </Link>
+        </Link>
+      </article>
     )
   );
 }
