@@ -22,7 +22,7 @@ export function HeroSection() {
       <Link href={sectionInfo.btn.href}>
         <Button
           variant="outline"
-          className="relative bg-transparent text-white uppercase border border-white hero-btn-effect z-10 hover:bg-transparent"
+          className="relative overflow-hidden bg-transparent text-white uppercase border border-white hero-btn-effect z-10 hover:bg-transparent"
         >
           {sectionInfo.btn.text}
         </Button>
