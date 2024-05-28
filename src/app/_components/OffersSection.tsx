@@ -34,8 +34,8 @@ export async function OffersSection() {
   );
 
   return (
-    <Wrapper className="grid place-items-center gap-12 lg:gap-16 py-24 lg:py-32">
-      <h3 className="text-4xl lg:text-5xl uppercase offers-custom-underline hover:text-custom-accent">
+    <Wrapper className="w-full py-24 lg:py-32">
+      <h3 className="text-4xl lg:text-5xl uppercase offers-custom-underline hover:text-custom-accent text-center w-fit mx-auto mb-8">
         {sectionInfo.title}
       </h3>
 
@@ -44,30 +44,29 @@ export async function OffersSection() {
           align: "start",
           loop: true,
         }}
-        className="max-w-xs md:max-w-lg lg:max-w-full lg:w-9/12"
+        className="mx-auto md:max-w-[90%] lg:max-w-[70%]"
       >
-        <CarouselContent className="flex items-stretch">
+        <CarouselContent>
           {highestDiscounts.map((prod, index) => (
             <CarouselItem
               key={index}
               // this is taking care of the case when there are less than 4 products, so it doesn't look bad
               className={clsx({
-                "": highestDiscounts.length === 1,
-                "md:basis-1/2": highestDiscounts.length === 2,
-                "md:basis-1/2 lg:basis-1/3": highestDiscounts.length === 3,
-                "md:basis-1/2 lg:basis-1/4": highestDiscounts.length > 3,
+                "mx-auto md:max-w-[80%] custom-offers-basis":
+                  highestDiscounts.length <= 3,
+                "custom-basis": highestDiscounts.length > 3,
               })}
             >
               <Card prod={prod} />
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="ml-4" />
-        <CarouselNext className="mr-4" />
+        <CarouselPrevious className="ml-12 top-1/2 -translate-y-12 lg:m-0 lg:realtive" />
+        <CarouselNext className="mr-12 top-1/2 -translate-y-12 lg:m-0 lg:realtive" />
       </Carousel>
 
-      <Link href={sectionInfo.btn.href}>
-        <Button className="uppercase">{sectionInfo.btn.text}</Button>
+      <Link href={sectionInfo.btn.href} className="flex justify-center">
+        <Button className="uppercase mt-8">{sectionInfo.btn.text}</Button>
       </Link>
     </Wrapper>
   );

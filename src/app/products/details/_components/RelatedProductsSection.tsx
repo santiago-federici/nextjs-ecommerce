@@ -62,23 +62,23 @@ export default async function RelatedProductsSection({
   );
 
   return (
-    <Carousel
-      opts={{
-        align: "start",
-      }}
-    >
-      <CarouselContent className="flex items-stretch">
-        {uniqueProducts.map((prod: ProdProps, index) => (
-          <CarouselItem
-            key={index}
-            className="basis-[40%] md:basis-[30%] lg:basis-[29%] xl:basis-[25%]"
-          >
-            <Card prod={prod} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+    <>
+      <h3 className="mb-4">Related products</h3>
+      <Carousel
+        opts={{
+          align: "start",
+        }}
+      >
+        <CarouselContent>
+          {uniqueProducts.map((prod: ProdProps, index) => (
+            <CarouselItem key={index} className="custom-basis">
+              <Card prod={prod} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="ml-12 top-1/2 -translate-y-12 lg:m-0 lg:realtive" />
+        <CarouselNext className="mr-12 top-1/2 -translate-y-12 lg:m-0 lg:realtive" />
+      </Carousel>
+    </>
   );
 }

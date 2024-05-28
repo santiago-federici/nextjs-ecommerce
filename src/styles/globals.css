@@ -200,3 +200,35 @@ img {
   right: 0;
   transition: 500ms all ease-in-out;
 }
+
+.custom-basis {
+  flex-basis: 100%;
+}
+
+@media (width > 450px) {
+  .custom-basis {
+    flex-basis: 50%;
+  }
+}
+
+@media (width > 900px) {
+  .custom-basis {
+    flex-basis: 30%;
+  }
+}
+
+.custom-offers-basis {
+  flex-basis: 100%;
+}
+
+@media (width > 450px) {
+  .custom-offers-basis {
+    flex-basis: 50%;
+  }
+}
+
+@media (width > 900px) {
+  .custom-offers-basis {
+    flex-basis: 40%;
+  }
+}

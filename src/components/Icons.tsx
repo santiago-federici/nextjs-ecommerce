@@ -515,9 +515,10 @@ export function ArrowUp() {
   );
 }
 
-export function ArrowRight() {
+export function ArrowRight({ className }: { className?: string }) {
   return (
     <svg
+      className={className}
       width="20"
       height="20"
       viewBox="0 0 24 24"
