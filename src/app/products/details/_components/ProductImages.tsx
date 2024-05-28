@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import JordanJumpan from "../../../../../public/JordanJumpman.webp";
 import NikeSB from "../../../../../public/NikeSB.webp";
@@ -38,6 +38,12 @@ export default function ProductImages({
   ];
 
   const [mainImage, setMainImage] = useState(images[0]);
+
+  useEffect(() => {
+    console.log(imageUrl);
+    setMainImage(images[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageUrl]);
 
   const handleClickMiniImage = (index: number) => {
     setMainImage(images[index]);

@@ -61,8 +61,6 @@ export default async function RelatedProductsSection({
     }, {})
   );
 
-  console.log(uniqueProducts);
-
   return (
     <Carousel
       opts={{
