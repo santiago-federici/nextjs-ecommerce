@@ -4,6 +4,12 @@ export const initialState: State = {
   cart: [],
 };
 
+const updateToLocalStorage = (cart: any /* TODO fix type */) => {
+  // if (typeof window === "undefined") {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  // }
+};
+
 export const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
 
@@ -21,6 +27,7 @@ export const reducer = (state: State, action: Action): State => {
       if (cart[indexOfProduct].quantity < stock!) {
         const newState = structuredClone(cart);
         newState[indexOfProduct].quantity += 1;
+        updateToLocalStorage(newState);
         return { update: "Product quantity updated", cart: newState };
       }
 
@@ -35,6 +42,7 @@ export const reducer = (state: State, action: Action): State => {
           quantity: 1,
         },
       ];
+      updateToLocalStorage(newState);
       return { success: "Added to cart", cart: newState };
     }
 
@@ -51,11 +59,13 @@ export const reducer = (state: State, action: Action): State => {
 
       if (newState[indexOfProduct].quantity > 1) {
         newState[indexOfProduct].quantity -= 1;
+        updateToLocalStorage(newState);
         return { update: "Product quantity updated", cart: newState };
       }
 
       if (cart[indexOfProduct].quantity === 1) {
         const newState = cart.filter((item) => item.productId !== id);
+        updateToLocalStorage(newState);
         return { success: "Product removed from cart", cart: newState };
       }
     }
@@ -68,10 +78,12 @@ export const reducer = (state: State, action: Action): State => {
     const { cart } = state;
 
     const newState = cart.filter((item) => item.productId !== id);
+    updateToLocalStorage(newState);
     return { success: "Product removed from cart", cart: newState };
   }
 
   if (type === "CLEAR_CART") {
+    updateToLocalStorage(initialState.cart);
     return { success: "Cart cleared", cart: initialState.cart };
   }
 

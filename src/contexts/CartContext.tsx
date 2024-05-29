@@ -23,7 +23,7 @@ export const CartContext = createContext({} as CartContext);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [initialCart, setInitialCart] = useState<CartItem[] | null>(null);
-  
+
   const {
     state,
     initializeCart,
@@ -47,7 +47,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         if (data.length > 0) {
           return setInitialCart(data);
         }
-        setInitialCart([])
+        setInitialCart(JSON.parse(localStorage.getItem("cart")!) || []);
       } catch (err) {
         console.error(err);
       }

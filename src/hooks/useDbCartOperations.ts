@@ -11,7 +11,11 @@ export function useDbCartOperations() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ options }),
+        body: JSON.stringify({
+          prodId: options.prodId,
+          userId: options.userId,
+          stock: options.stock,
+        }),
       });
       const data = await res.json();
 
