@@ -58,7 +58,7 @@ export function Footer() {
             ))}
           </ul>
         </div>
-        <Separator className="my-6 lg:my-8" />
+        <Separator className="my-6 lg:my-8 bg-gray-500" />
         <span className="block text-sm text-gray-500 sm:text-center">
           © 2023{" "}
           <Link href="/" className="hover:underline">
