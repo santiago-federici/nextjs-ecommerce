@@ -8,8 +8,6 @@ export const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
 
   if (type === "INITIALIZE_CART") {
-    console.log(state);
-    console.log(payload);
     return { ...state, cart: payload!.cart!, success: "Cart initialized" };
   }
 

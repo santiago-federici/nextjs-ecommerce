@@ -40,7 +40,6 @@ export default function ProductImages({
   const [mainImage, setMainImage] = useState(images[0]);
 
   useEffect(() => {
-    console.log(imageUrl);
     setMainImage(images[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageUrl]);
