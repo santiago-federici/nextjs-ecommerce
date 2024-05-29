@@ -56,11 +56,7 @@ export const reducer = (state: State, action: Action): State => {
 
       if (cart[indexOfProduct].quantity === 1) {
         const newState = cart.filter((item) => item.productId !== id);
-        return {
-          ...state,
-          success: "Product removed from cart",
-          cart: newState,
-        };
+        return { success: "Product removed from cart", cart: newState };
       }
     }
 
