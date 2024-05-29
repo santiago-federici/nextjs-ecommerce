@@ -6,7 +6,13 @@ export async function POST(request: Request) {
     try {
       const { prodId, userId, stock } = await request.json();
 
-      if (!prodId || !userId || !stock) {
+      if (!userId) {
+        return NextResponse.json({
+          warning: "Cant save data to DB because user is not logged in",
+        });
+      }
+
+      if (!prodId || !stock) {
         return NextResponse.json({
           error: "Missing required fields",
         });

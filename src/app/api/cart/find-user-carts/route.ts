@@ -17,7 +17,7 @@ export async function GET(request: Request) {
       return NextResponse.json(userCarts);
     }
 
-    return NextResponse.json({ error: "User not found" });
+    return NextResponse.json({ warning: "User not found" });
   } else {
     NextResponse.json({ error: "Method not allowed" });
   }

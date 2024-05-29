@@ -8,7 +8,7 @@ export async function POST(request: Request) {
 
       if (!userId) {
         return NextResponse.json({
-          error: "Missing required fields",
+          warning: "Cant delete data from DB because user is not logged in",
         });
       }
 

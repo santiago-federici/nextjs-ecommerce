@@ -6,7 +6,13 @@ export async function POST(request: Request) {
     try {
       const { prodId, userId } = await request.json();
 
-      if (!prodId || !userId) {
+      if (!userId) {
+        return NextResponse.json({
+          warning: "Cant delete data from DB because user is not logged in",
+        });
+      }
+
+      if (!prodId) {
         return NextResponse.json({
           error: "Missing required fields",
         });
