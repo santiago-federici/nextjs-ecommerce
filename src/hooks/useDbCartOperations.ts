@@ -1,79 +1,48 @@
 export function useDbCartOperations() {
+  const API_URL = "http://localhost:3000/api/cart";
+
+  const apiFetch = async (
+    operationRoute: string,
+    options: { prodId?: number; userId?: string; stock?: number }
+  ) => {
+    try {
+      const res = await fetch(`${API_URL}/${operationRoute}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ options }),
+      });
+      const data = await res.json();
+
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const increaseQuantityDb = async (
     prodId: number,
     userId: string,
     stock: number
   ) => {
-    try {
-      const res = await fetch(
-        "http://localhost:3000/api/cart/increase-quantity",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ prodId, userId, stock }),
-        }
-      );
-      const data = await res.json();
-
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
+    const operationRoute = "increase-quantity";
+    return await apiFetch(operationRoute, { prodId, userId, stock });
   };
 
   const decreaseQuantityDb = async (prodId: number, userId: string) => {
-    try {
-      const res = await fetch(
-        "http://localhost:3000/api/cart/decrease-quantity",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ prodId, userId }),
-        }
-      );
-      const data = await res.json();
-
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
+    const operationRoute = "decrease-quantity";
+    return await apiFetch(operationRoute, { prodId, userId });
   };
 
   const removeProdDb = async (prodId: number, userId: string) => {
-    try {
-      const res = await fetch("http://localhost:3000/api/cart/remove-product", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prodId, userId }),
-      });
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
+    const operationRoute = "remove-product";
+    return await apiFetch(operationRoute, { prodId, userId });
   };
 
   const clearCartDb = async (userId: string) => {
-    try {
-      const res = await fetch("http://localhost:3000/api/cart/clear-cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId }),
-      });
-      const data = await res.json();
-
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
+    const operationRoute = "clear-cart";
+    return await apiFetch(operationRoute, { userId });
   };
 
   return {
