@@ -1,7 +1,9 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+
+import { usePathname } from "next/navigation";
+
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import {
@@ -13,21 +15,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Button } from "@components/ui/button";
+
 import { UserCircle } from "@components/Icons";
-import { buttonVariants } from "@components/ui/button";
 
-const noUserOptions = [
-  {
-    name: "Login",
-    link: "/login",
-  },
-  {
-    name: "Register",
-    link: "/register",
-  },
-];
-
-const userOptions = [
+const accountOptions = [
   {
     name: "Profile",
     link: "/profile",
@@ -51,46 +43,40 @@ export function ProfileDropdown({ user }: { user: any }) {
 
   return (
     <div className="hidden lg:flex">
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          className={`${
-            pathname === "/" ? "text-white" : "text-black"
-          } hover:scale-105 hover:opacity-70 transition duration-200`}
+      {user ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className={`${
+              pathname === "/" ? "text-white" : "text-black"
+            } hover:scale-105 hover:opacity-70 transition duration-200`}
+          >
+            <UserCircle />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="ml-4 lg:ml-0">
+            <DropdownMenuLabel>Account settings</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              {accountOptions.map((option: any, index: number) => (
+                <DropdownMenuItem key={index} className="cursor-pointer">
+                  <Link href={option.link}>{option.name}</Link>
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <LogoutLink className="text-red-500">Logout</LogoutLink>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <Button
+          asChild
+          variant={pathname === "/" ? "secondary" : "default"}
+          className="mr-2 uppercase hidden lg:flex"
         >
-          <UserCircle />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="ml-4 lg:ml-0">
-          <DropdownMenuLabel>Account settings</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            {!user ? (
-              noUserOptions.map((option: any, index: number) => (
-                <DropdownMenuItem key={index}>
-                  <Link
-                    href={option.link}
-                    className={`w-full ${buttonVariants({
-                      variant: "default",
-                    })}`}
-                  >
-                    {option.name}
-                  </Link>
-                </DropdownMenuItem>
-              ))
-            ) : (
-              <>
-                {userOptions.map((option: any, index: number) => (
-                  <DropdownMenuItem key={index} className="cursor-pointer">
-                    <Link href={option.link}>{option.name}</Link>
-                  </DropdownMenuItem>
-                ))}
-                <DropdownMenuItem>
-                  <LogoutLink className="text-red-500">Logout</LogoutLink>
-                </DropdownMenuItem>
-              </>
-            )}
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+          <Link href={"/register"}>Register</Link>
+        </Button>
+      )}
     </div>
   );
 }

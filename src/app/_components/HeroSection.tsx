@@ -19,14 +19,13 @@ export function HeroSection() {
         {sectionInfo.title}
       </h1>
 
-      <Link href={sectionInfo.btn.href}>
-        <Button
-          variant="outline"
-          className="relative overflow-hidden bg-transparent text-white uppercase border border-white hero-btn-effect z-10 hover:bg-transparent"
-        >
-          {sectionInfo.btn.text}
-        </Button>
-      </Link>
+      <Button
+        asChild
+        variant="outline"
+        className="relative overflow-hidden bg-transparent text-white uppercase border border-white hero-btn-effect z-10 hover:bg-transparent"
+      >
+        <Link href={sectionInfo.btn.href}>{sectionInfo.btn.text}</Link>
+      </Button>
     </Wrapper>
   );
 }

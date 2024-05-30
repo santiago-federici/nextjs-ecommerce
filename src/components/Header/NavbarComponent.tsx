@@ -14,9 +14,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { buttonVariants } from "@components/ui/button";
+import { Button, buttonVariants } from "@components/ui/button";
 
-import { About, Contact, Home, Menu, Products } from "@components/Icons";
+import {
+  About,
+  AccountSettings,
+  Contact,
+  Home,
+  Menu,
+  Products,
+} from "@components/Icons";
 
 const navLinks = [
   {
@@ -95,46 +102,54 @@ export function NavbarComponent({ user }: { user: any }) {
             </SheetHeader>
 
             <ul className="text-black flex flex-col gap-2 w-full mb-20">
-              {navLinks.map((link: any, index: number) => {
-                return (
-                  <div key={index}>
-                    <li className="transition duration-200">
-                      <SheetTrigger asChild>
-                        <Link
-                          href={link.href}
-                          className={clsx(
-                            "font-medium text-lg flex gap-2 cursor-pointer hover:bg-zinc-400 w-full pl-2 py-2 rounded-md transition duration-200 uppercase",
-                            {
-                              "bg-zinc-300": pathname === link.href,
-                            }
-                          )}
-                        >
-                          <span className="lg:hidden">{link.icon}</span>
-                          {link.title}
-                        </Link>
-                      </SheetTrigger>
-                    </li>
-                  </div>
-                );
-              })}
+              {navLinks.map((link: any, index: number) => (
+                <span key={index}>
+                  <SheetTrigger asChild>
+                    <Button
+                      asChild
+                      variant={"ghost"}
+                      className={`justify-start w-full ${
+                        pathname === link.href
+                          ? "bg-gray-100 hover:bg-gray-200"
+                          : ""
+                      }`}
+                    >
+                      <Link href={link.href} className="flex gap-2 uppercase">
+                        {link.icon}
+                        {link.title}
+                      </Link>
+                    </Button>
+                  </SheetTrigger>
+                </span>
+              ))}
+
+              {/* Settings button only rendering when user is logged in */}
+              {user && (
+                <Button
+                  asChild
+                  variant={"ghost"}
+                  className={`justify-start w-full ${
+                    pathname === "/user-settings"
+                      ? "bg-gray-100 hover:bg-gray-200"
+                      : ""
+                  }`}
+                >
+                  <Link href={"user-settings"} className="flex gap-2 uppercase">
+                    <AccountSettings /> Account settings
+                  </Link>
+                </Button>
+              )}
             </ul>
             <SheetFooter className="flex sm:flex-col gap-y-4 items-end flex-1 mb-8">
               {!user ? (
-                btnsInfo.map((link, index) => {
-                  return (
-                    <SheetTrigger key={index} asChild className="w-full">
-                      <Link
-                        href={link.href}
-                        className={`uppercase ${buttonVariants({
-                          variant:
-                            link.text === "Login" ? "outline" : "default",
-                        })}`}
-                      >
-                        {link.text}
-                      </Link>
-                    </SheetTrigger>
-                  );
-                })
+                <>
+                  <Button asChild variant={"default"} className="w-full">
+                    <Link href="/register">Register</Link>
+                  </Button>
+                  <Button asChild variant={"outline"} className="w-full">
+                    <Link href="/login">Login</Link>
+                  </Button>
+                </>
               ) : (
                 <SheetTrigger asChild className="w-full">
                   <LogoutLink
