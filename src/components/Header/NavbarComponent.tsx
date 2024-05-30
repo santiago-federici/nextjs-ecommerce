@@ -48,17 +48,6 @@ const navLinks = [
   },
 ];
 
-const btnsInfo = [
-  {
-    text: "Login",
-    href: "/login",
-  },
-  {
-    text: "Register",
-    href: "/register",
-  },
-];
-
 export function NavbarComponent({ user }: { user: any }) {
   const pathname = usePathname();
 
