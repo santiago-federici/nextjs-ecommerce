@@ -47,11 +47,14 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
               <section className="flex flex-col flex-grow flex-1">
                 <ul className="flex flex-col gap-4 mt-14 flex-grow flex-1">
                   {cart.map((cartProd, index) => {
+                    const prod = prods.find(
+                      (prod: any) => prod.id === cartProd.productId
+                    );
+
                     return (
                       <li key={index}>
                         <CartCard
-                          prods={prods}
-                          cartProdId={cartProd.productId}
+                          prod={prod}
                           userId={userId}
                           quantity={cartProd.quantity}
                         />

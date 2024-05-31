@@ -12,19 +12,15 @@ interface ProdProps {
 }
 
 export function CartCard({
-  prods,
-  cartProdId,
+  prod,
   userId,
   quantity,
 }: {
-  prods: ProdProps[];
-  cartProdId: number;
+  prod: ProdProps;
   userId: string;
   quantity: number;
 }) {
   const { removeProd } = useCart();
-
-  const prod = prods.find((prod: any) => prod.id === cartProdId);
 
   if (!prod) return <div>Product not found</div>;
 
