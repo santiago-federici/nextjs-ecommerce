@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { useCart } from "@hooks/useCart";
 
-import { Minus, Plus, Trash } from "./Icons";
 import { formatPrice } from "@lib/utils";
 
 interface ProdProps {
@@ -24,7 +22,7 @@ export function CartCard({
   userId: string;
   quantity: number;
 }) {
-  const { increaseQuantity, decreaseQuantity, removeProd } = useCart();
+  const { removeProd } = useCart();
 
   const prod = prods.find((prod: any) => prod.id === cartProdId);
 
@@ -35,45 +33,24 @@ export function CartCard({
   return (
     prod && (
       <article className="flex gap-4 w-full">
-        <Image
-          src={imageUrl}
-          alt={name}
-          width={128}
-          height={128}
-          className="w-32 h-32"
-        />
+        <img src={imageUrl} alt={name} className="w-32 h-32 rounded" />
 
-        <section className="py-2 flex flex-col gap-2 w-full">
+        <section className="py-1 flex flex-col gap-2 w-full">
           <div className="flex-1">
-            <h3 className="text-base md:text-lg">{name}</h3>
-            <p className="text-xl font-semibold">
+            <h3 className="text-lg">{name}</h3>
+            <p className="text-base font-medium">
               {formatPrice(price - price * (offerPercentage / 100))}
             </p>
           </div>
 
           <div className="flex  items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span
-                onClick={() => decreaseQuantity(prodId, userId)}
-                className="cursor-pointer hover:text-custom-accent transition duration-200"
-              >
-                <Minus />
-              </span>
-              <p className="text-lg">{quantity}</p>
-              <span
-                onClick={() => increaseQuantity(prodId, userId, stock)}
-                className="cursor-pointer hover:text-custom-accent transition duration-200"
-              >
-                <Plus />
-              </span>
-            </div>
-
-            <span
+            <p className="text-sm font-light">Qty: {quantity}</p>
+            <p
               onClick={() => removeProd(prodId, userId)}
-              className="cursor-pointer hover:text-custom-accent transition duration-200"
+              className="text-sm cursor-pointer text-custom-accent transition duration-200"
             >
-              <Trash />
-            </span>
+              Remove
+            </p>
           </div>
         </section>
       </article>

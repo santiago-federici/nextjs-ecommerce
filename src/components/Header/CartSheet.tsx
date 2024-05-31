@@ -38,71 +38,78 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
         <SheetContent className="flex flex-col overflow-y-auto">
           <SheetHeader>
             <SheetTitle className="self-start">
-              Cart ({cartQuantity})
+              Shopping cart ({cartQuantity})
             </SheetTitle>
           </SheetHeader>
 
           {cart.length > 0 ? (
-            <section className="flex flex-col flex-grow flex-1">
-              <ul className="flex flex-col gap-4 mt-14 flex-grow flex-1">
-                {cart.map((cartProd, index) => {
-                  return (
-                    <li key={index}>
-                      <CartCard
-                        prods={prods}
-                        cartProdId={cartProd.productId}
-                        userId={userId}
-                        quantity={cartProd.quantity}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
+            <>
+              <section className="flex flex-col flex-grow flex-1">
+                <ul className="flex flex-col gap-4 mt-14 flex-grow flex-1">
+                  {cart.map((cartProd, index) => {
+                    return (
+                      <li key={index}>
+                        <CartCard
+                          prods={prods}
+                          cartProdId={cartProd.productId}
+                          userId={userId}
+                          quantity={cartProd.quantity}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
 
-              <Button
-                variant={"secondary"}
-                className="mt-16 place-self-end"
-                onClick={() => clearCart(userId)}
-              >
-                Clear cart
-              </Button>
+                <Button
+                  variant={"ghost"}
+                  className="mt-16 place-self-end hover:bg-red-200 hover:text-red-900"
+                  onClick={() => clearCart(userId)}
+                >
+                  Clear cart
+                </Button>
 
-              <section className="flex flex-col gap-2">
-                <Separator className="my-4" />
-
-                <div className="flex text-base">
-                  <p className="flex-1">Shipping</p>
-                  <p>$0</p>
-                </div>
-                <div className="flex text-base">
-                  <p className="flex-1">Total</p>
-                  <p>$0</p>
-                </div>
+                <section className="flex flex-col gap-2">
+                  <Separator className="my-4" />
+                  <div className="flex text-base">
+                    <p className="flex-1">Subtotal</p>
+                    <p>$0</p>
+                  </div>
+                </section>
               </section>
-            </section>
+
+              <SheetFooter className="w-full">
+                <SheetTrigger className="w-full grid gap-2">
+                  <Button
+                    asChild
+                    className="uppercase w-full mt-4 bg-custom-accent hover:bg-pink-400"
+                  >
+                    <Link href={"/checkout"} className="font-semibold">
+                      Checkout
+                    </Link>
+                  </Button>
+                  <div className="flex gap-2 text-sm items-center justify-center">
+                    or{" "}
+                    <Link
+                      href="/products"
+                      className="text-custom-accent hover:underline underline-offset-2"
+                    >
+                      Continue shopping
+                    </Link>
+                  </div>
+                </SheetTrigger>
+              </SheetFooter>
+            </>
           ) : (
             <section className="flex flex-col items-center mt-20 flex-1">
               <BigCart />
-              <p className="text-2xl md:text-3xl font-bold my-4">
-                Your cart is empty!
-              </p>
+              <p className="text-2xl font-semibold mb-8">Your cart is empty!</p>
               <SheetTrigger asChild>
-                <Link href={"/products"}>
-                  <Button className="uppercase">Shop now</Button>
-                </Link>
+                <Button asChild variant={"secondary"} className="uppercase">
+                  <Link href={"/products"}>See products</Link>
+                </Button>
               </SheetTrigger>
             </section>
           )}
-
-          {cart.length > 0 ? (
-            <SheetFooter>
-              <SheetTrigger asChild className="w-full">
-                <Link href={"/checkout"}>
-                  <Button className="uppercase w-full mt-4">Checkout</Button>
-                </Link>
-              </SheetTrigger>
-            </SheetFooter>
-          ) : null}
         </SheetContent>
       </Sheet>
 
