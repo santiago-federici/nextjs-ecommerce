@@ -92,24 +92,22 @@ export function NavbarComponent({ user }: { user: any }) {
 
             <ul className="text-black flex flex-col gap-2 w-full mb-20">
               {navLinks.map((link: any, index: number) => (
-                <span key={index}>
-                  <SheetTrigger asChild>
-                    <Button
-                      asChild
-                      variant={"ghost"}
-                      className={`justify-start w-full ${
-                        pathname === link.href
-                          ? "bg-gray-100 hover:bg-gray-200"
-                          : ""
-                      }`}
-                    >
-                      <Link href={link.href} className="flex gap-2 uppercase">
-                        {link.icon}
-                        {link.title}
-                      </Link>
-                    </Button>
-                  </SheetTrigger>
-                </span>
+                <SheetTrigger key={index} asChild>
+                  <Button
+                    asChild
+                    variant={"ghost"}
+                    className={`justify-start w-full ${
+                      pathname === link.href
+                        ? "bg-gray-100 hover:bg-gray-200"
+                        : ""
+                    }`}
+                  >
+                    <Link href={link.href} className="flex gap-2 uppercase">
+                      {link.icon}
+                      {link.title}
+                    </Link>
+                  </Button>
+                </SheetTrigger>
               ))}
 
               {/* Settings button only rendering when user is logged in */}
@@ -129,7 +127,11 @@ export function NavbarComponent({ user }: { user: any }) {
                 </Button>
               )}
             </ul>
-            <SheetFooter className="flex sm:flex-col gap-y-4 items-end flex-1 mb-8">
+            <SheetFooter
+              className={`flex sm:flex-col gap-y-4 ${
+                user ? "items-start" : "items-end"
+              } flex-1 mb-8`}
+            >
               {!user ? (
                 <>
                   <Button asChild variant={"default"} className="w-full">
@@ -140,15 +142,13 @@ export function NavbarComponent({ user }: { user: any }) {
                   </Button>
                 </>
               ) : (
-                <SheetTrigger asChild className="w-full">
-                  <LogoutLink
-                    className={`${buttonVariants({
-                      variant: "outline",
-                    })} hover:bg-red-200 hover:text-red-950 hover:border-red-300`}
-                  >
-                    Logout
-                  </LogoutLink>
-                </SheetTrigger>
+                <LogoutLink
+                  className={buttonVariants({
+                    variant: "link",
+                  })}
+                >
+                  Logout
+                </LogoutLink>
               )}
             </SheetFooter>
           </SheetContent>
