@@ -14,12 +14,16 @@ export default function CheckoutProds({ prods }: { prods: any }) {
         <section className="flex-grow flex-1">
           <ul className="grid gap-4 mt-14">
             {cart.map((cartProd, index) => {
+              const prod = prods.find(
+                (prod: any) => prod.id === cartProd.productId
+              );
+              
               return (
                 <li key={index}>
                   <CartCard
-                    prods={prods}
-                    cartProdId={cartProd.id}
+                    prod={prod}
                     quantity={cartProd.quantity}
+                    userId={"false"}
                   />
                 </li>
               );
