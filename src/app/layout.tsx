@@ -8,6 +8,7 @@ import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer";
 
 import "@styles/globals.css";
+import { WixClientProvider } from "@contexts/WixContext";
 
 const onest = Onest({
   subsets: ["latin"],
@@ -34,11 +35,13 @@ export default function RootLayout({
     <html lang="en" className="bg-surface">
       <body className={`${onest.variable} ${workSans.variable}`}>
         <CartProvider>
-          <Header />
-          <main className="realtive flex flex-col min-h-screen w-full">
-            {children}
-          </main>
-          <Footer />
+          <WixClientProvider>
+            <Header />
+            <main className="realtive flex flex-col min-h-screen w-full">
+              {children}
+            </main>
+            <Footer />
+          </WixClientProvider>
         </CartProvider>
       </body>
     </html>
