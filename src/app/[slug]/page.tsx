@@ -13,6 +13,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Toaster } from "sonner";
 import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
+import { Minus, Plus } from "@components/Icons";
 
 interface ProdProps {
   id: number;
@@ -83,7 +84,7 @@ export default async function DetailsPage({
                   <p className="text-sm text-gray-500 line-through mt-1">
                     {formattedPrice}
                   </p>
-                  <p className="text-gray-900 text-base font-semibold">
+                  <p className="text-gray-900 text-lg font-semibold">
                     {formattedDiscountedPrice}
                   </p>
                   <span className="text-sm text-green-600 font-semibold">
@@ -91,18 +92,11 @@ export default async function DetailsPage({
                   </span>
                 </div>
               ) : (
-                <p className="text-gray-900 text-base font-semibold">
+                <p className="text-gray-900 text-lg font-semibold">
                   {formattedPrice}
                 </p>
               )}
             </div>
-
-            {variants && productOptions && (
-              <ProdOptions
-                variants={variants}
-                productOptions={productOptions}
-              />
-            )}
 
             <p>
               {/* TODO: rich text */}
@@ -120,22 +114,12 @@ export default async function DetailsPage({
               <p className="text-green-500 font-semibold">Free shipping</p>
             </div>
 
-            <div className="grid gap-1">
-              <p className="font-semibold text-lg">Available stock</p>
-              <p>
-                Stored and sent by{" "}
-                <span className="uppercase text-green-500 italic font-bold">
-                  Full
-                </span>
-              </p>
-            </div>
-
             {stock?.inStock === true ? (
-              <p>
-                Quantity: <span className="font-semibold">1</span>{" "}
-                <span className="text-gray-400">
+              <p className="font-semibold text-lg flex items-center">
+                Available stock
+                <p className="ml-1 text-gray-400 text-sm">
                   ({stock?.quantity} available)
-                </span>
+                </p>
               </p>
             ) : (
               <p className="text-base text-orange-600 font-medium">
@@ -143,13 +127,29 @@ export default async function DetailsPage({
               </p>
             )}
 
-            <div className="grid gap-1">
-              {stock?.quantity === 1 && (
-                <p className="mb-2 text-gray-400 text-sm">
-                  Last unit available
-                </p>
-              )}
+            {variants && productOptions && (
+              <ProdOptions
+                variants={variants}
+                productOptions={productOptions}
+              />
+            )}
 
+            {stock?.inStock === true && (
+              <div className="flex gap-2">
+                <p>Quantity:</p>
+                <div className="flex gap-2">
+                  <button>
+                    <Minus />
+                  </button>
+                  <p>1</p>
+                  <button>
+                    <Plus />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="grid gap-1">
               <Button disabled={!stock?.inStock} className="w-full mb-1">
                 <Link href={"/checkout"}>Buy now</Link>
               </Button>
