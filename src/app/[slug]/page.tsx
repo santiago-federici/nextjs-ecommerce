@@ -60,6 +60,7 @@ export default async function DetailsPage({
     additionalInfoSections,
     variants,
     productOptions,
+    collectionIds,
   } = product!;
 
   const { price: formattedPrice, discountedPrice: formattedDiscountedPrice } =
@@ -111,7 +112,7 @@ export default async function DetailsPage({
               )}
             </p>
 
-            {/* <Categories productCategory={productCategory} /> */}
+            <Categories categoriesIds={collectionIds} />
           </section>
 
           <section className="flex flex-col gap-6 w-full xl:border xl:border-gray-200 xl:rounded-md p-2 xl:p-4">
