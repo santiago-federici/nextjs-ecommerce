@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { Suspense } from "react";
 
+import { wixClientServer } from "@lib/WixClientServer";
+
 import { Wrapper } from "@components/Wrapper";
 import { SortDropdown } from "./_components/SortDropdown";
 import { FiltersComponent } from "./_components/FiltersComponent";
@@ -12,8 +14,6 @@ import { ArrowRight } from "@components/Icons";
 import { Toaster } from "sonner";
 
 import clsx from "clsx";
-
-import { wixClientServer } from "@lib/WixClientServer";
 
 import "@styles/ProductsPage.css";
 import { products } from "@wix/stores";
@@ -34,12 +34,8 @@ const skewedSection = [
 ];
 
 export default async function ProductsPage() {
-  // const prods = await db.select().from(products);
-
   const wixClient = await wixClientServer();
-
   const res = await wixClient.products.queryProducts().find();
-
   const products = res.items;
 
   return (
