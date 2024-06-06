@@ -12,35 +12,39 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { Sort } from "@components/Icons";
+import { Filter } from "@components/Icons";
 
-const sortOptions = [
+const categoryOptions = [
   {
-    name: "Newest",
-    value: "desc-lastUpdated",
+    name: "All products",
+    value: "all-products",
   },
   {
-    name: "Oldest",
-    value: "asc-lastUpdated",
+    name: "Shirts",
+    value: "shirts",
   },
   {
-    name: "Price (low to high)",
-    value: "asc-price",
+    name: "Hoodies",
+    value: "hoodies",
   },
   {
-    name: "Price (high to low)",
-    value: "desc-price",
+    name: "Shoes",
+    value: "shoes",
+  },
+  {
+    name: "Joggers",
+    value: "joggers",
   },
 ];
 
-export function SortDropdown() {
+export function CategoryDropdown() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
   const handleFilterChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
-    params.set("sort", value);
+    params.set("category", value);
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -48,15 +52,15 @@ export function SortDropdown() {
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-2 bg-white text-sm font-medium uppercase pl-3 pr-4 py-2 border border-gray-200 rounded-md hover:bg-gray-100 transition duration-200">
-          <Sort /> Sort
+          <Filter /> Filter
         </DropdownMenuTrigger>
         <DropdownMenuContent className="ml-4 lg:ml-0 pr-4 pl-0">
-          <DropdownMenuLabel className="pl-6">Sort By</DropdownMenuLabel>
+          <DropdownMenuLabel className="pl-6">Category</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup
-            value={searchParams.get("sort") || "desc-lastUpdated"}
+            value={searchParams.get("category") || "all-products"}
           >
-            {sortOptions.map((option, index) => (
+            {categoryOptions.map((option, index) => (
               <DropdownMenuRadioItem
                 key={index}
                 value={option.value}

@@ -5,17 +5,18 @@ import { Suspense } from "react";
 import { wixClientServer } from "@lib/WixClientServer";
 
 import { Wrapper } from "@components/Wrapper";
+import { CategoryDropdown } from "./_components/CategoryDropdown";
 import { SortDropdown } from "./_components/SortDropdown";
-import { FiltersComponent } from "./_components/FiltersComponent";
 import { ProductsList } from "./_components/ProductsList";
 
-import { ArrowRight } from "@components/Icons";
+import { ArrowRight, Search } from "@components/Icons";
 
 import { Toaster } from "sonner";
 
 import clsx from "clsx";
 
 import "@styles/ProductsPage.css";
+import { SearchInput } from "./_components/SearchInput";
 
 const skewedSection = [
   {
@@ -54,7 +55,9 @@ export default async function ProductsPage({
 
       <section className="grid gap-8 lg:flex lg:justify-between w-full">
         <div className="flex flex-col justify-between">
-          <h2 className="text-6xl font-semibold">Shirts</h2>
+          <h2 className="text-6xl font-semibold">
+            {category.collection?.name || "All Products"}
+          </h2>
         </div>
 
         {/* Custom banner */}
@@ -82,14 +85,13 @@ export default async function ProductsPage({
         </div>
       </section>
 
-      <SortDropdown className="hidden xl:flex self-end mt-8" />
+      <section className="grid gap-8 mt-12">
+        <div className="flex gap-4 items-center relative">
+          <CategoryDropdown />
+          <SortDropdown />
+          <SearchInput />
+        </div>
 
-      <section className="grid grid-cols-1 xl:grid-cols-[1fr_4fr] gap-4 mt-10">
-        <section className="mb-6 max-xl:flex justify-between xl:justify-start relative">
-          <SortDropdown className="xl:hidden" />
-
-          <FiltersComponent />
-        </section>
         <Suspense fallback={"loading..."}>
           <ProductsList
             categoryId={
