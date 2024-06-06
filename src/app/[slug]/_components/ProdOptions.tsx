@@ -1,16 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { products } from "@wix/stores";
-
-import clsx from "clsx";
-
-interface ProductOptionsProps {
-  id: number;
-  option: string;
-  productId: number;
-}
 
 export default function ProdOptions({
   variants,
