@@ -24,12 +24,12 @@ const sortOptions = [
     value: "most-recent",
   },
   {
-    name: "Highest price",
-    value: "des-price",
+    name: "Price (low to high)",
+    value: "asc price",
   },
   {
-    name: "Lowest price",
-    value: "asc-price",
+    name: "Price (high to low)",
+    value: "desc price",
   },
 ];
 

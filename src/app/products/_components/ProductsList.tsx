@@ -12,11 +12,25 @@ export async function ProductsList({
   searchParams?: any;
 }) {
   const wixClient = await wixClientServer();
-  const res = await wixClient.products
+  const productQuery = await wixClient.products
     .queryProducts()
     .eq("collectionIds", categoryId)
-    .limit(limit || LIMIT_PER_PAGE)
-    .find();
+    .gt("priceData.price", searchParams?.min || 0)
+    .lt("priceData.price", searchParams?.max || 999999)
+    .limit(limit || LIMIT_PER_PAGE);
+
+  if (searchParams?.sort) {
+    const [sortType, sortBy] = searchParams.sort.split(" ");
+
+    if (sortType === "asc") {
+      productQuery.ascending("price");
+    }
+    if (sortType === "desc") {
+      productQuery.descending(sortBy);
+    }
+  }
+
+  const res = await productQuery.find();
   const products = res.items;
 
   return (
