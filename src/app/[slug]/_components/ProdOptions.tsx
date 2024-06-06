@@ -61,6 +61,10 @@ export default function ProdOptions({
 
   return (
     <section className="flex flex-col gap-6 w-full xl:border xl:rounded-md p-2 xl:px-4">
+      <p className="text-sm font-medium">
+        <span className="text-orange-600">{stock?.quantity} units</span>{" "}
+        available
+      </p>
       {productOptions.map((option) => (
         <div key={option.name}>
           <p className="font-semibold mt-4 mb-2">Choose a {option.name}</p>
@@ -100,7 +104,7 @@ export default function ProdOptions({
         </div>
       ))}
 
-      {stock?.inStock === true && (
+      {stock?.inStock === true && selectedVariant?.stock?.quantity! > 0 && (
         <QuantitySelector
           productId={productId}
           variantId={
