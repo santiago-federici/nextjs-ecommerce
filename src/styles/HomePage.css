@@ -52,30 +52,3 @@
 .custom-underline:hover::after {
   width: 102%;
 }
-
-.offers-custom-underline {
-  transform: skew(-15deg);
-  cursor: pointer;
-  transition: 200ms ease all;
-}
-
-.offers-custom-underline::after {
-  content: '';
-  background: #000;
-  width: 102%;
-  height: 5px;
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  transition: 200ms all ease;
-}
-
-@media (width > 1024px) {
-  .offers-custom-underline::after {
-    height: 6px;
-  }
-}
-
-.offers-custom-underline:hover::after {
-  background: var(--clr-custom-accent);
-}

@@ -5,7 +5,7 @@ import { OffersSection } from "./_components/OffersSection";
 
 import "@styles/HomePage.css";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <section>
       <HeroSection />
