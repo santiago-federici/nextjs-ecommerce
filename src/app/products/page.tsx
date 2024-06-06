@@ -7,7 +7,7 @@ import { wixClientServer } from "@lib/WixClientServer";
 import { Wrapper } from "@components/Wrapper";
 import { SortDropdown } from "./_components/SortDropdown";
 import { FiltersComponent } from "./_components/FiltersComponent";
-import { Card } from "@components/Card";
+import { ProductsList } from "./_components/ProductsList";
 
 import { ArrowRight } from "@components/Icons";
 
@@ -16,7 +16,6 @@ import { Toaster } from "sonner";
 import clsx from "clsx";
 
 import "@styles/ProductsPage.css";
-import { products } from "@wix/stores";
 
 const skewedSection = [
   {
@@ -33,10 +32,16 @@ const skewedSection = [
   },
 ];
 
-export default async function ProductsPage() {
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: { category: string };
+}) {
   const wixClient = await wixClientServer();
-  const res = await wixClient.products.queryProducts().find();
-  const products = res.items;
+
+  const category = await wixClient.collections.getCollectionBySlug(
+    searchParams.category || "all-products"
+  );
 
   return (
     <Wrapper className="flex flex-col">
@@ -50,7 +55,6 @@ export default async function ProductsPage() {
       <section className="grid gap-8 lg:flex lg:justify-between w-full">
         <div className="flex flex-col justify-between">
           <h2 className="text-6xl font-semibold">Shirts</h2>
-          {/* <p className="text-gray-500 text-sm">{prods.length} results</p> */}
         </div>
 
         {/* Custom banner */}
@@ -87,11 +91,12 @@ export default async function ProductsPage() {
           <FiltersComponent />
         </section>
         <Suspense fallback={"loading..."}>
-          <div className="grid custom-grid gap-4 mb-16">
-            {products.map((prod: products.Product, index) => (
-              <Card key={index} prod={prod} />
-            ))}
-          </div>
+          <ProductsList
+            categoryId={
+              category.collection?._id || "00000000-000000-000000-000000000001"
+            }
+            searchParams={searchParams}
+          />
         </Suspense>
       </section>
       <Toaster richColors />

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sheet,
   SheetContent,
@@ -8,28 +10,31 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@components/ui/button";
 
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+
 import { Filter } from "@components/Icons";
 
 const filters = [
   {
     id: 1,
-    name: "Categories",
+    name: "Category",
+    value: "category",
     options: [
       {
-        name: "All",
-        value: "all",
+        name: "All products",
+        value: "all-products",
       },
       {
-        name: "T-Shirts",
-        value: "tshirts",
+        name: "Shirts",
+        value: "shirts",
       },
       {
         name: "Hoodies",
         value: "hoodies",
       },
       {
-        name: "Snickers",
-        value: "snickers",
+        name: "Shoes",
+        value: "shoes",
       },
       {
         name: "Joggers",
@@ -39,89 +44,20 @@ const filters = [
   },
   {
     id: 2,
-    name: "Brands",
+    name: "Brand",
+    value: "brand",
     options: [
-      {
-        name: "All",
-        value: "all",
-      },
       {
         name: "Adidas",
         value: "adidas",
       },
       {
+        name: "Nike",
+        value: "nike",
+      },
+      {
         name: "Puma",
         value: "puma",
-      },
-      {
-        name: "Reebok",
-        value: "reebok",
-      },
-      {
-        name: "Vans",
-        value: "vans",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Price",
-    options: [
-      {
-        name: "Under $10",
-        value: "10",
-      },
-      {
-        name: "$10 - $20",
-        value: "10-20",
-      },
-      {
-        name: "$20 - $30",
-        value: "20-30",
-      },
-      {
-        name: "$30 - $40",
-        value: "30-40",
-      },
-      {
-        name: "Over $40",
-        value: "40",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "Rating",
-    options: [
-      {
-        name: "5 Stars",
-        value: "5",
-      },
-      {
-        name: "4 Stars",
-        value: "4",
-      },
-      {
-        name: "3 Stars",
-        value: "3",
-      },
-      {
-        name: "2 Stars",
-        value: "2",
-      },
-    ],
-  },
-  {
-    id: 5,
-    name: "Discount",
-    options: [
-      {
-        name: "Only discount",
-        value: "discount",
-      },
-      {
-        name: "No discount",
-        value: "nodiscount",
       },
     ],
   },
@@ -169,6 +105,15 @@ import {
 import { Label } from "@/components/ui/label";
 
 function FiltersAccordion() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+
+  const handleFilterChange = (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set(name, value);
+    replace(`${pathname}?${params.toString()}`);
+  };
   return (
     <section className="mt-8 lg:mt-0">
       <Accordion type="single" collapsible defaultValue="item-0">
@@ -181,11 +126,16 @@ function FiltersAccordion() {
               {filter.options.map((option: any, index: any) => (
                 <div key={index} className="flex gap-2">
                   <input
-                    type="checkbox"
-                    id={index}
+                    id={`filter-${index}`}
+                    type="radio"
+                    value={option.value}
+                    checked={searchParams.get("category") === option.value}
                     className="cursor-pointer"
+                    onChange={() =>
+                      handleFilterChange(filter.value, option.value)
+                    }
                   />
-                  <Label htmlFor={index} className="cursor-pointer">
+                  <Label htmlFor={`filter-${index}`} className="cursor-pointer">
                     {option.name}
                   </Label>
                 </div>

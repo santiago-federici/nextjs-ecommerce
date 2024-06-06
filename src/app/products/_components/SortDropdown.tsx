@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -13,8 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Sort } from "@components/Icons";
-import { Button } from "@components/ui/button";
-// import { Button } from "@components/ui/button";
 
 const sortOptions = [
   {
@@ -27,16 +25,24 @@ const sortOptions = [
   },
   {
     name: "Highest price",
-    value: "highest-price",
+    value: "des-price",
   },
   {
     name: "Lowest price",
-    value: "lowest-price",
+    value: "asc-price",
   },
 ];
 
 export function SortDropdown({ className }: { className: string }) {
-  const [value, setValue] = useState("latest");
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+
+  const handleFilterChange = (value: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("sort", value);
+    replace(`${pathname}?${params.toString()}`);
+  };
 
   return (
     <div className={className}>
@@ -47,12 +53,14 @@ export function SortDropdown({ className }: { className: string }) {
         <DropdownMenuContent className="ml-4 lg:ml-0 pr-4 pl-0">
           <DropdownMenuLabel className="pl-6">Sort By</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuRadioGroup value={value}>
+          <DropdownMenuRadioGroup
+            value={searchParams.get("sort") || "most-relevant"}
+          >
             {sortOptions.map((option, index) => (
               <DropdownMenuRadioItem
                 key={index}
                 value={option.value}
-                onClick={() => setValue(option.value)}
+                onClick={() => handleFilterChange(option.value)}
               >
                 {option.name}
               </DropdownMenuRadioItem>

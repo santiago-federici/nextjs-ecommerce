@@ -18,7 +18,7 @@ export async function CategoriesSection() {
           {categories.map((category) => (
             <article key={category._id} className="overflow-hidden">
               <div className="w-64 h-64">
-                <Link href={`/products?cat=${category.slug}`}>
+                <Link href={`/products?category=${category.slug}`}>
                   <img
                     src={category.media?.mainMedia?.image?.url}
                     alt={category._id!}
