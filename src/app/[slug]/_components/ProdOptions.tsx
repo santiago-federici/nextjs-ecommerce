@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { products } from "@wix/stores";
 
@@ -9,10 +9,12 @@ import { SizeSelector } from "./SizeSelector";
 import { ColorSelector } from "./ColorSelector";
 
 export default function ProdOptions({
+  productId,
   variants,
   productOptions,
   stock,
 }: {
+  productId: string;
   variants: products.Variant[];
   productOptions: products.ProductOption[];
   stock: any;
@@ -20,6 +22,21 @@ export default function ProdOptions({
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string;
   }>({});
+
+  const [selectedVariant, setSelectedVariant] = useState<products.Variant>();
+
+  useEffect(() => {
+    const variant = variants.find((variant) => {
+      const variantChoices = variant.choices;
+
+      if (!variantChoices) return false;
+
+      return Object.entries(selectedOptions).every(
+        ([key, value]) => variantChoices[key] === value
+      );
+    });
+    setSelectedVariant(variant);
+  }, [selectedOptions, variants]);
 
   const handleClickOption = (optionType: string, choice: string) => {
     setSelectedOptions((prev) => ({ ...prev, [optionType]: choice }));
@@ -82,6 +99,16 @@ export default function ProdOptions({
           </div>
         </div>
       ))}
+
+      {stock?.inStock === true && (
+        <QuantitySelector
+          productId={productId}
+          variantId={
+            selectedVariant?._id || "00000000-0000-0000-0000-000000000000"
+          }
+          stockNumber={selectedVariant?.stock?.quantity || 0}
+        />
+      )}
     </section>
   );
 }

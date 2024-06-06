@@ -8,6 +8,7 @@ import ProductImages from "./_components/ProductImages";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Toaster } from "sonner";
 import { Separator } from "@components/ui/separator";
+import { QuantitySelector } from "./_components/QuantitySelector";
 
 export default async function DetailsPage({
   params,
@@ -38,6 +39,7 @@ export default async function DetailsPage({
   }
 
   const {
+    _id,
     name,
     stock,
     media,
@@ -94,44 +96,31 @@ export default async function DetailsPage({
             <Categories categoriesIds={collectionIds} />
           </section>
 
-          {/* <section className="flex flex-col gap-6 w-full xl:border xl:border-gray-200 xl:rounded-md p-2 xl:p-4"> */}
-          {/* <div className="grid gap-1">
-              <p className="text-green-500 font-semibold">Free shipping</p>
-            </div>
-
-            {stock?.inStock === true ? (
-              <p className="font-semibold text-lg flex items-center">
-                Available stock
-                <p className="ml-1 text-gray-400 text-sm">
-                  ({stock?.quantity} available)
-                </p>
-              </p>
-            ) : (
-              <p className="text-base text-orange-600 font-medium">
-                Out of stock
-              </p>
-            )} */}
-
-          {variants && productOptions && (
+          {variants && productOptions ? (
             <ProdOptions
+              productId={_id!}
               variants={variants}
               productOptions={productOptions}
               stock={stock}
             />
+          ) : (
+            <QuantitySelector
+              productId={_id!}
+              variantId={"00000000-0000-0000-0000-000000000000"}
+              stockNumber={stock?.quantity || 0}
+            />
+            // {/* <div className="grid gap-1">
+            //     <Button disabled={!stock?.inStock} className="w-full mb-1">
+            //       <Link href={"/checkout"}>Buy now</Link>
+            //     </Button>
+            //     <AddToCartButton
+            //       prodId={Number(searchParams.id)}
+            //       userId={user?.id}
+            //       stock={stock}
+            //     />
+            //   </div> */}
           )}
 
-          {/* {stock?.inStock === true && <QuantitySelector />} */}
-
-          {/* <div className="grid gap-1">
-              <Button disabled={!stock?.inStock} className="w-full mb-1">
-                <Link href={"/checkout"}>Buy now</Link>
-              </Button>
-              <AddToCartButton
-                prodId={Number(searchParams.id)}
-                userId={user?.id}
-                stock={stock}
-              />
-            </div> */}
           {/* </section> */}
         </section>
       </div>
