@@ -54,8 +54,8 @@ export function CategoryDropdown() {
         <DropdownMenuTrigger className="flex items-center gap-2 bg-white text-sm font-medium uppercase pl-3 pr-4 py-2 border border-gray-200 rounded-md hover:bg-gray-100 transition duration-200">
           <Filter /> Filter
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="ml-4 lg:ml-0 pr-4 pl-0">
-          <DropdownMenuLabel className="pl-6">Category</DropdownMenuLabel>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Category</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup
             value={searchParams.get("category") || "all-products"}

@@ -86,9 +86,11 @@ export default async function ProductsPage({
       </section>
 
       <section className="grid gap-8 mt-12">
-        <div className="flex gap-4 items-center relative">
-          <CategoryDropdown />
-          <SortDropdown />
+        <div className="flex flex-col-reverse gap-4  md:flex-row relative">
+          <div className="flex gap-2 w-full md:w-fit justify-between md:justify-start">
+            <CategoryDropdown />
+            <SortDropdown />
+          </div>
           <SearchInput />
         </div>
 
