@@ -4,12 +4,18 @@ import { useState } from "react";
 
 import { products } from "@wix/stores";
 
+import { QuantitySelector } from "./QuantitySelector";
+import { SizeSelector } from "./SizeSelector";
+import { ColorSelector } from "./ColorSelector";
+
 export default function ProdOptions({
   variants,
   productOptions,
+  stock,
 }: {
   variants: products.Variant[];
   productOptions: products.ProductOption[];
+  stock: any;
 }) {
   const [selectedOptions, setSelectedOptions] = useState<{
     [key: string]: string;
@@ -37,14 +43,12 @@ export default function ProdOptions({
   };
 
   return (
-    <section>
+    <section className="flex flex-col gap-6 w-full xl:border xl:rounded-md p-2 xl:px-4">
       {productOptions.map((option) => (
-        <>
-          <p className="font-semibold mt-4 mb-2" key={option.name}>
-            Choose a {option.name}
-          </p>
+        <div key={option.name}>
+          <p className="font-semibold mt-4 mb-2">Choose a {option.name}</p>
 
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             {option.choices?.map((choice: any) => {
               const disabled = !isVariantInStock({
                 ...selectedOptions,
@@ -55,44 +59,28 @@ export default function ProdOptions({
                 selectedOptions[option.name!] === choice.description;
 
               return option.name === "Size" ? (
-                <div
+                <SizeSelector
                   key={choice.value}
-                  onClick={() =>
-                    handleClickOption(option.name!, choice.description!)
-                  }
-                  className={`w-7 h-7 text-xs font-semibold uppercase flex items-center justify-center rounded-md border transition duration-100 ${
-                    selected ? "border-gray-900 bg-gray-900 text-white" : ""
-                  } ${
-                    disabled
-                      ? "cursor-not-allowed opacity-50"
-                      : "cursor-pointer"
-                  }`}
-                >
-                  {choice.description}
-                </div>
+                  handleClickOption={handleClickOption}
+                  optionName={option.name!}
+                  choiceDescription={choice.description!}
+                  selected={selected}
+                  disabled={disabled}
+                />
               ) : (
-                <div
+                <ColorSelector
                   key={choice.value}
-                  onClick={() =>
-                    handleClickOption(option.name!, choice.description!)
-                  }
-                  className={`w-7 h-7 rounded-full p-[2px] ${
-                    selected ? "ring-1 ring-gray-900" : "ring-gray-300"
-                  }`}
-                >
-                  <div
-                    className={`w-full h-full rounded-full ${
-                      disabled
-                        ? "cursor-not-allowed opacity-40"
-                        : "cursor-pointer"
-                    }`}
-                    style={{ backgroundColor: choice.value }}
-                  ></div>
-                </div>
+                  handleClickOption={handleClickOption}
+                  optionName={option.name!}
+                  choiceDescription={choice.description!}
+                  selected={selected}
+                  disabled={disabled}
+                  choiceValue={choice.value}
+                />
               );
             })}
           </div>
-        </>
+        </div>
       ))}
     </section>
   );

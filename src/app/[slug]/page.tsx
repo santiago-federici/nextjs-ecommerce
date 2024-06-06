@@ -1,28 +1,13 @@
-import Link from "next/link";
-
 import { wixClientServer } from "@lib/WixClientServer";
 
 import { Wrapper } from "@components/Wrapper";
-import AddToCartButton from "./_components/AddToCartButton";
 import ProdOptions from "./_components/ProdOptions";
 import Categories from "./_components/Categories";
 import ProductImages from "./_components/ProductImages";
-import RelatedProductsSection from "./_components/RelatedProductsSection";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Toaster } from "sonner";
-import { Button } from "@components/ui/button";
 import { Separator } from "@components/ui/separator";
-import { Minus, Plus } from "@components/Icons";
-
-interface ProdProps {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-  offerPercentage: number;
-  stock: number;
-}
 
 export default async function DetailsPage({
   params,
@@ -109,8 +94,8 @@ export default async function DetailsPage({
             <Categories categoriesIds={collectionIds} />
           </section>
 
-          <section className="flex flex-col gap-6 w-full xl:border xl:border-gray-200 xl:rounded-md p-2 xl:p-4">
-            <div className="grid gap-1">
+          {/* <section className="flex flex-col gap-6 w-full xl:border xl:border-gray-200 xl:rounded-md p-2 xl:p-4"> */}
+          {/* <div className="grid gap-1">
               <p className="text-green-500 font-semibold">Free shipping</p>
             </div>
 
@@ -125,41 +110,29 @@ export default async function DetailsPage({
               <p className="text-base text-orange-600 font-medium">
                 Out of stock
               </p>
-            )}
+            )} */}
 
-            {variants && productOptions && (
-              <ProdOptions
-                variants={variants}
-                productOptions={productOptions}
-              />
-            )}
+          {variants && productOptions && (
+            <ProdOptions
+              variants={variants}
+              productOptions={productOptions}
+              stock={stock}
+            />
+          )}
 
-            {stock?.inStock === true && (
-              <div className="flex gap-2">
-                <p>Quantity:</p>
-                <div className="flex gap-2">
-                  <button>
-                    <Minus />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus />
-                  </button>
-                </div>
-              </div>
-            )}
+          {/* {stock?.inStock === true && <QuantitySelector />} */}
 
-            <div className="grid gap-1">
+          {/* <div className="grid gap-1">
               <Button disabled={!stock?.inStock} className="w-full mb-1">
                 <Link href={"/checkout"}>Buy now</Link>
               </Button>
-              {/* <AddToCartButton
+              <AddToCartButton
                 prodId={Number(searchParams.id)}
                 userId={user?.id}
                 stock={stock}
-              /> */}
-            </div>
-          </section>
+              />
+            </div> */}
+          {/* </section> */}
         </section>
       </div>
 
