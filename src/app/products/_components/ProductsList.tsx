@@ -1,6 +1,6 @@
 import { wixClientServer } from "@lib/WixClientServer";
 import { Card } from "@components/Card";
-import { products } from "@wix/stores";
+import Pagination from "@components/Pagination";
 
 const LIMIT_PER_PAGE = 20;
 export async function ProductsList({
@@ -17,43 +17,42 @@ export async function ProductsList({
     .queryProducts()
     .startsWith("name", searchParams?.name || "")
     .eq("collectionIds", categoryId)
-    // .hasSome(
-    // "productType",
-    // searchParams?.type ? [searchParams.type] : ["physical", "digital"]
-    // )
     .gt("priceData.price", searchParams?.min || 0)
     .lt("priceData.price", searchParams?.max || 999999)
-    .limit(limit || LIMIT_PER_PAGE);
-  // .skip(
-  // searchParams?.page
-  // ? parseInt(searchParams.page) * (limit || LIMIT_PER_PAGE)
-  // : 0
-  // );
-  // .find();
+    .limit(limit || LIMIT_PER_PAGE)
+    .skip(
+      searchParams?.page
+        ? parseInt(searchParams.page) * (limit || LIMIT_PER_PAGE)
+        : 0
+    );
 
-  let products: products.Product[] = [];
+  let res;
 
   if (searchParams?.sort) {
     const [sortType, sortBy] = searchParams.sort.split("-");
 
     if (sortType === "asc") {
-      const res = await productQuery.ascending(sortBy).find();
-      products = res.items;
+      res = await productQuery.ascending(sortBy).find();
     }
     if (sortType === "desc") {
-      const res = await productQuery.descending(sortBy).find();
-      products = res.items;
+      res = await productQuery.descending(sortBy).find();
     }
-  } else {
-    const res = await productQuery.descending("lastUpdated").find();
-    products = res.items;
   }
 
+  const products = res?.items;
+
   return (
-    <div className="grid custom-grid gap-4 mb-16">
-      {products.map((prod, index) => (
-        <Card key={index} prod={prod} />
-      ))}
-    </div>
+    <>
+      <div className="grid custom-grid gap-4 mb-16">
+        {products &&
+          products.map((prod, index) => <Card key={index} prod={prod} />)}
+      </div>
+
+      <Pagination
+        currentPage={res?.currentPage || 0}
+        hasPrev={res?.hasPrev()!}
+        hasNext={res?.hasNext()!}
+      />
+    </>
   );
 }
