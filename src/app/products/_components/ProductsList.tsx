@@ -49,8 +49,6 @@ export async function ProductsList({
     products = res.items;
   }
 
-  console.log(products);
-
   return (
     <div className="grid custom-grid gap-4 mb-16">
       {products.map((prod, index) => (

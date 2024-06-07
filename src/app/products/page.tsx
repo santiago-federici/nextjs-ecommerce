@@ -9,7 +9,7 @@ import { CategoryDropdown } from "./_components/CategoryDropdown";
 import { SortDropdown } from "./_components/SortDropdown";
 import { ProductsList } from "./_components/ProductsList";
 
-import { ArrowRight, Search } from "@components/Icons";
+import { ArrowRight } from "@components/Icons";
 
 import { Toaster } from "sonner";
 
