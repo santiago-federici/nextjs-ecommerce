@@ -109,19 +109,7 @@ export default async function DetailsPage({
               variantId={"00000000-0000-0000-0000-000000000000"}
               stockNumber={stock?.quantity || 0}
             />
-            // {/* <div className="grid gap-1">
-            //     <Button disabled={!stock?.inStock} className="w-full mb-1">
-            //       <Link href={"/checkout"}>Buy now</Link>
-            //     </Button>
-            //     <AddToCartButton
-            //       prodId={Number(searchParams.id)}
-            //       userId={user?.id}
-            //       stock={stock}
-            //     />
-            //   </div> */}
           )}
-
-          {/* </section> */}
         </section>
       </div>
 

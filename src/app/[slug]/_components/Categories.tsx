@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { wixClientServer } from "@lib/WixClientServer";
 
 export default async function Categories({
@@ -24,13 +26,13 @@ export default async function Categories({
         {categories.map(
           (category: any) =>
             category.items[0].name !== "All Products" && (
-              <p
+              <Link
                 key={category.items[0]._id}
+                href={`/products?category=${category.items[0].slug}`}
                 className="text-sm font-light cursor-pointer hover:text-blue-600 mr-1"
-                // TODO: <Link href={`/products?slug=category.items[0]slug`}></Link>
               >
                 {category.items[0].name},
-              </p>
+              </Link>
             )
         )}
       </div>
