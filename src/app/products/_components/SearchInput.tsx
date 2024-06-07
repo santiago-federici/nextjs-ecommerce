@@ -22,7 +22,7 @@ export function SearchInput() {
 
   return (
     <form
-      className="w-full md:w-96 h-full min-h-10 md:absolute right-0 relative"
+      className="w-full md:w-96 h-10 md:absolute right-0 relative"
       onSubmit={handleSearch}
     >
       <input

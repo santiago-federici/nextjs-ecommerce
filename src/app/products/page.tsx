@@ -17,6 +17,7 @@ import clsx from "clsx";
 
 import "@styles/ProductsPage.css";
 import { SearchInput } from "./_components/SearchInput";
+import { Separator } from "@components/ui/separator";
 
 const skewedSection = [
   {
@@ -53,56 +54,37 @@ export default async function ProductsPage({
         <p>Products</p>
       </div>
 
-      <section className="grid gap-8 lg:flex lg:justify-between w-full">
-        <div className="flex flex-col justify-between">
-          <h2 className="text-6xl font-semibold">
-            {category.collection?.name || "All Products"}
-          </h2>
-        </div>
+      <div className="w-full h-44 md:h-60 mb-10 relative overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1665815844395-06f64f44b5e3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="products banner"
+          className="w-full h-full object-cover rounded-md"
+        />
+      </div>
 
-        {/* Custom banner */}
-        <div className="lg:mr-4 skew-x-[-20deg] place-self-center flex w-full lg:w-[60%] h-16 md:h-24">
-          {skewedSection.map((item, index) => (
-            <div
-              key={index}
-              className={`${item.bg} w-[33%] h-full grid place-items-center px-4`}
-            >
-              <p
-                className={clsx(
-                  "font-bold uppercase text-center skew-x-[20deg]",
-                  {
-                    "text-base md:text-xl lg:text-2xl xl:text-4xl": index === 1,
-                  },
-                  {
-                    "text-xs md:text-lg lg:text-xl xl:text-2xl": index != 1,
-                  }
-                )}
-              >
-                {item.text}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid gap-8 mt-12">
-        <div className="flex flex-col-reverse gap-4  md:flex-row relative">
-          <div className="flex gap-2 w-full md:w-fit justify-between md:justify-start">
+      <div className="flex flex-col gap-8 relative">
+        <h2 className="text-6xl font-semibold">
+          {category.collection?.name || "All Products"}
+        </h2>
+        <div className="flex flex-col-reverse md:flex-row gap-4 w-full justify-between">
+          <div className="flex gap-2">
             <CategoryDropdown />
             <SortDropdown />
           </div>
           <SearchInput />
         </div>
+      </div>
 
-        <Suspense fallback={"loading..."}>
-          <ProductsList
-            categoryId={
-              category.collection?._id || "00000000-000000-000000-000000000001"
-            }
-            searchParams={searchParams}
-          />
-        </Suspense>
-      </section>
+      <Separator className="w-full my-8" />
+
+      <Suspense fallback={"loading..."}>
+        <ProductsList
+          categoryId={
+            category.collection?._id || "00000000-000000-000000-000000000001"
+          }
+          searchParams={searchParams}
+        />
+      </Suspense>
       <Toaster richColors />
     </Wrapper>
   );
