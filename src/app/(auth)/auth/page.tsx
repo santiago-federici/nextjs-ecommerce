@@ -17,7 +17,6 @@ export default function AuthPage() {
   const [email, setEmail] = useState();
   const [emailCode, setEmailCode] = useState();
   const [password, setPassword] = useState();
-  const [repeatPassword, setRepeatPassword] = useState();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -38,6 +37,8 @@ export default function AuthPage() {
 
     try {
       let res;
+
+      // MODES
       if (mode === "LOGIN") {
         res = await wixClient.auth.login({
           email: email!,
@@ -45,7 +46,6 @@ export default function AuthPage() {
         });
       }
       if (mode === "REGISTER") {
-        console.log("here");
         res = await wixClient.auth.register({
           email: email!,
           password: password!,
@@ -53,8 +53,8 @@ export default function AuthPage() {
       }
       if (mode === "RESET_PASSWORD") {
         const redirectUri = window.location.href.toString();
-        console.log(redirectUri);
         res = await wixClient.auth.sendPasswordResetEmail(email!, redirectUri);
+        setMessage("We&apos;ve sent you an email. Please check your inbox.");
       }
       if (mode === "EMAIL_VERIFICATION") {
         res = await wixClient.auth.processVerification({
@@ -62,6 +62,7 @@ export default function AuthPage() {
         });
       }
 
+      // LOGIN STATES
       if (res?.loginState === LoginState.SUCCESS) {
         setMessage("Successful! You are being redirected.");
 
@@ -92,8 +93,10 @@ export default function AuthPage() {
         }
       }
       if (res?.loginState === LoginState.EMAIL_VERIFICATION_REQUIRED) {
+        setMode("EMAIL_VERIFICATION");
       }
       if (res?.loginState === LoginState.OWNER_APPROVAL_REQUIRED) {
+        setMessage("Owner approval required");
       }
     } catch (err) {
       console.error(err);
@@ -122,11 +125,12 @@ export default function AuthPage() {
       </TabsContent>
       <TabsContent value="register">
         <RegisterTab
+          mode={mode}
           setMode={setMode}
           handleSubmit={handleSubmit}
           setEmail={setEmail}
           setPassword={setPassword}
-          setRepeatPassword={setRepeatPassword}
+          setEmailCode={setEmailCode}
           error={error!}
           email={email}
           message={message}
