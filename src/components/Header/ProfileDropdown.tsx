@@ -18,6 +18,7 @@ import {
 import { Button } from "@components/ui/button";
 
 import { UserCircle } from "@components/Icons";
+import LogoutButton from "./LogoutButton";
 
 const accountOptions = [
   {
@@ -38,12 +39,16 @@ const accountOptions = [
   },
 ];
 
-export function ProfileDropdown({ user }: { user: any }) {
+export function ProfileDropdown({
+  isUserLoggedIn,
+}: {
+  isUserLoggedIn: boolean;
+}) {
   const pathname = usePathname();
 
   return (
     <div className="hidden lg:flex">
-      {user ? (
+      {isUserLoggedIn ? (
         <DropdownMenu>
           <DropdownMenuTrigger
             className={`${
@@ -63,7 +68,7 @@ export function ProfileDropdown({ user }: { user: any }) {
               ))}
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <LogoutLink className="text-red-500">Logout</LogoutLink>
+                <LogoutButton />
               </DropdownMenuItem>
             </DropdownMenuGroup>
           </DropdownMenuContent>

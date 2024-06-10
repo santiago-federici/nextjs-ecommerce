@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 import clsx from "clsx";
 
@@ -24,6 +23,7 @@ import {
   Menu,
   Products,
 } from "@components/Icons";
+import LogoutButton from "./LogoutButton";
 
 const navLinks = [
   {
@@ -48,7 +48,11 @@ const navLinks = [
   },
 ];
 
-export function NavbarComponent({ user }: { user: any }) {
+export function NavbarComponent({
+  isUserLoggedIn,
+}: {
+  isUserLoggedIn: boolean;
+}) {
   const pathname = usePathname();
 
   return (
@@ -111,7 +115,7 @@ export function NavbarComponent({ user }: { user: any }) {
               ))}
 
               {/* Settings button only rendering when user is logged in */}
-              {user && (
+              {isUserLoggedIn && (
                 <Button
                   asChild
                   variant={"ghost"}
@@ -129,10 +133,10 @@ export function NavbarComponent({ user }: { user: any }) {
             </ul>
             <SheetFooter
               className={`flex sm:flex-col gap-y-4 ${
-                user ? "items-start" : "items-end"
+                isUserLoggedIn ? "items-start" : "items-end"
               } flex-1 mb-8`}
             >
-              {!user ? (
+              {!isUserLoggedIn ? (
                 <>
                   <Button asChild variant={"default"} className="w-full">
                     <Link href="/register">Register</Link>
@@ -142,13 +146,7 @@ export function NavbarComponent({ user }: { user: any }) {
                   </Button>
                 </>
               ) : (
-                <LogoutLink
-                  className={buttonVariants({
-                    variant: "link",
-                  })}
-                >
-                  Logout
-                </LogoutLink>
+                <LogoutButton />
               )}
             </SheetFooter>
           </SheetContent>
