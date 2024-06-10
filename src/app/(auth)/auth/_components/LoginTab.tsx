@@ -23,7 +23,6 @@ export function LoginTab({
   setEmail,
   setPassword,
   error,
-  email,
   message,
   isLoading,
 }: {
@@ -32,12 +31,22 @@ export function LoginTab({
   setEmail: any;
   setPassword: any;
   error: string;
-  email?: string;
   message: string;
   isLoading: boolean;
 }) {
   const [resetPasswordContent, setResetPasswordContent] =
     useState<boolean>(false);
+
+  const [invalidEmail, setInvalidEmail] = useState<boolean | string>(false);
+
+  const handleEmailValidation = (value: string) => {
+    if (!isValidEmail(value)) {
+      setInvalidEmail("Invalid email");
+    } else {
+      setInvalidEmail(false);
+      setEmail(value);
+    }
+  };
 
   return (
     <Card>
@@ -50,23 +59,26 @@ export function LoginTab({
       <CardContent className="space-y-2">
         <form onSubmit={handleSubmit} className="grid gap-4">
           {!resetPasswordContent && (
-            <div className="space-y-1">
+            <div className="space-y-1 relative">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="youremail@example.com"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => handleEmailValidation(e.target.value)}
                 className={clsx({
-                  "ring-4 focus-visible:ring-red-500/50 ring-red-500/50": error,
+                  "ring-4 focus-visible:ring-red-500/50 ring-red-500/50":
+                    invalidEmail || error,
                 })}
               />
-              {error && (
-                <span className="absolute right-2 top-[10px] text-red-500">
+              {invalidEmail && (
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-red-500">
                   <Close width="20" height="20" />
                 </span>
               )}
-              <p className="text-sm text-red-500 mt-2 ml-2">{error}</p>
+              {invalidEmail !== false && (
+                <p className="text-sm text-red-500 mt-2">{invalidEmail}</p>
+              )}
             </div>
           )}
 
@@ -86,7 +98,7 @@ export function LoginTab({
           </div>
 
           <Button
-            disabled={!isValidEmail(email) || error !== "" || isLoading}
+            disabled={invalidEmail !== false || isLoading}
             className="w-full mt-4"
             onClick={() =>
               setMode(resetPasswordContent ? "RESET_PASSWORD" : "LOGIN")
@@ -97,6 +109,7 @@ export function LoginTab({
           {message && (
             <p className="text-green-500 text-sm mt-2 text-center">{message}</p>
           )}
+          {error && <p className="text-sm text-red-500 mt-2">{error}</p>}
         </form>
 
         <div>

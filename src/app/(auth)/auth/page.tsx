@@ -78,6 +78,18 @@ export default function AuthPage() {
         router.push("/");
       }
       if (res?.loginState === LoginState.FAILURE) {
+        if (
+          res.errorCode === "invalidEmail" ||
+          res.errorCode === "invalidPassword"
+        ) {
+          setError("Invalid email or password");
+        }
+        if (res.errorCode === "emailAlreadyExists") {
+          setError("Email already exists");
+        }
+        if (res.errorCode === "resetPassword") {
+          setError("You need to reset your password!");
+        }
       }
       if (res?.loginState === LoginState.EMAIL_VERIFICATION_REQUIRED) {
       }
@@ -104,7 +116,6 @@ export default function AuthPage() {
           setEmail={setEmail}
           setPassword={setPassword}
           error={error!}
-          email={email}
           message={message}
           isLoading={isLoading}
         />
