@@ -1,23 +1,23 @@
-import { withAuth } from "@kinde-oss/kinde-auth-nextjs/middleware";
+import { OAuthStrategy, createClient } from "@wix/sdk";
+import { NextRequest, NextResponse } from "next/server";
 
-export default function middleware(req: Request) {
-  return withAuth();
+export async function middleware(req: NextRequest) {
+  const cookies = req.cookies;
+
+  const res = NextResponse.next();
+
+  if (cookies.get("refreshToken")) {
+    return res;
+  }
+
+  const wixClient = createClient({
+    auth: OAuthStrategy({ clientId: process.env.NEXT_PUBLIC_WIX_CLIENT_ID! }),
+  });
+
+  const tokens = await wixClient.auth.generateVisitorTokens();
+  res.cookies.set("refreshToken", JSON.stringify(tokens.refreshToken), {
+    maxAge: 60 * 60 * 24 * 30,
+  });
+
+  return res;
 }
-
-export const config = {
-  matcher: ["/about"],
-};
-
-// export default withAuth(
-//   async function middleware(req: any) {
-//     console.log("look at me", req.kindeAuth);
-//   },
-//   {
-//     isReturnToCurrentPage: true,
-//     loginPage: "/login",
-//     isAuthorized: ({ token }: any) => {
-//       // The user will be considered authorized if they have the permission 'eat:chips'
-//       return token.permissions.includes("eat:chips");
-//     },
-//   }
-// );
