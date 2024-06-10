@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "@components/ui/button";
-import { useState } from "react";
+import { WixClientContext } from "@contexts/WixContext";
+import { useContext, useState } from "react";
 
 export function QuantitySelector({
   productId,
@@ -21,6 +22,24 @@ export function QuantitySelector({
     if (type === "decrease" && quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  const wixClient = useContext(WixClientContext);
+  const handleAddToCart = async () => {
+    const res = await wixClient.currentCart.addToCurrentCart({
+      lineItems: [
+        {
+          catalogReference: {
+            appId: process.env.NEXT_PUBLIC_WIX_APP_ID,
+            catalogItemId: productId,
+            ...([variantId] && { options: { variantId } }),
+          },
+          quantity: stockNumber,
+        },
+      ],
+    });
+
+    console.log(res);
   };
 
   return (
@@ -64,7 +83,9 @@ export function QuantitySelector({
       </article>
 
       <div className="w-full flex flex-col gap-2 h-full justify-end mb-3">
-        <Button variant={"outline"}>Add to cart</Button>
+        <Button variant={"outline"} onClick={() => handleAddToCart()}>
+          Add to cart
+        </Button>
         <Button>Buy now</Button>
       </div>
     </div>

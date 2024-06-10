@@ -40,6 +40,7 @@ export async function Header() {
           <ProfileDropdown isUserLoggedIn={isUserLoggedIn} />
 
           {/* <CartSheet prods={prods} userId={user?.id!} /> */}
+          <CartSheet />
         </span>
       </Wrapper>
     </header>

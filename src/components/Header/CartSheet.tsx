@@ -18,11 +18,25 @@ import { Separator } from "@/components/ui/separator";
 import { CartCard } from "@components/CartCard";
 
 import { BigCart, Cart } from "@components/Icons";
+import { useContext, useEffect } from "react";
+import { WixClientContext } from "@contexts/WixContext";
 
-export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
-  const { cart, cartQuantity, clearCart } = useCart();
+// export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
+export function CartSheet() {
+  // const { cart, cartQuantity, clearCart } = useCart();
 
   const pathname = usePathname();
+
+  const wixClient = useContext(WixClientContext);
+
+  useEffect(() => {
+    const getCart = async () => {
+      const res = await wixClient.currentCart.getCurrentCart();
+      console.log(res);
+    };
+
+    getCart();
+  }, [wixClient]);
 
   return (
     <span
@@ -38,11 +52,11 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
         <SheetContent className="flex flex-col overflow-y-auto">
           <SheetHeader>
             <SheetTitle className="self-start">
-              Shopping cart ({cartQuantity})
+              {/* Shopping cart ({cartQuantity}) */}
             </SheetTitle>
           </SheetHeader>
 
-          {cart.length > 0 ? (
+          {/* {cart.length > 0 ? (
             <>
               <section className="flex flex-col flex-grow flex-1">
                 <ul className="flex flex-col gap-4 mt-14 flex-grow flex-1">
@@ -112,12 +126,12 @@ export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
                 </Button>
               </SheetTrigger>
             </section>
-          )}
+          )} */}
         </SheetContent>
       </Sheet>
 
       <span className="absolute -bottom-2 -right-1 bg-custom-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm">
-        {cartQuantity}
+        {/* {cartQuantity} */}0
       </span>
     </span>
   );
