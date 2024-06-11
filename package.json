@@ -19,6 +19,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.4",
+    "@wix/ecom": "^1.0.594",
     "@wix/sdk": "^1.9.7",
     "@wix/stores": "^1.0.154",
     "bcryptjs": "^2.4.3",
@@ -36,7 +37,8 @@
     "resend": "^3.2.0",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
