@@ -1,7 +1,9 @@
-import { media as wixMedia } from "@wix/sdk";
-import { Trash } from "./Icons";
-import { useCartStore } from "@hooks/useCartStore";
 import { useEffect, useState } from "react";
+
+import { useCartStore } from "@hooks/useCartStore";
+import { media as wixMedia } from "@wix/sdk";
+
+import { Trash } from "./Icons";
 
 export function CartCard({
   id,
@@ -25,7 +27,7 @@ export function CartCard({
   const [chosenVariant, setChosenVariant] = useState<any>(null);
 
   useEffect(() => {
-    const test = async () => {
+    const getVariants = async () => {
       const res = await wixClient.products
         .queryProducts()
         .eq("name", title)
@@ -37,7 +39,7 @@ export function CartCard({
       setChosenVariant(chosenVariant);
     };
 
-    test();
+    getVariants();
   }, [variantId, title, wixClient.products]);
 
   return (
