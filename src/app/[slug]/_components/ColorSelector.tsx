@@ -1,5 +1,4 @@
 export function ColorSelector({
-  key,
   handleClickOption,
   optionName,
   choiceDescription,
@@ -7,7 +6,6 @@ export function ColorSelector({
   disabled,
   choiceValue,
 }: {
-  key: string;
   handleClickOption: any;
   optionName: string;
   choiceDescription: string;
@@ -17,9 +15,8 @@ export function ColorSelector({
 }) {
   return (
     <div
-      key={key}
       onClick={() => handleClickOption(optionName, choiceDescription)}
-      className={`w-7 h-7 rounded-full p-[2px] ${
+      className={`w-7 h-7 rounded-full p-[2px] border ${
         selected ? "ring-1 ring-gray-900" : "ring-gray-300"
       }`}
     >

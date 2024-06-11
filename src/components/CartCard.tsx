@@ -1,55 +1,48 @@
-import { useCart } from "@hooks/useCart";
-
-import { formatPrice } from "@lib/utils";
-
-interface ProdProps {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-  offerPercentage: number;
-  stock: number;
-}
+import { media as wixMedia } from "@wix/sdk";
+import { Trash } from "./Icons";
+import { useCartStore } from "@hooks/useCartStore";
 
 export function CartCard({
-  prod,
-  userId,
+  id,
+  imageUrl,
+  title,
+  price,
+  wixClient,
   quantity,
 }: {
-  prod: ProdProps;
-  userId: string;
+  id: string;
+  imageUrl: string;
+  title: string;
+  price: string;
+  wixClient: any;
   quantity: number;
 }) {
-  const { removeProd } = useCart();
-
-  if (!prod) return <div>Product not found</div>;
-
-  const { id: prodId, name, imageUrl, price, offerPercentage, stock } = prod;
+  const { removeItem } = useCartStore();
 
   return (
-    prod && (
-      <article className="flex gap-4 w-full">
-        <img src={imageUrl} alt={name} className="w-32 h-32 rounded" />
-
-        <section className="py-1 flex flex-col gap-2 w-full">
-          <div className="flex-1">
-            <h3 className="text-lg">{name}</h3>
-            <p className="text-base font-medium">
-              {formatPrice(price - price * (offerPercentage / 100))}
-            </p>
-          </div>
-
-          <div className="flex  items-center justify-between">
-            <p className="text-sm font-light">Qty: {quantity}</p>
-            <p
-              onClick={() => removeProd(prodId, userId)}
-              className="text-sm cursor-pointer text-custom-accent transition duration-200"
-            >
-              Remove
-            </p>
-          </div>
-        </section>
-      </article>
-    )
+    <article className="flex">
+      <div className="w-28 h-28 overflow-hidden rounded-md">
+        <img
+          src={wixMedia.getScaledToFillImageUrl(imageUrl, 96, 96, {})}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="flex flex-col gap-2 flex-grow flex-1 ml-4">
+        <p className="text-base font-semibold">{title}</p>
+        <p className="text-sm">
+          Unit price: <span className="font-semibold">{price}</span>
+        </p>
+        <p className="text-sm">
+          Quantity: <span className="font-semibold">{quantity}</span>
+        </p>
+      </div>
+      <button
+        className="text-sm text-custom-accent cursor-pointer transition duration-100 self-start"
+        onClick={() => removeItem(wixClient, id)}
+      >
+        <Trash />
+      </button>
+    </article>
   );
 }

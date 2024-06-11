@@ -61,16 +61,20 @@ export default function ProdOptions({
 
   return (
     <section className="flex flex-col gap-6 w-full xl:border xl:rounded-md p-2 xl:px-4">
-      <p className="text-sm font-medium">
-        <span className="text-orange-600">{stock?.quantity} units</span>{" "}
-        available
-      </p>
+      {stock.quantity ? (
+        <p className="text-sm font-medium">
+          <span className="text-orange-600">{stock?.quantity} units</span>{" "}
+          available
+        </p>
+      ) : (
+        <p className="text-orange-600 font-medium">Out of stock</p>
+      )}
       {productOptions.map((option) => (
         <div key={option.name}>
           <p className="font-semibold mt-4 mb-2">Choose a {option.name}</p>
 
           <div className="flex gap-2">
-            {option.choices?.map((choice: any) => {
+            {option.choices?.map((choice: any, index: number) => {
               const disabled = !isVariantInStock({
                 ...selectedOptions,
                 [option.name!]: choice.description,
@@ -81,7 +85,7 @@ export default function ProdOptions({
 
               return option.name === "Size" ? (
                 <SizeSelector
-                  key={choice.value}
+                  key={index}
                   handleClickOption={handleClickOption}
                   optionName={option.name!}
                   choiceDescription={choice.description!}
@@ -90,7 +94,7 @@ export default function ProdOptions({
                 />
               ) : (
                 <ColorSelector
-                  key={choice.value}
+                  key={index}
                   handleClickOption={handleClickOption}
                   optionName={option.name!}
                   choiceDescription={choice.description!}
@@ -104,15 +108,14 @@ export default function ProdOptions({
         </div>
       ))}
 
-      {stock?.inStock === true && selectedVariant?.stock?.quantity! > 0 && (
-        <QuantitySelector
-          productId={productId}
-          variantId={
-            selectedVariant?._id || "00000000-0000-0000-0000-000000000000"
-          }
-          stockNumber={selectedVariant?.stock?.quantity || 0}
-        />
-      )}
+      <QuantitySelector
+        productId={productId}
+        variantId={
+          selectedVariant?._id || "00000000-0000-0000-0000-000000000000"
+        }
+        stockNumber={selectedVariant?.stock?.quantity || 0}
+        inStock={stock?.inStock}
+      />
     </section>
   );
 }

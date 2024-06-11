@@ -2,16 +2,19 @@
 
 import { Button } from "@components/ui/button";
 import { WixClientContext } from "@contexts/WixContext";
+import { useCartStore } from "@hooks/useCartStore";
 import { useContext, useState } from "react";
 
 export function QuantitySelector({
   productId,
   variantId,
   stockNumber,
+  inStock,
 }: {
   productId: string;
   variantId: string;
   stockNumber: number;
+  inStock: boolean;
 }) {
   const [quantity, setQuantity] = useState(1);
 
@@ -25,22 +28,8 @@ export function QuantitySelector({
   };
 
   const wixClient = useContext(WixClientContext);
-  const handleAddToCart = async () => {
-    const res = await wixClient.currentCart.addToCurrentCart({
-      lineItems: [
-        {
-          catalogReference: {
-            appId: process.env.NEXT_PUBLIC_WIX_APP_ID,
-            catalogItemId: productId,
-            ...([variantId] && { options: { variantId } }),
-          },
-          quantity: stockNumber,
-        },
-      ],
-    });
 
-    console.log(res);
-  };
+  const { addItem } = useCartStore();
 
   return (
     <div className="flex-grow flex flex-col">
@@ -49,14 +38,28 @@ export function QuantitySelector({
       <article className="flex gap-4 items-center">
         <div className="flex gap-4 items-center rounded-full w-fit border overflow-hidden">
           <span
-            className="text-2xl hover:bg-gray-100 cursor-pointer w-full h-full px-3 transition duration-100"
+            className={`text-2xl w-full h-full px-3 transition duration-100 ${
+              inStock
+                ? "hover:bg-gray-100 cursor-pointer"
+                : "text-gray-400 cursor-not-allowed"
+            }`}
             onClick={() => handleQuantity("decrease")}
           >
             -
           </span>
-          <span className="text-base font-medium">{quantity}</span>
           <span
-            className="text-2xl hover:bg-gray-100 cursor-pointer w-full h-full px-3 transition duration-100"
+            className={`text-base font-medium ${
+              inStock ? "" : "text-gray-400"
+            }`}
+          >
+            {quantity}
+          </span>
+          <span
+            className={`text-2xl w-full h-full px-3 transition duration-100 ${
+              inStock
+                ? "hover:bg-gray-100 cursor-pointer"
+                : "text-gray-400 cursor-not-allowed"
+            }`}
             onClick={() => handleQuantity("increase")}
           >
             +
@@ -64,7 +67,11 @@ export function QuantitySelector({
         </div>
 
         <div className="text-xs">
-          {stockNumber <= 10 ? (
+          {stockNumber < 1 ? (
+            <p>
+              <span className="text-orange-600">No items</span> left
+            </p>
+          ) : stockNumber <= 10 ? (
             <>
               <p>
                 Only{" "}
@@ -83,7 +90,11 @@ export function QuantitySelector({
       </article>
 
       <div className="w-full flex flex-col gap-2 h-full justify-end mb-3">
-        <Button variant={"outline"} onClick={() => handleAddToCart()}>
+        <Button
+          variant={"outline"}
+          disabled={!inStock || stockNumber === 0}
+          onClick={() => addItem(wixClient, productId, variantId, quantity)}
+        >
           Add to cart
         </Button>
         <Button>Buy now</Button>

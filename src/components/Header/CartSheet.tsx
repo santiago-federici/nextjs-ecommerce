@@ -1,9 +1,13 @@
 "use client";
 
+import { useContext, useEffect } from "react";
+
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-import { useCart } from "@hooks/useCart";
+import { WixClientContext } from "@contexts/WixContext";
+
+import { useCartStore } from "@hooks/useCartStore";
 
 import {
   Sheet,
@@ -18,25 +22,19 @@ import { Separator } from "@/components/ui/separator";
 import { CartCard } from "@components/CartCard";
 
 import { BigCart, Cart } from "@components/Icons";
-import { useContext, useEffect } from "react";
-import { WixClientContext } from "@contexts/WixContext";
 
-// export function CartSheet({ prods, userId }: { prods: any; userId: string }) {
 export function CartSheet() {
-  // const { cart, cartQuantity, clearCart } = useCart();
+  const wixClient = useContext(WixClientContext);
 
   const pathname = usePathname();
 
-  const wixClient = useContext(WixClientContext);
+  const { cart, getCart, cartLength, clearCart } = useCartStore();
 
   useEffect(() => {
-    const getCart = async () => {
-      const res = await wixClient.currentCart.getCurrentCart();
-      console.log(res);
-    };
+    getCart(wixClient);
+  }, [wixClient, getCart]);
 
-    getCart();
-  }, [wixClient]);
+  const productsInCart = cart && cart.lineItems;
 
   return (
     <span
@@ -52,25 +50,24 @@ export function CartSheet() {
         <SheetContent className="flex flex-col overflow-y-auto">
           <SheetHeader>
             <SheetTitle className="self-start">
-              {/* Shopping cart ({cartQuantity}) */}
+              Shopping cart ({cartLength})
             </SheetTitle>
           </SheetHeader>
 
-          {/* {cart.length > 0 ? (
+          {productsInCart && productsInCart.length > 0 ? (
             <>
               <section className="flex flex-col flex-grow flex-1">
-                <ul className="flex flex-col gap-4 mt-14 flex-grow flex-1">
-                  {cart.map((cartProd, index) => {
-                    const prod = prods.find(
-                      (prod: any) => prod.id === cartProd.productId
-                    );
-
+                <ul className="flex flex-col gap-6 mt-14 flex-grow flex-1">
+                  {productsInCart.map((product) => {
                     return (
-                      <li key={index}>
+                      <li key={product._id}>
                         <CartCard
-                          prod={prod}
-                          userId={userId}
-                          quantity={cartProd.quantity}
+                          id={product._id!}
+                          imageUrl={product.image!}
+                          title={product.productName?.original!}
+                          price={product.price?.formattedAmount!}
+                          wixClient={wixClient}
+                          quantity={product.quantity!}
                         />
                       </li>
                     );
@@ -80,7 +77,7 @@ export function CartSheet() {
                 <Button
                   variant={"ghost"}
                   className="mt-16 place-self-end hover:bg-red-200 hover:text-red-900"
-                  onClick={() => clearCart(userId)}
+                  onClick={() => clearCart(wixClient)}
                 >
                   Clear cart
                 </Button>
@@ -89,7 +86,7 @@ export function CartSheet() {
                   <Separator className="my-4" />
                   <div className="flex text-base">
                     <p className="flex-1">Subtotal</p>
-                    <p>$0</p>
+                    <p>{cart.subtotal.formattedAmount}</p>
                   </div>
                 </section>
               </section>
@@ -126,12 +123,12 @@ export function CartSheet() {
                 </Button>
               </SheetTrigger>
             </section>
-          )} */}
+          )}
         </SheetContent>
       </Sheet>
 
-      <span className="absolute -bottom-2 -right-1 bg-custom-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm">
-        {/* {cartQuantity} */}0
+      <span className="absolute -bottom-1 -right-1 bg-custom-accent text-white font-semibold rounded-full w-5 h-5 flex justify-center items-center text-sm">
+        {cartLength}
       </span>
     </span>
   );
