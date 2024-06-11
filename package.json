@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@kinde-oss/kinde-auth-nextjs": "^2.2.5",
     "@libsql/client": "^0.6.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -25,7 +24,6 @@
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "drizzle-orm": "^0.30.10",
     "embla-carousel-react": "^8.0.4",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.378.0",
@@ -47,7 +45,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "drizzle-kit": "^0.21.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "postcss": "^8",

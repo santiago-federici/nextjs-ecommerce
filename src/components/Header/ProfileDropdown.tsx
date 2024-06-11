@@ -4,8 +4,6 @@ import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
