@@ -4,9 +4,6 @@ import { Wrapper } from "@components/Wrapper";
 import ProdOptions from "./_components/ProdOptions";
 import Categories from "./_components/Categories";
 import ProductImages from "./_components/ProductImages";
-
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Toaster } from "sonner";
 import { Separator } from "@components/ui/separator";
 import { QuantitySelector } from "./_components/QuantitySelector";
 
@@ -15,9 +12,6 @@ export default async function DetailsPage({
 }: {
   params: { slug: string };
 }) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
   const wixClient = await wixClientServer();
   const res = await wixClient.products
     .queryProducts()
@@ -108,6 +102,7 @@ export default async function DetailsPage({
               productId={_id!}
               variantId={"00000000-0000-0000-0000-000000000000"}
               stockNumber={stock?.quantity || 0}
+              inStock={stock?.inStock!}
             />
           )}
         </section>
@@ -134,8 +129,6 @@ export default async function DetailsPage({
       <Separator className="mt-12 mb-8" />
 
       {/* <RelatedProductsSection productCategory={productCategory} prodId={id} /> */}
-
-      <Toaster richColors />
     </Wrapper>
   );
 }

@@ -1,6 +1,7 @@
 import { media as wixMedia } from "@wix/sdk";
 import { Trash } from "./Icons";
 import { useCartStore } from "@hooks/useCartStore";
+import { useEffect, useState } from "react";
 
 export function CartCard({
   id,
@@ -9,6 +10,7 @@ export function CartCard({
   price,
   wixClient,
   quantity,
+  variantId,
 }: {
   id: string;
   imageUrl: string;
@@ -16,8 +18,27 @@ export function CartCard({
   price: string;
   wixClient: any;
   quantity: number;
+  variantId: string;
 }) {
   const { removeItem } = useCartStore();
+
+  const [chosenVariant, setChosenVariant] = useState<any>(null);
+
+  useEffect(() => {
+    const test = async () => {
+      const res = await wixClient.products
+        .queryProducts()
+        .eq("name", title)
+        .find();
+      const product = res.items[0];
+      const chosenVariant = product.variants.find(
+        (variant: any) => variant._id === variantId
+      );
+      setChosenVariant(chosenVariant);
+    };
+
+    test();
+  }, [variantId, title, wixClient.products]);
 
   return (
     <article className="flex">
@@ -28,21 +49,42 @@ export function CartCard({
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="flex flex-col gap-2 flex-grow flex-1 ml-4">
+      <div className="flex flex-col gap-2 flex-grow flex-1 ml-4 justify-between">
         <p className="text-base font-semibold">{title}</p>
         <p className="text-sm">
-          Unit price: <span className="font-semibold">{price}</span>
+          {quantity} x <span className="font-semibold">{price}</span>
         </p>
+
+        {chosenVariant && (
+          <div>
+            <p className="text-xs font-light">
+              Size:{" "}
+              <span className="font-semibold">
+                {chosenVariant.choices.Size}
+              </span>
+            </p>
+            <p className="text-xs font-light">
+              Color:{" "}
+              <span className="font-semibold">
+                {chosenVariant.choices.Color}
+              </span>
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-col justify-between items-end">
         <p className="text-sm">
           Quantity: <span className="font-semibold">{quantity}</span>
         </p>
+
+        <button
+          className="text-sm text-custom-accent cursor-pointer transition duration-100"
+          onClick={() => removeItem(wixClient, id)}
+        >
+          <Trash />
+        </button>
       </div>
-      <button
-        className="text-sm text-custom-accent cursor-pointer transition duration-100 self-start"
-        onClick={() => removeItem(wixClient, id)}
-      >
-        <Trash />
-      </button>
     </article>
   );
 }
