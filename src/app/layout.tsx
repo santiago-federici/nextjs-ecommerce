@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Onest } from "next/font/google";
 import { Work_Sans } from "next/font/google";
 
-import { CartProvider } from "@contexts/CartContext";
 import { Header } from "@components/Header/Header";
 import { Footer } from "@components/Footer";
 
@@ -34,15 +33,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-surface">
       <body className={`${onest.variable} ${workSans.variable}`}>
-        <CartProvider>
-          <WixClientProvider>
-            <Header />
-            <main className="realtive flex flex-col min-h-screen w-full">
-              {children}
-            </main>
-            <Footer />
-          </WixClientProvider>
-        </CartProvider>
+        <WixClientProvider>
+          <Header />
+          <main className="realtive flex flex-col min-h-screen w-full">
+            {children}
+          </main>
+          <Footer />
+        </WixClientProvider>
       </body>
     </html>
   );
