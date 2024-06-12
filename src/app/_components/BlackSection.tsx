@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Wrapper } from "@components/Wrapper";
 
 const winterCollectionInfo = {
@@ -44,11 +42,9 @@ export function BlackSection() {
         <ul className="grid lg:flex gap-4 w-full">
           {winterCollectionProds.map((prod, index) => (
             <li key={index} className="relative overflow-hidden group">
-              <Image
+              <img
                 src={prod.image}
                 alt={prod.alt}
-                width={500}
-                height={0}
                 className="w-full h-[300px] mg:h-[350px] lg:h-[400px] object-cover opacity-75 cursor-pointer group-hover:opacity-85 group-hover:scale-110 transition duration-500"
               />
 
