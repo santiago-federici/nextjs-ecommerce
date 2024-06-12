@@ -8,19 +8,18 @@ export async function CategoriesSection() {
   const categories = res.items;
 
   return (
-    <>
-      <div className="bg-black w-full h-[1500px] absolute left-0 -z-10"></div>
+    <div className="bg-black w-full h-fit">
       <Wrapper className="py-16 overflow-hidden grid gap-8">
-        <h3 className="text-3xl font-semibold text-white mb-4 underline underline-offset-4">
+        <h3 className="text-4xl font-semibold uppercase text-white mb-4 text-center">
           Categories
         </h3>
         <div className="bento-grid-container">
           {categories.map((category) => (
             <article
               key={category._id}
-              className="overflow-hidden relative group rounded-md"
+              className="overflow-hidden relative group rounded-md group"
             >
-              <div className="w-full h-full group-hover:scale-105 transition-all duration-300 ease-in-out">
+              <div className="w-full h-full group-hover:scale-105 transition-all duration-300 ease-in-out opacity-75 group-hover:opacity-100">
                 <Link href={`/products?category=${category.slug}`}>
                   <img
                     src={category.media?.mainMedia?.image?.url}
@@ -36,6 +35,6 @@ export async function CategoriesSection() {
           ))}
         </div>
       </Wrapper>
-    </>
+    </div>
   );
 }
