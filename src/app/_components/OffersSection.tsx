@@ -1,72 +1,56 @@
+import { Wrapper } from "@components/Wrapper";
+import { wixClientServer } from "@lib/WixClientServer";
 import Link from "next/link";
 
-import { wixClientServer } from "@lib/WixClientServer";
-
-import { Wrapper } from "@components/Wrapper";
-import { Card } from "@components/Card";
-import { Button } from "@components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-
-import clsx from "clsx";
-
-const sectionInfo = {
-  title: "Best offers",
-  btn: {
-    text: "See offers",
-    href: "/products",
-  },
+const winterCollectionInfo = {
+  title: "CHECK OUT OUR OFFERS",
+  subtitle: "Products up to 30% OFF",
+  description:
+    "We are offering a wide range of products from the best brands in the market. Our products are made with the highest quality materials and are designed to last. We are committed to providing you with the best products at the best prices.",
 };
 
 export async function OffersSection() {
   const wixClient = await wixClientServer();
+
   const res = await wixClient.products.queryProducts().find();
   const products = res.items;
 
-  const discountedProds = products.filter(
-    (prod) => prod.discount?.value && prod.discount?.value > 0
-  );
+  const discountedProds = products
+    .filter((prod) => prod.discount?.value && prod.discount?.value > 0)
+    .slice(0, 3);
 
   return (
-    <Wrapper className="w-full py-24 lg:py-32">
-      <h3 className="text-5xl font-bold uppercase text-center mb-8 underline underline-offset-8">
-        {sectionInfo.title}
-      </h3>
+    <div className="bg-custom-secondary">
+      <Wrapper className="grid lg:flex justify-between gap-6 lg:gap-10 py-24 lg:py-32">
+        <div className="flow lg:max-w-sm xl:max-w-xl">
+          <h3 className="text-white text-3xl">{winterCollectionInfo.title}</h3>
+          <p className="text-gray-300 text-base md:text-lg">
+            {winterCollectionInfo.subtitle}
+          </p>
+          <p className="text-gray-300 text-base md:text-lg">
+            {winterCollectionInfo.description}
+          </p>
+        </div>
 
-      <Carousel
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-        className="mx-auto md:max-w-[90%] lg:max-w-[70%]"
-      >
-        <CarouselContent>
+        <ul className="grid lg:flex gap-4 w-full">
           {discountedProds.map((prod, index) => (
-            <CarouselItem
-              key={index}
-              // this is taking care of the case when there are less than 4 products, so it doesn't look bad
-              className={clsx({
-                "mx-auto md:max-w-[80%] custom-offers-basis":
-                  discountedProds.length <= 3,
-                "custom-basis": discountedProds.length > 3,
-              })}
-            >
-              <Card prod={prod} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="ml-12 top-1/2 -translate-y-12 lg:m-0 lg:realtive" />
-        <CarouselNext className="mr-12 top-1/2 -translate-y-12 lg:m-0 lg:realtive" />
-      </Carousel>
+            <li key={index} className="relative overflow-hidden group">
+              <img
+                src={prod.media?.mainMedia?.image?.url}
+                alt={prod.name!}
+                className="w-full h-[300px] mg:h-[350px] lg:h-[400px] object-cover opacity-75 cursor-pointer group-hover:opacity-85 group-hover:scale-105 transition duration-500 rounded-sm"
+              />
 
-      <Link href={sectionInfo.btn.href} className="flex justify-center">
-        <Button className="uppercase mt-8">{sectionInfo.btn.text}</Button>
-      </Link>
-    </Wrapper>
+              <Link
+                href={"/products"}
+                className="absolute text-white font-bold bottom-0 right-2 cursor-pointer custom-underline"
+              >
+                Discover
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Wrapper>
+    </div>
   );
 }

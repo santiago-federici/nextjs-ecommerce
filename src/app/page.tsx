@@ -1,7 +1,7 @@
 import { Toaster } from "sonner";
-import { BlackSection } from "./_components/BlackSection";
 import { HeroSection } from "./_components/HeroSection";
 import { OffersSection } from "./_components/OffersSection";
+import { NewSection } from "./_components/NewSection";
 import { CategoriesSection } from "./_components/CategoriesSection";
 
 import "@styles/HomePage.css";
@@ -11,9 +11,9 @@ export default async function HomePage() {
     <section>
       <HeroSection />
 
-      <BlackSection />
-
       <OffersSection />
+
+      <NewSection />
 
       <CategoriesSection />
 
