@@ -9,24 +9,29 @@ export async function CategoriesSection() {
 
   return (
     <>
-      <div className="h-10 w-full bg-black"></div>
-      <Wrapper className="grid gap-12 py-16">
-        <h3 className="text-5xl uppercase text-center font-bold underline underline-offset-8">
+      <div className="bg-black w-full h-[1500px] absolute left-0 -z-10"></div>
+      <Wrapper className="py-16 overflow-hidden grid gap-8">
+        <h3 className="text-3xl font-semibold text-white mb-4 underline underline-offset-4">
           Categories
         </h3>
-        <div className="grid lg:flex gap-6">
+        <div className="bento-grid-container">
           {categories.map((category) => (
-            <article key={category._id} className="overflow-hidden">
-              <div className="w-64 h-64">
+            <article
+              key={category._id}
+              className="overflow-hidden relative group rounded-md"
+            >
+              <div className="w-full h-full group-hover:scale-105 transition-all duration-300 ease-in-out">
                 <Link href={`/products?category=${category.slug}`}>
                   <img
                     src={category.media?.mainMedia?.image?.url}
                     alt={category._id!}
-                    className="w-full h-full object-cover rounded-md"
+                    className="w-full h-full object-cover"
                   />
                 </Link>
               </div>
-              <p className="text-lg font-medium mt-4">{category.name}</p>
+              <p className="px-4 py-2 text-base md:text-xl font-bold w-full absolute bottom-0 left-0 bg-white/70 backdrop-blur-sm group-hover:underline underline-offset-4 transition-all duration-300 ease-in-out">
+                {category.name}
+              </p>
             </article>
           ))}
         </div>
