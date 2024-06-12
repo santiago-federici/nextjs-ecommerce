@@ -8,31 +8,13 @@ import { Wrapper } from "@components/Wrapper";
 import { CategoryDropdown } from "./_components/CategoryDropdown";
 import { SortDropdown } from "./_components/SortDropdown";
 import { ProductsList } from "./_components/ProductsList";
+import { SearchInput } from "./_components/SearchInput";
 
 import { ArrowRight } from "@components/Icons";
 
-import { Toaster } from "sonner";
-
-import clsx from "clsx";
-
-import "@styles/ProductsPage.css";
-import { SearchInput } from "./_components/SearchInput";
 import { Separator } from "@components/ui/separator";
 
-const skewedSection = [
-  {
-    text: "New costumer?",
-    bg: "bg-gray-300",
-  },
-  {
-    text: "10% OFF",
-    bg: "bg-gray-400",
-  },
-  {
-    text: "In your first order!",
-    bg: "bg-gray-500",
-  },
-];
+import "@styles/ProductsPage.css";
 
 export default async function ProductsPage({
   searchParams,
@@ -85,7 +67,6 @@ export default async function ProductsPage({
           searchParams={searchParams}
         />
       </Suspense>
-      <Toaster richColors />
     </Wrapper>
   );
 }

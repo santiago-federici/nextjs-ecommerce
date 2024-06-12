@@ -52,7 +52,7 @@ export function CategoryDropdown() {
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger className="flex items-center gap-2 bg-white text-sm font-medium uppercase pl-3 pr-4 py-2 border border-gray-200 rounded-md hover:bg-gray-100 transition duration-200">
-          <Filter /> Filter
+          <Filter /> Categories
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Category</DropdownMenuLabel>
