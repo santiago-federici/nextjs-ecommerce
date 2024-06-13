@@ -3,6 +3,7 @@
 import { Button } from "@components/ui/button";
 import { WixClientContext } from "@contexts/WixContext";
 import { useCartStore } from "@hooks/useCartStore";
+import Link from "next/link";
 import { useContext, useState } from "react";
 
 export function QuantitySelector({
@@ -97,7 +98,9 @@ export function QuantitySelector({
         >
           Add to cart
         </Button>
-        <Button>Buy now</Button>
+        <Button asChild>
+          <Link href={"/checkout"}>Buy now</Link>
+        </Button>
       </div>
     </div>
   );
