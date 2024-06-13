@@ -1,45 +1,55 @@
 "use client";
 
-import { CartCard } from "@components/CartCard";
-import { BigCart } from "@components/Icons";
-import { useCart } from "@hooks/useCart";
-import { Separator } from "@radix-ui/react-separator";
+import { useContext, useEffect } from "react";
 
-export default function CheckoutProds({ prods }: { prods: any }) {
-  const { cart } = useCart();
+import { WixClientContext } from "@contexts/WixContext";
+
+import { useCartStore } from "@hooks/useCartStore";
+
+import { Separator } from "@components/ui/separator";
+import { CheckoutProductCard } from "./CheckoutProductCard";
+
+import { BigCart } from "@components/Icons";
+import { formatPrice } from "@lib/utils";
+
+export default function CheckoutProds() {
+  const wixClient = useContext(WixClientContext);
+
+  const { cart, getCart } = useCartStore();
+
+  useEffect(() => {
+    getCart(wixClient);
+  }, [wixClient, getCart]);
+
+  const productsInCart = cart && cart.lineItems;
+
+  const shipppingAmount = 5000; // Replace this amount with the actual shipping cost
 
   return (
     <div className="w-full">
-      {cart.length > 0 ? (
+      {productsInCart && productsInCart.length > 0 ? (
         <section className="flex-grow flex-1">
-          <ul className="grid gap-4 mt-14">
-            {cart.map((cartProd, index) => {
-              const prod = prods.find(
-                (prod: any) => prod.id === cartProd.productId
-              );
-              
-              return (
-                <li key={index}>
-                  <CartCard
-                    prod={prod}
-                    quantity={cartProd.quantity}
-                    userId={"false"}
-                  />
-                </li>
-              );
-            })}
+          <ul className="grid gap-4 mt-14 divide-y">
+            {productsInCart.map((product) => (
+              <li key={product._id} className="first:pt-0 pt-4">
+                <CheckoutProductCard product={product} wixClient={wixClient} />
+              </li>
+            ))}
           </ul>
 
           <section>
-            <Separator className="my-8" />
-
-            <div className="flex">
-              <p className="flex-1">Shipping</p>
-              <p>$0</p>
+            <Separator className="my-4" />
+            <div className="flex text-base">
+              <p className="flex-1">Subtotal:</p>
+              {/* Ignore this error. That value actually exists */}
+              <p>{cart.subtotal.formattedAmount}</p>
             </div>
-            <div className="flex">
-              <p className="flex-1">Total</p>
-              <p>$0</p>
+            <div className="flex text-base">
+              <p className="flex-1">Total:</p>
+              <p>
+                {/* Ignore this error. That value actually exists */}
+                {formatPrice(Number(cart.subtotal.amount) + shipppingAmount)},00
+              </p>
             </div>
           </section>
         </section>
