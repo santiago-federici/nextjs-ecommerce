@@ -9,6 +9,7 @@ import { CategoryDropdown } from "./_components/CategoryDropdown";
 import { SortDropdown } from "./_components/SortDropdown";
 import { ProductsList } from "./_components/ProductsList";
 import { SearchInput } from "./_components/SearchInput";
+import ProductsSkeleton from "./_components/ProductsSkeleton";
 
 import { ArrowRight } from "@components/Icons";
 
@@ -59,7 +60,7 @@ export default async function ProductsPage({
 
       <Separator className="w-full my-8" />
 
-      <Suspense fallback={"loading..."}>
+      <Suspense fallback={<ProductsSkeleton />}>
         <ProductsList
           categoryId={
             category.collection?._id || "00000000-000000-000000-000000000001"
