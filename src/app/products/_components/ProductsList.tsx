@@ -10,7 +10,14 @@ export async function ProductsList({
 }: {
   categoryId: string;
   limit?: number;
-  searchParams?: any;
+  searchParams?: {
+    category: string;
+    sort: any;
+    name: string;
+    min: number;
+    max: number;
+    page: string;
+  };
 }) {
   const wixClient = await wixClientServer();
   const productQuery = wixClient.products
@@ -37,6 +44,8 @@ export async function ProductsList({
     if (sortType === "desc") {
       res = await productQuery.descending(sortBy).find();
     }
+  } else {
+    res = await productQuery.descending("lastUpdated").find();
   }
 
   const products = res?.items;
