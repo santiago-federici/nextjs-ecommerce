@@ -77,6 +77,7 @@ export function CartSheet() {
                   <Separator className="my-4" />
                   <div className="flex text-base">
                     <p className="flex-1">Subtotal</p>
+                    {/* Ignore this error. That value actually exists */}
                     <p>{cart.subtotal.formattedAmount}</p>
                   </div>
                 </section>
