@@ -17,7 +17,7 @@ export async function CategoriesSection() {
           {categories.map((category) => (
             <article
               key={category._id}
-              className="overflow-hidden relative group rounded-md group"
+              className="overflow-hidden relative group rounded-md group border border-gray-600"
             >
               <div className="w-full h-full group-hover:scale-105 transition-all duration-300 ease-in-out opacity-75 group-hover:opacity-100">
                 <Link href={`/products?category=${category.slug}`}>
