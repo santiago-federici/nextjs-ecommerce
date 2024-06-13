@@ -17,10 +17,6 @@ export async function Header() {
   const wixClient = await wixClientServer();
   const isUserLoggedIn = await wixClient.auth.loggedIn();
 
-  // getting the prods from the database to use them in the cart. The import is here and not in the CartSheet or the CartCard component
-  // because those are client components, and getting the prods from the DB requires async/await functions, which are not
-  // available in client components (at least for now).
-
   return (
     <header className="w-full">
       <Wrapper className="py-4 flex justify-between items-center">
@@ -39,7 +35,6 @@ export async function Header() {
         <span className="flex gap-4 order-3">
           <ProfileDropdown isUserLoggedIn={isUserLoggedIn} />
 
-          {/* <CartSheet prods={prods} userId={user?.id!} /> */}
           <CartSheet />
         </span>
       </Wrapper>
