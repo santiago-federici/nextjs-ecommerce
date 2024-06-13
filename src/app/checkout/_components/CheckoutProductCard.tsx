@@ -54,7 +54,7 @@ export function CheckoutProductCard({
         />
       </div>
       <div className="flex flex-col gap-2 flex-grow flex-1 ml-4">
-        <p className="text-base font-semibold">{title}</p>
+        <p className="text-sm md:text-base font-semibold">{title}</p>
 
         {chosenVariant && (
           <div className="flex gap-4">
@@ -78,10 +78,10 @@ export function CheckoutProductCard({
         </p>
 
         <div className="flex gap-4">
-          <p className="text-sm">
+          <p className="text-xs">
             Unit price: <span className="font-semibold">{formattedAmount}</span>
           </p>
-          <p className="text-sm">
+          <p className="text-xs">
             Total:{" "}
             <span className="font-semibold">
               {formatPrice(Number(amount) * (quantity || 1))}

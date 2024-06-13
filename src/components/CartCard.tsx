@@ -57,8 +57,8 @@ export function CartCard({
         />
       </div>
       <div className="flex flex-col gap-2 flex-grow flex-1 ml-4 justify-between">
-        <p className="text-base font-semibold">{title}</p>
-        <p className="text-sm">
+        <p className="text-sm md:text-base font-semibold">{title}</p>
+        <p className="text-xs md:text-sm">
           {quantity} x <span className="font-semibold">{formattedAmount}</span>
         </p>
 
@@ -82,7 +82,7 @@ export function CartCard({
 
       <div className="flex flex-col justify-between items-end">
         <p className="text-sm">
-          Quantity: <span className="font-semibold">{quantity}</span>
+          Qty: <span className="font-semibold">{quantity}</span>
         </p>
 
         <button
