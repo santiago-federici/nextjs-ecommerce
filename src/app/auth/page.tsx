@@ -24,7 +24,8 @@ export default function AuthPage() {
 
   const wixClient = useContext(WixClientContext);
 
-  const isLoggedIn = wixClient.auth.loggedIn();
+  // const isLoggedIn = wixClient.auth.loggedIn();
+  const isLoggedIn = false;
 
   const router = useRouter();
 

@@ -14,8 +14,9 @@ const headerInfo = {
 };
 
 export async function Header() {
-  const wixClient = await wixClientServer();
-  const isUserLoggedIn = await wixClient.auth.loggedIn();
+  // const wixClient = await wixClientServer();
+  // const isUserLoggedIn = await wixClient.auth.loggedIn();
+  const isUserLoggedIn = false;
 
   return (
     <header className="w-full">
