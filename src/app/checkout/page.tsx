@@ -4,7 +4,7 @@ import CheckoutLogic from "./_components/CheckoutLogic";
 
 export default async function CheckoutPage() {
   return (
-    <Wrapper className="flex gap-8 border rounded-md p-4">
+    <Wrapper className="flex border rounded-md overflow-hidden h-fit mt-8">
       <CheckoutProds />
       <CheckoutLogic />
     </Wrapper>
