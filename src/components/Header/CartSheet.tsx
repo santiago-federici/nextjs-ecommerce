@@ -22,6 +22,8 @@ import { Separator } from "@/components/ui/separator";
 import { CartCard } from "@components/CartCard";
 
 import { BigCart, Cart } from "@components/Icons";
+import { products } from "@wix/stores";
+import { cart } from "@wix/ecom";
 
 export function CartSheet() {
   const wixClient = useContext(WixClientContext);
@@ -58,7 +60,7 @@ export function CartSheet() {
             <>
               <section className="flex flex-col flex-grow flex-1">
                 <ul className="flex flex-col flex-grow flex-1 divide-y">
-                  {productsInCart.map((product) => (
+                  {productsInCart.map((product: cart.LineItem) => (
                     <li key={product._id} className="py-6">
                       <CartCard product={product} wixClient={wixClient} />
                     </li>
@@ -77,7 +79,6 @@ export function CartSheet() {
                   <Separator className="my-4" />
                   <div className="flex text-base">
                     <p className="flex-1">Subtotal</p>
-                    {/* Ignore this error. That value actually exists */}
                     <p>{cart.subtotal.formattedAmount}</p>
                   </div>
                 </section>

@@ -11,6 +11,7 @@ import { CheckoutProductCard } from "./CheckoutProductCard";
 
 import { BigCart } from "@components/Icons";
 import { formatPrice } from "@lib/utils";
+import { cart } from "@wix/ecom";
 
 export default function CheckoutProds() {
   const wixClient = useContext(WixClientContext);
@@ -30,7 +31,7 @@ export default function CheckoutProds() {
       {productsInCart && productsInCart.length > 0 ? (
         <section className="flex-grow flex-1">
           <ul className="grid gap-4 divide-y">
-            {productsInCart.map((product) => (
+            {productsInCart.map((product: cart.LineItem) => (
               <li key={product._id} className="first:pt-0 pt-4">
                 <CheckoutProductCard product={product} wixClient={wixClient} />
               </li>
@@ -41,20 +42,17 @@ export default function CheckoutProds() {
             <Separator className="my-4" />
             <div className="flex text-base">
               <p className="flex-1">Subtotal:</p>
-              {/* Ignore this error. That value actually exists */}
               <p className="font-semibold">{cart.subtotal.formattedAmount}</p>
             </div>
 
             <div className="flex text-base mt-2">
               <p className="flex-1">Shipping:</p>
-              {/* Ignore this error. That value actually exists */}
               <p className="font-semibold">{formatPrice(shipppingAmount)},00</p>
             </div>
 
             <div className="flex text-base mt-2">
               <p className="flex-1">Total:</p>
               <p className="font-semibold">
-                {/* Ignore this error. That value actually exists */}
                 {formatPrice(Number(cart.subtotal.amount) + shipppingAmount)},00
               </p>
             </div>

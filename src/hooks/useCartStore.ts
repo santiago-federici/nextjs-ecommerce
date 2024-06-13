@@ -1,9 +1,10 @@
 import { create } from "zustand";
-import { currentCart } from "@wix/ecom";
+// import { currentCart } from "@wix/ecom";
 import { WixClient } from "@contexts/WixContext";
 
 type CartState = {
-  cart: currentCart.Cart | null;
+  // cart: currentCart.Cart | null;
+  cart: any; // TODO: fix type
   cartLength: number;
   getCart: (wixClient: WixClient) => void;
   addItem: (
