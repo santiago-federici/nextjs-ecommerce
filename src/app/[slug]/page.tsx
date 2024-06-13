@@ -4,8 +4,10 @@ import { Wrapper } from "@components/Wrapper";
 import ProdOptions from "./_components/ProdOptions";
 import Categories from "./_components/Categories";
 import ProductImages from "./_components/ProductImages";
-import { Separator } from "@components/ui/separator";
 import { QuantitySelector } from "./_components/QuantitySelector";
+import RelatedProductsSection from "./_components/RelatedProductsSection";
+
+import { Separator } from "@components/ui/separator";
 
 export default async function DetailsPage({
   params,
@@ -128,7 +130,7 @@ export default async function DetailsPage({
 
       <Separator className="mt-12 mb-8" />
 
-      {/* <RelatedProductsSection productCategory={productCategory} prodId={id} /> */}
+      <RelatedProductsSection />
     </Wrapper>
   );
 }
