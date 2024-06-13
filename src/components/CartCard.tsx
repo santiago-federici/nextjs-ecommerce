@@ -2,26 +2,31 @@ import { useEffect, useState } from "react";
 
 import { useCartStore } from "@hooks/useCartStore";
 import { media as wixMedia } from "@wix/sdk";
+import { currentCart } from "@wix/ecom";
 
 import { Trash } from "./Icons";
 
 export function CartCard({
-  id,
-  imageUrl,
-  title,
-  price,
+  product,
   wixClient,
-  quantity,
-  variantId,
 }: {
-  id: string;
-  imageUrl: string;
-  title: string;
-  price: string;
+  product: currentCart.LineItem;
   wixClient: any;
-  quantity: number;
-  variantId: string;
 }) {
+  const {
+    _id: id,
+    image: imageUrl,
+    productName,
+    price,
+    quantity,
+    catalogReference,
+  } = product;
+
+  const { original: title } = productName!;
+  const { formattedAmount } = price!;
+  const { options } = catalogReference!;
+  const { variantId } = options!;
+
   const { removeItem } = useCartStore();
 
   const [chosenVariant, setChosenVariant] = useState<any>(null);
@@ -46,7 +51,7 @@ export function CartCard({
     <article className="flex">
       <div className="w-28 h-28 overflow-hidden rounded-md">
         <img
-          src={wixMedia.getScaledToFillImageUrl(imageUrl, 96, 96, {})}
+          src={wixMedia.getScaledToFillImageUrl(imageUrl!, 96, 96, {})}
           alt={title}
           className="w-full h-full object-cover"
         />
@@ -54,7 +59,7 @@ export function CartCard({
       <div className="flex flex-col gap-2 flex-grow flex-1 ml-4 justify-between">
         <p className="text-base font-semibold">{title}</p>
         <p className="text-sm">
-          {quantity} x <span className="font-semibold">{price}</span>
+          {quantity} x <span className="font-semibold">{formattedAmount}</span>
         </p>
 
         {chosenVariant && (
@@ -82,7 +87,7 @@ export function CartCard({
 
         <button
           className="text-sm text-custom-accent cursor-pointer transition duration-100"
-          onClick={() => removeItem(wixClient, id)}
+          onClick={() => removeItem(wixClient, id!)}
         >
           <Trash />
         </button>

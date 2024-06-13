@@ -60,15 +60,7 @@ export function CartSheet() {
                 <ul className="flex flex-col flex-grow flex-1 divide-y">
                   {productsInCart.map((product) => (
                     <li key={product._id} className="py-6">
-                      <CartCard
-                        id={product._id!}
-                        imageUrl={product.image!}
-                        title={product.productName?.original!}
-                        price={product.price?.formattedAmount!}
-                        wixClient={wixClient}
-                        quantity={product.quantity!}
-                        variantId={product.catalogReference?.options?.variantId}
-                      />
+                      <CartCard product={product} wixClient={wixClient} />
                     </li>
                   ))}
                 </ul>
