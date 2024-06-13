@@ -1,5 +1,3 @@
-import { db } from "@db";
-import { payments } from "@db/schemas/payments";
 import MercadoPagoConfig, { Payment } from "mercadopago";
 import { NextRequest } from "next/server";
 
@@ -27,7 +25,7 @@ export async function POST(req: NextRequest) {
     createdAt: payment.date_created!,
   };
 
-  await db.insert(payments).values(receivedPayment);
+  // await db.insert(payments).values(receivedPayment);
 
   return Response.json({ success: true });
 }
