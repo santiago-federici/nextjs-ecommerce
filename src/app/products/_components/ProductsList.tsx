@@ -11,12 +11,12 @@ export async function ProductsList({
   categoryId: string;
   limit?: number;
   searchParams?: {
-    category: string;
-    sort: any;
-    name: string;
-    min: number;
-    max: number;
-    page: string;
+    category?: string;
+    sort?: any;
+    name?: string;
+    min?: number;
+    max?: number;
+    page?: string;
   };
 }) {
   const wixClient = await wixClientServer();
