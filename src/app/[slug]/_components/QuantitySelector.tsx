@@ -36,7 +36,7 @@ export function QuantitySelector({
     <div className="flex-grow flex flex-col">
       <p className="font-semibold mt-4 mb-3">Choose a Quantity</p>
 
-      <article className="flex gap-4 items-center">
+      <article className="flex gap-4 items-center mb-8">
         <div className="flex gap-4 items-center rounded-full w-fit border overflow-hidden">
           <span
             className={`text-2xl w-full h-full px-3 transition duration-100 ${
@@ -65,28 +65,6 @@ export function QuantitySelector({
           >
             +
           </span>
-        </div>
-
-        <div className="text-xs">
-          {stockNumber < 1 ? (
-            <p>
-              <span className="text-orange-600">No items</span> left
-            </p>
-          ) : stockNumber <= 10 ? (
-            <>
-              <p>
-                Only{" "}
-                <span className="text-orange-600">{stockNumber} items</span>{" "}
-                left!
-              </p>
-              <p>Dont miss it!</p>
-            </>
-          ) : (
-            <p>
-              <span className="text-orange-600">{stockNumber} items</span>{" "}
-              available
-            </p>
-          )}
         </div>
       </article>
 

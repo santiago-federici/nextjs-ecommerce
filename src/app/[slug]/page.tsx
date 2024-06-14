@@ -41,6 +41,7 @@ export default async function DetailsPage({
     media,
     price,
     discount,
+    description,
     additionalInfoSections,
     variants,
     productOptions,
@@ -51,17 +52,91 @@ export default async function DetailsPage({
     price?.formatted!;
 
   return (
-    <Wrapper className="mb-16 lg:pt-12 lg:pb-8 lg:px-16 overflow-hidden bg-[#ffffff] rounded-md lg:border lg:border-gray-100 lg:shadow">
-      <div className="grid lg:flex gap-2 lg:gap-6">
-        <h2 className="lg:hidden font-semibold text-2xl mt-6 ml-2">{name}</h2>
+    <>
+      {/* Big devices Wrapper */}
+      <Wrapper className="hidden lg:flex flex-col mb-16 p-12 bg-[#ffffff] border border-gray-100 rounded-md shadow overflow-hidden">
+        <div className="flex gap-2 lg:gap-6">
+          <ProductImages images={media?.items} />
 
-        <ProductImages images={media?.items} />
+          <section className="w-full grid lg:flex flex-col xl:flex-row gap-6 text-base">
+            <section className="w-full flex flex-col gap-4 p-2 ">
+              <h2 className="text-2xl">{name}</h2>
 
-        <section className="w-full grid xl:flex gap-6 text-base">
-          <section className="w-full flex flex-col gap-4 p-2 ">
-            <h2 className="hidden xl:block text-3xl">{name}</h2>
+              {/* Price */}
+              {discount?.value! > 0 ? (
+                <div className="flex items-baseline gap-2">
+                  <p className="text-sm text-gray-500 line-through mt-1">
+                    {formattedPrice}
+                  </p>
+                  <p className="text-gray-900 text-lg font-semibold">
+                    {formattedDiscountedPrice}
+                  </p>
+                  <span className="text-xs text-green-600 font-semibold">
+                    {discount?.value}% OFF
+                  </span>
+                </div>
+              ) : (
+                <p className="text-gray-900 text-lg font-semibold">
+                  {formattedPrice}
+                </p>
+              )}
 
-            <div className="flex flex-col">
+              <p className="text-base font-light my-4">{description}</p>
+
+              <Categories categoriesIds={collectionIds} />
+            </section>
+
+            {variants && productOptions ? (
+              <ProdOptions
+                productId={_id!}
+                variants={variants}
+                productOptions={productOptions}
+                stock={stock}
+              />
+            ) : (
+              <QuantitySelector
+                productId={_id!}
+                variantId={"00000000-0000-0000-0000-000000000000"}
+                stockNumber={stock?.quantity || 0}
+                inStock={stock?.inStock!}
+              />
+            )}
+          </section>
+        </div>
+
+        <section className="w-full">
+          <Separator className="mt-12 mb-8" />
+
+          <span className="text-base text-gray-600 flex flex-col gap-8">
+            {additionalInfoSections?.map((section) => (
+              <div key={section.title}>
+                <h3 className="font-semibold text-black text-lg mr-2">
+                  {section.title}
+                </h3>
+                {section.description}
+              </div>
+            ))}
+          </span>
+        </section>
+
+        <Separator className="mt-12 mb-8" />
+
+        <RelatedProductsSection
+          categoriesIds={collectionIds}
+          productId={_id!}
+        />
+      </Wrapper>
+
+      {/* Small devices Wrapper */}
+      <Wrapper className="flex flex-col lg:hidden mb-16 overflow-hidden bg-[#ffffff] rounded-md">
+        <section className="grid gap-2">
+          <h2 className="font-semibold text-2xl">{name}</h2>
+
+          <ProductImages images={media?.items} />
+
+          <section className="w-full grid gap-6 text-base">
+            <section className="w-full flex flex-col gap-4 p-2 ">
+              {/* Price */}
               {discount?.value! > 0 ? (
                 <div className="flex items-baseline gap-2">
                   <p className="text-sm text-gray-500 line-through mt-1">
@@ -79,58 +154,52 @@ export default async function DetailsPage({
                   {formattedPrice}
                 </p>
               )}
-            </div>
+            </section>
 
-            <p>
-              {/* TODO: rich text */}
-              {additionalInfoSections?.map(
-                (section) =>
-                  section.title === "SHORT DESCRIPTION" && section.description
-              )}
-            </p>
+            {variants && productOptions ? (
+              <ProdOptions
+                productId={_id!}
+                variants={variants}
+                productOptions={productOptions}
+                stock={stock}
+              />
+            ) : (
+              <QuantitySelector
+                productId={_id!}
+                variantId={"00000000-0000-0000-0000-000000000000"}
+                stockNumber={stock?.quantity || 0}
+                inStock={stock?.inStock!}
+              />
+            )}
+
+            <p>{description}</p>
 
             <Categories categoriesIds={collectionIds} />
           </section>
-
-          {variants && productOptions ? (
-            <ProdOptions
-              productId={_id!}
-              variants={variants}
-              productOptions={productOptions}
-              stock={stock}
-            />
-          ) : (
-            <QuantitySelector
-              productId={_id!}
-              variantId={"00000000-0000-0000-0000-000000000000"}
-              stockNumber={stock?.quantity || 0}
-              inStock={stock?.inStock!}
-            />
-          )}
         </section>
-      </div>
 
-      <section className="w-full">
+        <section className="w-full">
+          <Separator className="mt-12 mb-8" />
+
+          <span className="text-base text-gray-600 flex flex-col gap-8">
+            {additionalInfoSections?.map((section) => (
+              <div key={section.title}>
+                <h3 className="font-semibold text-black text-lg mr-2">
+                  {section.title}
+                </h3>
+                {section.description}
+              </div>
+            ))}
+          </span>
+        </section>
+
         <Separator className="mt-12 mb-8" />
 
-        <span className="text-base text-gray-600 flex flex-col gap-8">
-          {additionalInfoSections?.map(
-            (section) =>
-              section.title !== "SHORT DESCRIPTION" && (
-                <div key={section.title}>
-                  <h3 className="font-semibold text-black text-lg mr-2">
-                    {section.title}
-                  </h3>
-                  {section.description}
-                </div>
-              )
-          )}
-        </span>
-      </section>
-
-      <Separator className="mt-12 mb-8" />
-
-      <RelatedProductsSection />
-    </Wrapper>
+        <RelatedProductsSection
+          categoriesIds={collectionIds}
+          productId={_id!}
+        />
+      </Wrapper>
+    </>
   );
 }

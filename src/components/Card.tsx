@@ -28,7 +28,7 @@ export function Card({ prod }: { prod: products.Product }) {
             </h3>
 
             {discount?.value! > 0 ? (
-              <div className="flex items-baseline gap-2">
+              <div className="flex flex-col md:flex-row items-baseline md:gap-2">
                 <p className="text-sm text-gray-500 line-through mt-1">
                   {formattedPrice}
                 </p>

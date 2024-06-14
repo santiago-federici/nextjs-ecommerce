@@ -13,7 +13,9 @@ export function SizeSelector({
 }) {
   return (
     <div
-      onClick={() => handleClickOption(optionName, choiceDescription)}
+      onClick={() => {
+        !disabled && handleClickOption(optionName, choiceDescription);
+      }}
       className={`w-7 h-7 text-xs font-semibold uppercase flex items-center justify-center rounded-md border transition duration-100 ${
         selected ? "border-gray-900 bg-gray-900 text-white" : ""
       } ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}

@@ -22,7 +22,7 @@ export default async function Categories({
   return (
     categories.length > 1 && (
       <div className="flex items-center">
-        <p className="font-medium mr-2">Categories: </p>
+        <p className="font-semibold mr-2">Categories: </p>
         {categories.map(
           (category: any) =>
             category.items[0].name !== "All Products" && (

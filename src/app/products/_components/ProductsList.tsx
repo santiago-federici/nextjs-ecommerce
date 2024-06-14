@@ -2,7 +2,7 @@ import { wixClientServer } from "@lib/WixClientServer";
 import { Card } from "@components/Card";
 import Pagination from "@components/Pagination";
 
-const LIMIT_PER_PAGE = 20;
+const LIMIT_PER_PAGE = 8;
 export async function ProductsList({
   categoryId,
   limit,

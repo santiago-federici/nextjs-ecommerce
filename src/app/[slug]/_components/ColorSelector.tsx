@@ -15,8 +15,10 @@ export function ColorSelector({
 }) {
   return (
     <div
-      onClick={() => handleClickOption(optionName, choiceDescription)}
-      className={`w-7 h-7 rounded-full p-[2px] border ${
+      onClick={() => {
+        !disabled && handleClickOption(optionName, choiceDescription);
+      }}
+      className={`w-7 h-7 rounded-full p-[2px] border relative ${
         selected ? "ring-1 ring-gray-900" : "ring-gray-300"
       }`}
     >
@@ -26,6 +28,12 @@ export function ColorSelector({
         }`}
         style={{ backgroundColor: choiceValue }}
       ></div>
+
+      <span
+        className={`${
+          disabled && "bg-red-700"
+        } h-[2px] w-[90%] absolute left-0 bottom-1/2 z-10 -skew-y-[45deg]`}
+      ></span>
     </div>
   );
 }
