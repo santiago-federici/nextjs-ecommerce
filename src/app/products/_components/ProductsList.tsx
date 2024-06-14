@@ -50,6 +50,13 @@ export async function ProductsList({
 
   const products = res?.items;
 
+  if (!products?.length)
+    return (
+      <h2 className="text-4xl font-bold text-center w-full mt-8">
+        No products found
+      </h2>
+    );
+
   return (
     <>
       <div className="grid custom-grid gap-4 mb-16">
