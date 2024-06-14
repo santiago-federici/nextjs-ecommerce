@@ -41,11 +41,6 @@ const navLinks = [
     href: "/about",
     icon: <About />,
   },
-  {
-    title: "Contact",
-    href: "/contact",
-    icon: <Contact />,
-  },
 ];
 
 export function NavbarComponent({
