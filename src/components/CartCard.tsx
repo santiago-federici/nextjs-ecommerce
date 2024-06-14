@@ -47,6 +47,8 @@ export function CartCard({
     getVariants();
   }, [variantId, title, wixClient.products]);
 
+  console.log(chosenVariant);
+
   return (
     <article className="flex">
       <div className="w-28 h-28 overflow-hidden rounded-md">
@@ -64,18 +66,22 @@ export function CartCard({
 
         {chosenVariant && (
           <div>
-            <p className="text-xs font-light">
-              Size:{" "}
-              <span className="font-semibold">
-                {chosenVariant.choices.Size}
-              </span>
-            </p>
-            <p className="text-xs font-light">
-              Color:{" "}
-              <span className="font-semibold">
-                {chosenVariant.choices.Color}
-              </span>
-            </p>
+            {chosenVariant.choices.Size && (
+              <p className="text-xs font-light">
+                Size:{" "}
+                <span className="font-semibold">
+                  {chosenVariant.choices.Size}
+                </span>
+              </p>
+            )}
+            {chosenVariant.choices.Color && (
+              <p className="text-xs font-light">
+                Color:{" "}
+                <span className="font-semibold">
+                  {chosenVariant.choices.Color}
+                </span>
+              </p>
+            )}
           </div>
         )}
       </div>
