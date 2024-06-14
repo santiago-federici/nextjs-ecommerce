@@ -2,7 +2,7 @@ import { Wrapper } from "@components/Wrapper";
 import { wixClientServer } from "@lib/WixClientServer";
 import Link from "next/link";
 
-const winterCollectionInfo = {
+const offersSectionInfo = {
   title: "CHECK OUT OUR OFFERS",
   subtitle: "Products up to 30% OFF",
   description:
@@ -23,12 +23,14 @@ export async function OffersSection() {
     <div className="bg-custom-secondary">
       <Wrapper className="grid lg:flex justify-between gap-6 lg:gap-10 py-24 lg:py-32">
         <div className="flow lg:max-w-sm xl:max-w-xl">
-          <h3 className="text-white text-3xl">{winterCollectionInfo.title}</h3>
+          <h3 className="text-white text-2xl md:text-3xl">
+            {offersSectionInfo.title}
+          </h3>
           <p className="text-gray-300 text-base md:text-lg">
-            {winterCollectionInfo.subtitle}
+            {offersSectionInfo.subtitle}
           </p>
           <p className="text-gray-300 text-base md:text-lg">
-            {winterCollectionInfo.description}
+            {offersSectionInfo.description}
           </p>
         </div>
 
