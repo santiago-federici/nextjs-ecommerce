@@ -43,7 +43,7 @@ Urban Vogue – an ecommerce website that allows users to browse and purchase pr
 
 ## 🛠️ Stack
 
-- [**Netxjs**]([https://react.dev/](https://nextjs.org/)) - The react framework for the web.
+- [**NextJS**](https://nextjs.org/) - The react framework for the web.
 - [**React**](https://react.dev/) - A JavaScript library for building user interfaces.
 - [**Tailwind**](https://tailwindcss.com/) - A utility-first CSS framework for faster development.
 
