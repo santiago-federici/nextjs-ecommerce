@@ -1,5 +1,6 @@
 import { Wrapper } from "@components/Wrapper";
 import { wixClientServer } from "@lib/WixClientServer";
+import Image from "next/image";
 import Link from "next/link";
 
 export async function CategoriesSection() {
@@ -21,9 +22,11 @@ export async function CategoriesSection() {
             >
               <div className="w-full h-full group-hover:scale-105 transition-all duration-300 ease-in-out opacity-75 group-hover:opacity-100">
                 <Link href={`/products?category=${category.slug}`}>
-                  <img
-                    src={category.media?.mainMedia?.image?.url}
+                  <Image
+                    src={category.media?.mainMedia?.image?.url!}
                     alt={category._id!}
+                    width={500}
+                    height={500}
                     className="w-full h-full object-cover"
                   />
                 </Link>
